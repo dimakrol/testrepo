@@ -1,33 +1,16 @@
 # This is a sample build configuration for PHP.
-# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Check our guides at https://confluence.atlassian.com/x/VYk8Lw for more examples.
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: php:7.1.1
+image: phpunit/phpunit:5.0.3
 
 pipelines:
   default:
     - step:
-        caches:
-          - composer
-        script:
-          - apt-get update && apt-get install -y unzip
-          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+        script: # Modify the commands below to build your repository.
+          - php -r "file_exists('.env') || copy('.env.example', '.env');"
           - composer install
-          - cp .env.example .env
-          - chmod 777 storage bootstrap/cache -Rv
           - php artisan key:generate
-          - export DB_CONNECTION=mysql
           - php artisan migrate
-          - vendor/bin/phpunit
-        services:
-          - mysql
-definitions:
-  services:
-    mysql:
-      image: mysql
-      environment:
-        MYSQL_DATABASE: 'wwd'
-        MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-        MYSQL_USER: 'root'
-        MYSQL_PASSWORD: 'secret'
+          - phpunit
