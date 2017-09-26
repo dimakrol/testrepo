@@ -9,16 +9,15 @@ pipelines:
           - SDK_VERSION=155.0.0
           - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
           - apt-get update && apt-get install -qy git curl libmcrypt-dev mysql-client
-          - docker-php-ext-install mcrypt && docker-php-ext-install pdo_mysql
+          - add-apt-repository ppa:fkrull/deadsnakes
+          - apt-get update
+          - apt-get install python2.7
           - ./install-composer.sh
           - composer install
           - export CACHE_DRIVER=database
           - export SESSION_DRIVER=database
           - export DB_CONNECTION=mysql
           - php artisan migrate
-          - php artisan serve &
-          - sleep 5
-          - curl -vk http://localhost:8000
            # Downloading the Google Cloud SDK
           - curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-155.0.0-linux-x86_64.tar.gz 
           - tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/
