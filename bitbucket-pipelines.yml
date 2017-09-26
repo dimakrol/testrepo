@@ -6,11 +6,8 @@ pipelines:
              # Install Google Cloud SDK
           - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
           # Google Cloud SDK is pinned for build reliability. Bump if the SDK complains about deprecation.
-          - SDK_VERSION=127.0.0
+          - SDK_VERSION=155.0.0
           - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
-          - curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
-          - tar -zxvf ${SDK_FILENAME} --directory ${HOME}
-          - export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
           - apt-get update && apt-get install -qy git curl libmcrypt-dev mysql-client
           - docker-php-ext-install mcrypt && docker-php-ext-install pdo_mysql
           - ./install-composer.sh
@@ -22,6 +19,13 @@ pipelines:
           - php artisan serve &
           - sleep 5
           - curl -vk http://localhost:8000
-          - echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
-          - gcloud auth activate-service-account --key-file client-secret.json
-          - gcloud --quiet --verbosity=error app deploy app.yaml --promote
+           # Downloading the Google Cloud SDK
+          - curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-155.0.0-linux-x86_64.tar.gz 
+          - tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/
+          - /tmp/google-cloud-sdk/install.sh -q
+          - source /tmp/google-cloud-sdk/path.bash.inc
+          # Authenticating with the service account key file
+          - echo $GCLOUD_API_KEYFILE | base64 --decode --ignore-garbage > ./gcloud-api-key.json
+          - gcloud auth activate-service-account --key-file gcloud-api-key.json
+          # Linking to the Google Cloud project
+          - gcloud config set project $GCLOUD_PROJECT
