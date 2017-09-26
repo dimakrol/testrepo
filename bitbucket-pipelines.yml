@@ -9,7 +9,6 @@ pipelines:
           - SDK_VERSION=155.0.0
           - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
           - apt-get update && apt-get install -qy git curl libmcrypt-dev mysql-client
-          - add-apt-repository ppa:fkrull/deadsnakes
           - apt-get update
           - apt-get install python2.7
           - ./install-composer.sh
