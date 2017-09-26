@@ -7,22 +7,10 @@ pipelines:
           - docker-php-ext-install mcrypt && docker-php-ext-install pdo_mysql
           - ./install-composer.sh
           - composer install
-          - export CACHE_DRIVER=redis
-          - export SESSION_DRIVER=redis
+          - export CACHE_DRIVER=database
+          - export SESSION_DRIVER=database
           - export DB_CONNECTION=mysql
           - php artisan migrate
           - php artisan serve &
           - sleep 5
           - curl -vk http://localhost:8000
-        services:
-          - mysql
-
-definitions:
-  services:
-    mysql:
-      image: mysql
-      environment:
-        MYSQL_DATABASE: 'wwd'
-        MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-        MYSQL_USER: 'root'
-        MYSQL_PASSWORD: 'secret'
