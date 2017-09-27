@@ -25,6 +25,10 @@ storage/*.key
 .env
 Homestead.yaml
 Homestead.json
+Vagrantfile
+after.sh
+aliases
+.vagrant
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
@@ -144,7 +148,3 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/linux,macos,laravel,phpstorm,netbeans,appengine
-.vagrant/
-Vagrantfile
-after.sh
-aliases
