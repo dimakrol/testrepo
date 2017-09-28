@@ -4,11 +4,11 @@ exquisite videos with your friends and family.
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 ### Prerequisites
-PHP >= 7.0
-Git
-Composer
-Vagrant
-Homestead
+ * PHP >= 7.0
+ * Git
+ * Composer
+ * Vagrant
+ * Homestead
 ### Installing
  * First install PHP 7 on your local machine
  * Install [Composer](https://getcomposer.org) for dependency management
