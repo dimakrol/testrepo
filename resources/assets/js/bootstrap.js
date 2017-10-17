@@ -10,7 +10,8 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
+    require('bootstrap');
+    require('popper.js');
 } catch (e) {}
 
 /**
