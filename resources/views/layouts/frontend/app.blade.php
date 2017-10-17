@@ -12,36 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>
-        /*!
- * Start Bootstrap - 3 Col Portfolio (http://startbootstrap.com/template-overviews/3-col-portfolio)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-3-col-portfolio/blob/master/LICENSE)
- */
-
-        body {
-            padding-top: 54px;
-        }
-
-        @media (min-width: 992px) {
-            body {
-                padding-top: 56px;
-            }
-        }
-
-        .portfolio-item {
-            margin-bottom: 30px;
-        }
-
-        .pagination {
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
 <body>
-    {{--<div id="app">--}}
+    <div id="app">
+        @include('layouts.navigation.main')
         @yield('content')
-    {{--</div>--}}
+    </div>
     {{--<div id="app">--}}
         {{--<nav class="navbar navbar-default navbar-static-top">--}}
             {{--<div class="container">--}}

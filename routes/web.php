@@ -11,9 +11,8 @@
   |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'index');
+
 
 Auth::routes();
 
