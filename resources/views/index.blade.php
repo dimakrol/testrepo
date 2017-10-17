@@ -12,6 +12,7 @@
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </p>
     </div>
+
     <!-- Page Heading -->
     <h1 class="my-4">Page Heading
         <small>Secondary Text</small>
