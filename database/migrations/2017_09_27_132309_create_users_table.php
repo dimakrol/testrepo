@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->date('payment_date')->nullable();
             $table->string('stripe_customer_id')->nullable();
             $table->dateTime('last_signin')->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
