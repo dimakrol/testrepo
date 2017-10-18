@@ -1,8 +1,4 @@
 @extends('layouts.frontend.app')
-    {{--part for video preview--}}
-
-
-    {{--<input type="file" name="file[]" class="file_multi_video" accept="video/*">--}}
     <div id="wrapper" class="toggled">
         @include('layouts.admin.sidebar')
         <div id="page-content-wrapper">

@@ -11,20 +11,20 @@
         <li>
             <a href="{{ route('admin.video.create') }}">Create Video</a>
         </li>
-        <li>
-            <a href="#">Overview</a>
-        </li>
-        <li>
-            <a href="#">Events</a>
-        </li>
-        <li>
-            <a href="#">About</a>
-        </li>
-        <li>
-            <a href="#">Services</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
-        </li>
+        {{--<li>--}}
+            {{--<a href="#">Overview</a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+            {{--<a href="#">Events</a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+            {{--<a href="#">About</a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+            {{--<a href="#">Services</a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+            {{--<a href="#">Contact</a>--}}
+        {{--</li>--}}
     </ul>
 </div>

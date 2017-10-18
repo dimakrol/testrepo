@@ -24,6 +24,7 @@
                 <source width="320" height="240" id="video_here">
                 Your browser does not support HTML5 video.
             </video>
+            {{--<input type="file" name="file[]" class="file_multi_video" accept="video/*">--}}
         </div>
         <button type="submit" class="btn btn-primary">Upload</button>
     </form>
