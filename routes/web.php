@@ -18,7 +18,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function () {
-    Route::view('/', 'admin.index')->name('admin.index');
+
+Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
+    Route::view('/', 'admin.index')->name('index');
+
+    Route::resource('/video', 'Admin\VideoController');
 });
 

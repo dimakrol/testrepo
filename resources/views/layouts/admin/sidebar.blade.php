@@ -1,15 +1,15 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="#">
+            <a href="{{ route('admin.index') }}">
                 WWD Admin
             </a>
         </li>
         <li>
-            <a href="#">Dashboard</a>
+            <a href="{{ route('admin.video.index') }}">All Videos</a>
         </li>
         <li>
-            <a href="#">Shortcuts</a>
+            <a href="#">Create Video</a>
         </li>
         <li>
             <a href="#">Overview</a>
