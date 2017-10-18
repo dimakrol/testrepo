@@ -34,9 +34,9 @@ class VideoController extends Controller
      * @param StoreVideoRequest $request
      * @return FurnitureImage
      */
-    public function store(StoreVideoRequest $request)
+    public function store(Request $request)
     {
-
+        dd($request->all());
 //        $path = $request->photo->store('public/photos');
 //        $ext = $request->photo->extension();
 //        $image = Image::make(Storage::get($path))->resize(100, 100);

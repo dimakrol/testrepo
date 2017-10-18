@@ -24,7 +24,8 @@ class StoreVideoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'video' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:200000'
         ];
     }
 }
