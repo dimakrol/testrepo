@@ -9,7 +9,7 @@
             <a href="{{ route('admin.video.index') }}">All Videos</a>
         </li>
         <li>
-            <a href="#">Create Video</a>
+            <a href="{{ route('admin.video.create') }}">Create Video</a>
         </li>
         <li>
             <a href="#">Overview</a>
