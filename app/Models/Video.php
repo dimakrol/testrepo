@@ -34,7 +34,7 @@ class Video extends Model
         $filePath = 'public'. DIRECTORY_SEPARATOR .'videos' . DIRECTORY_SEPARATOR . $categoryName;
         $videoFile->storeAs($filePath, $filename);
 
-        $storagePath = 'storage' . DIRECTORY_SEPARATOR.'videos' . DIRECTORY_SEPARATOR . $categoryName . DIRECTORY_SEPARATOR . $filename;
+        $storagePath = 'videos' . DIRECTORY_SEPARATOR . $categoryName . DIRECTORY_SEPARATOR . $filename;
         $video->preview_url = $storagePath;
         $video->thumbnail_url = $storagePath;
         $video->local_url = $storagePath;

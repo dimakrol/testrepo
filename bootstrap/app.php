@@ -41,6 +41,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+/** initial pagination for bootstrap 4 */
+Illuminate\Pagination\AbstractPaginator::defaultView("pagination::bootstrap-4");
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

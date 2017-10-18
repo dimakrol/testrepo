@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -20,7 +21,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::paginate(2);
         return view('admin.video.index', compact('videos'));
     }
 
@@ -66,17 +67,6 @@ class VideoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -84,7 +74,10 @@ class VideoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $video = Video::findOrFail($id);
+        $categories = Category::pluck('name', 'id');
+
+        return view('admin.video.edit', compact('video', 'categories'));
     }
 
     /**
@@ -107,6 +100,6 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd(Storage::delete('public/'.$video->local_url));
     }
 }

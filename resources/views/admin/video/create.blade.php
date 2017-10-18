@@ -1,5 +1,6 @@
 @extends('layouts.admin.app')
 @section('admin-content')
+    {{-- todo add normal flash messages --}}
     @foreach($errors->all() as $message)
         {{$message}}
     @endforeach
