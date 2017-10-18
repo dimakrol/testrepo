@@ -7,18 +7,21 @@
         {!! Form::open(['route' => 'admin.video.store', 'files' => true]) !!}
             <div class="form-group">
                 <label for="inputName" class="col-form-label">Name:</label>
-                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name">
+                {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName' , 'placeholder' => 'Video Name', 'required' => 'required']) !!}
             </div>
             <div class="form-group">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox"> Premium
+                        {!! Form::checkbox('premium', null, null, ['class' => 'form-check-input']) !!} Premium
                     </label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlFile1">Select video file</label>
-                <input type="file" name="video" class="form-control-file" id="exampleFormControlFile1" accept="video/*">
+                <label for="inputVideo">Select video file</label>
+                {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*', 'required' => 'required']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::select('category_id', $categories, null, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
             </div>
             {{--in future--}}
             {{--<div class="form-group" style="display: none">--}}

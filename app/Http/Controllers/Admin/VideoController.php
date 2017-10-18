@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\StoreVideoRequest;
+
+use App\Models\Category;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Mockery\Exception;
 
 class VideoController extends Controller
 {
@@ -25,7 +32,8 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return view('admin.video.create');
+        $categories = Category::pluck('name', 'id');
+        return view('admin.video.create', compact('categories'));
     }
 
     /**
@@ -34,9 +42,30 @@ class VideoController extends Controller
      * @param StoreVideoRequest $request
      * @return FurnitureImage
      */
-    public function store(Request $request)
+    public function store(StoreVideoRequest $request)
     {
         dd($request->all());
+//        try {
+            $file =  $request->file('video');
+
+//            $video = new Video
+//
+//            ]);
+//
+//            Video::upload($file, $request->name, $request->category_id);
+//        } catch (Exception $e) {
+//            Log::
+//        }
+
+        $path = $request->file('video')->storeAs(
+            'avatars', $request->user()->id.'.'.$file->extension()
+        );
+        dd($path);
+        // dd($request->video->extension());
+        dd($request->video);
+        $contents = File::get($request->video);
+        $contents = file_get_contents($request->video);
+        //Storage::put('video/1', $contents);
 //        $path = $request->photo->store('public/photos');
 //        $ext = $request->photo->extension();
 //        $image = Image::make(Storage::get($path))->resize(100, 100);
