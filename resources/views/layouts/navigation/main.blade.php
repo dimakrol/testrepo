@@ -34,7 +34,7 @@
                                 Logout
                             </a>
                             @if(Auth::user()->is_admin)
-                                <a class="dropdown-item" href="{{ route('admin') }}">
+                                <a class="dropdown-item" href="{{ route('admin.index') }}">
                                     Admin
                                 </a>
                             @endif

@@ -20,5 +20,13 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+//        part for video preview
+//        $(document).on("change", ".file_multi_video", function(evt) {
+//            var $source = $('#video_here');
+//            $source[0].src = URL.createObjectURL(this.files[0]);
+//            $source.parent()[0].load();
+//        });
+    </script>
 </body>
 </html>
