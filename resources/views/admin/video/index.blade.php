@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('content')
+@section('admin-content')
 <table class="table">
     <thead class="thead-default">
     <tr>

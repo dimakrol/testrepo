@@ -1,4 +1,6 @@
 @extends('layouts.frontend.app')
+
+@section('content')
     <div id="wrapper" class="toggled">
         @include('layouts.admin.sidebar')
         <div id="page-content-wrapper">
@@ -7,11 +9,8 @@
                 {{--<div class="alert alert-primary" role="alert">--}}
                     {{--This is a primary alert—check it out!--}}
                 {{--</div>--}}
-                @section('content')
+                @yield('admin-content')
             </div>
         </div>
     </div>
-
-
-
 @endsection

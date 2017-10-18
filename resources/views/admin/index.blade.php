@@ -1,5 +1,6 @@
 @extends('layouts.admin.app')
-@section('content')
+
+@section('admin-content')
 <h2>Welcome to Admin</h2>
 
 
