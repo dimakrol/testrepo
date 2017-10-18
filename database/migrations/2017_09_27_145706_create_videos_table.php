@@ -18,6 +18,7 @@ class CreateVideosTable extends Migration
             $table->string('name',355);
             $table->string('preview_url');
             $table->string('thumbnail_url');
+            $table->string('local_url');
             $table->boolean('premium');
             $table->string('impossible_video_id');
             $table->integer('category_id')->unsigned();

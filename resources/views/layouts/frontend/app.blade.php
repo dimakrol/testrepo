@@ -27,6 +27,11 @@
 //            $source[0].src = URL.createObjectURL(this.files[0]);
 //            $source.parent()[0].load();
 //        });
+//      toggle navbar
+//    $("#menu-toggle").click(function(e) {
+//        e.preventDefault();
+//        $("#wrapper").toggleClass("toggled");
+//    });
     </script>
 </body>
 </html>
