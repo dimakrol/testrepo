@@ -3,37 +3,28 @@
 <table class="table">
     <thead class="thead-default">
     <tr>
-        <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Slug</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-    </tr>
+    @foreach($videos as $video)
+        <tr>
+            <th scope="row">{{$video->id}}</th>
+            <td>{{$video->name}}</td>
+            <td>No slug yet</td>
+            <td><a href="{{ route('admin.video.edit', $video->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
+        </tr>
+    @endforeach
+
     </tbody>
 </table>
-    @foreach($videos as $video)
-        <video src="{{ asset($video->local_url) }}" width="400" controls>
-        <source width="320" height="240" id="video_here">
-        Your browser does not support HTML5 video.
-        </video>
-    @endforeach
+    {{--@foreach($videos as $video)--}}
+        {{--<video src="{{ asset($video->local_url) }}" width="400" controls>--}}
+        {{--<source width="320" height="240" id="video_here">--}}
+        {{--Your browser does not support HTML5 video.--}}
+        {{--</video>--}}
+    {{--@endforeach--}}
 @endsection
