@@ -30,4 +30,10 @@
     </tr>
     </tbody>
 </table>
+    @foreach($videos as $video)
+        <video src="{{ asset($video->local_url) }}" width="400" controls>
+        <source width="320" height="240" id="video_here">
+        Your browser does not support HTML5 video.
+        </video>
+    @endforeach
 @endsection

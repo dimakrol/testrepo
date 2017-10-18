@@ -32,8 +32,9 @@ class Video extends Model
     {
         $filename = time().str_random(10).'.'.$videoFile->extension();
         $filePath = 'public'. DIRECTORY_SEPARATOR .'videos' . DIRECTORY_SEPARATOR . $categoryName;
-        $storagePath = $videoFile->storeAs($filePath, $filename);
+        $videoFile->storeAs($filePath, $filename);
 
+        $storagePath = 'storage' . DIRECTORY_SEPARATOR.'videos' . DIRECTORY_SEPARATOR . $categoryName . DIRECTORY_SEPARATOR . $filename;
         $video->preview_url = $storagePath;
         $video->thumbnail_url = $storagePath;
         $video->local_url = $storagePath;
