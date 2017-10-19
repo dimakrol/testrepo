@@ -39,8 +39,10 @@ class CategoryController extends Controller
                 'seo_description' => $name
             ]);
         } catch (\PDOException $e) {
-            return back()->with('error', 'aaaa');
+            flash('Error while creating category!')->error();
+            return back();
         }
+        flash('Category created successful!')->success();
         return back();
     }
 

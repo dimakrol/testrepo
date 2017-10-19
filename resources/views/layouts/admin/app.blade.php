@@ -10,6 +10,7 @@
                     {{--This is a primary alert—check it out!--}}
                 {{--</div>--}}
                 {{-- todo add normal flash messages --}}
+                @include('flash::message')
                 @foreach($errors->all() as $message)
                     {{$message}}
                 @endforeach

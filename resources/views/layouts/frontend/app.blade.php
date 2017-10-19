@@ -32,6 +32,8 @@
 //        e.preventDefault();
 //        $("#wrapper").toggleClass("toggled");
 //    });
+//todo move to separate file.
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 </body>
 </html>
