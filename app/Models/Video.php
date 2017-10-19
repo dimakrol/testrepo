@@ -32,7 +32,6 @@ class Video extends Model
     /**
      * Upload video to server, set url parameters to fields
      * @param $videoFile
-     * @param $categoryName
      */
     public function upload($videoFile)
     {
