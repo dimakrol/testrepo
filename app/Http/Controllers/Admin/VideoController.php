@@ -53,7 +53,7 @@ class VideoController extends Controller
         ]);
 
         try {
-            $video->upload($video, $request->file('video'), $category->name);
+            $video->upload($request->file('video'), $category->name);
             Auth::user()->videos()->save($video);
         } catch (\PDOException $e) {
             Log::error('Error while creating video: '. $e->getMessage());
@@ -64,8 +64,9 @@ class VideoController extends Controller
             flash('Error while creating uploading video!')->error();
             return back();
         }
+
         flash('Video created successful!')->success();
-        return redirect(route('admin.video.index'));
+        return redirect()->route('admin.video.index');
     }
 
     /**
@@ -102,6 +103,22 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        //dd(Storage::delete('public/'.$video->local_url));
+        $video = Video::findOrFail($id);
+
+        if (!$video->destroyFile()) {
+            Log::error('Error while deletion video: ');
+            flash('Error while deletion video!')->error();
+            return back();
+        }
+        try {
+            $video->delete();
+        } catch (\PDOException $e) {
+            Log::error('Error while deletion video with id: '. $video->id.' '. $e->getMessage());
+            flash('Error while deletion video!')->error();
+            return back();
+        }
+
+        flash('File deleted successful!')->success();
+        return redirect()->route('admin.video.index');
     }
 }

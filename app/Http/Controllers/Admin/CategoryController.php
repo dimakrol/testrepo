@@ -43,7 +43,7 @@ class CategoryController extends Controller
             return back();
         }
         flash('Category created successful!')->success();
-        return back();
+        return redirect()->route('admin.category.create');
     }
 
     /**

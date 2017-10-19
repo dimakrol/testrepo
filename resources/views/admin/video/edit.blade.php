@@ -1,9 +1,5 @@
 @extends('layouts.admin.app')
 @section('admin-content')
-    {{-- todo add normal flash messages --}}
-    @foreach($errors->all() as $message)
-        {{$message}}
-    @endforeach
     <div class="col-md-6 col-xs-12">
         <h2>Update video {{ $video->name }}</h2>
     </div>
