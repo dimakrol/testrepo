@@ -14,7 +14,7 @@
         @foreach($videos as $video)
             <tr>
                 <th scope="row">{{$video->id}}</th>
-                <td>{{$video->name}}</td>
+                <td><a href="{{ route('admin.video.edit', $video->id) }}">{{$video->name}}</a></td>
                 <td>No slug yet</td>
                 <td>
                     <a href="{{ route('admin.video.edit', $video->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
