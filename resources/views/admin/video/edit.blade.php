@@ -9,7 +9,7 @@
             <source width="320" height="240" id="video_here">
             Your browser does not support HTML5 video.
         </video>
-    {!! Form::open(['route' => 'admin.video.store', 'files' => true]) !!}
+    {!! Form::open(['route' => ['admin.video.update', $video->id], 'method'  => 'put', 'files' => true]) !!}
     <div class="form-group">
         <label for="inputName" class="col-form-label">Name:</label>
         {!! Form::text('name', $video->name, ['class' => 'form-control', 'id' => 'inputName' , 'placeholder' => 'Video Name', 'required' => 'required']) !!}
@@ -23,11 +23,19 @@
     </div>
     <div class="form-group">
         <label for="inputVideo">Select video to change</label>
-        {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*', 'required' => 'required']) !!}
+        {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*']) !!}
     </div>
     <div class="form-group">
         {!! Form::select('category_id', $categories, $video->category_id, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
     </div>
-    <button type="submit" class="btn btn-primary">Update</button>
+    <div class="row">
+        <div style="margin-right: 5px">
+            {{ Form::submit('Update', ['class' => 'btn btn-primary']) }}
+        </div>
     {!! Form::close() !!}
+
+    {!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin.video.destroy', $video->id ] ]) !!}
+            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+    {!! Form::close() !!}
+    </div>
 @endsection
