@@ -11,9 +11,9 @@
         <li>
             <a href="{{ route('admin.video.create') }}">Create Video</a>
         </li>
-        {{--<li>--}}
-            {{--<a href="#">Overview</a>--}}
-        {{--</li>--}}
+        <li>
+            <a href="{{ route('admin.category.create') }}">Create Category</a>
+        </li>
         {{--<li>--}}
             {{--<a href="#">Events</a>--}}
         {{--</li>--}}

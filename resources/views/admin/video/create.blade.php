@@ -1,9 +1,5 @@
 @extends('layouts.admin.app')
 @section('admin-content')
-    {{-- todo add normal flash messages --}}
-    @foreach($errors->all() as $message)
-        {{$message}}
-    @endforeach
     <h2>Upload new video</h2>
         {!! Form::open(['route' => 'admin.video.store', 'files' => true]) !!}
             <div class="form-group">

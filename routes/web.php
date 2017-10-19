@@ -23,5 +23,8 @@ Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
     Route::view('/', 'admin.index')->name('index');
 
     Route::resource('/video', 'Admin\VideoController');
+    Route::resource('/category', 'Admin\CategoryController', ['only' => [
+        'create', 'store', 'destroy'
+    ]]);
 });
 

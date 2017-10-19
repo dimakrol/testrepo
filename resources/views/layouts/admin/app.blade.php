@@ -9,6 +9,10 @@
                 {{--<div class="alert alert-primary" role="alert">--}}
                     {{--This is a primary alert—check it out!--}}
                 {{--</div>--}}
+                {{-- todo add normal flash messages --}}
+                @foreach($errors->all() as $message)
+                    {{$message}}
+                @endforeach
                 @yield('admin-content')
             </div>
         </div>
