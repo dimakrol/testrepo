@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('admin-content')
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <h2>Categories:</h2>
     </div>
     @if($categories->count() > 0)
