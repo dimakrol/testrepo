@@ -1,13 +1,19 @@
 @extends('layouts.admin.app')
 @section('admin-content')
-    <h2>Categories</h2>
-    <ul class="list-group col-md-6">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
+    <div class="form-group">
+        <h2>Categories:</h2>
+    </div>
+    @if($categories->count() > 0)
+        <ul class="list-group col-md-6">
+            @foreach($categories as $category)
+                <li class="list-group-item">{{$category->name}}</li>
+            @endforeach
+        </ul>
+    @else
+        <div class="form-group">
+            <h4>No categories added.</h4>
+        </div>
+    @endif
 
     {!! Form::open(['route' => 'admin.category.store']) !!}
     <div class="form-group col-md-6">

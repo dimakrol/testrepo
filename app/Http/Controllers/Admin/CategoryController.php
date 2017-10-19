@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $categories = Category::all();
+        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -25,7 +28,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:categories'
+        ]);
+        $name = $request->input('name');
+        try {
+            Category::create([
+                'name' => $name,
+                'seo_title' => $name,
+                'seo_description' => $name
+            ]);
+        } catch (\PDOException $e) {
+            return back()->with('error', 'aaaa');
+        }
+        return back();
     }
 
     /**
