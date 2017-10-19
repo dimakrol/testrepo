@@ -10,7 +10,7 @@
             Your browser does not support HTML5 video.
         </video>
     {!! Form::open(['route' => ['admin.video.update', $video->id], 'method'  => 'put', 'files' => true]) !!}
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label for="inputName" class="col-form-label">Name:</label>
         {!! Form::text('name', $video->name, ['class' => 'form-control', 'id' => 'inputName' , 'placeholder' => 'Video Name', 'required' => 'required']) !!}
     </div>
@@ -25,7 +25,7 @@
         <label for="inputVideo">Select video to change</label>
         {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*']) !!}
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
         {!! Form::select('category_id', $categories, $video->category_id, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
     </div>
     <div class="row">
