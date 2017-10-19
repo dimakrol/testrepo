@@ -21,7 +21,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::paginate(2);
+        $videos = Video::paginate(20);
         return view('admin.video.index', compact('videos'));
     }
 
@@ -57,12 +57,14 @@ class VideoController extends Controller
             Auth::user()->videos()->save($video);
         } catch (\PDOException $e) {
             Log::error('Error while creating video: '. $e->getMessage());
-            return back()->with('');
+            flash('Error while creating video!')->error();
+            return back();
         } catch (\Exception $e) {
             Log::error('Error while uploading video file: '. $e->getMessage());
-            return back()->with('');
+            flash('Error while creating uploading video!')->error();
+            return back();
         }
-
+        flash('Video created successful!')->success();
         return redirect(route('admin.video.index'));
     }
 
