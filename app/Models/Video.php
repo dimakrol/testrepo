@@ -34,13 +34,13 @@ class Video extends Model
      * @param $videoFile
      * @param $categoryName
      */
-    public function upload($videoFile, $categoryName)
+    public function upload($videoFile)
     {
         $filename = time().str_random(10).'.'.$videoFile->extension();
-        $filePath = 'public'. DIRECTORY_SEPARATOR .'videos' . DIRECTORY_SEPARATOR . $categoryName;
+        $filePath = 'public'. DIRECTORY_SEPARATOR .'videos';
         $videoFile->storeAs($filePath, $filename);
 
-        $storagePath = 'videos' . DIRECTORY_SEPARATOR . $categoryName . DIRECTORY_SEPARATOR . $filename;
+        $storagePath = 'videos' . DIRECTORY_SEPARATOR . $filename;
         $this->preview_url = $storagePath;
         $this->thumbnail_url = $storagePath;
         $this->local_url = $storagePath;

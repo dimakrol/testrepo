@@ -44,16 +44,14 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
-        $category = Category::findOrFail($request->input('category_id'));
-
         $video = new Video([
             'name' => $request->input('name'),
             'premium' => $request->input('premium') ? true : false,
-            'category_id' => $category->id,
+            'category_id' => $request->input('category_id'),
         ]);
 
         try {
-            $video->upload($request->file('video'), $category->name);
+            $video->upload($request->file('video'));
             Auth::user()->videos()->save($video);
         } catch (\PDOException $e) {
             Log::error('Error while creating video: '. $e->getMessage());
@@ -92,7 +90,30 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+//        $category = Category::findOrFail($request->input('category_id'));
+//
+//        $video = new Video([
+//            'name' => $request->input('name'),
+//            'premium' => $request->input('premium') ? true : false,
+//            'category_id' => $category->id,
+//        ]);
+//
+//        try {
+//            $video->upload($request->file('video'), $category->name);
+//            Auth::user()->videos()->save($video);
+//        } catch (\PDOException $e) {
+//            Log::error('Error while creating video: '. $e->getMessage());
+//            flash('Error while creating video!')->error();
+//            return back();
+//        } catch (\Exception $e) {
+//            Log::error('Error while uploading video file: '. $e->getMessage());
+//            flash('Error while creating uploading video!')->error();
+//            return back();
+//        }
+//
+//        flash('Video created successful!')->success();
+//        return redirect()->route('admin.video.index');
     }
 
     /**
