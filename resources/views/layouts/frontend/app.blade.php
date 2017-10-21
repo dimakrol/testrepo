@@ -11,7 +11,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <script>
+        let WWD = {
+            stripe: {
+                stripeKey: "{{ config('services.stripe.key') }}"
+            },
+            user: JSON.parse('{!! json_encode(Auth::user()) !!}')
+        }
+    </script>
 </head>
 <body>
     <div id="app">
@@ -19,7 +26,9 @@
         @yield('content')
     </div>
     <!-- Scripts -->
+    <script src="https://checkout.stripe.com/checkout.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
     <script>
 //        part for video preview
 //        $(document).on("change", ".file_multi_video", function(evt) {

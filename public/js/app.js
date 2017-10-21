@@ -987,7 +987,7 @@ window.Vue = __webpack_require__(36);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(39));
+Vue.component('checkout-form', __webpack_require__(39));
 
 var app = new Vue({
   el: '#app'
@@ -46450,7 +46450,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Example.vue"
+Component.options.__file = "resources/assets/js/components/CheckoutForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -46460,9 +46460,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-64c3a272", Component.options)
+    hotAPI.createRecord("data-v-1b38695c", Component.options)
   } else {
-    hotAPI.reload("data-v-64c3a272", Component.options)
+    hotAPI.reload("data-v-1b38695c", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46595,18 +46595,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    methods: {
+        buySubscription: function buySubscription() {
+            console.log(this.$data);
+
+            this.stripe.open({
+                name: 'name',
+                description: 'description',
+                zipCode: true,
+                amount: 2500
+            });
+        }
+    },
+    data: function data() {
+        return {
+            stripe: {},
+            stripeEmail: '',
+            stripeToken: ''
+        };
+    },
     mounted: function mounted() {
-        console.log('Component mounted.');
+        var _this = this;
+
+        this.stripe = StripeCheckout.configure({
+            key: WWD.stripe.stripeKey,
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            email: WWD.user.email,
+            token: function token(_token) {
+
+                vm.stripeEmail = _token.email;
+                vm.stripeToken = _token.id;
+
+                axios.post('subscription', _this.$data).then(function (response) {
+                    console.log(response);
+                });
+            }
+        });
     }
 });
 
@@ -46618,38 +46645,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("h1", [_vm._v("Checkout form")]),
+    _vm._v(" "),
+    _c(
+      "button",
+      { attrs: { id: "customButton" }, on: { click: _vm.buySubscription } },
+      [_vm._v("Purchase")]
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component!\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-64c3a272", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1b38695c", module.exports)
   }
 }
 

@@ -10,7 +10,13 @@ class SubscriptionController extends Controller
 {
     public function index()
     {
-        $plan = Plan::where('name', 'yearly')->first();
-        return StripePaymentService::getPlan($plan->name);
+        return view('subscription');
+//        $plan = Plan::where('name', 'yearly')->first();
+//        return StripePaymentService::getPlan($plan->name);
+    }
+
+    public function store(Request $request)
+    {
+        return $request->all();
     }
 }
