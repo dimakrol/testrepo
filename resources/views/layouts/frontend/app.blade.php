@@ -12,7 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <script>
-        let WWD = {
+        window.WWD = {
             stripe: {
                 stripeKey: "{{ config('services.stripe.key') }}"
             },

@@ -46604,14 +46604,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.stripe.open({
                 name: 'name',
                 description: 'description',
-                zipCode: true,
                 amount: 2500
             });
         }
     },
     data: function data() {
         return {
-            stripe: {},
             stripeEmail: '',
             stripeToken: ''
         };
@@ -46626,8 +46624,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             email: WWD.user.email,
             token: function token(_token) {
 
-                vm.stripeEmail = _token.email;
-                vm.stripeToken = _token.id;
+                _this.stripeEmail = _token.email;
+                _this.stripeToken = _token.id;
 
                 axios.post('subscription', _this.$data).then(function (response) {
                     console.log(response);
@@ -46650,8 +46648,8 @@ var render = function() {
     _vm._v(" "),
     _c(
       "button",
-      { attrs: { id: "customButton" }, on: { click: _vm.buySubscription } },
-      [_vm._v("Purchase")]
+      { staticClass: "btn btn-primary", on: { click: _vm.buySubscription } },
+      [_vm._v("Bye Subscription")]
     )
   ])
 }

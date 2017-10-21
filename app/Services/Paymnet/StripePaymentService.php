@@ -9,8 +9,8 @@
 namespace App\Services\Payment;
 
 
-use Stripe\Plan;
-use Stripe\Stripe;
+use Stripe\{Customer, Plan, Stripe};
+use App\Models\Plan as EloquentPlan;
 
 class StripePaymentService
 {
@@ -43,7 +43,7 @@ class StripePaymentService
      * @param \App\Models\Plan $plan
      * @return Plan
      */
-    public static function createPlan(\App\Models\Plan $plan)
+    public static function createPlan(EloquentPlan $plan)
     {
         static::setKey();
 
@@ -56,6 +56,28 @@ class StripePaymentService
             ]);
     }
 
+    /**
+     * @param $stripeEmail
+     * @param $stripeToken
+     * @param EloquentPlan $plan
+     * @return Customer
+     */
+    public static function createCustomerWithSubscription($stripeEmail, $stripeToken, EloquentPlan $plan)
+    {
+        static::setKey();
+
+        return Customer::create([
+            'email' => $stripeEmail,
+            'source' => $stripeToken,
+            'plan' => $plan->stripe_id
+        ]);
+    }
+
+
+
+    /**
+     * Set stripe key
+     */
     public static function setKey()
     {
         Stripe::setApiKey(static::getStripeKey());

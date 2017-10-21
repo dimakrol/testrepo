@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h1>Checkout form</h1>
-        <button id="customButton" @click="buySubscription">Purchase</button>
+        <button class="btn btn-primary" @click="buySubscription">Bye Subscription</button>
     </div>
 
 </template>
@@ -15,14 +15,12 @@
                 this.stripe.open({
                     name: 'name',
                     description: 'description',
-                    zipCode: true,
                     amount: 2500
                 })
             }
         },
         data() {
             return {
-                stripe: {},
                 stripeEmail: '',
                 stripeToken: ''
             }
@@ -36,8 +34,8 @@
                 email: WWD.user.email,
                 token: (token) => {
 
-                    vm.stripeEmail = token.email;
-                    vm.stripeToken = token.id;
+                    this.stripeEmail = token.email;
+                    this.stripeToken = token.id;
 
                     axios.post('subscription', this.$data).then((response) => {
                         console.log(response);

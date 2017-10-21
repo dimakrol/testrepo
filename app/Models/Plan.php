@@ -16,4 +16,10 @@ class Plan extends Model
         'amount',
         'interval'
     ];
+
+    public function scopeDefault($query)
+    {
+        return $query->where('stripe_id', static::STRIPE_ID)->first();
+    }
+
 }

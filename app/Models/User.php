@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Log;
+use Stripe\Customer;
 
 class User extends Authenticatable
 {
@@ -17,7 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name', 'email', 'password','last_name',
         'gender','facebook_id','ip_address','date_of_birth',
-        'payment_date','stripe_customer_id','last_signin'
+        'payment_date','stripe_customer_id','last_signin',
+
     ];
 
     /**
@@ -35,5 +39,18 @@ class User extends Authenticatable
     public function videos()
     {
         return $this->hasMany(Video::class);
+    }
+
+    public function activateStripeSubscription(Customer $customer)
+    {
+        foreach ($customer->subscriptions->data as $subscription) {
+            $this->stripe_customer_id = $customer->id;
+            $this->billing_type = 'stripe';
+            $this->stripe_subscription_id = $subscription->id;
+            $this->active_subscription = true;
+            $this->subscription_end_at = Carbon::createFromTimestamp($subscription->current_period_end);
+            $this->payment_date = Carbon::createFromTimestamp($subscription->current_period_start);
+            $this->save();
+        }
     }
 }
