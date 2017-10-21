@@ -1,13 +1,21 @@
 <template>
     <div class="container">
-        <h1>Checkout form</h1>
-        <button class="btn btn-primary" @click="buySubscription">Bye Subscription</button>
+        <div v-if="!user.active_subscription">
+            <h1>Checkout form</h1>
+            <button class="btn btn-primary" @click="buySubscription">Bye Subscription</button>
+        </div>
+        <div v-else>
+            <p>Your have yearly premium subscription.</p>
+            <p>Next payment at: {{ nextPayment }}</p>
+            <button class="btn btn-danger btn-sm">Cancel Subscription</button>
+        </div>
     </div>
 
 </template>
 
 <script>
     export default {
+        props: ['user'],
         methods: {
             buySubscription() {
                 console.log(this.$data);
@@ -26,12 +34,11 @@
             }
         },
         mounted() {
-
             this.stripe = StripeCheckout.configure({
                 key: WWD.stripe.stripeKey,
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
                 locale: 'auto',
-                email: WWD.user.email,
+                email: this.user.email,
                 token: (token) => {
 
                     this.stripeEmail = token.email;
@@ -42,6 +49,12 @@
                     })
                 }
             });
+        },
+        computed: {
+            nextPayment() {
+                console.log(this.user.subscription_end_at);
+                return moment(this.user.subscription_end_at).format('DD-MM-YYYY');
+            }
         }
     }
 </script>

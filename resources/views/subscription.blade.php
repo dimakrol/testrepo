@@ -1,4 +1,4 @@
 @extends('layouts.frontend.app')
 @section('content')
-    <checkout-form></checkout-form>
+    <checkout-form :user="user"></checkout-form>
 @endsection

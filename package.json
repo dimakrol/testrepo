@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "bootstrap": "4.0.0-beta",
-    "popper.js": "^1.12.5",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "moment": "^2.19.1",
+    "popper.js": "^1.12.5"
   }
 }

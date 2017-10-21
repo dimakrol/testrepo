@@ -43,11 +43,12 @@ class User extends Authenticatable
 
     public function activateStripeSubscription(Customer $customer)
     {
+        $this->billing_type = 'stripe';
+        $this->stripe_customer_id = $customer->id;
+        $this->active_subscription = true;
+
         foreach ($customer->subscriptions->data as $subscription) {
-            $this->stripe_customer_id = $customer->id;
-            $this->billing_type = 'stripe';
             $this->stripe_subscription_id = $subscription->id;
-            $this->active_subscription = true;
             $this->subscription_end_at = Carbon::createFromTimestamp($subscription->current_period_end);
             $this->payment_date = Carbon::createFromTimestamp($subscription->current_period_start);
             $this->save();

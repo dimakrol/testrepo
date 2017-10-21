@@ -30,7 +30,7 @@ class SubscriptionController extends Controller
                 $plan
             );
         } catch (Exception $e) {
-            Log::error('Customer does not created: ' . $e->getMessage());
+            Log::error('Customer has not been created: ' . $e->getMessage());
             return response()->json([
                 'status' => $e->getMessage()
             ], 422);

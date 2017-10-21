@@ -1,4 +1,8 @@
 import Popper from 'popper.js/dist/umd/popper.js';
+import moment from 'moment';
+
+window.moment = moment;
+
 window._ = require('lodash');
 /**
  * js lib for bootstrap
