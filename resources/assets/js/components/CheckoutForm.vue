@@ -7,7 +7,7 @@
         <div v-else>
             <p>Your have yearly premium subscription.</p>
             <p>Next payment at: {{ nextPayment }}</p>
-            <button class="btn btn-danger btn-sm">Cancel Subscription</button>
+            <button class="btn btn-danger btn-sm" @click="cancelSubscription">Cancel Subscription</button>
         </div>
     </div>
 
@@ -25,7 +25,12 @@
                     description: 'description',
                     amount: 2500
                 })
-            }
+            },
+            cancelSubscription() {
+                axios.delete('subscription').then((response) => {
+                    console.log(response);
+                })
+            },
         },
         data() {
             return {

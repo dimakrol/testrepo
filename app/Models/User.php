@@ -54,4 +54,9 @@ class User extends Authenticatable
             $this->save();
         }
     }
+
+    public function cancelStripeSubscription(Customer $customer)
+    {
+
+    }
 }

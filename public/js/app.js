@@ -46623,6 +46623,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 description: 'description',
                 amount: 2500
             });
+        },
+        cancelSubscription: function cancelSubscription() {
+            axios.delete('subscription').then(function (response) {
+                console.log(response);
+            });
         }
     },
     data: function data() {
@@ -46686,9 +46691,14 @@ var render = function() {
           _vm._v(" "),
           _c("p", [_vm._v("Next payment at: " + _vm._s(_vm.nextPayment))]),
           _vm._v(" "),
-          _c("button", { staticClass: "btn btn-danger btn-sm" }, [
-            _vm._v("Cancel Subscription")
-          ])
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger btn-sm",
+              on: { click: _vm.cancelSubscription }
+            },
+            [_vm._v("Cancel Subscription")]
+          )
         ])
   ])
 }

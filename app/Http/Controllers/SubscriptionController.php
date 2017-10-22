@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Plan;
 use App\Services\Payment\StripePaymentService;
-use Dompdf\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Stripe\Customer;
 
 class SubscriptionController extends Controller
 {
@@ -29,16 +28,32 @@ class SubscriptionController extends Controller
                 $request->input('stripeToken'),
                 $plan
             );
-        } catch (Exception $e) {
-            Log::error('Customer has not been created: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            Log::error('Customer with subscription has not been created: ' . $e->getMessage());
             return response()->json([
                 'status' => $e->getMessage()
             ], 422);
         }
 
-        Log::debug($customer);
         $request->user()->activateStripeSubscription($customer);
 
         return response()->json(['message' => 'Subscription activated successfully'], 201);
+    }
+
+    public function cancel()
+    {
+        try {
+            $canceledSubscription = StripePaymentService::cancelSubscription(Auth::user()->stripe_subscription_id);
+        } catch (\Exception $e) {
+            Log::error('Subscription has not been canceled: ' . $e->getMessage());
+            return response()->json([
+                'status' => $e->getMessage()
+            ], 422);
+        }
+
+        //todo cancel subscription in local database
+        Log::debug($canceledSubscription);
+
+        return 'true';
     }
 }

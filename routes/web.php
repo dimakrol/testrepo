@@ -20,6 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
 Route::post('/subscription', 'SubscriptionController@store');
+Route::delete('/subscription', 'SubscriptionController@cancel');
 
 Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
     Route::view('/', 'admin.index')->name('index');
