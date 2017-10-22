@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('facebook_id')->nullable();
             $table->ipAddress('ip_address')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->date('payment_date')->nullable();
             $table->string('stripe_customer_id')->nullable();
             $table->dateTime('last_signin')->nullable();
             $table->boolean('is_admin')->default(false);
