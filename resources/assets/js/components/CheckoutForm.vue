@@ -11,20 +11,13 @@
                         <button @click="subscribe" :disabled="subscribeBusy" type="button" class="btn btn-success btn-sm pull-right" >Subscribe</button>
                     </li>
                 </ul>
-                <div>
-                <p>Your have yearly premium subscription.</p>
-                <button class="btn btn-danger btn-sm" @click="cancelSubscription">Cancel Subscription</button>
+                <div v-else>
+                    <p>Your have yearly premium subscription.</p>
+                    <button class="btn btn-danger btn-sm" @click="cancelSubscription">Cancel Subscription</button>
                 </div>
             </div>
         </div>
     </div>
-
-        <!--<div v-else>-->
-            <!--<p>Your have yearly premium subscription.</p>-->
-            <!--<p>Next payment at: {{ nextPayment }}</p>-->
-            <!--<button class="btn btn-danger btn-sm" @click="cancelSubscription">Cancel Subscription</button>-->
-        <!--</div>-->
-
 </template>
 
 <script>

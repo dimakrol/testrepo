@@ -11,6 +11,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
+    @auth
     <script>
         window.WWD = {
             stripe: {
@@ -19,6 +20,7 @@
             user: JSON.parse('{!! json_encode(Auth::user()->with('subscriptions')->first()) !!}')
         }
     </script>
+    @endauth
 </head>
 <body>
     <div id="app">

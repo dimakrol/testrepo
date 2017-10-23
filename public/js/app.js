@@ -62817,13 +62817,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -62932,20 +62925,18 @@ var render = function() {
                 )
               ])
             ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", [
-          _c("p", [_vm._v("Your have yearly premium subscription.")]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger btn-sm",
-              on: { click: _vm.cancelSubscription }
-            },
-            [_vm._v("Cancel Subscription")]
-          )
-        ])
+          : _c("div", [
+              _c("p", [_vm._v("Your have yearly premium subscription.")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger btn-sm",
+                  on: { click: _vm.cancelSubscription }
+                },
+                [_vm._v("Cancel Subscription")]
+              )
+            ])
       ])
     ])
   ])
