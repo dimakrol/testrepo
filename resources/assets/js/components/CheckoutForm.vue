@@ -11,9 +11,13 @@
                         <button @click="subscribe" :disabled="subscribeBusy" type="button" class="btn btn-success btn-sm pull-right" >Subscribe</button>
                     </li>
                 </ul>
+                <div v-else-if="user.subscriptions.length && user.subscriptions[0].ends_at">
+                    <p>Your have yearly premium subscription ends at: {{ user.subscriptions[0].ends_at }}</p>
+                    <button @click="resumeSubscription" class="btn btn-warning btn-sm">Resume subscription</button>
+                </div>
                 <div v-else>
                     <p>Your have yearly premium subscription.</p>
-                    <button class="btn btn-danger btn-sm" @click="cancelSubscription">Cancel Subscription</button>
+                    <button @click="cancelSubscription" class="btn btn-danger btn-sm">Cancel Subscription</button>
                 </div>
             </div>
         </div>
@@ -51,6 +55,9 @@
                     console.log(response);
                 })
             },
+            resumeSubscription() {
+
+            }
         },
 
         mounted() {

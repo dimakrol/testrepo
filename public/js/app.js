@@ -62817,6 +62817,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -62848,7 +62852,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.delete('subscription').then(function (response) {
                 console.log(response);
             });
-        }
+        },
+        resumeSubscription: function resumeSubscription() {}
     },
 
     mounted: function mounted() {
@@ -62925,18 +62930,36 @@ var render = function() {
                 )
               ])
             ])
-          : _c("div", [
-              _c("p", [_vm._v("Your have yearly premium subscription.")]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger btn-sm",
-                  on: { click: _vm.cancelSubscription }
-                },
-                [_vm._v("Cancel Subscription")]
-              )
-            ])
+          : _vm.user.subscriptions.length && _vm.user.subscriptions[0].ends_at
+            ? _c("div", [
+                _c("p", [
+                  _vm._v(
+                    "Your have yearly premium subscription ends at: " +
+                      _vm._s(_vm.user.subscriptions[0].ends_at)
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-warning btn-sm",
+                    on: { click: _vm.resumeSubscription }
+                  },
+                  [_vm._v("Resume subscription")]
+                )
+              ])
+            : _c("div", [
+                _c("p", [_vm._v("Your have yearly premium subscription.")]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    on: { click: _vm.cancelSubscription }
+                  },
+                  [_vm._v("Cancel Subscription")]
+                )
+              ])
       ])
     ])
   ])
