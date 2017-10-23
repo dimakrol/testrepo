@@ -16,7 +16,7 @@ class CreateSubscriptionsTable extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->enum('billing_type', ['stripe', 'paypal'])->nullable();
 
             $table->string('stripe_id');

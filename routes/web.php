@@ -18,16 +18,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
-Route::post('/subscription', 'SubscriptionController@store');
-Route::delete('/subscription', 'SubscriptionController@cancel');
+Route::group(['middleware' => 'auth'], function () {
 
-Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
-    Route::view('/', 'admin.index')->name('index');
 
-    Route::resource('/video', 'Admin\VideoController');
-    Route::resource('/category', 'Admin\CategoryController', ['only' => [
-        'create', 'store', 'destroy'
-    ]]);
+    Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
+    Route::post('/subscription', 'SubscriptionController@store');
+    Route::delete('/subscription', 'SubscriptionController@cancel');
+
+    Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
+        Route::view('/', 'admin.index')->name('index');
+
+        Route::resource('/video', 'Admin\VideoController');
+        Route::resource('/category', 'Admin\CategoryController', ['only' => [
+            'create', 'store', 'destroy'
+        ]]);
+    });
 });
 

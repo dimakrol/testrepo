@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Stripe\Customer;
 
@@ -41,18 +42,37 @@ class User extends Authenticatable
         return $this->hasMany(Video::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * @param Customer $customer
+     * @return bool
+     */
     public function activateStripeSubscription(Customer $customer)
     {
-        $this->billing_type = 'stripe';
-        $this->stripe_customer_id = $customer->id;
-        $this->active_subscription = true;
+        if (count($customer->subscriptions->data)) {
+            $this->stripe_customer_id = $customer->id;
 
-        foreach ($customer->subscriptions->data as $subscription) {
-            $this->stripe_subscription_id = $subscription->id;
-            $this->subscription_end_at = Carbon::createFromTimestamp($subscription->current_period_end);
-            $this->payment_date = Carbon::createFromTimestamp($subscription->current_period_start);
-            $this->save();
+            foreach ($customer->subscriptions->data as $subscription) {
+                $subscription = new Subscription([
+                    'name' => $subscription->plan->name,
+                    'billing_type' => 'stripe',
+                    'stripe_id' => $subscription->id,
+                    'stripe_plan' => $subscription->plan->id,
+                    'quantity' => $subscription->plan->amount,
+                    'next_payment' => Carbon::createFromTimestamp($subscription->current_period_end)
+                ]);
+            }
+            return Auth::user()->subscriptions()->save($subscription);
         }
+
+        return false;
     }
 
     public function cancelStripeSubscription(Customer $customer)
