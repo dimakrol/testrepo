@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
@@ -24,5 +25,15 @@ class Subscription extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @param \Stripe\Subscription $subscription
+     */
+    public function cancelWithPeriod(\Stripe\Subscription $subscription)
+    {
+        $this->next_payment = null;
+        $this->ends_at = Carbon::createFromTimestamp($subscription->current_period_end);
+        $this->save();
     }
 }

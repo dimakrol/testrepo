@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\Subscription;
 use App\Services\Payment\StripePaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,8 @@ class SubscriptionController extends Controller
     public function cancel()
     {
         try {
-            $canceledSubscription = StripePaymentService::cancelSubscription(Auth::user()->stripe_subscription_id);
+            $subscription = Auth::user()->subscriptions()->first();
+            StripePaymentService::cancelSubscription($subscription);
         } catch (\Exception $e) {
             Log::error('Subscription has not been canceled: ' . $e->getMessage());
             return response()->json([
@@ -51,9 +53,6 @@ class SubscriptionController extends Controller
             ], 422);
         }
 
-        //todo cancel subscription in local database
-        Log::debug($canceledSubscription);
-
-        return 'true';
+        return response()->json(['message' => 'Your subscription has been canceled!!!'], 201);
     }
 }

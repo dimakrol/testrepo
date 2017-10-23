@@ -24,7 +24,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('quantity');
             $table->dateTime('trial_ends_at')->nullable();
             $table->dateTime('ends_at')->nullable();
-            $table->dateTime('next_payment')->nullabel();
+            $table->dateTime('next_payment')->nullable();
 
             $table->timestamps();
         });

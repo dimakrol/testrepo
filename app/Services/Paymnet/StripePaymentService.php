@@ -12,6 +12,7 @@ namespace App\Services\Payment;
 use Stripe\{
     Customer, Plan, Stripe, Subscription
 };
+use App\Models\Subscription as EloquentSubscription;
 use App\Models\Plan as EloquentPlan;
 
 class StripePaymentService
@@ -75,13 +76,15 @@ class StripePaymentService
         ]);
     }
 
-    public static function cancelSubscription($subscriptionId)
+
+    public static function cancelSubscription(EloquentSubscription $subscription)
     {
         static::setKey();
 
-        $subscription = Subscription::retrieve($subscriptionId);
+        $stripeSubscription = Subscription::retrieve($subscription->stripe_id);
+        $canceledSubscription = $stripeSubscription->cancel(['at_period_end' => true]);
 
-        return $subscription->cancel(['at_period_end' => true]);
+        $subscription->cancelWithPeriod($canceledSubscription);
     }
 
 
