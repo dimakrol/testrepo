@@ -2,7 +2,7 @@
     <div class="container">
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <ul class="list-group col-md-6">
+                <ul v-if="!user.subscriptions.length" class="list-group col-md-6">
                     <li class="list-group-item">$ 9.99/year</li>
                     <li class="list-group-item">Unlimited videos.</li>
                     <li class="list-group-item">Donation to charity FOE</li>
@@ -11,6 +11,10 @@
                         <button @click="subscribe" :disabled="subscribeBusy" type="button" class="btn btn-success btn-sm pull-right" >Subscribe</button>
                     </li>
                 </ul>
+                <div>
+                <p>Your have yearly premium subscription.</p>
+                <button class="btn btn-danger btn-sm" @click="cancelSubscription">Cancel Subscription</button>
+                </div>
             </div>
         </div>
     </div>
@@ -25,7 +29,12 @@
 
 <script>
     export default {
-        props: ['user'],
+        props: {
+                user: {
+                    type: Object,
+                    required: true
+                }
+            },
         data() {
             return {
                 subscribeBusy: false,
@@ -36,7 +45,6 @@
 
         methods: {
             subscribe() {
-                console.log(this.$data);
                 this.subscribeBusy = true;
 
                 this.stripe.open({
@@ -72,10 +80,7 @@
                     })
                 }
             });
-
-            this.stripe.close(() => {
-                console.log('dddd')
-            })
+            console.log(this.user)
         },
         computed: {
             nextPayment() {

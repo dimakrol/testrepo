@@ -16,7 +16,7 @@
             stripe: {
                 stripeKey: "{{ config('services.stripe.key') }}"
             },
-            user: JSON.parse('{!! json_encode(Auth::user()) !!}')
+            user: JSON.parse('{!! json_encode(Auth::user()->with('subscriptions')->first()) !!}')
         }
     </script>
 </head>

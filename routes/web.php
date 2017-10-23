@@ -19,7 +19,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-
+    Route::get('user', function() {
+        return Auth::user()->with('subscriptions')->first();
+    });
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
     Route::post('/subscription', 'SubscriptionController@store');

@@ -16950,10 +16950,19 @@ window.Bus = new Vue();
 Vue.component('checkout-form', __webpack_require__(159));
 
 var app = new Vue({
-  data: {
-    user: WWD.user
-  },
-  el: '#app'
+    data: {
+        user: WWD.user
+    },
+    el: '#app',
+    mounted: function mounted() {
+        var _this = this;
+
+        // console.log('here');
+        // console.log(this.user);
+        axios.get('user').then(function (response) {
+            _this.user = response.data;
+        });
+    }
 });
 
 /***/ }),
@@ -62811,9 +62820,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
+    props: {
+        user: {
+            type: Object,
+            required: true
+        }
+    },
     data: function data() {
         return {
             subscribeBusy: false,
@@ -62825,7 +62843,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         subscribe: function subscribe() {
-            console.log(this.$data);
             this.subscribeBusy = true;
 
             this.stripe.open({
@@ -62863,10 +62880,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         });
-
-        this.stripe.close(function () {
-            console.log('dddd');
-        });
+        console.log(this.user);
     },
 
     computed: {
@@ -62888,32 +62902,49 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { attrs: { id: "page-content-wrapper" } }, [
       _c("div", { staticClass: "container-fluid" }, [
-        _c("ul", { staticClass: "list-group col-md-6" }, [
-          _c("li", { staticClass: "list-group-item" }, [_vm._v("$ 9.99/year")]),
+        !_vm.user.subscriptions.length
+          ? _c("ul", { staticClass: "list-group col-md-6" }, [
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("$ 9.99/year")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("Unlimited videos.")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("Donation to charity FOE")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("30-Day money back guarantee")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-group-item" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success btn-sm pull-right",
+                    attrs: { disabled: _vm.subscribeBusy, type: "button" },
+                    on: { click: _vm.subscribe }
+                  },
+                  [_vm._v("Subscribe")]
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", [
+          _c("p", [_vm._v("Your have yearly premium subscription.")]),
           _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("Unlimited videos.")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("Donation to charity FOE")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("30-Day money back guarantee")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success btn-sm pull-right",
-                attrs: { disabled: _vm.subscribeBusy, type: "button" },
-                on: { click: _vm.subscribe }
-              },
-              [_vm._v("Subscribe")]
-            )
-          ])
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger btn-sm",
+              on: { click: _vm.cancelSubscription }
+            },
+            [_vm._v("Cancel Subscription")]
+          )
         ])
       ])
     ])
