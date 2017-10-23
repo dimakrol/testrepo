@@ -25,7 +25,7 @@ const app = new Vue({
     mounted() {
         // console.log('here');
         // console.log(this.user);
-        axios.get('user').then((response) => {
+        axios.get('/user').then((response) => {
             this.user = response.data;
         });
     }

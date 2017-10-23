@@ -16959,7 +16959,7 @@ var app = new Vue({
 
         // console.log('here');
         // console.log(this.user);
-        axios.get('user').then(function (response) {
+        axios.get('/user').then(function (response) {
             _this.user = response.data;
         });
     }

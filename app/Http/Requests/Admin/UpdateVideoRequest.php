@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreVideoRequest extends FormRequest
+class UpdateVideoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class StoreVideoRequest extends FormRequest
             'name' => 'required',
             'category_id' => 'required',
             'impossible_video_id' => 'required',
-            'video' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:200000'
+            'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:200000'
         ];
     }
 }

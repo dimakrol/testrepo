@@ -15,6 +15,10 @@
         {!! Form::text('name', $video->name, ['class' => 'form-control', 'id' => 'inputName' , 'placeholder' => 'Video Name', 'required' => 'required']) !!}
     </div>
     <div class="form-group col-md-6 col-xs-12">
+        <label for="inputImpossibleVideoId" class="col-form-label">Impossible Video Id:</label>
+        {!! Form::text('impossible_video_id', $video->impossible_video_id, ['class' => 'form-control', 'id' => 'inputImpossibleVideoId' , 'placeholder' => 'Impossible Video Id', 'required' => 'required']) !!}
+    </div>
+    <div class="form-group col-md-6 col-xs-12">
         <div class="form-check">
             <label class="form-check-label">
                 {!! Form::checkbox('premium', null, $video->premium, ['class' => 'form-check-input']) !!} Premium

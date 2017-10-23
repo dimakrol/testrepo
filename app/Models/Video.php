@@ -10,7 +10,8 @@ class Video extends Model
     protected $fillable = [
         'name',
         'premium',
-        'category_id'
+        'category_id',
+        'impossible_video_id'
     ];
 
     /**
@@ -43,7 +44,6 @@ class Video extends Model
         $this->preview_url = $storagePath;
         $this->thumbnail_url = $storagePath;
         $this->local_url = $storagePath;
-        $this->impossible_video_id = 1;
     }
 
     /**

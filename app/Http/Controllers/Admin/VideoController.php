@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\StoreVideoRequest;
 
+use App\Http\Requests\Admin\UpdateVideoRequest;
 use App\Models\Category;
 use App\Models\Video;
 use foo\bar;
@@ -45,6 +46,7 @@ class VideoController extends Controller
     {
         $video = new Video([
             'name' => $request->input('name'),
+            'impossible_video_id' => $request->input('impossible_video_id'),
             'premium' => $request->input('premium') ? true : false,
             'category_id' => $request->input('category_id'),
         ]);
@@ -80,17 +82,17 @@ class VideoController extends Controller
         return view('admin.video.edit', compact('video', 'categories'));
     }
 
+
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateVideoRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateVideoRequest $request, $id)
     {
         $video = Video::findOrFail($id);
-        $data =  $request->except('premium');
+            $data =  $request->except('premium');
         $data['premium'] = $request->input('premium') ? true : false;
         $video->fill($data);
         if ($request->file('video')) {
