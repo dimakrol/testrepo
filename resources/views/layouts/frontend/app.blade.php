@@ -58,8 +58,11 @@
                 processData: false, // Don't process the files
                 contentType: false, // Set content type to false as jQuery will tell the server its a query string request
                 success: function(data) {
-                    $("#video-source").attr('src', data.videoUrl);
-                    $('video')[0].load();;
+                    $('.video-container').html(`
+                    <video data-id="${data.videoId}" poster="http://localhost:8000/images/loading_anim.gif" preload="auto" class="center" width="100%" controls="">
+                        <source src="${data.videoUrl}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>`);
                 },
                 error: function(jqXHR, textStatus) {
                     console.log(textStatus);

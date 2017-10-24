@@ -4,7 +4,7 @@
     <div class="container">
         <!-- Heading Row -->
         <div class="row my-4">
-            <div class="col-lg-8">
+            <div class="col-lg-8 video-container">
                 <video data-id="{{ $video->id }}" poster="{{ asset('images/loading_anim.gif') }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $video->getLocalUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.

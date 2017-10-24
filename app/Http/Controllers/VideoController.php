@@ -87,7 +87,7 @@ class VideoController extends Controller
 
         Log::debug('Video Url: '. $videoUrl);
 
-        return response()->json(['videoUrl' => $videoUrl]);
+        return response()->json(['videoUrl' => $videoUrl, 'videoId' => $video->id]);
     }
 
     /**
