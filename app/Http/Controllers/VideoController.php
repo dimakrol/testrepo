@@ -48,6 +48,8 @@ class VideoController extends Controller
                 } catch (\Exception $e) {
                     Log::error('Error while uploading image file: '. $e->getMessage());
                 }
+                Log::debug('Impossible id: '.$field->variable_name);
+                Log::debug('Uploaded image url: '. $fileUrl);
                 $params[$field->variable_name] = $fileUrl;
             }
         }
