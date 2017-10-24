@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CreateFieldRequest;
 use App\Models\Field;
-use Illuminate\Http\Request;
+use App\Models\Video;
 use App\Http\Controllers\Controller;
 
 class FieldController extends Controller
@@ -21,10 +21,8 @@ class FieldController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateFieldRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateFieldRequest $request)
     {
