@@ -17,6 +17,7 @@ Route::view('/', 'index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/api_video_play', 'HomeController@play')->name('video');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('user', function() {
