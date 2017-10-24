@@ -31,6 +31,14 @@ class Video extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function fields()
+    {
+        return $this->hasMany(Field::class);
+    }
+
+    /**
      * Upload video to server, set url parameters to fields
      * @param $videoFile
      */

@@ -14,9 +14,9 @@
         <li>
             <a href="{{ route('admin.category.create') }}">Create Category</a>
         </li>
-        {{--<li>--}}
-            {{--<a href="#">Events</a>--}}
-        {{--</li>--}}
+        <li>
+            <a href="{{ route('admin.field.create') }}">Create field</a>
+        </li>
         {{--<li>--}}
             {{--<a href="#">About</a>--}}
         {{--</li>--}}

@@ -18,6 +18,8 @@ class CreateFieldsTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('variable_name');
+            //todo delete nullable
+            $table->string('aspect_ratio')->nullable();
 
 
             $table->timestamps();
