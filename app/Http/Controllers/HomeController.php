@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $videos = Video::latest()->take(5)->get();
+        $videos = Video::latest()->take(9)->get();
         return view('index', compact('videos'));
     }
 

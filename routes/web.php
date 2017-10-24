@@ -16,9 +16,8 @@
 
 Auth::routes();
 
-Route::resource('/video', 'VideoController', ['only' => [
-    'show'
-]]);
+Route::post('/video/generate', 'VideoController@generate');
+Route::resource('/video', 'VideoController', ['only' => ['show']]);
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');

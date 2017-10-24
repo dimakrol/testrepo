@@ -33,9 +33,24 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function generate(Request $request)
     {
-        //
+        $video = Video::with('fields')->findOrFail($request->id);
+
+        $arr = [];
+
+        foreach ($video->fields as $field) {
+            if ($request->hasFile($field->variable_name)) {
+                $arr[$field->variable_name] = $request->file($field->variable_name)->getClientOriginalName();
+            }
+        }
+
+
+//        foreach ($request->files as $file) {
+//            $arr[] = $file->getClientOriginalName();
+//        }
+//        $arr[] = $request->id;
+        return $arr;
     }
 
     /**
@@ -47,7 +62,8 @@ class VideoController extends Controller
     public function show($id)
     {
         $video = Video::with('fields')->findOrFail($id);
-        return view('frontend.video.show', compact($video));
+//        dd($video);
+        return view('frontend.video.show', compact('video'));
     }
 
     /**

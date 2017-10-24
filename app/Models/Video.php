@@ -61,4 +61,18 @@ class Video extends Model
     {
         return Storage::delete('public/'.$this->local_url);
     }
+
+    public function uploadImage()
+    {
+        //todo
+    }
+
+    /**
+     * Return local url
+     * @return string
+     */
+    public function getLocalUrl()
+    {
+        return asset('storage/'.$this->local_url);
+    }
 }

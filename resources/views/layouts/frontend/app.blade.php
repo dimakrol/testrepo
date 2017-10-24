@@ -32,6 +32,39 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
+        $('.update-preview').on('click', function () {
+            let fileInputs = $('input[type=file]');
+            let videoId = $('video').data('id');
+
+            let data = new FormData();
+            $.each(fileInputs, function (index, fileInput) {
+                $.each(fileInput.files, function (key, value) {
+                    console.log('key: ' + key);
+                    console.log('value: ' + value);
+                    data.append(fileInput.name, value);
+                })
+//                console.log(fileInput.files[0].value);
+//                data.append(fileInput.name, fileInput.files[0].value);
+            });
+            data.append('_token', $('input[name=_token]').val());
+            data.append('id', videoId);
+            console.log(data);
+            $.ajax({
+                url: '/video/generate',
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                success: function(data, textStatus, jqXHR) {
+                    console.log(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
+            });
+        });
 //        part for video preview
 //        $(document).on("change", ".file_multi_video", function(evt) {
 //            var $source = $('#video_here');
