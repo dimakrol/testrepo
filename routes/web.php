@@ -11,11 +11,16 @@
   |
  */
 
-Route::view('/', 'index');
+//Route::view('/', 'index');
 
 
 Auth::routes();
 
+Route::resource('/video', 'VideoController', ['only' => [
+    'show'
+]]);
+
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/api_video_play', 'HomeController@play')->name('video');
 
