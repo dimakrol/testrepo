@@ -62,9 +62,20 @@ class Video extends Model
         return Storage::delete('public/'.$this->local_url);
     }
 
-    public function uploadImage()
+    /**
+     * Upload image and return video url
+     *
+     * @param $image
+     * @return string
+     */
+    public static function uploadImage($image)
     {
-        //todo
+        $filename = time().str_random(10).'.'.$image->extension();
+        $filePath = 'public'. DIRECTORY_SEPARATOR .'images';
+        $image->storeAs($filePath, $filename);
+
+        $storagePath = 'storage'.DIRECTORY_SEPARATOR.'images' . DIRECTORY_SEPARATOR . $filename;
+        return asset($storagePath);
     }
 
     /**
@@ -73,6 +84,6 @@ class Video extends Model
      */
     public function getLocalUrl()
     {
-        return asset('storage/'.$this->local_url);
+        return asset('storage'.DIRECTORY_SEPARATOR.$this->local_url);
     }
 }
