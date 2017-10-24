@@ -57,34 +57,32 @@
                 dataType: 'json',
                 processData: false, // Don't process the files
                 contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-                success: function(data, textStatus, jqXHR) {
-                    let video = $('video');
+                success: function(data) {
                     $("#video-source").attr('src', data.videoUrl);
-                    video.load();
-                    video.play();
+                    $('video')[0].load();;
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function(jqXHR, textStatus) {
                     console.log(textStatus);
                 }
             });
         });
-        var video = document.getElementById('video');
-        var source = document.createElement('source');
-
-        source.setAttribute('src', 'http://www.tools4movies.com/trailers/1012/Kill%20Bill%20Vol.3.mp4');
-
-        video.appendChild(source);
-        video.play();
-
-        setTimeout(function() {
-            video.pause();
-
-            source.setAttribute('src', 'http://www.tools4movies.com/trailers/1012/Despicable%20Me%202.mp4');
-
-            video.load();
-            video.play();
-        }, 3000);
-//        part for video preview
+//        var video = document.getElementById('video');
+//        var source = document.createElement('source');
+//
+//        source.setAttribute('src', 'http://www.tools4movies.com/trailers/1012/Kill%20Bill%20Vol.3.mp4');
+//
+//        video.appendChild(source);
+//        video.play();
+//
+//        setTimeout(function() {
+//            video.pause();
+//
+//            source.setAttribute('src', 'http://www.tools4movies.com/trailers/1012/Despicable%20Me%202.mp4');
+//
+//            video.load();
+//            video.play();
+//        }, 3000);
+////        part for video preview
 //        $(document).on("change", ".file_multi_video", function(evt) {
 //            var $source = $('#video_here');
 //            $source[0].src = URL.createObjectURL(this.files[0]);
