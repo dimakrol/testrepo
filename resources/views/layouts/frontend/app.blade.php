@@ -31,6 +31,8 @@
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
+    @yield('script')
+
     <script>
         $('.update-preview').on('click', function () {
             let fileInputs = $('input[type=file]');

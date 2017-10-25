@@ -39,6 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/category', 'Admin\CategoryController', ['only' => [
             'create', 'store', 'destroy'
         ]]);
+        Route::resource('/tag', 'Admin\TagController', ['only' => [
+            'create', 'store', 'destroy'
+        ]]);
+
 
         Route::resource('/field', 'Admin\FieldController', ['only' => [
             'create', 'store', 'destroy'
