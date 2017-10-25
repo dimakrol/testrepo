@@ -56,6 +56,7 @@ class VideoController extends Controller
         try {
             $video->upload($request->file('video'));
             Auth::user()->videos()->save($video);
+            $video->tags()->sync($request->tags);
         } catch (\PDOException $e) {
             Log::error('Error while creating video: '. $e->getMessage());
             flash('Error while creating video!')->error();
