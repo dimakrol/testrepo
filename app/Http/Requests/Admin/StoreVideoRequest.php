@@ -25,7 +25,6 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'category_id' => 'required',
             'impossible_video_id' => 'required',
             'video' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:200000'
         ];

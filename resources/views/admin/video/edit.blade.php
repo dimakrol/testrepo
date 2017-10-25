@@ -30,9 +30,11 @@
         {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*']) !!}
     </div>
     <div class="form-group col-md-6 col-xs-12">
-        {!! Form::select('category_id', $categories, $video->category_id, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::label('categories[]', 'Categories:') !!}
+        {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2-multi-categories', 'multiple' => "multiple"]) !!}
     </div>
     <div class="form-group col-md-6 col-xs-12">
+        {!! Form::label('categories[]', 'Tags:') !!}
         {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
     </div>
     <table class="table col-md-12 col-xs-12">
@@ -72,6 +74,7 @@
 @section('script')
     <script>
         $('.select2-multi').select2();
+        $('.select2-multi-categories').select2().val({!! json_encode($video->categories()->pluck('id')) !!}).trigger('change');
         $('.select2-multi').select2().val({!! json_encode($video->tags()->pluck('id')) !!}).trigger('change');
     </script>
 @endsection

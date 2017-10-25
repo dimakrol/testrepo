@@ -50,13 +50,13 @@ class VideoController extends Controller
             'name' => $request->input('name'),
             'impossible_video_id' => $request->input('impossible_video_id'),
             'premium' => $request->input('premium') ? true : false,
-            'category_id' => $request->input('category_id'),
         ]);
 
         try {
             $video->upload($request->file('video'));
             Auth::user()->videos()->save($video);
             $video->tags()->sync($request->tags);
+            $video->categories()->sync($request->categories);
         } catch (\PDOException $e) {
             Log::error('Error while creating video: '. $e->getMessage());
             flash('Error while creating video!')->error();
@@ -96,7 +96,7 @@ class VideoController extends Controller
     public function update(UpdateVideoRequest $request, $id)
     {
         $video = Video::findOrFail($id);
-            $data =  $request->except('premium');
+        $data =  $request->except('premium');
         $data['premium'] = $request->input('premium') ? true : false;
         $video->fill($data);
         if ($request->file('video')) {
@@ -118,6 +118,11 @@ class VideoController extends Controller
                 $video->tags()->sync($request->tags);
             } else {
                 $video->tags()->sync(array());
+            }
+            if (isset($request->categories)) {
+                $video->categories()->sync($request->categories);
+            } else {
+                $video->categories()->sync(array());
             }
         } catch (\PDOException $e) {
             Log::error('Error while updating video with id: ' .$video->id.' error:'. $e->getMessage());

@@ -35,10 +35,9 @@ class CategoryController extends Controller
         try {
             Category::create([
                 'name' => $name,
-                'seo_title' => $name,
-                'seo_description' => $name
             ]);
         } catch (\PDOException $e) {
+            Log::error('Error while creation category: '. $e->getMessage());
             flash('Error while creating category!')->error();
             return back();
         }

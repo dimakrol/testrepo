@@ -22,9 +22,11 @@
                 {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*', 'required' => 'required']) !!}
             </div>
             <div class="form-group">
-                {!! Form::select('category_id', $categories, null, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::label('categories[]', 'Categories:') !!}
+                {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('tags[]', 'Tags:') !!}
                 {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
             </div>
             {{--in future--}}
