@@ -11,7 +11,7 @@
         </ul>
     @else
         <div class="form-group">
-            <h4>No categories added.</h4>
+            <h4>No tags added.</h4>
         </div>
     @endif
 

@@ -11,11 +11,11 @@ class Category extends Model
         'seo_title',
         'seo_description'
     ];
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function videos()
-    {
-        return $this->hasMany(Video::class);
-    }
+//    /**
+//     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+//     */
+//    public function videos()
+//    {
+//        return $this->hasMany(Video::class);
+//    }
 }

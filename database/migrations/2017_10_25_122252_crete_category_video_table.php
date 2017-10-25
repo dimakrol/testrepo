@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagsVideosTable extends Migration
+class CreteCategoryVideoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTagsVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_video', function (Blueprint $table) {
+        Schema::create('category_video', function (Blueprint $table) {
+            $table->integer('category_id')->unsigned();
             $table->integer('video_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
         });
-
-
     }
 
     /**
@@ -29,7 +30,6 @@ class CreateTagsVideosTable extends Migration
      */
     public function down()
     {
-
-        Schema::dropIfExists('tag_video');
+        Schema::dropIfExists('category_video');
     }
 }

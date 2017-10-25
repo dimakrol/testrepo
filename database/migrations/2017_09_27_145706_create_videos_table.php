@@ -21,7 +21,6 @@ class CreateVideosTable extends Migration
             $table->string('local_url');
             $table->boolean('premium');
             $table->string('impossible_video_id');
-            $table->integer('category_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
