@@ -39,6 +39,14 @@ class Video extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
      * Upload video to server, set url parameters to fields
      * @param $videoFile
      */

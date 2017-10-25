@@ -1,5 +1,6 @@
 import Popper from 'popper.js/dist/umd/popper.js';
 import moment from 'moment';
+import 'select2/dist/js/select2.full';
 
 window.moment = moment;
 

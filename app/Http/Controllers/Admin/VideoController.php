@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\StoreVideoRequest;
 
 use App\Http\Requests\Admin\UpdateVideoRequest;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Models\Video;
 use foo\bar;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class VideoController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id');
-        return view('admin.video.create', compact('categories'));
+        $tags = Tag::pluck('name', 'id');
+        return view('admin.video.create', compact('categories', 'tags'));
     }
 
     /**

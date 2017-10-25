@@ -24,6 +24,9 @@
             <div class="form-group">
                 {!! Form::select('category_id', $categories, null, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
             </div>
+            <div class="form-group">
+                {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'required' => 'required', 'multiple' => "multiple"]) !!}
+            </div>
             {{--in future--}}
             {{--<div class="form-group" style="display: none">--}}
                 {{--<video width="400"--}}
@@ -37,4 +40,10 @@
             {{--end in future--}}
             <button type="submit" class="btn btn-primary">Upload</button>
         {!! Form::close() !!}
+@endsection
+
+@section('script')
+    <script>
+        $('.select2-multi').select2();
+    </script>
 @endsection

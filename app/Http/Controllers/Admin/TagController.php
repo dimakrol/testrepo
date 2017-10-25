@@ -37,7 +37,7 @@ class TagController extends Controller
             flash('Error while creating tag!')->error();
             return back();
         }
-        flash('Tag created successful!')->success();
+        flash('Tag created successfully!')->success();
         return redirect()->route('admin.tag.create');
     }
 
