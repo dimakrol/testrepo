@@ -32,6 +32,9 @@
     <div class="form-group col-md-6 col-xs-12">
         {!! Form::select('category_id', $categories, $video->category_id, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
     </div>
+    <div class="form-group col-md-6 col-xs-12">
+        {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
+    </div>
     <table class="table col-md-12 col-xs-12">
         <thead class="thead-default">
         <tr>
@@ -50,11 +53,6 @@
                 <th scope="row">{{$field->variable_name}}</th>
                 <th scope="row">{{$field->type}}</th>
                 <th scope="row">Actions</th>
-                {{--<td><a href="{{ route('admin.video.edit', $video->id) }}">{{$video->name}}</a></td>--}}
-                {{--<td>No slug yet</td>--}}
-                {{--<td>--}}
-                    {{--<a href="{{ route('admin.video.edit', $video->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>--}}
-                {{--</td>--}}
             </tr>
         @endforeach
         </tbody>
@@ -70,4 +68,10 @@
             {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
     {!! Form::close() !!}
     </div>
+@endsection
+@section('script')
+    <script>
+        $('.select2-multi').select2();
+        $('.select2-multi').select2().val({!! json_encode($video->tags()->pluck('id')) !!}).trigger('change');
+    </script>
 @endsection

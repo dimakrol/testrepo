@@ -25,7 +25,7 @@
                 {!! Form::select('category_id', $categories, null, ['placeholder' => 'Select category', 'class' => 'form-control', 'required' => 'required']) !!}
             </div>
             <div class="form-group">
-                {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'required' => 'required', 'multiple' => "multiple"]) !!}
+                {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
             </div>
             {{--in future--}}
             {{--<div class="form-group" style="display: none">--}}

@@ -81,8 +81,9 @@ class VideoController extends Controller
     {
         $video = Video::findOrFail($id);
         $categories = Category::pluck('name', 'id');
+        $tags = Tag::pluck('name', 'id');
 
-        return view('admin.video.edit', compact('video', 'categories'));
+        return view('admin.video.edit', compact('video', 'categories', 'tags'));
     }
 
 
@@ -112,6 +113,12 @@ class VideoController extends Controller
         }
         try {
             $video->save();
+            $video->tags()->sync($request->tags);
+            if (isset($request->tags)) {
+                $video->tags()->sync($request->tags);
+            } else {
+                $video->tags()->sync(array());
+            }
         } catch (\PDOException $e) {
             Log::error('Error while updating video with id: ' .$video->id.' error:'. $e->getMessage());
             flash('Error while updating video!')->error();
