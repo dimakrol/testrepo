@@ -58,6 +58,16 @@ class Video extends Model
     }
 
     /**
+     * return creator of video
+     *
+     * @return Model|null|static
+     */
+    public function creator()
+    {
+        return $this->user()->first();
+    }
+
+    /**
      * Upload video to server, set url parameters to fields
      * @param $videoFile
      */

@@ -5,12 +5,12 @@
         <!-- Heading Row -->
         <div class="row my-4">
             <div class="col-lg-8 video-container">
-                {{--<h2>{{ $video->name }}</h2>--}}
                 <video data-id="{{ $video->id }}" poster="{{ asset('images/default_for_video.png') }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $video->getLocalUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                {{--<img class="img-fluid rounded" src="http://placehold.it/900x400" alt="">--}}
+                <h2>{{ $video->name }}</h2>
+                <p>Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
             </div>
             <!-- /.col-lg-8 -->
             <div class="col-lg-4">

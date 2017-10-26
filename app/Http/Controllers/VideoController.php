@@ -19,7 +19,7 @@ class VideoController extends Controller
      */
     public function show($slug)
     {
-        $video = Video::with('fields')->whereSlug($slug)->firstOrFail();
+        $video = Video::with(['fields', 'user'])->whereSlug($slug)->firstOrFail();
         return view('frontend.video.show', compact('video'));
     }
 
