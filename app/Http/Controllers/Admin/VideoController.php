@@ -24,7 +24,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::with('fields')->paginate(20);
+        $videos = Video::with(['fields','user'])->paginate(20);
         return view('admin.video.index', compact('videos'));
     }
 

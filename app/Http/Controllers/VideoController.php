@@ -46,31 +46,15 @@ class VideoController extends Controller
                 Log::debug('input name:'.$field->variable_name);
                 $fileUrl = '';
                 try {
-                    $data = $request->input($field->variable_name);
-                    list($type, $data) = explode(';', $data);
-                    Log::debug($type);
-                    Log::debug('Type: '.$type);
-                    list(, $data)      = explode(',', $data);
-                    list(,$extension) = explode('/', $type);
-                    Log::debug('Extention: '.$extension);
-                    $imageName = time().str_random(10).'.'.$extension;
-                    Log::debug('Image Name: '.$imageName);
-                    $imageContent = base64_decode($data);
-                    $path = 'images'.DIRECTORY_SEPARATOR.$imageName;
-                    Storage::put('public'.DIRECTORY_SEPARATOR.$path, $imageContent);
+                    $fileUrl = Video::uploadImage($request->input($field->variable_name));
                 } catch (\Exception $e) {
                     Log::error('Error while uploading image file: '. $e->getMessage());
                 }
-
-                Log::debug('Asset: '.asset('storage'.DIRECTORY_SEPARATOR.$path));
-
-                $params[$field->variable_name] = asset('storage'.DIRECTORY_SEPARATOR.$path);
+                $params[$field->variable_name] = $fileUrl;
             }
         }
 
-
-        $PROJECT_ID = "b8533acd-23ac-487d-9d46-cbc143ee06f9";
-
+        $PROJECT_ID = getenv('IMPOSSIBLE_PROJECT_ID');
         $movieName = $video->impossible_video_id;
 
         Log::debug('Impossible video id: '. $movieName);
@@ -91,6 +75,7 @@ class VideoController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
         $result = curl_exec($ch);
+
         Log::debug('Result: '. $result);
 
         $token = json_decode($result)->{'token'};
