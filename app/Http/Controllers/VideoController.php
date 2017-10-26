@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -41,16 +42,29 @@ class VideoController extends Controller
         $params = [];
 
         foreach ($video->fields as $field) {
-            if ($request->hasFile($field->variable_name)) {
+            if ($request->input($field->variable_name)) {
+                Log::debug('input name:'.$field->variable_name);
                 $fileUrl = '';
                 try {
-                    $fileUrl = Video::uploadImage($request->file($field->variable_name));
+                    $data = $request->input($field->variable_name);
+                    list($type, $data) = explode(';', $data);
+                    Log::debug($type);
+                    Log::debug('Type: '.$type);
+                    list(, $data)      = explode(',', $data);
+                    list(,$extension) = explode('/', $type);
+                    Log::debug('Extention: '.$extension);
+                    $imageName = time().str_random(10).'.'.$extension;
+                    Log::debug('Image Name: '.$imageName);
+                    $imageContent = base64_decode($data);
+                    $path = 'images'.DIRECTORY_SEPARATOR.$imageName;
+                    Storage::put('public'.DIRECTORY_SEPARATOR.$path, $imageContent);
                 } catch (\Exception $e) {
                     Log::error('Error while uploading image file: '. $e->getMessage());
                 }
-                Log::debug('Impossible id: '.$field->variable_name);
-                Log::debug('Uploaded image url: '. $fileUrl);
-                $params[$field->variable_name] = $fileUrl;
+
+                Log::debug('Asset: '.asset('storage'.DIRECTORY_SEPARATOR.$path));
+
+                $params[$field->variable_name] = asset('storage'.DIRECTORY_SEPARATOR.$path);
             }
         }
 

@@ -34,43 +34,6 @@
     @yield('script')
 
     <script>
-        $('.update-preview').on('click', function () {
-            let fileInputs = $('input[type=file]');
-            let videoId = $('video').data('id');
-
-            let data = new FormData();
-            $.each(fileInputs, function (index, fileInput) {
-                $.each(fileInput.files, function (key, value) {
-                    console.log('key: ' + key);
-                    console.log('value: ' + value);
-                    data.append(fileInput.name, value);
-                })
-//                console.log(fileInput.files[0].value);
-//                data.append(fileInput.name, fileInput.files[0].value);
-            });
-            data.append('_token', $('input[name=_token]').val());
-            data.append('id', videoId);
-            console.log(data);
-            $.ajax({
-                url: '/video/generate',
-                type: 'POST',
-                data: data,
-                cache: false,
-                dataType: 'json',
-                processData: false, // Don't process the files
-                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-                success: function(data) {
-                    $('.video-container').html(`
-                    <video data-id="${data.videoId}" poster="http://localhost:8000/images/loading_anim.gif" autoplay preload="auto" class="center" width="100%" controls="">
-                        <source src="${data.videoUrl}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>`);
-                },
-                error: function(jqXHR, textStatus) {
-                    console.log(textStatus);
-                }
-            });
-        });
 //        var video = document.getElementById('video');
 //        var source = document.createElement('source');
 //

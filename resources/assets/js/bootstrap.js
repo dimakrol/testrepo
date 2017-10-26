@@ -1,8 +1,10 @@
 import Popper from 'popper.js/dist/umd/popper.js';
 import moment from 'moment';
+import Croppie from 'croppie'
 import 'select2/dist/js/select2.full';
 
 window.moment = moment;
+window.Croppie = Croppie;
 
 window._ = require('lodash');
 /**
