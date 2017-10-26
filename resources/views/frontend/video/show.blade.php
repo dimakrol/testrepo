@@ -5,7 +5,7 @@
         <!-- Heading Row -->
         <div class="row my-4">
             <div class="col-lg-8 video-container">
-                <h2>{{ $video->name }}</h2>
+                {{--<h2>{{ $video->name }}</h2>--}}
                 <video data-id="{{ $video->id }}" poster="{{ asset('images/default_for_video.png') }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $video->getLocalUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
@@ -26,7 +26,13 @@
                         @endif
                     @endforeach
                     <div class="form-group">
-                        <button class="btn btn-warning update-preview btn-xs" href="#" disabled="true">Update Preview</button>
+                        <button class="btn btn-success update-preview btn-block" href="#">Add Your Photo</button>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success update-preview btn-block" href="#" disabled="true">Update Preview</button>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <button class="btn btn-success btn-block" href="#">Create Video</button>
                     </div>
                 </div>
                 <div id="croppie"></div>
@@ -40,8 +46,6 @@
 
 @section('script')
     <script>
-        //http://localhost:8000/storage/videos/1508943727Lgkc6VGfjR.mp4
-
         let croppie = null;
         let fileName = null;
         let updatePreview = $('button.update-preview');
@@ -126,53 +130,7 @@
                         console.log(textStatus);
                     }
                 });
-//                this.axios.post(uploadProfilePic, {img: this.image})
-//                    .then((response) => {
-//                        this.canUpload = true
-//                        this.modalVisible = false
-//                        this.button = {
-//                            name: 'Upload',
-//                            class: 'fa-upload'
-//                        }
-//                    })
             })
         };
-
-
-//        $('.update-preview').on('click', function () {
-//            let fileInputs = $('input[type=file]');
-//            let videoId = $('video').data('id');
-//
-//            let data = new FormData();
-//            $.each(fileInputs, function (index, fileInput) {
-//                $.each(fileInput.files, function (key, value) {
-//                    console.log('key: ' + key);
-//                    console.log('value: ' + value);
-//                    data.append(fileInput.name, value);
-//                })
-//            });
-//            data.append('_token', $('input[name=_token]').val());
-//            data.append('id', videoId);
-//            console.log(data);
-//            $.ajax({
-//                url: '/video/generate',
-//                type: 'POST',
-//                data: data,
-//                cache: false,
-//                dataType: 'json',
-//                processData: false, // Don't process the files
-//                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-//                success: function(data) {
-//                    $('.video-container').html(`
-//                    <video data-id="${data.videoId}" poster="http://localhost:8000/images/loading_anim.gif" autoplay preload="auto" class="center" width="100%" controls="">
-//                        <source src="${data.videoUrl}" type="video/mp4">
-//                        Your browser does not support the video tag.
-//                    </video>`);
-//                },
-//                error: function(jqXHR, textStatus) {
-//                    console.log(textStatus);
-//                }
-//            });
-//        });
     </script>
 @endsection
