@@ -6,12 +6,26 @@ use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Stripe\Customer;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Sluggable;
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'first_name'
+            ]
+        ];
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -73,6 +87,11 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function fullName()
+    {
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function cancelStripeSubscription(Customer $customer)

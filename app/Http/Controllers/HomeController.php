@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $videos = Video::latest()->take(9)->get();
+        $videos = Video::with('user')->latest()->take(9)->get();
         return view('index', compact('videos'));
     }
 

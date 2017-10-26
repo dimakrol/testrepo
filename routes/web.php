@@ -21,7 +21,8 @@ Route::resource('/video', 'VideoController', ['only' => ['show']]);
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/api_video_play', 'HomeController@play')->name('video');
+Route::get('channel/{slug}', 'VideoController@channel')->name('channel.index');
+//Route::get('/api_video_play', 'HomeController@play')->name('video');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('user', function() {

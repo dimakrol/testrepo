@@ -4,19 +4,17 @@
 <div class="container">
 
     <div class="jumbotron">
-        <h1 class="display-3">Hello, world!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </p>
+        <h1 class="display-4" align="center">The Home of Personalised Video</h1>
+        @guest
+            <p class="lead" align="center">Already have ah account? <a href="{{route('login')}}">Log in</a></p>
+            <p class="lead" align="center">
+                <a class="btn btn-success btn-lg" href="{{route('register')}}" role="button">Sign Up</a>
+            </p>
+        @endguest
     </div>
 
     <!-- Page Heading -->
-    <h1 class="my-4">Page Heading
-        <small>Secondary Text</small>
-    </h1>
+    <h1 class="my-4" align="center">Features Videos{{--<small>Secondary Text</small>--}}</h1>
 
     <div class="row">
         @foreach($videos as $video)
@@ -27,92 +25,37 @@
                         <h4 class="card-title">
                             <a href="{{ route('video.show', $video->id) }}">{{ $video->name }}</a>
                         </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+                        <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->slug}}</a></p>
                     </div>
                 </div>
             </div>
         @endforeach
-        {{--<div class="col-lg-4 col-sm-6 portfolio-item">--}}
-            {{--<div class="card h-100">--}}
-                {{--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>--}}
-                {{--<div class="card-body">--}}
-                    {{--<h4 class="card-title">--}}
-                        {{--<a href="#">Project Two</a>--}}
-                    {{--</h4>--}}
-                    {{--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="col-lg-4 col-sm-6 portfolio-item">--}}
-            {{--<div class="card h-100">--}}
-                {{--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>--}}
-                {{--<div class="card-body">--}}
-                    {{--<h4 class="card-title">--}}
-                        {{--<a href="#">Project Three</a>--}}
-                    {{--</h4>--}}
-                    {{--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="col-lg-4 col-sm-6 portfolio-item">--}}
-            {{--<div class="card h-100">--}}
-                {{--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>--}}
-                {{--<div class="card-body">--}}
-                    {{--<h4 class="card-title">--}}
-                        {{--<a href="#">Project Four</a>--}}
-                    {{--</h4>--}}
-                    {{--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="col-lg-4 col-sm-6 portfolio-item">--}}
-            {{--<div class="card h-100">--}}
-                {{--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>--}}
-                {{--<div class="card-body">--}}
-                    {{--<h4 class="card-title">--}}
-                        {{--<a href="#">Project Five</a>--}}
-                    {{--</h4>--}}
-                    {{--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="col-lg-4 col-sm-6 portfolio-item">--}}
-            {{--<div class="card h-100">--}}
-                {{--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>--}}
-                {{--<div class="card-body">--}}
-                    {{--<h4 class="card-title">--}}
-                        {{--<a href="#">Project Six</a>--}}
-                    {{--</h4>--}}
-                    {{--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
     </div>
     <!-- /.row -->
 
     <!-- Pagination -->
-    <ul class="pagination justify-content-center">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>
-    </ul>
+    {{--<ul class="pagination justify-content-center">--}}
+        {{--<li class="page-item">--}}
+            {{--<a class="page-link" href="#" aria-label="Previous">--}}
+                {{--<span aria-hidden="true">&laquo;</span>--}}
+                {{--<span class="sr-only">Previous</span>--}}
+            {{--</a>--}}
+        {{--</li>--}}
+        {{--<li class="page-item">--}}
+            {{--<a class="page-link" href="#">1</a>--}}
+        {{--</li>--}}
+        {{--<li class="page-item">--}}
+            {{--<a class="page-link" href="#">2</a>--}}
+        {{--</li>--}}
+        {{--<li class="page-item">--}}
+            {{--<a class="page-link" href="#">3</a>--}}
+        {{--</li>--}}
+        {{--<li class="page-item">--}}
+            {{--<a class="page-link" href="#" aria-label="Next">--}}
+                {{--<span aria-hidden="true">&raquo;</span>--}}
+                {{--<span class="sr-only">Next</span>--}}
+            {{--</a>--}}
+        {{--</li>--}}
+    {{--</ul>--}}
 </div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -9,26 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function channel($slug)
     {
-        //
+        // Get post for slug.
+        $user = User::with('videos')->whereSlug($slug)->firstOrFail();
+        return view('frontend.video.channel', compact('user'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -87,52 +75,5 @@ class VideoController extends Controller
         Log::debug('Video Url: '. $videoUrl);
 
         return response()->json(['videoUrl' => $videoUrl, 'videoId' => $video->id]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $video = Video::with('fields')->findOrFail($id);
-//        dd($video);
-        return view('frontend.video.show', compact('video'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
