@@ -1,8 +1,6 @@
 @extends('layouts.frontend.app')
 @section('content')
-    <!-- Page Content -->
     <div class="container">
-        <!-- Heading Row -->
         <div class="row my-4">
             <div class="col-lg-8 video-container">
                 <video data-id="{{ $video->id }}" poster="{{ asset('images/default_for_video.png') }}" preload="auto" class="center" width="100%" controls="">
@@ -12,7 +10,6 @@
                 <h2>{{ $video->name }}</h2>
                 <p>Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
             </div>
-            <!-- /.col-lg-8 -->
             <div class="col-lg-4">
                 <div>
                     @if(!Auth::user() || !Auth::user()->subscribed('yearly'))
@@ -22,26 +19,29 @@
                     @else
                         @foreach($video->fields as $field)
                             @if('image' == $field->type)
-                                <div class="form-group">
-                                    {!! Form::label($field->variable_name, 'Select photo or image') !!}
+                                <div class="form-group hide-block">
                                     {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'accept' => 'image/*', 'required' => 'required']) !!}
                                 </div>
                             @elseif('text' == $field->type)
                             @elseif('text_area' == $field->type)
                             @endif
                         @endforeach
+                        @foreach($video->fields as $field)
+                            @if('image' == $field->type)
+                                <div class="form-group">
+                                    <button class="btn btn-success btn-block add-photo" data-variable-name="{{$field->variable_name}}">Add Your Photo</button>
+                                </div>
+                            @endif
+                        @endforeach
                         <div class="form-group">
-                            <button class="btn btn-success update-preview btn-block" href="#">Add Your Photo</button>
+                            <button class="btn btn-success update-preview btn-block" disabled="true">Update Preview</button>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success update-preview btn-block" href="#" disabled="true">Update Preview</button>
+                            <button class="btn btn-danger btn-block crop-button hide-block">Crop</button>
                         </div>
                     @endif
                 </div>
                 <div id="croppie"></div>
-
-                {!! Form::token() !!}
-
             </div>
         </div>
     </div>
@@ -51,21 +51,31 @@
     <script>
         let croppie = null;
         let fileName = null;
-        let updatePreview = $('button.update-preview');
+        let croppedImage = null;
+        let updatePreviewButton = $('button.update-preview');
         let videoId = $('video').data('id');
+        let cropButton = $('.crop-button');
+        let addPhotoButton = $('.add-photo');
 
-        updatePreview.on('click', function () {
+        updatePreviewButton.on('click', function () {
             uploadFile()
+        });
+
+        cropButton.on('click', function () {
+            cropImage();
+        });
+
+        addPhotoButton.on('click', function () {
+            let varName = $(this).data('variable-name');
+            $('input[name='+varName+']').click();
         });
 
         @foreach($video->fields as $field)
             $('input[name={{$field->variable_name}}]').on('change', function (e) {
-
                 fileName = $(this)[0].name;
 
                 let files = e.target.files || e.dataTransfer.files;
 
-                console.log(files);
                 if (!files.length) {
                     return;
                 }
@@ -74,12 +84,15 @@
         @endforeach
 
         function createImage(file) {
-            var image = new Image()
-            var reader = new FileReader()
+            var image = new Image();
+            var reader = new FileReader();
 
             reader.onload = (e) => {
+
                 image = e.target.result;
-                setUpCroppie(image)
+
+                setUpCroppie(image);
+
             };
             reader.readAsDataURL(file)
         }
@@ -90,50 +103,57 @@
                 croppie.destroy();
             }
 
-            updatePreview.prop('disabled', false);
+            cropButton.show();
 
             croppie = new Croppie(el, {
                 viewport: { width: 140, height: 200 },
                 boundary: { width: 300, height: 300 },
-//            showZoomer: true,
-//            enableResize: true,
                 enableOrientation: true
             });
+
             croppie.bind({
                 url: imageData
             });
         }
 
-        function uploadFile (){
+
+        function cropImage() {
             croppie.result({
                 type: 'canvas',
                 size: 'viewport'
             }).then((response) => {
+                updatePreviewButton.prop('disabled', false);
+                cropButton.hide();
+                croppedImage = response;
+                croppie.destroy();
+                croppie = null;
+                addPhotoButton.text('Change Photo');
+            })
+        }
 
-                let data = new FormData();
-                data.append(fileName, response);
-                data.append('_token', $('input[name=_token]').val());
-                data.append('id', videoId);
-                $.ajax({
-                    url: '/video/generate',
-                    type: 'POST',
-                    data: data,
-                    cache: false,
-                    dataType: 'json',
-                    processData: false, // Don't process the files
-                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-                    success: function(data) {
-                        $('.video-container').html(`
+        function uploadFile () {
+            let data = new FormData();
+            data.append(fileName, croppedImage);
+            data.append('id', videoId);
+            $.ajax({
+                url: '/video/generate',
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                success: function(data) {
+                    $('.video-container').html(`
                         <video data-id="${data.videoId}" poster="http://localhost:8000/images/loading_anim.gif" autoplay preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
-                    },
-                    error: function(jqXHR, textStatus) {
-                        console.log(textStatus);
-                    }
-                });
-            })
+                },
+                error: function(jqXHR, textStatus) {
+                    console.log(textStatus);
+                }
+            });
         };
     </script>
 @endsection
