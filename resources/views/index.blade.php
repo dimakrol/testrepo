@@ -23,7 +23,7 @@
                     <a href="{{ route('video.show', $video->id) }}"><img class="card-img-top" src="{{ asset('images/default_for_video.png') }}" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="{{ route('video.show', $video->id) }}">{{ $video->name }}</a>
+                            <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
                         </h4>
                         <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->slug}}</a></p>
                     </div>

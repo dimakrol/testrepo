@@ -12,9 +12,11 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
+                @auth
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('subscription.index')}}">Subscription</a>
                 </li>
+                @endauth
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Login</a>

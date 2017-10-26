@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Storage;
 class VideoController extends Controller
 {
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function show($slug)
+    {
+        $video = Video::with('fields')->whereSlug($slug)->firstOrFail();
+        return view('frontend.video.show', compact('video'));
+    }
+
     public function channel($slug)
     {
         // Get post for slug.
