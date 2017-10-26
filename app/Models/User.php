@@ -65,6 +65,45 @@ class User extends Authenticatable
     }
 
     /**
+     * Determine if the Stripe model has a given subscription.
+     *
+     * @param  string  $subscription
+     * @param  string|null  $plan
+     * @return bool
+     */
+    public function subscribed($subscription = 'default', $plan = null)
+    {
+        $subscription = $this->subscription($subscription);
+
+        if (is_null($subscription)) {
+            return false;
+        }
+
+        if (is_null($plan)) {
+            return $subscription->valid();
+        }
+
+//        return $subscription->valid() &&
+//            $subscription->stripe_plan === $plan;
+    }
+
+    /**
+     * Get a subscription instance by name.
+     *
+     * @param  string  $subscription
+     * @return \Laravel\Cashier\Subscription|null
+     */
+    public function subscription($subscription = 'default')
+    {
+        return $this->subscriptions->sortByDesc(function ($value) {
+            return $value->created_at->getTimestamp();
+        })
+            ->first(function ($value) use ($subscription) {
+                return $value->name === $subscription;
+            });
+    }
+
+    /**
      * @param Customer $customer
      * @return bool
      */

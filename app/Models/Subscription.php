@@ -36,4 +36,53 @@ class Subscription extends Model
         $this->ends_at = Carbon::createFromTimestamp($subscription->current_period_end);
         $this->save();
     }
+
+
+    /**
+     * Determine if the subscription is active, on trial, or within its grace period.
+     *
+     * @return bool
+     */
+    public function valid()
+    {
+        return $this->active() || $this->onTrial() || $this->onGracePeriod();
+    }
+
+    /**
+     * Determine if the subscription is active.
+     *
+     * @return bool
+     */
+    public function active()
+    {
+        return is_null($this->ends_at) || $this->onGracePeriod();
+    }
+
+    /**
+     * Determine if the subscription is within its trial period.
+     *
+     * @return bool
+     */
+    public function onTrial()
+    {
+        if (! is_null($this->trial_ends_at)) {
+            return Carbon::now()->lt($this->trial_ends_at);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Determine if the subscription is within its grace period after cancellation.
+     *
+     * @return bool
+     */
+    public function onGracePeriod()
+    {
+        if (! is_null($endsAt = $this->ends_at)) {
+            return Carbon::now()->lt(Carbon::instance($endsAt));
+        } else {
+            return false;
+        }
+    }
 }

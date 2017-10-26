@@ -15,25 +15,28 @@
             <!-- /.col-lg-8 -->
             <div class="col-lg-4">
                 <div>
-                    @foreach($video->fields as $field)
-                        @if('image' == $field->type)
-                            <div class="form-group">
-                                {!! Form::label($field->variable_name, 'Select photo or image') !!}
-                                {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'accept' => 'image/*', 'required' => 'required']) !!}
-                            </div>
-                        @elseif('text' == $field->type)
-                        @elseif('text_area' == $field->type)
-                        @endif
-                    @endforeach
-                    <div class="form-group">
-                        <button class="btn btn-success update-preview btn-block" href="#">Add Your Photo</button>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success update-preview btn-block" href="#" disabled="true">Update Preview</button>
-                    </div>
-                    <div class="form-group" style="display: none">
-                        <button class="btn btn-success btn-block" href="#">Create Video</button>
-                    </div>
+                    @if(!Auth::user() || !Auth::user()->subscribed('yearly'))
+                        <div class="form-group">
+                            <a class="btn btn-success btn-block" href="{{ route('subscription.index') }}">Create Video</a>
+                        </div>
+                    @else
+                        @foreach($video->fields as $field)
+                            @if('image' == $field->type)
+                                <div class="form-group">
+                                    {!! Form::label($field->variable_name, 'Select photo or image') !!}
+                                    {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'accept' => 'image/*', 'required' => 'required']) !!}
+                                </div>
+                            @elseif('text' == $field->type)
+                            @elseif('text_area' == $field->type)
+                            @endif
+                        @endforeach
+                        <div class="form-group">
+                            <button class="btn btn-success update-preview btn-block" href="#">Add Your Photo</button>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success update-preview btn-block" href="#" disabled="true">Update Preview</button>
+                        </div>
+                    @endif
                 </div>
                 <div id="croppie"></div>
 
