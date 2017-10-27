@@ -9,6 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Styles -->
+    @yield('styles')
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @auth
