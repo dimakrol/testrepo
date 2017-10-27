@@ -22,11 +22,4 @@ const app = new Vue({
         user: WWD.user
     },
     el: '#app',
-    mounted() {
-        // console.log('here');
-        // console.log(this.user);
-        axios.get('/user').then((response) => {
-            this.user = response.data;
-        });
-    }
 });

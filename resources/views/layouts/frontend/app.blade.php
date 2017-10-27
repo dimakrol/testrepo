@@ -21,6 +21,16 @@
         }
     </script>
     @endauth
+    @guest
+    <script>
+        window.WWD = {
+            stripe: {
+                stripeKey: "{{ config('services.stripe.key') }}"
+            },
+            user: null
+        }
+    </script>
+    @endguest
 </head>
 <body>
     <div id="app">
