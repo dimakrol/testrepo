@@ -39,6 +39,14 @@
                         <div class="form-group">
                             <button class="btn btn-danger btn-block crop-button hide-block">Crop</button>
                         </div>
+                        @foreach($video->fields as $field)
+                            @if('image' == $field->type)
+                                <div class="text-center preview-image {{$field->variable_name}} hide-block">
+                                    <img src="" class="img-fluid" alt="Responsive image">
+                                </div>
+                            @endif
+                        @endforeach
+
                     @endif
                 </div>
                 <div id="croppie"></div>
@@ -56,6 +64,7 @@
         let videoId = $('video').data('id');
         let cropButton = $('.crop-button');
         let addPhotoButton = $('.add-photo');
+        let previewImage = null;
 
         updatePreviewButton.on('click', function () {
             uploadFile()
@@ -73,6 +82,9 @@
         @foreach($video->fields as $field)
             $('input[name={{$field->variable_name}}]').on('change', function (e) {
                 fileName = $(this)[0].name;
+                previewImage = $('.preview-image.'+'{{$field->variable_name}}');
+                console.log(previewImage.children());
+                previewImage.hide();
 
                 let files = e.target.files || e.dataTransfer.files;
 
@@ -122,6 +134,7 @@
                 type: 'canvas',
                 size: 'viewport'
             }).then((response) => {
+                previewImage.show().children().attr('src', response);
                 updatePreviewButton.prop('disabled', false);
                 cropButton.hide();
                 croppedImage = response;
