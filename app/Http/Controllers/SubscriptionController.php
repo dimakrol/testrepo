@@ -23,6 +23,9 @@ class SubscriptionController extends Controller
     public function store(Request $request)
     {
         $plan = Plan::default();
+        if (!$plan) {
+            return response()->json(['message' => 'Error while creating subscription!'], 422);
+        }
         try {
             $customer = StripePaymentService::createCustomerWithSubscription(
                 $request->input('stripeEmail'),
