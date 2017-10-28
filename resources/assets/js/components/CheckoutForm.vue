@@ -2,7 +2,7 @@
     <div class="container">
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <ul v-if="!user.subscriptions.length" class="list-group col-md-6">
+                <ul v-if="!subscription" class="list-group col-md-6">
                     <li class="list-group-item">$ 9.99/year</li>
                     <li class="list-group-item">Unlimited videos.</li>
                     <li class="list-group-item">Donation to charity FOE</li>
@@ -11,8 +11,8 @@
                         <button @click="subscribe" :disabled="subscribeBusy" type="button" class="btn btn-success btn-sm pull-right" >Subscribe</button>
                     </li>
                 </ul>
-                <div v-else-if="user.subscriptions.length && user.subscriptions[0].ends_at">
-                    <p>Your have yearly premium subscription ends at: {{ user.subscriptions[0].ends_at }}</p>
+                <div v-else-if="subscription && subscription.ends_at">
+                    <p>Your have yearly premium subscription ends at: {{ subscription.ends_at }}</p>
                     <button @click="resumeSubscription" class="btn btn-warning btn-sm">Resume subscription</button>
                 </div>
                 <div v-else>
@@ -36,7 +36,8 @@
             return {
                 subscribeBusy: false,
                 stripeEmail: '',
-                stripeToken: ''
+                stripeToken: '',
+                subscription: '',
             }
         },
 
@@ -61,6 +62,9 @@
         },
 
         mounted() {
+            axios.get('/user').then((response) => {
+                console.log(response);
+            });
             this.stripe = StripeCheckout.configure({
                 key: WWD.stripe.stripeKey,
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -80,12 +84,10 @@
                     })
                 }
             });
-            console.log(this.user)
         },
         computed: {
             nextPayment() {
-                console.log(this.user.subscription_end_at);
-                return moment(this.user.subscription_end_at).format('DD-MM-YYYY');
+//                return moment(this.user.subscription_end_at).format('DD-MM-YYYY');
             }
         }
     }

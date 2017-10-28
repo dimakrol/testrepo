@@ -70909,7 +70909,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             subscribeBusy: false,
             stripeEmail: '',
-            stripeToken: ''
+            stripeToken: '',
+            subscription: ''
         };
     },
 
@@ -70935,6 +70936,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
+        axios.get('/user').then(function (response) {
+            console.log(response);
+        });
         this.stripe = StripeCheckout.configure({
             key: WWD.stripe.stripeKey,
             image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -70954,13 +70958,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         });
-        console.log(this.user);
     },
 
     computed: {
         nextPayment: function nextPayment() {
-            console.log(this.user.subscription_end_at);
-            return moment(this.user.subscription_end_at).format('DD-MM-YYYY');
+            //                return moment(this.user.subscription_end_at).format('DD-MM-YYYY');
         }
     }
 });
@@ -70976,7 +70978,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { attrs: { id: "page-content-wrapper" } }, [
       _c("div", { staticClass: "container-fluid" }, [
-        !_vm.user.subscriptions.length
+        !_vm.subscription
           ? _c("ul", { staticClass: "list-group col-md-6" }, [
               _c("li", { staticClass: "list-group-item" }, [
                 _vm._v("$ 9.99/year")
@@ -71006,12 +71008,12 @@ var render = function() {
                 )
               ])
             ])
-          : _vm.user.subscriptions.length && _vm.user.subscriptions[0].ends_at
+          : _vm.subscription && _vm.subscription.ends_at
             ? _c("div", [
                 _c("p", [
                   _vm._v(
                     "Your have yearly premium subscription ends at: " +
-                      _vm._s(_vm.user.subscriptions[0].ends_at)
+                      _vm._s(_vm.subscription.ends_at)
                   )
                 ]),
                 _vm._v(" "),

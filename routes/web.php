@@ -26,7 +26,7 @@ Route::get('channel/{slug}', 'VideoController@channel')->name('channel.index');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('user', function() {
-        return Auth::user()->with('subscriptions')->first();
+        return Auth::user()->subscriptions()->first();
     });
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
