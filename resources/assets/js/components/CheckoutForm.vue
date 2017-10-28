@@ -63,7 +63,7 @@
 
         mounted() {
             axios.get('/user').then((response) => {
-                console.log(response);
+                this.subscription = response.data;
             });
             this.stripe = StripeCheckout.configure({
                 key: WWD.stripe.stripeKey,

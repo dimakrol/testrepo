@@ -70937,7 +70937,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         axios.get('/user').then(function (response) {
-            console.log(response);
+            _this.subscription = response.data;
         });
         this.stripe = StripeCheckout.configure({
             key: WWD.stripe.stripeKey,
