@@ -16,9 +16,11 @@
 @import "~select2/dist/css/select2";
 @import "~croppie/croppie";
 
-// navigation
+// custom design
+@import "buttons";
 @import "main";
+@import "navbar";
+@import "jumbotron";
 
 // admin
 @import "admin/sidebar";
-
