@@ -16208,6 +16208,10 @@ background: #ccc;
   background: #7cc3b9 !important;
 }
 
+.background--grey {
+  background: #f5f6f8;
+}
+
 body {
   padding-top: 54px;
   font-family: 'Roboto Condensed', sans-serif;
