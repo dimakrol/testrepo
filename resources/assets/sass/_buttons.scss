@@ -1,0 +1,19 @@
+.btn {
+  width: 140px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  line-height: 36px;
+  font-size: 18px;
+  font-weight: 700;
+  color: $white;
+}
+
+.btn-success {
+  border: 0!important;
+  background: $green;
+  &:hover, &:active, &:focus {
+    border: 0!important;
+    background: lighten($green, 10%)!important;
+  }
+}

@@ -14,7 +14,7 @@
     </div>
 
     <!-- Page Heading -->
-    <h1 class="my-4" align="center">Features Videos{{--<small>Secondary Text</small>--}}</h1>
+    <h1 class="my-4" align="center">Featured Videos{{--<small>Secondary Text</small>--}}</h1>
 
     <div class="row">
         @foreach($videos as $video)
