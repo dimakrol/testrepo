@@ -62,7 +62,7 @@
                 <div id="pay-invoice" class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h3 class="text-center">Pay Invoice</h3>
+                            <h3 class="text-center">Buy early subscription.</h3>
                         </div>
                         <hr>
                         <form action="" method="post" novalidate="novalidate">
@@ -80,14 +80,21 @@
                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
-                                        <label for="cc-exp" class="control-label mb-1">Expiration</label>
-                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="MM / YY" autocomplete="cc-exp">
+                                        <label for="cc-exp" class="control-label mb-1">Month Expiration</label>
+                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="MM" autocomplete="cc-exp">
                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="cc-exp" class="control-label mb-1">Year Expiration</label>
+                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="YY" autocomplete="cc-exp">
+                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-4">
                                     <label for="x_card_code" class="control-label mb-1">Security code</label>
                                     <div class="input-group">
                                         <input id="x_card_code" name="x_card_code" type="tel" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
@@ -99,14 +106,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="x_zip" class="control-label mb-1">Postal code</label>
-                                <input id="x_zip" name="x_zip" type="text" class="form-control" value="" data-val="true" data-val-required="Please enter the ZIP/Postal code" autocomplete="postal-code">
-                                <span class="help-block" data-valmsg-for="x_zip" data-valmsg-replace="true"></span>
-                            </div>
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
                                     <span id="payment-button-amount">Subscribe</span>
                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                 </button>
