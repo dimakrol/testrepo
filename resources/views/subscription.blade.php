@@ -62,7 +62,7 @@
 
     <div class="container-fluid py-3">
         <div class="row">
-            <div class="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
+            <div class="col-12 col-sm-8 col-md-8 col-lg-4 mx-auto">
                 <div id="pay-invoice" class="card">
                     <div class="card-body">
                         <div class="card-title">
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                         <label for="card-expiry-month" class="control-label mb-1">Month Expiration</label>
                                         <select class="form-control" id="card-expiry-month" required>
@@ -108,7 +108,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                         <label for="card-expiry-year" class="control-label mb-1">Year Expiration</label>
                                         <select class="form-control" id="card-expiry-year" required>
@@ -126,7 +126,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                     <label for="card-cvc" class="control-label mb-1">Security code</label>
                                         <div class="input-group">
