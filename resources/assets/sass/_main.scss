@@ -2,7 +2,17 @@
 
 body {
   padding-top: 54px;
+  background: #2f353b;
   font-family: 'Roboto Condensed', sans-serif;
+}
+
+#app {
+  background: $white;
+}
+
+.background--grey {
+  padding-top: 32px;
+  background: $offWhite;
 }
 
 a {

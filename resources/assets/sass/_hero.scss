@@ -1,0 +1,29 @@
+.hero {
+  padding: 32px 0;
+  text-align: center;
+
+  h1 {
+    margin-top: 0!important;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  p {
+    color: $grey;
+  }
+
+  &--home {
+    padding: 64px 0 48px;
+
+    .btn {
+      width: 200px;
+      height: 42px;
+      line-height: 42px;
+    }
+  }
+}
+
+.hero__icon {
+  font-size: 48px;
+  color: $grey;
+}

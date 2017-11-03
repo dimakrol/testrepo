@@ -16210,7 +16210,17 @@ background: #ccc;
 
 body {
   padding-top: 54px;
+  background: #2f353b;
   font-family: 'Roboto Condensed', sans-serif;
+}
+
+#app {
+  background: #ffffff;
+}
+
+.background--grey {
+  padding-top: 32px;
+  background: #f5f6f8;
 }
 
 a {
@@ -16289,6 +16299,66 @@ a:hover {
 
 .jumbotron {
   background: #ffffff;
+}
+
+.footer {
+  padding: 32px 0;
+  background: #2f353b;
+  font-size: 11px;
+  color: #f5f6f8;
+}
+
+.footer ul {
+  margin: 0;
+}
+
+.footer p {
+  color: #bac3cd;
+}
+
+.footer__link {
+  display: block;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  background: #2b3036;
+  margin: 0 2px;
+  font-size: 18px;
+  color: #4b5157;
+}
+
+.footer__link:hover {
+  background: #252a2f;
+}
+
+.hero {
+  padding: 32px 0;
+  text-align: center;
+}
+
+.hero h1 {
+  margin-top: 0 !important;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.hero p {
+  color: #bac3cd;
+}
+
+.hero--home {
+  padding: 64px 0 48px;
+}
+
+.hero--home .btn {
+  width: 200px;
+  height: 42px;
+  line-height: 42px;
+}
+
+.hero__icon {
+  font-size: 48px;
+  color: #bac3cd;
 }
 
 body {
