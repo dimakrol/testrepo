@@ -1,6 +1,10 @@
 @extends('layouts.frontend.app')
 @section('styles')
     <style>
+        .card{
+            margin-top: 15px;
+        }
+
         .input-group-addon {
             background-color: transparent;
             border-left: 0;
@@ -65,7 +69,10 @@
                             <h3 class="text-center">Buy early subscription.</h3>
                         </div>
                         <hr>
-                        <form action="" method="post" novalidate="novalidate">
+                        <form id="subscribe-form" action="" method="post">
+                            <div class="error-message-alert alert alert-danger" role="alert" style="display: none"></div>
+                            <input type="hidden" name="stripe_token">
+                            {{ csrf_field() }}
                             <div class="form-group text-center">
                                 <ul class="list-inline">
                                     <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
@@ -75,33 +82,60 @@
                                 </ul>
                             </div>
                             <div class="form-group">
-                                <label for="cc-number" class="control-label mb-1">Card number</label>
-                                <input id="cc-number" name="cc-number" type="tel" class="form-control cc-number identified visa" value="" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number" autocomplete="cc-number">
-                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                <label for="card-number" class="control-label mb-1">Card number</label>
+                                <input id="card-number" type="tel" class="form-control cc-number">
+                                <div class="invalid-feedback">
+                                    Please provide a valid credit card number.
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="cc-exp" class="control-label mb-1">Month Expiration</label>
-                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="MM" autocomplete="cc-exp">
-                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                        <label for="card-expiry-month" class="control-label mb-1">Month Expiration</label>
+                                        <select class="form-control" id="card-expiry-month" required>
+                                            <option selected>01</option>
+                                            <option>02</option>
+                                            <option>03</option>
+                                            <option>04</option>
+                                            <option>05</option>
+                                            <option>06</option>
+                                            <option>07</option>
+                                            <option>08</option>
+                                            <option>09</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="cc-exp" class="control-label mb-1">Year Expiration</label>
-                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="YY" autocomplete="cc-exp">
-                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                        <label for="card-expiry-year" class="control-label mb-1">Year Expiration</label>
+                                        <select class="form-control" id="card-expiry-year" required>
+                                            <option>2017</option>
+                                            <option>2018</option>
+                                            <option>2019</option>
+                                            <option selected="">2020</option>
+                                            <option>2021</option>
+                                            <option>2022</option>
+                                            <option>2023</option>
+                                            <option>2024</option>
+                                            <option>2025</option>
+                                            <option>2026</option>
+                                            <option>2027</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <label for="x_card_code" class="control-label mb-1">Security code</label>
-                                    <div class="input-group">
-                                        <input id="x_card_code" name="x_card_code" type="tel" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
-                                        <div class="input-group-addon">
-                                        <span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" data-title="Security Code"
-                                              data-content="<div class='text-center one-card'>The 3 digit code on back of the card..<div class='visa-mc-cvc-preview'></div></div>"
-                                              data-trigger="hover"></span>
+                                    <div class="form-group">
+                                    <label for="card-cvc" class="control-label mb-1">Security code</label>
+                                        <div class="input-group">
+                                            <input type="tel" id="card-cvc" class="form-control cc-cvc">
+                                            <div class="input-group-addon">
+                                            <span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" data-title="Security Code"
+                                                  data-content="<div class='text-center one-card'>The 3 digit code on back of the card..<div class='visa-mc-cvc-preview'></div></div>"
+                                                  data-trigger="hover"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -118,137 +152,58 @@
             </div>
         </div>
     </div>
-    {{--<checkout-form :user="user"></checkout-form>--}}
-
-    {{--<div class="container">--}}
-        {{--<div id="page-content-wrapper">--}}
-            {{--<div class="container-fluid">--}}
-                {{--<form action="/stripe_js/checkout" method="post" id="subscribe-form">--}}
-                    {{--<input type="hidden" name="stripe_token">--}}
-                    {{--{{ csrf_field() }}--}}
-                    {{--<h3 class="page-header">Payment Information</h3>--}}
-                    {{--<div class="row">--}}
-                        {{--<div class="col-sm-12">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="card_no">Credit Card Number</label>--}}
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-sm-6">--}}
-                                        {{--<input type="text" class="card-number form-control" id="card_no"--}}
-                                               {{--required data-msg-required="cannot be blank">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-sm-6">--}}
-                                                    {{--<span class="cb-cards hidden-xs">--}}
-                                                        {{--<span class="visa"></span>--}}
-                                                        {{--<span class="mastercard"></span>--}}
-                                                        {{--<span class="american_express"></span>--}}
-                                                        {{--<span class="discover"></span>--}}
-                                                    {{--</span>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<small for="card_no" class="text-danger"></small>--}}
-                            {{--</div>--}}
-
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="row">--}}
-                        {{--<div class="col-sm-6">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="expiry_month">Card Expiry</label>--}}
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-xs-6">--}}
-                                        {{--<select class="card-expiry-month form-control" id="expiry_month"--}}
-                                                {{--required data-msg-required="empty">--}}
-                                            {{--<option selected>01</option>--}}
-                                            {{--<option>02</option>--}}
-                                            {{--<option>03</option>--}}
-                                            {{--<option>04</option>--}}
-                                            {{--<option>05</option>--}}
-                                            {{--<option>06</option>--}}
-                                            {{--<option>07</option>--}}
-                                            {{--<option>08</option>--}}
-                                            {{--<option>09</option>--}}
-                                            {{--<option>10</option>--}}
-                                            {{--<option>11</option>--}}
-                                            {{--<option>12</option>--}}
-                                        {{--</select>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-xs-6">--}}
-                                        {{--<select class="card-expiry-year form-control" id="expiry_year"--}}
-                                                {{--required data-msg-required="empty">--}}
-                                            {{--<option>2013</option>--}}
-                                            {{--<option>2014</option>--}}
-                                            {{--<option>2015</option>--}}
-                                            {{--<option>2016</option>--}}
-                                            {{--<option>2017</option>--}}
-                                            {{--<option>2018</option>--}}
-                                            {{--<option>2019</option>--}}
-                                            {{--<option selected="">2020</option>--}}
-                                            {{--<option>2021</option>--}}
-                                            {{--<option>2022</option>--}}
-                                            {{--<option>2023</option>--}}
-                                        {{--</select>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<small for="expiry_month" class="text-danger"></small>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-sm-6">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="ccv">CVC</label>--}}
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-xs-6">--}}
-                                        {{--<input type="text" class="card-cvc form-control" id="cvc" placeholder="CVC"--}}
-                                               {{--required data-msg-required="empty">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-xs-6">--}}
-                                        {{--<h6 class="cb-cvv"><small>(Last 3-4 digits)</small></h6>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<small for="cvc" class="text-danger"></small>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<hr>--}}
-                    {{--<p>By clicking Subscribe, you agree to our privacy policy and terms of service.</p>--}}
-                    {{--<p><small class="text-danger" style="display:none;">There were errors while submitting</small></p>--}}
-                    {{--<p><input type="submit" class="btn btn-success btn-lg pull-left" value="Subscribe">&nbsp;&nbsp;&nbsp;&nbsp;--}}
-                        {{--<span class="subscribe_process process" style="display:none;">Processing&hellip;</span>--}}
-                        {{--<small class="alert-danger text-danger"></small>--}}
-                    {{--</p>--}}
-                {{--</form>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
 @endsection
 @section('script')
     <script src="https://js.stripe.com/v2/"></script>
     <script>
-        Stripe.setPublishableKey(WWD.stripe.stripeKey);
 
-        $("#subscribe-form").on('submit', function(e) {
-            e.preventDefault();
-            // form validation
-//            formValidationCheck(this);
-//            if(!$(this).valid()){
-//                return false;
-//            }
-//            // Disable the submit button to prevent repeated clicks and form submit
-//            $('.submit-button').attr("disabled", "disabled");
-            // createToken returns immediately - the supplied callback
-            // submits the form if there are no errors
-            Stripe.createToken({
-                number: $('.card-number').val(),
-                cvc: $('.card-cvc').val(),
-                exp_month: $('.card-expiry-month').val(),
-                exp_year: $('.card-expiry-year').val()
-            }, stripeResponseHandler);
-            return false; // submit from callback
-        });
+        $(function () {
+            Stripe.setPublishableKey(WWD.stripe.stripeKey);
+
+            $('[data-toggle="popover"]').popover();
+
+            var form = $("#subscribe-form");
+
+            form.on('submit', function(e) {
+                e.preventDefault();
+                deleteErrorMessages();
+                toggleSubscribeButton();
+
+                if (!validate()) {
+                    toggleSubscribeButton();
+                    return false;
+                }
+
+                return false;
 
 
-        function stripeResponseHandler(status, response) {
-            console.log(response);
-            return false;
+                Stripe.createToken({
+//                number: $('.card-number').val(),
+//                cvc: $('.card-cvc').val(),
+//                exp_month: $('.card-expiry-month').val(),
+//                exp_year: $('.card-expiry-year').val()
+                }, stripeResponseHandler);
+                return false; // submit from callback
+            });
+
+            function validate() {
+                var cardNumber = $('#card-number');
+                var cardSecurity = $('#card-cvc');
+                if (!valid_credit_card(cardNumber.val())) {
+                    cardNumber.addClass('is-invalid');
+                    return false;
+                }
+                if (!valid_securuty_code(cardSecurity.val())) {
+                    cardSecurity.addClass('is-invalid');
+                    $('.error-message-alert').text('Please provide a valid security code.').show();
+                    return false;
+                }
+                return true;
+            }
+
+            function stripeResponseHandler(status, response) {
+                console.log(response);
+                return false;
 //            if (response.error) {
 //                // Re-enable the submit button
 //                $('.submit-button').removeAttr("disabled");
@@ -280,7 +235,52 @@
 //                form.ajaxSubmit(options);
 //                return false;
 //            }
-        }
+            }
+
+            function deleteErrorMessages() {
+                $('#card-number,#card-cvc').removeClass('is-invalid');
+                $('.error-message-alert').hide();
+            }
+
+            function toggleSubscribeButton() {
+                $('#payment-button').prop('disabled', function(i, v) { return !v; });
+                $('#payment-button-amount,#payment-button-sending').toggle();
+            }
+
+            function valid_credit_card(value) {
+                //validate if empty
+                if (!value) return false;
+                // accept only digits, dashes or spaces
+                if (/[^0-9-\s]+/.test(value)) return false;
+
+                // The Luhn Algorithm. It's so pretty.
+                var nCheck = 0, nDigit = 0, bEven = false;
+                value = value.replace(/\D/g, "");
+
+                for (var n = value.length - 1; n >= 0; n--) {
+                    var cDigit = value.charAt(n),
+                        nDigit = parseInt(cDigit, 10);
+
+                    if (bEven) {
+                        if ((nDigit *= 2) > 9) nDigit -= 9;
+                    }
+
+                    nCheck += nDigit;
+                    bEven = !bEven;
+                }
+
+                return (nCheck % 10) == 0;
+            }
+
+            function valid_securuty_code(value) {
+                if (!value || !/^[0-9]{3,4}$/.test(value)) {
+                    return false;
+                }
+                return true;
+            }
+
+
+        });
 
 
 
