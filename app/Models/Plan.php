@@ -22,4 +22,8 @@ class Plan extends Model
         return $query->where('stripe_id', static::STRIPE_ID)->first();
     }
 
+    public function amountInDollars()
+    {
+        return number_format(($this->amount / 100), 2, '.', ' ');
+    }
 }

@@ -16,12 +16,15 @@ class SubscriptionController extends Controller
         $plan = Plan::where('name', 'yearly')->first();
 
         return view('subscription', compact('plan'));
-//        $plan = Plan::where('name', 'yearly')->first();
-//        return StripePaymentService::getPlan($plan->name);
     }
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'stripeToken' => 'required'
+        ]);
+
+        dd($request->all());
         $plan = Plan::default();
         if (!$plan) {
             return response()->json(['message' => 'Error while creating subscription!'], 422);
