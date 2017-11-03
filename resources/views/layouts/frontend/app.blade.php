@@ -38,7 +38,28 @@
     <div id="app">
         @include('layouts.navigation.main')
         @yield('content')
+        <div class="footer text-center">
+          <p>Copyright &copy; Words Wont Do Ltd</p>
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/wordswontdo/" target="_blank" class="footer__link">
+                <i class="fa fa-facebook"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://twitter.com/WordsWontDo" target="_blank" class="footer__link">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.pinterest.co.uk/wordswontdo/" target="_blank" class="footer__link">
+                <i class="fa fa-pinterest"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
     </div>
+
     <!-- Scripts -->
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>

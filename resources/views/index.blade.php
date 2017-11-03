@@ -3,13 +3,13 @@
 <!-- Page Content -->
 <div class="container">
 
-    <div class="jumbotron">
+    <div class="jumbotron hero hero--home">
         <h1 class="display-4" align="center">The Home of Personalised Video</h1>
         @guest
-            <p class="lead" align="center">Already have ah account? <a href="{{route('login')}}">Log in</a></p>
-            <p class="lead" align="center">
-                <a class="btn btn-success btn-lg" href="{{route('register')}}" role="button">Sign Up</a>
-            </p>
+        <p class="lead">Our amazing talent create videos that you can personalise and send to friends.<br> We like to have fun and we release new content every week.</p>
+        <p class="lead" align="center">
+            <a class="btn btn-success btn-lg" href="{{route('register')}}" role="button">Sign Up</a>
+        </p>
         @endguest
     </div>
 

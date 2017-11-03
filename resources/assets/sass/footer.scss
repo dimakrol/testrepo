@@ -1,0 +1,28 @@
+.footer {
+  padding: 32px 0;
+  background: #2f353b;
+  font-size: 11px;
+  color: $offWhite;
+  ul {
+    margin: 0;
+  }
+
+  p {
+    color: $grey;
+  }
+}
+
+.footer__link {
+  display: block;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  background: #2b3036;
+  margin: 0 2px;
+  font-size: 18px;
+  color: $darkGrey;
+
+  &:hover {
+    background: darken(#2b3036, 2.5%);
+  }
+}
