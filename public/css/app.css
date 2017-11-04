@@ -16361,6 +16361,10 @@ a:hover {
   color: #bac3cd;
 }
 
+.frontend-flash-container {
+  margin-top: 17px;
+}
+
 .subscription.card {
   margin-top: 15px;
 }

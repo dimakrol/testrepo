@@ -2,7 +2,7 @@
 @section('content')
 <!-- Page Content -->
 <div class="container">
-
+    @include('flash::message')
     <div class="jumbotron hero hero--home">
         <h1 class="display-4" align="center">The Home of Personalised Video</h1>
         @guest
@@ -18,7 +18,7 @@
   <div class="container">
 
       <!-- Page Heading -->
-      <h1 class="my-4" align="center">Featured Videos{{--<small>Secondary Text</small>--}}</h1>
+      <h1 class="my-4" align="center">Featured Videos</h1>
 
       <div class="row">
           @foreach($videos as $video)

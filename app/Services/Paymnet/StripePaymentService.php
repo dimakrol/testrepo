@@ -73,8 +73,6 @@ class StripePaymentService
                 'plan' => $plan->stripe_id
             ]);
 
-            Log::debug('Stripe customer: '.$stripeCustomer);
-
             $user->update(['stripe_customer_id' => $stripeCustomer->id]);
 
             if (self::activateStripeSubscription($user, $stripeCustomer)) {

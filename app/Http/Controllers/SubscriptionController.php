@@ -34,7 +34,7 @@ class SubscriptionController extends Controller
             Auth::user(),
             $plan
         )) {
-            Log::debug('subscription created');
+            flash('Success! Welcome to Words Won\'t Do!')->success();
             return redirect('/');
         }
         return back();

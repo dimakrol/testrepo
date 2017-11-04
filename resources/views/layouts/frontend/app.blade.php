@@ -37,6 +37,9 @@
 <body>
     <div id="app">
         @include('layouts.navigation.main')
+        <div class="container frontend-flash-container">
+            @include('flash::message')
+        </div>
         @yield('content')
         <div class="footer text-center">
           <p>Copyright &copy; Words Wont Do Ltd</p>
@@ -101,7 +104,7 @@
 //        $("#wrapper").toggleClass("toggled");
 //    });
 //todo move to separate file.
-        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+//        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 </body>
 </html>
