@@ -14,7 +14,6 @@ class SubscriptionController extends Controller
     public function index()
     {
         $plan = Plan::where('name', 'yearly')->first();
-
         return view('subscription', compact('plan'));
     }
 
@@ -24,27 +23,21 @@ class SubscriptionController extends Controller
             'stripeToken' => 'required'
         ]);
 
-        dd($request->all());
         $plan = Plan::default();
         if (!$plan) {
-            return response()->json(['message' => 'Error while creating subscription!'], 422);
-        }
-        try {
-            $customer = StripePaymentService::createCustomerWithSubscription(
-                $request->input('stripeEmail'),
-                $request->input('stripeToken'),
-                $plan
-            );
-        } catch (\Exception $e) {
-            Log::error('Customer with subscription has not been created: ' . $e->getMessage());
-            return response()->json([
-                'status' => $e->getMessage()
-            ], 422);
+            Log::error('Default plan does not exists');
+            return back();
         }
 
-        $request->user()->activateStripeSubscription($customer);
-
-        return response()->json(['message' => 'Subscription activated successfully'], 201);
+        if (StripePaymentService::createCustomerWithSubscription(
+            $request->input('stripeToken'),
+            Auth::user(),
+            $plan
+        )) {
+            Log::debug('subscription created');
+            return redirect('/');
+        }
+        return back();
     }
 
     public function cancel()

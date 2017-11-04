@@ -9,6 +9,9 @@
 namespace App\Services\Payment;
 
 
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Stripe\{
     Customer, Plan, Stripe, Subscription
 };
@@ -59,21 +62,28 @@ class StripePaymentService
             ]);
     }
 
-    /**
-     * @param $stripeEmail
-     * @param $stripeToken
-     * @param EloquentPlan $plan
-     * @return Customer
-     */
-    public static function createCustomerWithSubscription($stripeEmail, $stripeToken, EloquentPlan $plan)
+    public static function createCustomerWithSubscription($stripeToken, User $user, EloquentPlan $plan)
     {
         static::setKey();
 
-        return Customer::create([
-            'email' => $stripeEmail,
-            'source' => $stripeToken,
-            'plan' => $plan->stripe_id
-        ]);
+        try {
+            $stripeCustomer = Customer::create([
+                'source' => $stripeToken,
+                'email' => $user->email,
+                'plan' => $plan->stripe_id
+            ]);
+
+            Log::debug('Stripe customer: '.$stripeCustomer);
+
+            $user->update(['stripe_customer_id' => $stripeCustomer->id]);
+
+            if (self::activateStripeSubscription($user, $stripeCustomer)) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            Log::error('Error while creating subscription: '.$e->getMessage());
+            return false;
+        }
     }
 
 
@@ -87,7 +97,28 @@ class StripePaymentService
         $subscription->cancelWithPeriod($canceledSubscription);
     }
 
-
+    private static function activateStripeSubscription(User $eloquentUser, Customer $customer)
+    {
+        if (count($customer->subscriptions->data)) {
+            $subscription = null;
+            foreach ($customer->subscriptions->data as $subscription) {
+                $subscription = new EloquentSubscription([
+                    'name' => $subscription->plan->name,
+                    'billing_type' => 'stripe',
+                    'stripe_id' => $subscription->id,
+                    'stripe_plan' => $subscription->plan->id,
+                    'quantity' => $subscription->plan->amount,
+                    'next_payment' => Carbon::createFromTimestamp($subscription->current_period_end)
+                ]);
+            }
+            if ($subscription) {
+                if ($eloquentUser->subscriptions()->save($subscription)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Set stripe key

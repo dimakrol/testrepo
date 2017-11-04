@@ -91,7 +91,6 @@ class User extends Authenticatable
      * Get a subscription instance by name.
      *
      * @param  string  $subscription
-     * @return \Laravel\Cashier\Subscription|null
      */
     public function subscription($subscription = 'default')
     {
@@ -101,31 +100,6 @@ class User extends Authenticatable
             ->first(function ($value) use ($subscription) {
                 return $value->name === $subscription;
             });
-    }
-
-    /**
-     * @param Customer $customer
-     * @return bool
-     */
-    public function activateStripeSubscription(Customer $customer)
-    {
-        if (count($customer->subscriptions->data)) {
-            $this->stripe_customer_id = $customer->id;
-
-            foreach ($customer->subscriptions->data as $subscription) {
-                $subscription = new Subscription([
-                    'name' => $subscription->plan->name,
-                    'billing_type' => 'stripe',
-                    'stripe_id' => $subscription->id,
-                    'stripe_plan' => $subscription->plan->id,
-                    'quantity' => $subscription->plan->amount,
-                    'next_payment' => Carbon::createFromTimestamp($subscription->current_period_end)
-                ]);
-            }
-            return Auth::user()->subscriptions()->save($subscription);
-        }
-
-        return false;
     }
 
     public function fullName()
