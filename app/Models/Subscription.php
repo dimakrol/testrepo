@@ -19,6 +19,14 @@ class Subscription extends Model
         'next_payment'
     ];
 
+    protected $dates = [
+        'trial_ends_at',
+        'ends_at',
+        'next_payment'
+    ];
+
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
