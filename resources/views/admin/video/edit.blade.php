@@ -4,7 +4,7 @@
         <h2>Update video {{ $video->name }}</h2>
     </div>
     <div class="col-md-6 col-xs-12">
-        <video src="{{ asset('storage/'.$video->local_url) }}" width="400" controls>
+        <video src="{{ $video->local_url }}" width="400" controls>
             <source width="320" height="240" id="video_here">
             Your browser does not support HTML5 video.
         </video>

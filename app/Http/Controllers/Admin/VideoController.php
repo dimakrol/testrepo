@@ -46,6 +46,7 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
+//        dd($request->file('video'));
         $video = new Video([
             'name' => $request->input('name'),
             'impossible_video_id' => $request->input('impossible_video_id'),

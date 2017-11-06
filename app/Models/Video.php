@@ -73,11 +73,11 @@ class Video extends Model
      */
     public function upload($videoFile)
     {
-        $filename = time().str_random(10).'.'.$videoFile->extension();
-        $filePath = 'public'. DIRECTORY_SEPARATOR .'videos';
-        $videoFile->storeAs($filePath, $filename);
+        $filename = 'videos'.DIRECTORY_SEPARATOR.time().str_random(10).'.'.$videoFile->extension();
+        $s3 = Storage::disk('s3');
+        $s3->put($filename, file_get_contents($videoFile), 'public');
 
-        $storagePath = 'videos' . DIRECTORY_SEPARATOR . $filename;
+        $storagePath = $s3->url($filename);
         $this->preview_url = $storagePath;
         $this->thumbnail_url = $storagePath;
         $this->local_url = $storagePath;
