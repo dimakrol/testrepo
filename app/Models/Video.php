@@ -108,9 +108,10 @@ class Video extends Model
 
         $imageContent = base64_decode($data);
         $path = 'images'.DIRECTORY_SEPARATOR.$imageName;
-        Storage::put('public'.DIRECTORY_SEPARATOR.$path, $imageContent);
+        $s3 = Storage::disk('s3');
+        $s3->put($path, $imageContent, 'public');
 
-        return asset('storage'.DIRECTORY_SEPARATOR.$path);
+        return $s3->url($path);
     }
 
     /**

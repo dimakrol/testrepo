@@ -16,6 +16,12 @@
 
 Auth::routes();
 
+//Route::get('aaa', function () {
+//    $s3 = Storage::disk('s3');
+//    $f = $s3->url('images.jpg');
+//    dd($f);
+//});
+
 Route::post('/video/generate', 'VideoController@generate');
 Route::resource('/video', 'VideoController', ['only' => ['show']]);
 

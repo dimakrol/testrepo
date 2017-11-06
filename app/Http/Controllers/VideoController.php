@@ -47,6 +47,7 @@ class VideoController extends Controller
                 $fileUrl = '';
                 try {
                     $fileUrl = Video::uploadImage($request->input($field->variable_name));
+                    Log::debug('File input path: '.$fileUrl);
                 } catch (\Exception $e) {
                     Log::error('Error while uploading image file: '. $e->getMessage());
                 }
