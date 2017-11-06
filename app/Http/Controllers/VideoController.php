@@ -43,11 +43,11 @@ class VideoController extends Controller
 
         foreach ($video->fields as $field) {
             if ($request->input($field->variable_name)) {
-                Log::debug('input name:'.$field->variable_name);
+                //Log::debug('input name:'.$field->variable_name);
                 $fileUrl = '';
                 try {
                     $fileUrl = Video::uploadImage($request->input($field->variable_name));
-                    Log::debug('File input path: '.$fileUrl);
+                    //Log::debug('File input path: '.$fileUrl);
                 } catch (\Exception $e) {
                     Log::error('Error while uploading image file: '. $e->getMessage());
                 }
@@ -58,7 +58,7 @@ class VideoController extends Controller
         $PROJECT_ID = getenv('IMPOSSIBLE_PROJECT_ID');
         $movieName = $video->impossible_video_id;
 
-        Log::debug('Impossible video id: '. $movieName);
+        //Log::debug('Impossible video id: '. $movieName);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -77,15 +77,15 @@ class VideoController extends Controller
 
         $result = curl_exec($ch);
 
-        Log::debug('Result: '. $result);
+        //Log::debug('Result: '. $result);
 
         $token = json_decode($result)->{'token'};
 
-        Log::debug('Token: '. $token);
+        //Log::debug('Token: '. $token);
 
         $videoUrl = "http://api.impossible.io/v2/render/".$token.".mp4";
 
-        Log::debug('Video Url: '. $videoUrl);
+        //Log::debug('Video Url: '. $videoUrl);
 
         return response()->json(['videoUrl' => $videoUrl, 'videoId' => $video->id]);
     }
