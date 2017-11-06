@@ -104,109 +104,106 @@
     </div>
 @endsection
 @section('script')
-    @if(Auth::user()->subscribed($plan->stripe_id))
-        <script src="https://js.stripe.com/v2/"></script>
-        <script>
-            $(function () {
-                Stripe.setPublishableKey(WWD.stripe.stripeKey);
+    <script src="https://js.stripe.com/v2/"></script>
+    <script>
+        $(function () {
+            Stripe.setPublishableKey(WWD.stripe.stripeKey);
 
-                $('[data-toggle="popover"]').popover();
+            $('[data-toggle="popover"]').popover();
 
-                var form = $("#subscribe-form");
+            var form = $("#subscribe-form");
 
 
-                $('#payment-button-amount').on('click', function(e) {
-                    e.preventDefault();
-                    deleteErrorMessages();
+            $('#payment-button-amount').on('click', function(e) {
+                e.preventDefault();
+                deleteErrorMessages();
+                toggleSubscribeButton();
+
+                if (!validate()) {
                     toggleSubscribeButton();
-
-                    if (!validate()) {
-                        toggleSubscribeButton();
-                        return false;
-                    }
-
-                    Stripe.createToken({
-                        number: $('#card-number').val(),
-                        cvc: $('#card-cvc').val(),
-                        exp_month: $('#card-expiry-month').val(),
-                        exp_year: $('#card-expiry-year').val()
-                    }, stripeResponseHandler);
-                    return false; // submit from callback
-                });
-
-                function validate() {
-                    var cardNumber = $('#card-number');
-                    var cardSecurity = $('#card-cvc');
-                    if (!valid_credit_card(cardNumber.val())) {
-                        cardNumber.addClass('is-invalid');
-                        return false;
-                    }
-                    if (!valid_securuty_code(cardSecurity.val())) {
-                        cardSecurity.addClass('is-invalid');
-                        $('.error-message-alert').text('Please provide a valid security code.').show();
-                        return false;
-                    }
-                    return true;
+                    return false;
                 }
 
-                function stripeResponseHandler(status, response) {
-                    console.log(response);
-
-                    if (response.error) {
-                        toggleSubscribeButton();
-                        $('.error-message-alert').text('Error while processing your card...').show();
-                        return false;
-                    } else {
-                        if (response.id) {
-                            $('input[name=stripeToken]').val(response.id);
-                            form.submit();
-                        }
-                    }
-                }
-
-                function deleteErrorMessages() {
-                    $('#card-number,#card-cvc').removeClass('is-invalid');
-                    $('.error-message-alert').hide();
-                }
-
-                function toggleSubscribeButton() {
-                    $('#payment-button').prop('disabled', function(i, v) { return !v; });
-                    $('#payment-button-amount,#payment-button-sending').toggle();
-                }
-
-                function valid_credit_card(value) {
-                    //validate if empty
-                    if (!value) return false;
-                    // accept only digits, dashes or spaces
-                    if (/[^0-9-\s]+/.test(value)) return false;
-
-                    // The Luhn Algorithm. It's so pretty.
-                    var nCheck = 0, nDigit = 0, bEven = false;
-                    value = value.replace(/\D/g, "");
-
-                    for (var n = value.length - 1; n >= 0; n--) {
-                        var cDigit = value.charAt(n),
-                            nDigit = parseInt(cDigit, 10);
-
-                        if (bEven) {
-                            if ((nDigit *= 2) > 9) nDigit -= 9;
-                        }
-
-                        nCheck += nDigit;
-                        bEven = !bEven;
-                    }
-
-                    return (nCheck % 10) == 0;
-                }
-
-                function valid_securuty_code(value) {
-                    if (!value || !/^[0-9]{3,4}$/.test(value)) {
-                        return false;
-                    }
-                    return true;
-                }
+                Stripe.createToken({
+                    number: $('#card-number').val(),
+                    cvc: $('#card-cvc').val(),
+                    exp_month: $('#card-expiry-month').val(),
+                    exp_year: $('#card-expiry-year').val()
+                }, stripeResponseHandler);
+                return false; // submit from callback
             });
-        </script>
-    @endif
 
+            function validate() {
+                var cardNumber = $('#card-number');
+                var cardSecurity = $('#card-cvc');
+                if (!valid_credit_card(cardNumber.val())) {
+                    cardNumber.addClass('is-invalid');
+                    return false;
+                }
+                if (!valid_securuty_code(cardSecurity.val())) {
+                    cardSecurity.addClass('is-invalid');
+                    $('.error-message-alert').text('Please provide a valid security code.').show();
+                    return false;
+                }
+                return true;
+            }
+
+            function stripeResponseHandler(status, response) {
+                console.log(response);
+
+                if (response.error) {
+                    toggleSubscribeButton();
+                    $('.error-message-alert').text('Error while processing your card...').show();
+                    return false;
+                } else {
+                    if (response.id) {
+                        $('input[name=stripeToken]').val(response.id);
+                        form.submit();
+                    }
+                }
+            }
+
+            function deleteErrorMessages() {
+                $('#card-number,#card-cvc').removeClass('is-invalid');
+                $('.error-message-alert').hide();
+            }
+
+            function toggleSubscribeButton() {
+                $('#payment-button').prop('disabled', function(i, v) { return !v; });
+                $('#payment-button-amount,#payment-button-sending').toggle();
+            }
+
+            function valid_credit_card(value) {
+                //validate if empty
+                if (!value) return false;
+                // accept only digits, dashes or spaces
+                if (/[^0-9-\s]+/.test(value)) return false;
+
+                // The Luhn Algorithm. It's so pretty.
+                var nCheck = 0, nDigit = 0, bEven = false;
+                value = value.replace(/\D/g, "");
+
+                for (var n = value.length - 1; n >= 0; n--) {
+                    var cDigit = value.charAt(n),
+                        nDigit = parseInt(cDigit, 10);
+
+                    if (bEven) {
+                        if ((nDigit *= 2) > 9) nDigit -= 9;
+                    }
+
+                    nCheck += nDigit;
+                    bEven = !bEven;
+                }
+
+                return (nCheck % 10) == 0;
+            }
+
+            function valid_securuty_code(value) {
+                if (!value || !/^[0-9]{3,4}$/.test(value)) {
+                    return false;
+                }
+                return true;
+            }
+        });
+    </script>
 @endsection
