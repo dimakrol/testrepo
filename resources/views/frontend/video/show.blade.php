@@ -67,7 +67,7 @@
         let previewImage = null;
 
         updatePreviewButton.on('click', function () {
-            uploadFile()
+            uploadFile();
         });
 
         cropButton.on('click', function () {
@@ -162,6 +162,7 @@
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
+                    previewImage.hide();
                 },
                 error: function(jqXHR, textStatus) {
                     console.log(textStatus);
