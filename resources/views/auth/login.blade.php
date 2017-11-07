@@ -6,6 +6,10 @@
         <div class="col-md-6 offset-md-3 form-margin-top">
             <h3 class="font-weight-bold">Login to your Acoount</h3>
             <p class="form-margin-top">Need an account? <a href="{{ route('register') }}">Signup Free</a></p>
+            <p class="text-center">
+                <a href="{{route('login.facebook')}}" class="font-weight-bold"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+            </p>
+            <p class="text-center"> - OR - </p>
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 

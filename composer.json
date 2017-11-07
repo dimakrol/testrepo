@@ -10,6 +10,7 @@
   "require": {
     "php": ">=7.0.0",
     "cviebrock/eloquent-sluggable": "^4.3",
+    "doctrine/dbal": "^2.6",
     "fideloper/proxy": "~3.3",
     "laracasts/flash": "^3.0",
     "laravel/cashier": "~7.0",

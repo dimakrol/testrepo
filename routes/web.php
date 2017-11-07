@@ -9,8 +9,8 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('channel/{slug}', 'VideoController@channel')->name('channel.index');
 
-Route::get('/redirect', 'SocialAuthController@redirect');
-Route::get('/callback', 'SocialAuthController@callback');
+Route::get('/redirect-to-facebook', 'SocialAuthController@redirect')->name('login.facebook');
+Route::get('/callback-facebook', 'SocialAuthController@callback');
 
 //Route::get('/api_video_play', 'HomeController@play')->name('video');
 
