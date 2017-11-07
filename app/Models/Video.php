@@ -78,17 +78,20 @@ class Video extends Model
         $s3 = Storage::disk('s3');
         $s3->put($filename, file_get_contents($videoFile), 'public');
 
-        $storagePath = $s3->url($filename);
-        $this->preview_url = $storagePath;
-        $this->local_url = $storagePath;
+        $this->preview_url = $filename;
+        $this->local_url = $filename;
     }
 
+    public function getVideoUrl()
+    {
+        return Storage::disk('s3')->url($this->local_url);
+    }
     /**
      * Destroy video file from storage
      */
     public function destroyFile()
     {
-        return Storage::delete('public/'.$this->local_url);
+        return Storage::disk('s3')->delete($this->local_url);
     }
 
     /**
@@ -114,15 +117,33 @@ class Video extends Model
         return $s3->url($path);
     }
 
+
+
     public function uploadThumbnail($imageFile)
     {
         $imageName = time().str_random(10).'.'.$imageFile->extension();
 
-        $imageContent = Image::make($imageFile->getRealPath())->crop(640,500)->stream()->__toString();
+        $imageContent = Image::make($imageFile->getRealPath())
+            ->resize(730, 410, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream()
+            ->__toString();
+
         $path = 'thumbnails'.DIRECTORY_SEPARATOR.$imageName;
         $s3 = Storage::disk('s3');
         $s3->put($path, $imageContent, 'public');
 
-        $this->thumbnail_url = $s3->url($path);
+        $this->thumbnail_url = $path;
     }
+
+    public function getThumbnail()
+    {
+        return Storage::disk('s3')->url($this->thumbnail_url);
+    }
+
+    public function destroyThumbnail()
+    {
+        return Storage::disk('s3')->delete($this->thumbnail_url);
+    }
+
 }

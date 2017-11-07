@@ -24,7 +24,7 @@
           @foreach($videos as $video)
               <div class="col-lg-4 col-sm-6 portfolio-item">
                   <div class="card h-100">
-                      <a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ asset('images/default_for_video.png') }}" alt=""></a>
+                      <a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
                       <div class="card-body">
                           <h4 class="card-title">
                               <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>

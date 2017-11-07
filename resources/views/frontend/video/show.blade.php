@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row my-4">
             <div class="col-lg-8 video-container">
-                <video data-id="{{ $video->id }}" poster="{{ asset('images/default_for_video.png') }}" preload="auto" class="center" width="100%" controls="">
-                    <source src="{{ $video->local_url }}" type="video/mp4">
+                <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
+                    <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h2>{{ $video->name }}</h2>

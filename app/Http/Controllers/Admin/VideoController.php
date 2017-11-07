@@ -46,7 +46,6 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
-//        dd($request->file('video'));
         $video = new Video([
             'name' => $request->input('name'),
             'impossible_video_id' => $request->input('impossible_video_id'),
@@ -103,13 +102,26 @@ class VideoController extends Controller
         $video->fill($data);
         if ($request->file('video')) {
             if (!$video->destroyFile()) {
-                Log::error('Video file was not delete, path: '. '"public/'.$video->local_url.'"');
+                Log::error('Video file was not delete, path: '. $video->local_url.'"');
             }
             try {
                 $video->upload($data['video']);
             } catch (\Exception $e) {
                 Log::error('Error while uploading video file: '. $e->getMessage());
                 flash('Error while uploading video!')->error();
+                return back();
+            }
+        }
+
+        if ($request->file('image')) {
+            if (!$video->destroyThumbnail()) {
+                Log::error('Thumbnail has not been deleted, path: '. $video->thumbnail_url.'"');
+            }
+            try {
+                $video->uploadThumbnail($data['image']);
+            } catch (\Exception $e) {
+                Log::error('Error while uploading thumbnail file: '. $e->getMessage());
+                flash('Error while uploading thumbnail!')->error();
                 return back();
             }
         }
@@ -145,12 +157,9 @@ class VideoController extends Controller
     {
         $video = Video::findOrFail($id);
 
-        if (!$video->destroyFile()) {
-            Log::error('Error while deletion video: ');
-            flash('Error while deletion video!')->error();
-            return back();
-        }
         try {
+            $video->destroyFile();
+            $video->destroyThumbnail();
             $video->delete();
         } catch (\PDOException $e) {
             Log::error('Error while deletion video with id: '. $video->id.' '. $e->getMessage());

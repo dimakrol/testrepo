@@ -3,12 +3,19 @@
     <div class="col-md-6 col-xs-12">
         <h2>Update video {{ $video->name }}</h2>
     </div>
-    <div class="col-md-6 col-xs-12">
-        <video src="{{ $video->local_url }}" width="400" controls>
-            <source width="320" height="240" id="video_here">
-            Your browser does not support HTML5 video.
-        </video>
-    </div>
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <video src="{{ $video->getVideoUrl() }}" width="400" controls>
+                <source width="320" height="240" id="video_here">
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+        <div class="col-md-3 col-sm-9 col-xs-9">
+            <p>Image thumbnail</p>
+            <img src="{{ $video->getThumbnail() }}" class="img-fluid" alt="Responsive image">
+        </div>
+
+
     {!! Form::open(['route' => ['admin.video.update', $video->id], 'method'  => 'put', 'files' => true]) !!}
     <div class="form-group col-md-6 col-xs-12">
         <label for="inputName" class="col-form-label">Name:</label>
@@ -28,6 +35,10 @@
     <div class="form-group col-md-6 col-xs-12">
         <label for="inputVideo">Select video to change</label>
         {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*']) !!}
+    </div>
+    <div class="form-group col-md-6 col-xs-12">
+        <label for="inputImage">Select image to change thumbnail</label>
+        {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*', 'required' => 'required']) !!}
     </div>
     <div class="form-group col-md-6 col-xs-12">
         {!! Form::label('categories[]', 'Categories:') !!}
