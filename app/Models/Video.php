@@ -5,6 +5,7 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class Video extends Model
 {
@@ -79,7 +80,6 @@ class Video extends Model
 
         $storagePath = $s3->url($filename);
         $this->preview_url = $storagePath;
-        $this->thumbnail_url = $storagePath;
         $this->local_url = $storagePath;
     }
 
@@ -114,12 +114,15 @@ class Video extends Model
         return $s3->url($path);
     }
 
-    /**
-     * Return local url
-     * @return string
-     */
-    public function getLocalUrl()
+    public function uploadThumbnail($imageFile)
     {
-        return asset('storage'.DIRECTORY_SEPARATOR.$this->local_url);
+        $imageName = time().str_random(10).'.'.$imageFile->extension();
+
+        $imageContent = Image::make($imageFile->getRealPath())->crop(640,500)->stream()->__toString();
+        $path = 'thumbnails'.DIRECTORY_SEPARATOR.$imageName;
+        $s3 = Storage::disk('s3');
+        $s3->put($path, $imageContent, 'public');
+
+        $this->thumbnail_url = $s3->url($path);
     }
 }

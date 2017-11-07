@@ -26,7 +26,8 @@ class StoreVideoRequest extends FormRequest
         return [
             'name' => 'required',
             'impossible_video_id' => 'required',
-            'video' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:200000'
+            'video' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:200000',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096'
         ];
     }
 }

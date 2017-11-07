@@ -55,6 +55,7 @@ class VideoController extends Controller
 
         try {
             $video->upload($request->file('video'));
+            $video->uploadThumbnail($request->file('image'));
             Auth::user()->videos()->save($video);
             $video->tags()->sync($request->tags);
             $video->categories()->sync($request->categories);

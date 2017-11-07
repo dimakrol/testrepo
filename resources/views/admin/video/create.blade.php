@@ -22,6 +22,10 @@
                 {!! Form::file('video', ['class' => 'form-control-file', 'id' => 'inputVideo' , 'accept' => 'video/*', 'required' => 'required']) !!}
             </div>
             <div class="form-group">
+                <label for="inputImage">Select image thumbnail</label>
+                {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*', 'required' => 'required']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('categories[]', 'Categories:') !!}
                 {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
             </div>
