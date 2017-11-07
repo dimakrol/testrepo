@@ -1,26 +1,6 @@
 <?php
 
-/*
-  |--------------------------------------------------------------------------
-  | Web Routes
-  |--------------------------------------------------------------------------
-  |
-  | Here is where you can register web routes for your application. These
-  | routes are loaded by the RouteServiceProvider within a group which
-  | contains the "web" middleware group. Now create something great!
-  |
- */
-
-//Route::view('/', 'index');
-
-
 Auth::routes();
-
-//Route::get('aaa', function () {
-//    $s3 = Storage::disk('s3');
-//    $f = $s3->url('images.jpg');
-//    dd($f);
-//});
 
 Route::post('/video/generate', 'VideoController@generate');
 Route::resource('/video', 'VideoController', ['only' => ['show']]);
@@ -28,6 +8,10 @@ Route::resource('/video', 'VideoController', ['only' => ['show']]);
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('channel/{slug}', 'VideoController@channel')->name('channel.index');
+
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
+
 //Route::get('/api_video_play', 'HomeController@play')->name('video');
 
 Route::group(['middleware' => 'auth'], function () {

@@ -35,6 +35,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Sign Up</button>
+                <a href="redirect">FB Login</a>
             </form>
         </div>
     </div>
