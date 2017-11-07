@@ -26,7 +26,9 @@ class VideoController extends Controller
     public function channel($slug)
     {
         // Get post for slug.
-        $user = User::with('videos')->whereSlug($slug)->firstOrFail();
+        $user = User::with(['videos' => function($q) {
+            $q->latest();
+        }])->whereSlug($slug)->firstOrFail();
         return view('frontend.video.channel', compact('user'));
     }
     /**
