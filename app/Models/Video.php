@@ -124,7 +124,7 @@ class Video extends Model
         $imageName = time().str_random(10).'.'.$imageFile->extension();
 
         $imageContent = Image::make($imageFile->getRealPath())
-            ->resize(730, 410, function ($constraint) {
+            ->resize(720, 405, function ($constraint) {
                 $constraint->aspectRatio();
             })->stream()
             ->__toString();
