@@ -90,10 +90,10 @@
                                 </div>
                             </div>
                             <div>
-                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                <div id="payment-button" class="btn btn-lg btn-info btn-block">
                                     <span id="payment-button-amount">Subscribe</span>
                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                </button>
+                                </div>
                             </div>
                         </form>
                     </div>
