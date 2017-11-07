@@ -12,12 +12,7 @@ Route::get('channel/{slug}', 'VideoController@channel')->name('channel.index');
 Route::get('/redirect-to-facebook', 'SocialAuthController@redirect')->name('login.facebook');
 Route::get('/callback-facebook', 'SocialAuthController@callback');
 
-//Route::get('/api_video_play', 'HomeController@play')->name('video');
-
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('user', function() {
-        return Auth::user()->subscriptions()->first();
-    });
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
     Route::post('/subscription', 'SubscriptionController@store');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Socialite;
 use App\Services\SocialAccountService;
@@ -19,7 +20,10 @@ class SocialAuthController extends Controller
 
         auth()->login($user);
 
-        flash('Message login user TO DO need to change')->success();
+//        flash('Message login user TO DO need to change')->success();
+        if (!$user->subscribed(Plan::default()->stripe_id)) {
+            return redirect(route('subscription.index'));
+        }
         return redirect('/home');
     }
 }

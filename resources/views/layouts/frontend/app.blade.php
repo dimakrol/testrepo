@@ -76,35 +76,7 @@
     @yield('script')
 
     <script>
-//        var video = document.getElementById('video');
-//        var source = document.createElement('source');
-//
-//        source.setAttribute('src', 'http://www.tools4movies.com/trailers/1012/Kill%20Bill%20Vol.3.mp4');
-//
-//        video.appendChild(source);
-//        video.play();
-//
-//        setTimeout(function() {
-//            video.pause();
-//
-//            source.setAttribute('src', 'http://www.tools4movies.com/trailers/1012/Despicable%20Me%202.mp4');
-//
-//            video.load();
-//            video.play();
-//        }, 3000);
-////        part for video preview
-//        $(document).on("change", ".file_multi_video", function(evt) {
-//            var $source = $('#video_here');
-//            $source[0].src = URL.createObjectURL(this.files[0]);
-//            $source.parent()[0].load();
-//        });
-//      toggle navbar
-//    $("#menu-toggle").click(function(e) {
-//        e.preventDefault();
-//        $("#wrapper").toggleClass("toggled");
-//    });
-//todo move to separate file.
-//        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 </body>
 </html>
