@@ -20,6 +20,9 @@
         <li>
             <a href="{{ route('admin.field.create') }}">Create field</a>
         </li>
+        <li>
+            <a href="{{ route('admin.user.create') }}">Users</a>
+        </li>
 
         {{--<li>--}}
             {{--<a href="#">About</a>--}}

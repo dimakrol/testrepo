@@ -32,6 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/field', 'Admin\FieldController', ['only' => [
             'create', 'store', 'destroy'
         ]]);
+        Route::resource('/user', 'Admin\UserController', ['only' => [
+            'create', 'store', 'destroy'
+        ]]);
     });
 });
 

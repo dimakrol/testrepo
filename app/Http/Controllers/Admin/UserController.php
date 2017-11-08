@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,5 +17,51 @@ class UserController extends Controller
     {
         $user = User::with('videos')->findOrFail($id);
         return view('admin.user.videos', compact('user'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $creators = User::whereNotIn('id', [Auth::user()->id])->latest()->get();
+        return view('admin.user.create', compact('creators'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:5'
+        ]);
+
+        if (User::create([
+            'first_name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'role' => 'creator'
+        ])) {
+            flash('User created successfully!')->success();
+            return redirect(route('admin.user.create'));
+        }
+        flash('Error while creating user!!!')->error();
+        return redirect(route('admin.user.create'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
