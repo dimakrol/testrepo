@@ -4,7 +4,7 @@
     <div class="container">
       <div class="hero__icon"><img src="{{ $user->thumbnail_path }}" class="rounded-circle"></div>
       <h1 class="my-4" align="center">{{ $user->fullName() }}</h1>
-      <p class="lead">Our amazing talent create videos that you can personalise and send to friends.<br> We like to have fun and we release new content every week.</p>
+      <p class="lead">{{ $user->description }}</p>
     </div>
   </div>
   <div class="background--grey">
