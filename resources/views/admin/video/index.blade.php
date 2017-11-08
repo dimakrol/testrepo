@@ -8,6 +8,7 @@
             <th>Name</th>
             <th>Creator</th>
             <th>Slug</th>
+            <th>Created</th>
             <th></th>
         </tr>
         </thead>
@@ -17,7 +18,8 @@
                     <th scope="row">{{$video->id}}</th>
                     <td><a href="{{ route('admin.video.edit', $video->id) }}">{{$video->name}}</a></td>
                     <td><a href="{{ route('admin.user.videos', $video->id) }}">{{$video->user->first_name}} {{$video->user->last_name}}</a></td>
-                    <td>No slug yet</td>
+                    <td>{{ $video->slug }}</td>
+                    <td>{{ $video->created_at }}</td>
                     <td>
                         <a href="{{ route('admin.video.edit', $video->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
                     </td>
