@@ -84,7 +84,10 @@ class User extends Authenticatable
 
     public function getThumbnailPathAttribute()
     {
-        return Storage::disk('s3')->url("{$this->thumbnail_url}");
+        if ($this->thumbnail_url) {
+            return Storage::disk('s3')->url("{$this->thumbnail_url}");
+        }
+        return '';
     }
 
     public function getThumbnail()
