@@ -7,6 +7,7 @@
             <th>Slug</th>
             <th>Created</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -15,6 +16,7 @@
                 <th scope="row">{{$creator->first_name}}</th>
                 <td>{{$creator->slug}}</td>
                 <td>{{$creator->created_at}}</td>
+                <td><a href="{{ route('admin.user.edit', $creator->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Edit</a></td>
                 <td><a href="{{ route('admin.user.login', $creator->id) }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></td>
             </tr>
         @endforeach

@@ -7,7 +7,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Storage;
 use Stripe\Customer;
+use Image;
 
 class User extends Authenticatable
 {
@@ -62,6 +64,34 @@ class User extends Authenticatable
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+
+    public function uploadThumbnail($imageFile)
+    {
+        $imageName = time().str_random(10).'.'.$imageFile->extension();
+
+        $imageContent = Image::make($imageFile->getRealPath())
+            ->resize(75, 75, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream()
+            ->__toString();
+
+        $path = 'usersthumbnails'.DIRECTORY_SEPARATOR.$imageName;
+        $s3 = Storage::disk('s3');
+        $s3->put($path, $imageContent, 'public');
+
+        $this->thumbnail_url = $path;
+    }
+
+    public function getThumbnail()
+    {
+        return Storage::disk('s3')->url($this->thumbnail_url);
+    }
+
+    public function deleteThumbnail()
+    {
+        return Storage::disk('s3')->delete($this->thumbnail_url);
     }
 
     /**

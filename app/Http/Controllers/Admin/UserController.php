@@ -67,6 +67,43 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.user.edit', compact('user'));
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        if ($request->file('image')) {
+            $user->deleteThumbnail();
+            $user->uploadThumbnail($request->file('image'));
+        }
+        $user->fill($request->except('image'));
+
+        if(!$user->save()) {
+            flash('Error while updating user!!!')->error();
+            return back();
+        }
+
+        flash('User updated successfully!')->success();
+        return redirect(route('admin.user.create'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

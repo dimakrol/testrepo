@@ -17,7 +17,7 @@
                 <tr>
                     <th scope="row">{{$video->id}}</th>
                     <td><a href="{{ route('admin.video.edit', $video->id) }}">{{$video->name}}</a></td>
-                    <td><a href="{{ route('admin.user.videos', $video->id) }}">{{$video->user->first_name}} {{$video->user->last_name}}</a></td>
+                    <td><a href="{{ route('admin.user.videos', $video->user->id) }}">{{$video->user->first_name}} {{$video->user->last_name}}</a></td>
                     <td>{{ $video->slug }}</td>
                     <td>{{ $video->created_at }}</td>
                     <td>
