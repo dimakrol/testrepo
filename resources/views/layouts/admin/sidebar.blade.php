@@ -6,6 +6,9 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('admin.user.create') }}">Users</a>
+        </li>
+        <li>
             <a href="{{ route('admin.video.index') }}">All Videos</a>
         </li>
         <li>
@@ -20,18 +23,5 @@
         <li>
             <a href="{{ route('admin.field.create') }}">Create field</a>
         </li>
-        <li>
-            <a href="{{ route('admin.user.create') }}">Users</a>
-        </li>
-
-        {{--<li>--}}
-            {{--<a href="#">About</a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-            {{--<a href="#">Services</a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-            {{--<a href="#">Contact</a>--}}
-        {{--</li>--}}
     </ul>
 </div>

@@ -15,12 +15,7 @@
                 <th scope="row">{{$creator->first_name}}</th>
                 <td>{{$creator->slug}}</td>
                 <td>{{$creator->created_at}}</td>
-                <td><a href="">Login</a></td>
-                {{--<td><a href="{{ route('admin.user.videos', $video->id) }}">{{$video->user->first_name}} {{$video->user->last_name}}</a></td>--}}
-                {{--<td>No slug yet</td>--}}
-                {{--<td>--}}
-                    {{--<a href="{{ route('admin.video.edit', $video->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>--}}
-                {{--</td>--}}
+                <td><a href="{{ route('admin.user.login', $creator->id) }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></td>
             </tr>
         @endforeach
         </tbody>

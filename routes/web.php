@@ -21,7 +21,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
         Route::view('/', 'admin.index')->name('index');
 
-        Route::get('/user/{id}/videos', 'Admin\UserController@videos')->name('user.videos');
         Route::resource('/video', 'Admin\VideoController');
         Route::resource('/category', 'Admin\CategoryController', ['only' => [
             'create', 'store', 'destroy'
@@ -32,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/field', 'Admin\FieldController', ['only' => [
             'create', 'store', 'destroy'
         ]]);
+        Route::get('/user/{id}/videos', 'Admin\UserController@videos')->name('user.videos');
+        Route::get('/user/login/{id}',  'Admin\UserController@login')->name('user.login');
         Route::resource('/user', 'Admin\UserController', ['only' => [
             'create', 'store', 'destroy'
         ]]);

@@ -26,8 +26,20 @@ class UserController extends Controller
      */
     public function create()
     {
-        $creators = User::whereNotIn('id', [Auth::user()->id])->latest()->get();
+        $creators = User::whereNotIn('id', [Auth::user()->id])->whereIn('role', ['admin', 'creator'])->latest()->get();
         return view('admin.user.create', compact('creators'));
+    }
+
+    public function login($id)
+    {
+        $creator = User::findOrFail($id);
+        if (in_array($creator->role, ['admin', 'creator'])) {
+            Auth::login($creator);
+            flash('You success login as '.$creator->first_name)->success();
+            return redirect(route('admin.index'));
+        }
+        flash('Error while login as: '.$creator->first_name)->error();
+        return back();
     }
 
     /**
