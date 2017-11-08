@@ -38,7 +38,7 @@
     </div>
     <div class="form-group col-md-6 col-xs-12">
         <label for="inputImage">Select image to change thumbnail</label>
-        {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*', 'required' => 'required']) !!}
+        {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*']) !!}
     </div>
     <div class="form-group col-md-6 col-xs-12">
         {!! Form::label('categories[]', 'Categories:') !!}
