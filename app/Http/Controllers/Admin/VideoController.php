@@ -127,7 +127,6 @@ class VideoController extends Controller
         }
         try {
             $video->save();
-            $video->tags()->sync($request->tags);
             if (isset($request->tags)) {
                 $video->tags()->sync($request->tags);
             } else {
