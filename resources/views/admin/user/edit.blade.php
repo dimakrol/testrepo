@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 @section('admin-content')
     <div class="col-md-6 col-xs-12">
-        <h2>Edit {{ $user->first_name }}</h2>
+        <h2>Edit {{ $user->first_name }} <img src="{{ $user->thumbnail_path }}" class="rounded-circle"></h2>
     </div>
 
     {!! Form::open(['route' => ['admin.user.update', $user->id], 'method'  => 'put', 'files' => true]) !!}
@@ -14,7 +14,7 @@
         {!! Form::textarea('description', $user->description, ['class' => 'form-control', 'id' => 'description' , 'placeholder' => 'Creator Description', 'required' => 'required']) !!}
     </div>
     <div class="form-group col-md-6">
-        <label for="inputImage">Select image thumbnail</label>
+        <label for="inputImage">Select image thumbnail to update</label>
         {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*']) !!}
     </div>
     <div class="form-group col-md-6">

@@ -72,9 +72,7 @@ class User extends Authenticatable
         $imageName = time().str_random(10).'.'.$imageFile->extension();
 
         $imageContent = Image::make($imageFile->getRealPath())
-            ->resize(75, 75, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream()
+            ->resize(75, 75)->stream()
             ->__toString();
 
         $path = 'usersthumbnails'.DIRECTORY_SEPARATOR.$imageName;
@@ -82,6 +80,11 @@ class User extends Authenticatable
         $s3->put($path, $imageContent, 'public');
 
         $this->thumbnail_url = $path;
+    }
+
+    public function getThumbnailPathAttribute()
+    {
+        return Storage::disk('s3')->url("{$this->thumbnail_url}");
     }
 
     public function getThumbnail()
