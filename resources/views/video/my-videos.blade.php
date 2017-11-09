@@ -17,7 +17,7 @@
             @foreach($gVideos as $gVideo)
                 <tr>
                     <th scope="row" class="text-center"><img width="100" src="{{ $gVideo->video->thumbnail_path}}" alt=""></th>
-                    <td class="text-center"><a href="">{{ $gVideo->video->name }}</a></td>
+                    <td class="text-center"><a href="{{ route('video.download', $gVideo->id) }}">{{ $gVideo->video->name }}</a></td>
                     <td class="text-center">{{ $gVideo->created_at->format('l jS \\of F Y h:i:s A') }}</td>
                 </tr>
             @endforeach
@@ -28,9 +28,10 @@
                 {{ $gVideos->links() }}
             </div>
         </div>
-        @endif
+        @else
         <div class="my-videos-title">
             <h1 align="center"><span class="text-danger">No videos yet.</span></h1>
         </div>
+        @endif
     </div>
 @endsection

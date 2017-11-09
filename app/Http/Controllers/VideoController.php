@@ -13,6 +13,9 @@ use Auth;
 class VideoController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function generatedVideos()
     {
         $gVideos = Auth::user()->videosGenerated()->with('video')->paginate(20);
@@ -97,7 +100,7 @@ class VideoController extends Controller
         try {
             $video->videosGenerated()->create([
                 'user_id' => Auth::user()->id,
-                'impossible_id' => $token
+                'impossible_id' => "http://api.impossible.io/v2/render/".$token.".mp4"
             ]);
         } catch (\Exception $e) {
             Log::error('Error while generation video: '.$video->id.'for user: '.Auth::user()->id);
@@ -110,5 +113,18 @@ class VideoController extends Controller
         //Log::debug('Video Url: '. $videoUrl);
 
         return response()->json(['videoUrl' => $videoUrl, 'videoId' => $video->id]);
+    }
+
+    public function download($id)
+    {
+        if (!$video = VideoGenerated::find($id)){
+            return back();
+        }
+
+        $filename = time().str_random(10).'.mp4';
+        $tempImage = tempnam(sys_get_temp_dir(), $filename);
+        @copy($video->impossible_id, $tempImage);
+
+        return response()->download($tempImage, $filename);
     }
 }
