@@ -30,7 +30,7 @@
                             {{ Auth::user()->first_name }}
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="">My Videos</a>
+                            <a class="dropdown-item" href="{{route('my-videos')}}">My Videos</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -2,8 +2,8 @@
 
 Auth::routes();
 
-Route::post('/video/generate', 'VideoController@generate');
 Route::resource('/video', 'VideoController', ['only' => ['show']]);
+
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -13,6 +13,8 @@ Route::get('/redirect-to-facebook', 'SocialAuthController@redirect')->name('logi
 Route::get('/callback-facebook', 'SocialAuthController@callback');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/video/generate', 'VideoController@generate');
+    Route::get('/my-videos', 'VideoController@generatedVideos')->name('my-videos');
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
     Route::post('/subscription', 'SubscriptionController@store');

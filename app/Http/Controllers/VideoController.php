@@ -13,6 +13,10 @@ use Auth;
 class VideoController extends Controller
 {
 
+    public function generatedVideos()
+    {
+        return view('video.my-videos');
+    }
     /**
      * Display the specified resource.
      *
@@ -22,16 +26,15 @@ class VideoController extends Controller
     public function show($slug)
     {
         $video = Video::with(['fields', 'user'])->whereSlug($slug)->firstOrFail();
-        return view('frontend.video.show', compact('video'));
+        return view('video.show', compact('video'));
     }
 
     public function channel($slug)
     {
-        // Get post for slug.
         $user = User::with(['videos' => function($q) {
             $q->latest();
         }])->whereSlug($slug)->firstOrFail();
-        return view('frontend.video.channel', compact('user'));
+        return view('video.channel', compact('user'));
     }
     /**
      * Store a newly created resource in storage.
