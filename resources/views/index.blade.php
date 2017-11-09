@@ -26,10 +26,17 @@
                   <div class="card h-100">
                       <a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
                       <div class="card-body">
-                          <h4 class="card-title">
-                              <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
-                          </h4>
-                          <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->slug}}</a></p>
+                          <div class="row">
+                              <div class="col-3">
+                                  <a href="{{ route('video.show', $video->slug) }}"><img src="{{ $video->user->thumbnail_path }}" class="rounded-circle img-fluid"></a>
+                              </div>
+                              <div class="col-9">
+                                  <h4 class="card-title">
+                                      <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
+                                  </h4>
+                                  <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->slug}}</a></p>
+                              </div>
+                          </div>
                       </div>
                   </div>
               </div>

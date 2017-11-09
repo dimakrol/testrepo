@@ -7,8 +7,15 @@
                     <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <h2>{{ $video->name }}</h2>
-                <p>Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
+                <div class="row">
+                    <div class="col-2">
+                        <a href="{{ route('video.show', $video->slug) }}"><img src="{{ $video->user->thumbnail_path }}" class="rounded-circle"></a>
+                    </div>
+                    <div class="col-10">
+                        <h2>{{ $video->name }}</h2>
+                        <p>Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div>
