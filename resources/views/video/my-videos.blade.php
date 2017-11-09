@@ -1,6 +1,7 @@
 @extends('layouts.frontend.app')
 @section('content')
     <div class="container">
+        @if($gVideos->count())
         <div class="my-videos-title">
             <h1 align="center">Your Videos</h1>
         </div>
@@ -26,6 +27,10 @@
             <div class="mx-auto">
                 {{ $gVideos->links() }}
             </div>
+        </div>
+        @endif
+        <div class="my-videos-title">
+            <h1 align="center"><span class="text-danger">No videos yet.</span></h1>
         </div>
     </div>
 @endsection
