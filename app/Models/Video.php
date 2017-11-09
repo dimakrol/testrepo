@@ -144,6 +144,14 @@ class Video extends Model
     {
         return Storage::disk('s3')->url($this->thumbnail_url);
     }
+    
+    public function getThumbnailPathAttribute()
+    {
+        if ($this->thumbnail_url) {
+            return Storage::disk('s3')->url("{$this->thumbnail_url}");
+        }
+        return '';
+    }
 
     public function destroyThumbnail()
     {

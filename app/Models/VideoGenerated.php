@@ -14,6 +14,10 @@ class VideoGenerated extends Model
         'impossible_id'
     ];
 
+    protected $dates = [
+        'created_at',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

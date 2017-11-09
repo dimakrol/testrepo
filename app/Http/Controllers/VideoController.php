@@ -15,7 +15,8 @@ class VideoController extends Controller
 
     public function generatedVideos()
     {
-        return view('video.my-videos');
+         $gVideos = Auth::user()->videosGenerated()->with('video')->paginate(20);
+        return view('video.my-videos', compact('gVideos'));
     }
     /**
      * Display the specified resource.
