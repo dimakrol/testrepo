@@ -8,6 +8,12 @@ class VideoGenerated extends Model
 {
     protected $table = 'videos_generated';
 
+    protected $fillable = [
+        'user_id',
+        'video_id',
+        'impossible_id'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

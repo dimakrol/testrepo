@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Video;
+use App\Models\VideoGenerated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class VideoController extends Controller
 {
@@ -39,6 +41,11 @@ class VideoController extends Controller
      */
     public function generate(Request $request)
     {
+        //todo check if user has subscription
+        if (!Auth::user()) {
+            return 'not work';
+        }
+
         $video = Video::with('fields')->findOrFail($request->id);
 
         $params = [];
@@ -82,6 +89,15 @@ class VideoController extends Controller
         //Log::debug('Result: '. $result);
 
         $token = json_decode($result)->{'token'};
+
+        try {
+            $video->videosGenerated()->create([
+                'user_id' => Auth::user()->id,
+                'impossible_id' => $token
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error while generation video: '.$video->id.'for user: '.Auth::user()->id);
+        }
 
         //Log::debug('Token: '. $token);
 
