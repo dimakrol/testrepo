@@ -21,7 +21,7 @@
                 <div>
                     @if(!Auth::user() || !Auth::user()->subscribed('yearly'))
                         <div class="form-group">
-                            <a class="btn btn-success btn-block" href="{{ route('subscription.index') }}">Create Video</a>
+                            <a class="btn btn-success btn-block" href="{{ route('register') }}">Create Video</a>
                         </div>
                     @else
                         @foreach($video->fields as $field)
