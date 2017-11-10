@@ -21,6 +21,13 @@ class VideoController extends Controller
         $gVideos = Auth::user()->videosGenerated()->with('video')->paginate(20);
         return view('video.my-videos', compact('gVideos'));
     }
+
+    public function generatedVideo($slug)
+    {
+        $gVideo = VideoGenerated::with(['video'])->whereSlug($slug)->firstOrFail();
+        return view('video.my-video', compact('gVideo'));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -100,7 +107,7 @@ class VideoController extends Controller
         try {
             $video->videosGenerated()->create([
                 'user_id' => Auth::user()->id,
-                'impossible_id' => "http://api.impossible.io/v2/render/".$token.".mp4"
+                'impossible_id' => $token
             ]);
         } catch (\Exception $e) {
             Log::error('Error while generation video: '.$video->id.'for user: '.Auth::user()->id);
@@ -123,7 +130,7 @@ class VideoController extends Controller
 
         $filename = time().str_random(10).'.mp4';
         $tempImage = tempnam(sys_get_temp_dir(), $filename);
-        @copy($video->impossible_id, $tempImage);
+        @copy($video->video_url, $tempImage);
 
         return response()->download($tempImage, $filename);
     }

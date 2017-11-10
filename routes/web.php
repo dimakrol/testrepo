@@ -12,9 +12,13 @@ Route::get('channel/{slug}', 'VideoController@channel')->name('channel.index');
 Route::get('/redirect-to-facebook', 'SocialAuthController@redirect')->name('login.facebook');
 Route::get('/callback-facebook', 'SocialAuthController@callback');
 
+
+Route::get('/video/{id}/download', 'VideoController@download')->name('video.download');
+Route::get('/my-videos/{slug}', 'VideoController@generatedVideo')->name('my-video');
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/video/generate', 'VideoController@generate');
-    Route::get('/video/{id}/download', 'VideoController@download')->name('video.download');
     Route::get('/my-videos', 'VideoController@generatedVideos')->name('my-videos');
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');

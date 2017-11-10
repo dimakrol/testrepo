@@ -3,10 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class VideoGenerated extends Model
 {
+    use Sluggable;
+
     protected $table = 'videos_generated';
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => ['user.first_name', 'video.name']
+            ]
+        ];
+    }
 
     protected $fillable = [
         'user_id',
@@ -40,5 +57,13 @@ class VideoGenerated extends Model
     public function generatedFields()
     {
         return $this->hasMany(GeneratedField::class, 'generated_id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getVideoUrlAttribute()
+    {
+        return "http://api.impossible.io/v2/render/".$this->impossible_id.".mp4";
     }
 }

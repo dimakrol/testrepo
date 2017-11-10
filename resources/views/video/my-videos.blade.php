@@ -3,7 +3,7 @@
     <div class="container">
         @if($gVideos->count())
         <div class="my-videos-title">
-            <h1 align="center">Your Videos</h1>
+            <h1 align="center"><span class="text-danger">Your Videos</span></h1>
         </div>
         <table class="table">
             <thead>
@@ -17,7 +17,7 @@
             @foreach($gVideos as $gVideo)
                 <tr>
                     <th scope="row" class="text-center"><img width="100" src="{{ $gVideo->video->thumbnail_path}}" alt=""></th>
-                    <td class="text-center"><a href="{{ route('video.download', $gVideo->id) }}">{{ $gVideo->video->name }}</a></td>
+                    <td class="text-center"><a href="{{ route('my-video', $gVideo->slug) }}">{{ $gVideo->video->name }}</a></td>
                     <td class="text-center">{{ $gVideo->created_at->format('l jS \\of F Y h:i:s A') }}</td>
                 </tr>
             @endforeach
