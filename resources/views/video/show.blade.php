@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
 @section('content')
     <div class="container">
-        <div class="row my-4">
+        <div class="row my-4 video-row-container">
             <div class="col-lg-8 video-container">
                 <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
