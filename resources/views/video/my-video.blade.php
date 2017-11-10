@@ -1,4 +1,12 @@
 @extends('layouts.frontend.app')
+@section('styles')
+    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="{{ $gVideo->video->getThumbnail() }}" />
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row my-4">
@@ -9,61 +17,23 @@
                     Your browser does not support the video tag.
                 </video>
                 <div class="row">
+                    <p><img src="{{ $gVideo->video->getThumbnail() }}" alt=""></p>
                     <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger">Download</a>
+                    <div id="fb-root"></div>
+                    <div class="fb-share-button" data-href="{{ route('my-video', $gVideo->slug) }}" data-layout="button_count">button</div>
+                    {{--<a href="https://www.facebook.com/sharer/sharer.php?u=YourPageLink.com&display=popup"> share this </a>--}}
                 </div>
-                {{--<div class="row">--}}
-                    {{--<div class="col-2">--}}
-                        {{--<a href="{{ route('video.show', $video->slug) }}"><img src="{{ $video->user->thumbnail_path }}" class="rounded-circle"></a>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-10">--}}
-                        {{--<h2>{{ $video->name }}</h2>--}}
-                        {{--<p>Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
-            {{--<div class="col-lg-4">--}}
-                {{--<div>--}}
-                    {{--@if(!Auth::user() || !Auth::user()->subscribed('yearly'))--}}
-                        {{--<div class="form-group">--}}
-                            {{--<a class="btn btn-success btn-block" href="{{ route('register') }}">Create Video</a>--}}
-                        {{--</div>--}}
-                    {{--@else--}}
-                        {{--@foreach($video->fields as $field)--}}
-                            {{--@if('image' == $field->type)--}}
-                                {{--<div class="form-group hide-block">--}}
-                                    {{--{!! Form::file($field->variable_name, ['class' => 'form-control-file', 'accept' => 'image/*', 'required' => 'required']) !!}--}}
-                                {{--</div>--}}
-                            {{--@elseif('text' == $field->type)--}}
-                            {{--@elseif('text_area' == $field->type)--}}
-                            {{--@endif--}}
-                        {{--@endforeach--}}
-                        {{--@foreach($video->fields as $field)--}}
-                            {{--@if('image' == $field->type)--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<button class="btn btn-success btn-block add-photo" data-variable-name="{{$field->variable_name}}">Add Your Photo</button>--}}
-                                {{--</div>--}}
-                            {{--@endif--}}
-                        {{--@endforeach--}}
-                        {{--<div class="form-group">--}}
-                            {{--<button class="btn btn-success update-preview btn-block" disabled="true">Update Preview</button>--}}
-                        {{--</div>--}}
-                        {{--<div class="form-group">--}}
-                            {{--<button class="btn btn-danger btn-block crop-button hide-block">Crop</button>--}}
-                        {{--</div>--}}
-                        {{--@foreach($video->fields as $field)--}}
-                            {{--@if('image' == $field->type)--}}
-                                {{--<div class="text-center preview-image {{$field->variable_name}} hide-block">--}}
-                                    {{--<img src="" class="img-fluid" alt="Responsive image">--}}
-                                {{--</div>--}}
-                            {{--@endif--}}
-                        {{--@endforeach--}}
-
-                    {{--@endif--}}
-                {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
 @endsection
 
 @section('script')
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=241110544128";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 @endsection
