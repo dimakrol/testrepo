@@ -4,7 +4,6 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />
-    <meta property="og:image"         content="{{ $gVideo->video->getThumbnail() }}" />
 @endsection
 
 @section('content')
@@ -17,10 +16,10 @@
                     Your browser does not support the video tag.
                 </video>
                 <div class="row">
-                    <p><img src="{{ $gVideo->video->getThumbnail() }}" alt=""></p>
+                    <img alt="thumbnail" src="{{ $gVideo->video->getThumbnail() }}" alt="">
                     <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger">Download</a>
                     <div id="fb-root"></div>
-                    <div class="fb-share-button" data-href="{{ route('my-video', $gVideo->slug) }}" data-layout="button_count">button</div>
+                    <div class="fb-share-button" data-href="https://www.wordswontdo.com/" data-layout="button_count">button</div>
                     {{--<a href="https://www.facebook.com/sharer/sharer.php?u=YourPageLink.com&display=popup"> share this </a>--}}
                 </div>
             </div>
@@ -33,7 +32,7 @@
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=241110544128";
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=241110544128";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 @endsection
