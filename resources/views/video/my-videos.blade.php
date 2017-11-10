@@ -16,9 +16,9 @@
             <tbody>
             @foreach($gVideos as $gVideo)
                 <tr>
-                    <th scope="row" class="text-center"><img width="100" src="{{ $gVideo->video->thumbnail_path}}" alt=""></th>
-                    <td class="text-center"><a href="{{ route('my-video', $gVideo->slug) }}">{{ $gVideo->video->name }}</a></td>
-                    <td class="text-center">{{ $gVideo->created_at->format('l jS \\of F Y h:i:s A') }}</td>
+                    <th scope="row" class="text-center"><a href="{{ route('my-video', $gVideo->slug) }}"><img width="100" src="{{ $gVideo->video->thumbnail_path}}" alt=""></a></th>
+                    <td class="text-center align-middle" ><a href="{{ route('my-video', $gVideo->slug) }}">{{ $gVideo->video->name }}</a></td>
+                    <td class="text-center align-middle">{{ $gVideo->created_at->format('l jS \\of F Y h:i:s A') }}</td>
                 </tr>
             @endforeach
             </tbody>

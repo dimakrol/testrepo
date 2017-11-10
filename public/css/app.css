@@ -16426,6 +16426,10 @@ a:hover {
   padding: 20px;
 }
 
+.my-video-title {
+  margin: 20px;
+}
+
 body {
   overflow-x: hidden;
 }

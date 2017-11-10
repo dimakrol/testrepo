@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row my-4">
             <div class="offset-lg-2 col-lg-8 col-sm-12 col-xs-12 video-container">
-                <h2 class="" align="center"><span class="text-danger">{{$gVideo->video->name}}</span></h2>
+                <h2 class="my-video-title" align="center"><span class="text-danger">{{$gVideo->video->name}}</span></h2>
                 <video poster="{{ $gVideo->video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $gVideo->video_url }}" type="video/mp4">
                     Your browser does not support the video tag.
