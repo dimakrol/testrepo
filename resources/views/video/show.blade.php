@@ -31,7 +31,7 @@
                         @foreach($video->fields as $field)
                             @if('image' == $field->type)
                                 <div class="form-group hide-block">
-                                    {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'accept' => 'image/*', 'required' => 'required']) !!}
+                                    {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'data-ratio' => $field->aspect_ratio, 'accept' => 'image/*', 'required' => 'required']) !!}
                                 </div>
                             @elseif('text' == $field->type)
                             @elseif('text_area' == $field->type)
@@ -40,7 +40,9 @@
                         @foreach($video->fields as $field)
                             @if('image' == $field->type)
                                 <div class="form-group">
-                                    <button class="btn btn-success btn-block add-photo" data-variable-name="{{$field->variable_name}}">Add Your Photo</button>
+                                    <button class="btn btn-success btn-block add-photo"
+                                            data-variable-name="{{$field->variable_name}}"
+                                    >Add Your Photo</button>
                                 </div>
                             @endif
                         @endforeach
@@ -76,6 +78,7 @@
         let cropButton = $('.crop-button');
         let addPhotoButton = $('.add-photo');
         let previewImage = null;
+        let ratio = null;
 
         updatePreviewButton.on('click', function () {
             uploadFile();
@@ -93,8 +96,8 @@
         @foreach($video->fields as $field)
             $('input[name={{$field->variable_name}}]').on('change', function (e) {
                 fileName = $(this)[0].name;
+                ratio = $(this).data('ratio');
                 previewImage = $('.preview-image.'+'{{$field->variable_name}}');
-                console.log(previewImage.children());
                 previewImage.hide();
 
                 let files = e.target.files || e.dataTransfer.files;
@@ -129,7 +132,7 @@
             cropButton.show();
 
             croppie = new Croppie(el, {
-                viewport: { width: 140, height: 200 },
+                viewport: { width: ratio * 200, height: 200 },
                 boundary: { width: 300, height: 300 },
                 enableOrientation: true
             });
