@@ -1,10 +1,10 @@
 @extends('layouts.frontend.app')
 @section('content')
 <!-- Page Content -->
-<div class="container">
+{{--<div class="container">--}}
     @include('flash::message')
     <div class="jumbotron hero hero--home">
-        <h1 class="display-4" align="center">The Home of Personalised Video</h1>
+        <h1 class="display-2" align="center"><span>Personalized Video Messages</span></h1>
         @guest
         <p class="lead">Our amazing talent create videos that you can personalise and send to friends.<br> We like to have fun and we release new content every week.</p>
         <p class="lead" align="center">
@@ -13,7 +13,7 @@
         @endguest
     </div>
 
-</div>
+{{--</div>--}}
 <div class="background--grey">
   <div class="container">
 
