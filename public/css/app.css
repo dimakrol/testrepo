@@ -16434,6 +16434,10 @@ a:hover {
   margin: 20px;
 }
 
+.my-video.social-buttons > div {
+  margin-bottom: 5px;
+}
+
 body {
   overflow-x: hidden;
 }

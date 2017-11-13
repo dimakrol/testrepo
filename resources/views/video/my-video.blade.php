@@ -15,11 +15,15 @@
                     <source src="{{ $gVideo->video_url }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="row">
-                    <img alt="thumbnail" src="{{ $gVideo->video->getThumbnail() }}" alt="">
-                    <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger">Download</a>
-                    <div id="fb-root"></div>
-                    <div class="fb-share-button" data-href="{{ route('my-video', $gVideo->slug) }}" data-layout="button_count">button</div>
+                <div class="row my-video social-buttons">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger">Download</a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('my-video', $gVideo->slug))}}" class="btn btn-warning" style="background-color: #4267B2"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
+                    </div>
+                    {{--<div id="fb-root"></div>--}}
+                    {{--<div class="fb-share-button" data-href="{{ route('my-video', $gVideo->slug) }}" data-layout="button_count">button</div>--}}
                     {{--<a href="https://www.facebook.com/sharer/sharer.php?u=YourPageLink.com&display=popup"> share this </a>--}}
                 </div>
             </div>
@@ -28,11 +32,29 @@
 @endsection
 
 @section('script')
-    <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=241110544128";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+
+        var popupSize = {
+            width: 780,
+            height: 550
+        };
+
+        $(document).on('click', '.social-buttons > a', function(e){
+
+            var
+                verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
+                horisontalPos = Math.floor(($(window).height() - popupSize.height) / 2);
+
+            var popup = window.open($(this).prop('href'), 'social',
+                'width='+popupSize.width+',height='+popupSize.height+
+                ',left='+verticalPos+',top='+horisontalPos+
+                ',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
+
+            if (popup) {
+                popup.focus();
+                e.preventDefault();
+            }
+
+        });
+    </script>
 @endsection
