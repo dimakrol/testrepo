@@ -19,7 +19,7 @@
                     <img alt="thumbnail" src="{{ $gVideo->video->getThumbnail() }}" alt="">
                     <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger">Download</a>
                     <div id="fb-root"></div>
-                    <div class="fb-share-button" data-href="https://www.wordswontdo.com/" data-layout="button_count">button</div>
+                    <div class="fb-share-button" data-href="{{ route('my-video', $gVideo->slug) }}" data-layout="button_count">button</div>
                     {{--<a href="https://www.facebook.com/sharer/sharer.php?u=YourPageLink.com&display=popup"> share this </a>--}}
                 </div>
             </div>
