@@ -19,7 +19,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
                         <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger">Download</a>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 social-button">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('my-video', $gVideo->slug))}}" class="btn btn-warning" style="background-color: #4267B2"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
                     </div>
                     {{--<div id="fb-root"></div>--}}
@@ -39,7 +39,7 @@
             height: 550
         };
 
-        $(document).on('click', '.social-buttons > a', function(e){
+        $(document).on('click', '.social-button > a', function(e){
 
             var
                 verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
