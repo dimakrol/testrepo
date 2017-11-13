@@ -55,6 +55,7 @@
             <th>Field Name:</th>
             <th>Variable Name:</th>
             <th>Type:</th>
+            <th>Ratio:</th>
             <th>#</th>
         </tr>
         </thead>
@@ -65,6 +66,7 @@
                 <th scope="row">{{$field->name}}</th>
                 <th scope="row">{{$field->variable_name}}</th>
                 <th scope="row">{{$field->type}}</th>
+                <th scope="row">{{$field->aspect_ratio}}</th>
                 <th scope="row">Actions</th>
             </tr>
         @endforeach

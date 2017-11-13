@@ -19,9 +19,13 @@
             </div>
             <div class="col-lg-4">
                 <div>
-                    @if(!Auth::user() || !Auth::user()->subscribed('yearly'))
+                    @if(!Auth::user())
                         <div class="form-group">
                             <a class="btn btn-success btn-block" href="{{ route('register') }}">Create Video</a>
+                        </div>
+                    @elseif(!Auth::user()->subscribed('yearly'))
+                        <div class="form-group">
+                            <a class="btn btn-success btn-block" href="{{ route('subscription.index') }}">Create Video</a>
                         </div>
                     @else
                         @foreach($video->fields as $field)
