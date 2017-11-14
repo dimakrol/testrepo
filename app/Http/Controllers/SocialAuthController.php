@@ -16,11 +16,14 @@ class SocialAuthController extends Controller
 
     public function callback(SocialAccountService $service)
     {
-        $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
+        try {
+            $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
+            auth()->login($user);
+        } catch (\Exception $e) {
+            flash('You need to accept FB request')->error();
+            return redirect('/home');
+        }
 
-        auth()->login($user);
-
-//        flash('Message login user TO DO need to change')->success();
         if (!$user->subscribed(Plan::default()->stripe_id)) {
             return redirect(route('subscription.index'));
         }
