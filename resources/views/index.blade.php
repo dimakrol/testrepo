@@ -6,14 +6,17 @@
     <div class="jumbotron hero hero--home">
         <h1 class="display-2" align="center"><span>Personalized Video Messages</span></h1>
         <p class="lead">Our amazing talent create videos that you can personalise and send to friends.<br> We like to have fun and we release new content every week.</p>
+        @auth
         <p class="lead" align="center">
             <a class="btn btn-success btn-lg" href="{{ route('video.show', $videos[0]->slug) }}" role="button">Create video</a>
         </p>
+        @endauth
         @guest
         <p class="lead" align="center">
             <a class="btn btn-success btn-lg" href="{{route('register')}}" role="button">Sign Up</a>
         </p>
         @endguest
+
     </div>
 
 {{--</div>--}}
