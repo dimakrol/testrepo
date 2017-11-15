@@ -74,6 +74,14 @@ class User extends Authenticatable
         return $this->hasMany(Subscription::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
+
 
     public function uploadThumbnail($imageFile)
     {
