@@ -53,6 +53,20 @@ return [
             'strict' => true,
             'engine' => null,
         ],
+        'mysql_old' => [
+            'driver' => 'mysql',
+            'host' => 'aa1dczi8ebulxy3.clskdewusgl1.eu-west-2.rds.amazonaws.com',
+            'port' => '3306',
+            'database' => 'ebdb',
+            'username' => 'root',
+            'password' => 123123123,
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
