@@ -4,6 +4,8 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />
+    <meta property="og:image" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png"/>
+    <meta property="og:image:secure_url" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png" />
 @endsection
 
 @section('content')

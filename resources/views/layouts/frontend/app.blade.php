@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:image" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png"/>
-    <meta property="og:image:secure_url" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
