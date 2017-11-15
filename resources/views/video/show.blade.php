@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-10">
                         <h2>{{ $video->name }}</h2>
-                        <p>Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
+                        <p>by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
                     </div>
                 </div>
             </div>
