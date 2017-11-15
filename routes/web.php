@@ -16,8 +16,6 @@ Route::get('/callback-facebook', 'SocialAuthController@callback');
 Route::get('/video/{id}/download', 'VideoController@download')->name('video.download');
 Route::get('/my-videos/{slug}', 'VideoController@generatedVideo')->name('my-video');
 
-Route::get('/migrate_users', 'MigrationController@index');
-
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/video/generate', 'VideoController@generate');
     Route::get('/my-videos', 'VideoController@generatedVideos')->name('my-videos');
