@@ -38,7 +38,7 @@ return [
     'facebook' => [
         'client_id' => '2085784908374790',
         'client_secret' => '6040bc5264688e7ae00086f463568150',
-        'redirect' => 'http://stagen.eu-west-2.elasticbeanstalk.com/callback-facebook',
+        'redirect' => 'https://wordswontdo.com',
     ],
 
 ];
