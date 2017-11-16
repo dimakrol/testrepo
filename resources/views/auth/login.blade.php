@@ -10,6 +10,7 @@
                 <a href="{{route('login.facebook')}}" class="font-weight-bold"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
             </p>
             <p class="text-center"> - OR - </p>
+            <hr>
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 
@@ -33,6 +34,7 @@
                 </div>
                 <a href="{{ route('password.request') }}">Lost your password?</a>
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Login</button>
+                <hr>
             </form>
         </div>
     </div>

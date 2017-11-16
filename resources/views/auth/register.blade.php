@@ -14,6 +14,7 @@
                 <a href="{{route('login.facebook')}}" class="font-weight-bold"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
             </p>
             <p class="text-center"> - OR - </p>
+            <hr>
             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
                 <div class="form-group form-margin-top">
@@ -42,8 +43,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Sign Up</button>
-
-
+                <hr>
             </form>
         </div>
     </div>
