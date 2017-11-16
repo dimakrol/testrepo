@@ -31,7 +31,7 @@
                                   <a href="{{ route('video.show', $video->slug) }}"><img src="{{ $video->user->thumbnail_path }}" class="rounded-circle img-fluid"></a>
                               </div>
                               <div class="col-9">
-                                  <h4 class="card-title">
+                                  <h4>
                                       <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
                                   </h4>
                                   <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->slug}}</a></p>
