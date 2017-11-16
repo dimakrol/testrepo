@@ -92,7 +92,10 @@ class UserController extends Controller
             $user->deleteThumbnail();
             $user->uploadThumbnail($request->file('image'));
         }
-        $user->fill($request->except('image'));
+        $user->fill([
+            'first_name' => $request->input('name'),
+            'description' => $request->input('description'),
+            ]);
 
         if(!$user->save()) {
             flash('Error while updating user!!!')->error();
