@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3 form-margin-top">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <h3 class="font-weight-bold" align="center">Reset Password</h3>
             <hr>
             <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
