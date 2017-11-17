@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\VideoGenerated;
@@ -56,8 +57,8 @@ class VideoController extends Controller
     public function generate(Request $request)
     {
         //todo check if user has subscription
-        if (!Auth::user()) {
-            return 'not work';
+        if (!Auth::user() && !Auth::user()->subscribed(Plan::default()->stripe_id)) {
+            return redirect(route('home'));
         }
 
         $video = Video::with('fields')->findOrFail($request->id);
