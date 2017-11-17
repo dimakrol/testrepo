@@ -70,6 +70,10 @@
 
 @section('script')
     <script>
+        fbq('track', 'ViewContent', {
+            content_name: "{{$video->slug}}"
+        });
+
         let croppie = null;
         let fileName = null;
         let croppedImage = null;
