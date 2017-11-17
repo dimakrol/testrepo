@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/subscription', 'SubscriptionController@store');
     Route::delete('/subscription', 'SubscriptionController@cancel');
 
-    Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
+    Route::group(['prefix' => 'admin','middleware' => 'admin','as' => 'admin.'], function () {
         Route::view('/', 'admin.index')->name('index');
 
         Route::resource('/video', 'Admin\VideoController');
