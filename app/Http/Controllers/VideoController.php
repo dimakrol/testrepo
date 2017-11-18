@@ -112,7 +112,7 @@ class VideoController extends Controller
                 'impossible_id' => $token
             ]);
         } catch (\Exception $e) {
-            Log::error('Error while generation video: '.$video->id.'for user: '.Auth::user()->id);
+            Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
         }
 
         //Log::debug('Token: '. $token);
@@ -127,8 +127,11 @@ class VideoController extends Controller
         ];
         if (!$gVideo) {
             $response['downloadUrl'] = null;
+            $response['generatedUrl'] = null;
         } else {
             $response['downloadUrl'] = route('video.download', $gVideo->id);
+            $response['generatedUrl'] = route('my-video', $gVideo->slug) ;
+
         }
 
         return response()->json($response);

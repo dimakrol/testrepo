@@ -55,6 +55,9 @@
                         <div class="form-group">
                             <a href="#" class="btn btn-danger btn-block download-video" style="display: none" disabled="true"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
                         </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-primary btn-block go-share" style="display: none" disabled="true"><i class="fa fa-share" aria-hidden="true"></i> Go Share</a>
+                        </div>
                         @foreach($video->fields as $field)
                             @if('image' == $field->type)
                                 <div class="text-center preview-image {{$field->variable_name}} hide-block">
@@ -87,6 +90,7 @@
             let addPhotoButton = $('.add-photo');
             let createButton = $('.create-video');
             let downloadButton = $('.download-video');
+            let goShareButton = $('.go-share');
             let previewImage = null;
             let ratio = null;
 
@@ -115,7 +119,8 @@
                 ratio = $(this).data('ratio');
                 previewImage = $('.preview-image.'+'{{$field->variable_name}}');
                 previewImage.hide();
-                downloadButton.hide();
+//                downloadButton.prop('disabled', true).hide();
+//                goShareButton.prop('disabled', true).hide();
 
                 let files = e.target.files || e.dataTransfer.files;
 
@@ -196,6 +201,9 @@
                         updatePreviewButton.prop('disabled', true);
                         if (data.downloadUrl) {
                             downloadButton.attr("href", data.downloadUrl).prop('disabled', false).show();
+                        }
+                        if (data.generatedUrl) {
+                            goShareButton.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
                         previewImage.hide();
                     },
