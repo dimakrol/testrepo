@@ -21,11 +21,11 @@
                 <div>
                     @if(!Auth::user())
                         <div class="form-group">
-                            <a class="btn btn-success btn-block" href="{{ route('register') }}">Create Video</a>
+                            <a class="btn btn-success btn-block create-video" href="{{ route('register') }}">Create Video</a>
                         </div>
                     @elseif(!Auth::user()->subscribed('yearly'))
                         <div class="form-group">
-                            <a class="btn btn-success btn-block" href="{{ route('subscription.index') }}">Create Video</a>
+                            <a class="btn btn-success btn-block create-video" href="{{ route('subscription.index') }}">Create Video</a>
                         </div>
                     @else
                         @foreach($video->fields as $field)
@@ -70,35 +70,43 @@
 
 @section('script')
     <script>
-        fbq('track', 'ViewContent', {
-            content_name: "{{$video->slug}}"
-        });
+        $(function () {
+            fbq('track', 'ViewContent', {
+                content_name: "{{$video->slug}}"
+            });
 
-        let croppie = null;
-        let fileName = null;
-        let croppedImage = null;
-        let updatePreviewButton = $('button.update-preview');
-        let videoId = $('video').data('id');
-        let cropButton = $('.crop-button');
-        let addPhotoButton = $('.add-photo');
-        let previewImage = null;
-        let ratio = null;
+            let croppie = null;
+            let fileName = null;
+            let croppedImage = null;
+            let updatePreviewButton = $('button.update-preview');
+            let videoId = $('video').data('id');
+            let cropButton = $('.crop-button');
+            let addPhotoButton = $('.add-photo');
+            let createButton = $('.create-video');
+            let previewImage = null;
+            let ratio = null;
 
-        updatePreviewButton.on('click', function () {
-            uploadFile();
-        });
+            createButton.on('click', function() {
+                fbq('track', 'Lead', {
+                    content_name: "{{$video->slug}}"
+                });
+            });
 
-        cropButton.on('click', function () {
-            cropImage();
-        });
+            updatePreviewButton.on('click', function () {
+                uploadFile();
+            });
 
-        addPhotoButton.on('click', function () {
-            let varName = $(this).data('variable-name');
-            $('input[name='+varName+']').click();
-        });
+            cropButton.on('click', function () {
+                cropImage();
+            });
 
-        @foreach($video->fields as $field)
-            $('input[name={{$field->variable_name}}]').on('change', function (e) {
+            addPhotoButton.on('click', function () {
+                let varName = $(this).data('variable-name');
+                $('input[name='+varName+']').click();
+            });
+
+            @foreach($video->fields as $field)
+                $('input[name={{$field->variable_name}}]').on('change', function (e) {
                 fileName = $(this)[0].name;
                 ratio = $(this).data('ratio');
                 previewImage = $('.preview-image.'+'{{$field->variable_name}}');
@@ -111,81 +119,82 @@
                 }
                 createImage(files[0]);
             });
-        @endforeach
+            @endforeach
 
-        function createImage(file) {
-            var image = new Image();
-            var reader = new FileReader();
+            function createImage(file) {
+                var image = new Image();
+                var reader = new FileReader();
 
-            reader.onload = (e) => {
+                reader.onload = (e) => {
 
-                image = e.target.result;
+                    image = e.target.result;
 
-                setUpCroppie(image);
+                    setUpCroppie(image);
 
-            };
-            reader.readAsDataURL(file)
-        }
-
-        function setUpCroppie(imageData) {
-            let el = document.getElementById('croppie');
-            if (croppie) {
-                croppie.destroy();
+                };
+                reader.readAsDataURL(file)
             }
 
-            cropButton.show();
+            function setUpCroppie(imageData) {
+                let el = document.getElementById('croppie');
+                if (croppie) {
+                    croppie.destroy();
+                }
 
-            croppie = new Croppie(el, {
-                viewport: { width: ratio * 200, height: 200 },
-                boundary: { width: 300, height: 300 },
-                enableOrientation: true
-            });
+                cropButton.show();
 
-            croppie.bind({
-                url: imageData
-            });
-        }
+                croppie = new Croppie(el, {
+                    viewport: { width: ratio * 200, height: 200 },
+                    boundary: { width: 300, height: 300 },
+                    enableOrientation: true
+                });
+
+                croppie.bind({
+                    url: imageData
+                });
+            }
 
 
-        function cropImage() {
-            croppie.result({
-                type: 'canvas',
-                size: 'viewport'
-            }).then((response) => {
-                previewImage.show().children().attr('src', response);
-                updatePreviewButton.prop('disabled', false);
-                cropButton.hide();
-                croppedImage = response;
-                croppie.destroy();
-                croppie = null;
-                addPhotoButton.text('Change Photo');
-            })
-        }
+            function cropImage() {
+                croppie.result({
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then((response) => {
+                    previewImage.show().children().attr('src', response);
+                    updatePreviewButton.prop('disabled', false);
+                    cropButton.hide();
+                    croppedImage = response;
+                    croppie.destroy();
+                    croppie = null;
+                    addPhotoButton.text('Change Photo');
+                })
+            }
 
-        function uploadFile () {
-            let data = new FormData();
-            data.append(fileName, croppedImage);
-            data.append('id', videoId);
-            $.ajax({
-                url: '/video/generate',
-                type: 'POST',
-                data: data,
-                cache: false,
-                dataType: 'json',
-                processData: false, // Don't process the files
-                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-                success: function(data) {
-                    $('.video-container').html(`
+            function uploadFile () {
+                let data = new FormData();
+                data.append(fileName, croppedImage);
+                data.append('id', videoId);
+                $.ajax({
+                    url: '/video/generate',
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    dataType: 'json',
+                    processData: false, // Don't process the files
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                    success: function(data) {
+                        $('.video-container').html(`
                         <video data-id="${data.videoId}" poster="http://localhost:8000/images/loading_anim.gif" autoplay preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
-                    previewImage.hide();
-                },
-                error: function(jqXHR, textStatus) {
-                    console.log(textStatus);
-                }
-            });
-        };
+                        previewImage.hide();
+                    },
+                    error: function(jqXHR, textStatus) {
+                        console.log(textStatus);
+                    }
+                });
+            };
+        })
     </script>
 @endsection

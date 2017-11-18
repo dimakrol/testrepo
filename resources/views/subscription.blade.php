@@ -149,7 +149,6 @@
             }
 
             function stripeResponseHandler(status, response) {
-                console.log(response);
 
                 if (response.error) {
                     toggleSubscribeButton();
@@ -158,6 +157,9 @@
                 } else {
                     if (response.id) {
                         $('input[name=stripeToken]').val(response.id);
+                        fbq('track', 'Purchase', {
+                            content_name: "User id: {{Auth::user()->id}}; email: {{Auth::user()->email}}"
+                        });
                         form.submit();
                     }
                 }
