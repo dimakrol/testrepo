@@ -52,6 +52,9 @@
                         <div class="form-group">
                             <button class="btn btn-danger btn-block crop-button hide-block">Crop</button>
                         </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-danger btn-block download-video" style="display: none" disabled="true"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+                        </div>
                         @foreach($video->fields as $field)
                             @if('image' == $field->type)
                                 <div class="text-center preview-image {{$field->variable_name}} hide-block">
@@ -83,6 +86,7 @@
             let cropButton = $('.crop-button');
             let addPhotoButton = $('.add-photo');
             let createButton = $('.create-video');
+            let downloadButton = $('.download-video');
             let previewImage = null;
             let ratio = null;
 
@@ -111,6 +115,7 @@
                 ratio = $(this).data('ratio');
                 previewImage = $('.preview-image.'+'{{$field->variable_name}}');
                 previewImage.hide();
+                downloadButton.hide();
 
                 let files = e.target.files || e.dataTransfer.files;
 
@@ -188,6 +193,10 @@
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
+                        updatePreviewButton.prop('disabled', true);
+                        if (data.downloadUrl) {
+                            downloadButton.attr("href", data.downloadUrl).prop('disabled', false).show();
+                        }
                         previewImage.hide();
                     },
                     error: function(jqXHR, textStatus) {

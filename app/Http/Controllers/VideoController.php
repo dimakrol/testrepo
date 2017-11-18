@@ -105,8 +105,9 @@ class VideoController extends Controller
 
         $token = json_decode($result)->{'token'};
 
+        $gVideo = null;
         try {
-            $video->videosGenerated()->create([
+            $gVideo = $video->videosGenerated()->create([
                 'user_id' => Auth::user()->id,
                 'impossible_id' => $token
             ]);
@@ -120,7 +121,17 @@ class VideoController extends Controller
 
         //Log::debug('Video Url: '. $videoUrl);
 
-        return response()->json(['videoUrl' => $videoUrl, 'videoId' => $video->id]);
+        $response = [
+            'videoUrl' => $videoUrl,
+            'videoId' => $video->id,
+        ];
+        if (!$gVideo) {
+            $response['downloadUrl'] = null;
+        } else {
+            $response['downloadUrl'] = route('video.download', $gVideo->id);
+        }
+
+        return response()->json($response);
     }
 
     public function download($id)

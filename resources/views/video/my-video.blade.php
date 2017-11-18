@@ -19,7 +19,7 @@
                 </video>
                 <div class="row my-video social-buttons">
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                        <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger">Download</a>
+                        <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 social-button">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('my-video', $gVideo->slug))}}" class="btn btn-warning" style="background-color: #4267B2"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
