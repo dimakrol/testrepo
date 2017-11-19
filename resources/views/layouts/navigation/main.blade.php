@@ -7,29 +7,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{route('home')}}">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                @auth
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('subscription.index')}}">Subscription</a>
-                </li>
-                @endauth
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-success">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}" class="btn btn-light menu-login-button">Login</a>
                     </li>
                 @else
                     <div class="dropdown" role="menu">
-                        <div class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="btn btn-success dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->first_name }}
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{route('subscription.index')}}">Subscription</a>
                             <a class="dropdown-item" href="{{route('my-videos')}}">My Videos</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
