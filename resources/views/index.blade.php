@@ -34,7 +34,7 @@
                                   <h4>
                                       <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
                                   </h4>
-                                  <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->slug}}</a></p>
+                                  <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->fullName()}}</a></p>
                               </div>
                           </div>
                       </div>
