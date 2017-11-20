@@ -41,9 +41,9 @@ class SignedUp extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('You successfully registered on Words Wont Do')
+                    ->action('Continue', url('/'))
+                    ->line('Thank you for using Words Wont Do!');
     }
 
     /**
