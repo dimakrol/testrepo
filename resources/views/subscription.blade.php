@@ -96,13 +96,18 @@
                                 </div>
                             </div>
                         </form>
-                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                            <input type="hidden" name="custom" value="{{json_encode(array('user_id' => 3))}}">
-                            <input type="hidden" name="cmd" value="_s-xclick">
-                            <input type="hidden" name="hosted_button_id" value="H46Z6LRPBZGQC">
-                            <input type="image" src="https://www.sandbox.paypal.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-                            <img alt="" border="0" src="https://www.sandbox.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-                        </form>
+                        <div class="card-title">
+                            <h3 class="text-center"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i></h3>
+                        </div>
+                        <div class="row mx-auto">
+                            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-button">
+                                <input type="hidden" name="custom" value="{{json_encode(array('user_id' => 3))}}">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="hosted_button_id" value="H46Z6LRPBZGQC">
+                                <input type="image" src="https://www.sandbox.paypal.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                                <img alt="" border="0" src="https://www.sandbox.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+                            </form>
+                        </div>
                     </div>
                     @endif
                 </div>
