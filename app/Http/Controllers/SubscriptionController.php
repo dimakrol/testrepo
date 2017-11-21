@@ -54,4 +54,10 @@ class SubscriptionController extends Controller
 
         return response()->json(['message' => 'Your subscription has been canceled!!!'], 201);
     }
+
+    public function paypalSuccess()
+    {
+        flash('Success! Welcome to Words Won\'t Do!')->success();
+        return view('subscription.paypal_success');
+    }
 }

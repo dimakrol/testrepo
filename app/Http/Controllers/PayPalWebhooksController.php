@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 class PayPalWebhooksController extends Controller
 {
     
-    public function aaa(Request $request)
+    public function processPayment(Request $request)
     {
         $ipn = new PaypalIPNListener();
         $ipn->use_sandbox = true;

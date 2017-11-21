@@ -16,7 +16,7 @@ Route::get('/callback-facebook', 'SocialAuthController@callback');
 Route::get('/video/{id}/download', 'VideoController@download')->name('video.download');
 Route::get('/my-videos/{slug}', 'VideoController@generatedVideo')->name('my-video');
 
-Route::post('/paypal/try', 'PayPalWebhooksController@aaa');
+Route::post('/paypal/process', 'PayPalWebhooksController@processPayment');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/video/generate', 'VideoController@generate');
@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
     Route::post('/subscription', 'SubscriptionController@store');
     Route::delete('/subscription', 'SubscriptionController@cancel');
+
+    Route::get('/subscription/success', 'SubscriptionController@paypalSuccess');
+
 
     Route::group(['prefix' => 'admin','middleware' => 'admin','as' => 'admin.'], function () {
         Route::view('/', 'admin.index')->name('index');
