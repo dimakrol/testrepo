@@ -18,37 +18,41 @@ class PayPalWebhooksController extends Controller
         $ipn = new PaypalIPNListener();
         $ipn->use_sandbox = true;
 
-        $verified = $ipn->processIpn();
+        try {
+            $verified = $ipn->processIpn();
 
-        $report = $ipn->getTextReport();
+            $report = $ipn->getTextReport();
 
-        Log::info("-----new payment-----");
+            Log::info("-----new payment-----");
 
-        Log::info($report);
+            Log::info($report);
 
-        if ($verified) {
-            if ($request->address_status == 'confirmed') {
-                // Check outh POST variable and insert your logic here
-                Log::info('User: ' . json_decode($request->custom)->user_id);
+            if ($verified) {
+                if ($request->address_status == 'confirmed') {
+                    // Check outh POST variable and insert your logic here
+                    Log::info('User: ' . json_decode($request->custom)->user_id);
 
-                if (!$subscription = Subscription::where('stripe_id', $request->subscr_id)
-                    ->where('billing_type', 'paypal')->first()) {
-                    $user = User::find(json_decode($request->custom)->user_id);
-                    $subscription = new Subscription([
-                        'name' => $request->item_name,
-                        'billing_type' => 'paypal',
-                        'stripe_id' => $request->subscr_id,
-                        'stripe_plan' => $request->item_name,
-                        'quantity' => $request->mc_amount3 * 100,
-                        'next_payment' => Carbon::now()->addYear(),
-                    ]);
-                    $user->subscriptions()->save($subscription);
+                    if (!$subscription = Subscription::where('stripe_id', $request->subscr_id)
+                        ->where('billing_type', 'paypal')->first()) {
+                        $user = User::find(json_decode($request->custom)->user_id);
+                        $subscription = new Subscription([
+                            'name' => $request->item_name,
+                            'billing_type' => 'paypal',
+                            'stripe_id' => $request->subscr_id,
+                            'stripe_plan' => $request->item_name,
+                            'quantity' => $request->mc_amount3 * 100,
+                            'next_payment' => Carbon::now()->addYear(),
+                        ]);
+                        $user->subscriptions()->save($subscription);
+                    }
+
+                    Log::info("payment verified and inserted to db");
                 }
-
-                Log::info("payment verified and inserted to db");
+            } else {
+                Log::info("Some thing went wrong in the payment !");
             }
-        } else {
-            Log::info("Some thing went wrong in the payment !");
+        } catch (\Exception $e) {
+            Log::info("Error while processing payment: ". $e->getTraceAsString());
         }
     }
 }
