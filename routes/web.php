@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/subscription', 'SubscriptionController@cancel');
 
     Route::get('/subscription/success', 'SubscriptionController@paypalSuccess');
+    Route::get('/subscription/error', 'SubscriptionController@paypalError');
 
 
     Route::group(['prefix' => 'admin','middleware' => 'admin','as' => 'admin.'], function () {

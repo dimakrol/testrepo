@@ -40,7 +40,7 @@ class PayPalWebhooksController extends Controller
                             'billing_type' => 'paypal',
                             'stripe_id' => $request->subscr_id,
                             'stripe_plan' => $request->item_name,
-                            'quantity' => $request->mc_amount3 * 100,
+                            'quantity' => $request->mc_gross * 100,
                             'next_payment' => Carbon::now()->addYear(),
                         ]);
                         $user->subscriptions()->save($subscription);
