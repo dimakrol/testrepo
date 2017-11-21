@@ -15,7 +15,7 @@
                     @else
                     <div class="card-body">
                         <div class="card-title">
-                            <h3 class="text-center">Buy early subscription for {{ $plan->amountInDollars() }} $</h3>
+                            <h3 class="text-center">Buy early subscription for {{ $plan->amountInDollars() }} &pound;</h3>
                         </div>
                         <hr>
                         <form id="subscribe-form" action="/subscription" method="post">
