@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscription;
+use App\Models\User;
+use Carbon\Carbon;
 use Fahim\PaypalIPN\PaypalIPNListener;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +30,21 @@ class PayPalWebhooksController extends Controller
             if ($request->address_status == 'confirmed') {
                 // Check outh POST variable and insert your logic here
                 Log::info('User: ' . json_decode($request->custom)->user_id);
+
+                if (!$subscription = Subscription::where('stripe_id', $request->subscr_id)
+                    ->where('billing_type', 'paypal')->first()) {
+                    $user = User::find(json_decode($request->custom)->user_id);
+                    $subscription = new Subscription([
+                        'name' => $request->item_name,
+                        'billing_type' => 'paypal',
+                        'stripe_id' => $request->subscr_id,
+                        'stripe_plan' => $request->item_name,
+                        'quantity' => $request->mc_amount3 * 100,
+                        'next_payment' => Carbon::now()->addYear(),
+                    ]);
+                    $user->subscriptions()->save($subscription);
+                }
+
                 Log::info("payment verified and inserted to db");
             }
         } else {
