@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Log;
 class PayPalWebhooksController extends Controller
 {
     
-    public function aaa()
+    public function aaa(Request $request)
     {
-        Log::debug('post paypal');
+        Log::debug($request->all());
     }
 }
