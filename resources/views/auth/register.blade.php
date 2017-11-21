@@ -78,7 +78,6 @@
                         for (err in JSON.parse(data.responseText).errors) {
                             result += JSON.parse(data.responseText).errors[err].toString() + "\n";
                         }
-                        //todo display error messages
                         alert.show().find('span.message').text(result);
                     }
                 });
