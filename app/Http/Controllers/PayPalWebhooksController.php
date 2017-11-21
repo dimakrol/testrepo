@@ -11,7 +11,6 @@ class PayPalWebhooksController extends Controller
     
     public function aaa(Request $request)
     {
-        Log::gebug('user id: '.Auth::user()->id);
         Log::debug($request->all());
     }
 }
