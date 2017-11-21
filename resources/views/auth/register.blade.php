@@ -15,7 +15,13 @@
             </p>
             <p class="text-center"> - OR - </p>
             <hr>
-            <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+            <div class="alert alert-danger alert-dismissible fade show register-alert-message" role="alert" style="display: none">
+                <span class="message"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="register-form form-horizontal" method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
                 <div class="form-group form-margin-top">
                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name" required autofocus>
@@ -48,4 +54,35 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $(function () {
+            let alert = $('.register-alert-message');
+            $('form.register-form').on('submit', function (e) {
+                alert.hide();
+                e.preventDefault();
+                let data = $(this).serialize();
+                $.ajax({
+                    url: '{{route('register')}}',
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success: function(data) {
+                        fbq('track', 'CompleteRegistration');
+                        window.location.replace('{{ route('subscription.index') }}');
+                    },
+                    error: function(data) {
+                        var result = '';
+                        for (err in JSON.parse(data.responseText).errors) {
+                            result += JSON.parse(data.responseText).errors[err].toString() + "\n";
+                        }
+                        //todo display error messages
+                        alert.show().find('span.message').text(result);
+                    }
+                });
+            });
+        })
+    </script>
 @endsection
