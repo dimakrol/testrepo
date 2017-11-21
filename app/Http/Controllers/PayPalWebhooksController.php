@@ -12,8 +12,6 @@ class PayPalWebhooksController extends Controller
     
     public function aaa(Request $request)
     {
-        Log::debug($request->all());
-
         $ipn = new PaypalIPNListener();
         $ipn->use_sandbox = true;
 
@@ -28,6 +26,7 @@ class PayPalWebhooksController extends Controller
         if ($verified) {
             if ($request->address_status == 'confirmed') {
                 // Check outh POST variable and insert your logic here
+                Log::info('User: ' . json_decode($request->custom)->user_id);
                 Log::info("payment verified and inserted to db");
             }
         } else {
