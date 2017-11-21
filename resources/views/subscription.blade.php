@@ -122,12 +122,17 @@
         $(function () {
             Stripe.setPublishableKey(WWD.stripe.stripeKey);
 
+            $('form.paypal-button').on('click', function (e) {
+                fbq('track', 'AddPaymentInfo');
+            });
+
             $('[data-toggle="popover"]').popover();
 
             var form = $("#subscribe-form");
 
 
             $('#payment-button-amount').on('click', function(e) {
+                fbq('track', 'AddPaymentInfo');
                 e.preventDefault();
                 deleteErrorMessages();
                 toggleSubscribeButton();
