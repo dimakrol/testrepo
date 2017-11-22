@@ -16,7 +16,6 @@ class PayPalWebhooksController extends Controller
     public function processPayment(Request $request)
     {
         $ipn = new PaypalIPNListener();
-        $ipn->use_sandbox = true;
 
         try {
             $verified = $ipn->processIpn();
