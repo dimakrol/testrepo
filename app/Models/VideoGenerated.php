@@ -28,7 +28,8 @@ class VideoGenerated extends Model
     protected $fillable = [
         'user_id',
         'video_id',
-        'impossible_id'
+        'impossible_id',
+        'hash'
     ];
 
     protected $dates = [

@@ -26,7 +26,16 @@ class VideoController extends Controller
     public function generatedVideo($slug)
     {
         $gVideo = VideoGenerated::with(['video'])->whereSlug($slug)->firstOrFail();
-        return view('video.my-video', compact('gVideo'));
+        if ($gVideo->user_id == Auth::user()->id) {
+            return view('video.my-video', compact('gVideo'));
+        }
+        return redirect(route('view', $gVideo->hash));
+    }
+
+    public function generatedVideoByHash($hash)
+    {
+        $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();
+        return view('video.view', compact('gVideo'));
     }
 
     /**
@@ -107,9 +116,15 @@ class VideoController extends Controller
 
         $gVideo = null;
         try {
+            $hash = str_random(40);
+            while (VideoGenerated::where('hash', $hash)->first()) {
+                $hash = str_random(40);
+            }
+
             $gVideo = $video->videosGenerated()->create([
                 'user_id' => Auth::user()->id,
-                'impossible_id' => $token
+                'impossible_id' => $token,
+                'hash' => $hash
             ]);
         } catch (\Exception $e) {
             Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
@@ -130,7 +145,7 @@ class VideoController extends Controller
             $response['generatedUrl'] = null;
         } else {
             $response['downloadUrl'] = route('video.download', $gVideo->id);
-            $response['generatedUrl'] = route('my-video', $gVideo->slug) ;
+            $response['generatedUrl'] = route('view', $gVideo->hash) ;
 
         }
 
