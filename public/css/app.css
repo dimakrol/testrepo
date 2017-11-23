@@ -16298,7 +16298,7 @@ a:hover {
 }
 
 .jumbotron {
-  background-image: url(/images/homehero.jpg?f75d21d13f8650aec00e7b9a0027ee90);
+  background-image: url(/images/homehero.jpg?6ac6259db17ddafeb171a7c50a47f744);
   background-color: #ffffff;
   margin-bottom: 0;
   min-height: 100%;
@@ -16462,6 +16462,11 @@ a:hover {
 
 .my-video.social-buttons > div {
   margin-bottom: 5px;
+}
+
+.video-view-alert {
+  margin-top: 15px;
+  display: none;
 }
 
 body {

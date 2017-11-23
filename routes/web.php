@@ -15,13 +15,19 @@ Route::get('/callback-facebook', 'SocialAuthController@callback');
 
 Route::get('/video/{id}/download', 'VideoController@download')->name('video.download');
 Route::get('/view/{hash}', 'VideoController@generatedVideoByHash')->name('view');
+Route::get('/my-videos/{slug}', 'VideoController@generatedVideo')->name('my-video');
+
+Route::post('/share/email', 'ShareController@email')->name('share.email');
+
 
 Route::post('/paypal/process', 'PayPalWebhooksController@processPayment');
 
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/video/generate', 'VideoController@generate');
-    Route::get('/my-videos/{slug}', 'VideoController@generatedVideo')->name('my-video');
     Route::get('/my-videos', 'VideoController@generatedVideos')->name('my-videos');
+
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
     Route::post('/subscription', 'SubscriptionController@store');
