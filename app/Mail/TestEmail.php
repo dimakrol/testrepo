@@ -37,10 +37,10 @@ class TestEmail extends Mailable
 //                'variable_1' => 'abc'
 //            ]
             'sub' => [
-                '%name%' => [$this->data['name']],
-                '%email%' => [$this->data['email']],
-                '%message%' => [$this->data['message']],
-                '%href_created_video%' => ['https://wordswontdo.com/my-videos/john-leonardo-da-vinci-3']
+                '%recipient_name%' => [$this->data['name']],
+                '%sender_name%' => [$this->data['sender_name']],
+//                '%message%' => [$this->data['message']],
+//                '%href_created_video%' => ['https://wordswontdo.com/my-videos/john-leonardo-da-vinci-3']
             ],
             'filters' => [
                 'templates' => [

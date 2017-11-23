@@ -57,7 +57,7 @@
                             <input type="email" class="form-control" id="recipient-email" placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" id="recipient-message" placeholder="Message"></textarea>
+                            <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name" required>
                         </div>
                     </form>
                 </div>
@@ -84,16 +84,18 @@
             let formModalAlert = $('.error-message-form');
 
             submitEmailBut.on('click', function () {
-                let email = $('#recipient-email').val();
-                let message = $('#recipient-message').val();
+                let email = $('#recipient-email');
+                let name = $('#recipient-name');
                 let route = $(this).data('mail-route');
                 let shareLink = $(this).data('share-link');
                 $.ajax({
                     url: route,
                     type: 'POST',
-                    data: {email: email, message: message, shareLink: shareLink},
+                    data: {email: email.val(), name: name.val(), shareLink: shareLink},
                     dataType: 'json',
-                    success: function() {
+                    success: function(data) {
+                        email.val('');
+                        name.val('');
                         modalShare.modal('hide');
                         alertEmail.show().not('.alert-important').delay(4000).fadeOut(350);
                     },
