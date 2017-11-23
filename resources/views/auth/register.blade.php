@@ -44,10 +44,6 @@
                     @endif
                 </div>
 
-                <div class="form-group form-margin-top">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autofocus>
-                </div>
-
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Sign Up</button>
                 <hr>
             </form>
