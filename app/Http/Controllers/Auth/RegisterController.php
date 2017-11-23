@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Notifications\SignedUp;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -71,7 +73,10 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         try {
-            $user->notify(new SignedUp());
+            Mail::to($user->email)
+                ->send(new WelcomeEmail([
+                    'name' => $user->first_name,
+                ]));
         } catch (\Exception $e) {
             Log::error('');
         }

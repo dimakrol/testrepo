@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TestEmail extends Mailable
+class WelcomeEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,23 +30,17 @@ class TestEmail extends Mailable
      */
     public function build()
     {
-        $subject = 'This is a demo!';
+        $subject = 'WORDS WONT DO';
 
         $headerData = [
-//            'unique_args' => [
-//                'variable_1' => 'abc'
-//            ]
             'sub' => [
                 '%recipient_name%' => [$this->data['name']],
-                '%sender_name%' => [$this->data['sender_name']],
-//                '%message%' => [$this->data['message']],
-//                '%href_created_video%' => ['https://wordswontdo.com/my-videos/john-leonardo-da-vinci-3']
             ],
             'filters' => [
                 'templates' => [
                     'settings' => [
                         'enable' => 1,
-                        'template_id' => 'ca27e582-4c9c-4871-bd34-e699d21f3171'
+                        'template_id' => '43dd8d58-0e76-49bb-8172-8cf1f3ab0353'
                     ]
                 ]
             ]
