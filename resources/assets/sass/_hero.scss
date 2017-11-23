@@ -9,21 +9,36 @@
 
     span {
       color: #5EB0A6;
-      padding: 10px;
+      padding: 5px 10px;
       background-color: $white;
     }
   }
 
   p {
+    margin: 0;
     color: $grey;
   }
 
   &--home {
-    padding: 300px 0 48px;
+    padding: 230px 0 20px;
 
-    .display-2 {
-      margin-bottom: 25px;
+    h1 {
+        margin-bottom: 15px;
+        font-size: 28px;
     }
+    
+
+    @include bp(small) {
+        padding: 300px 0 48px;
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 48px;
+        }
+
+    }
+
+    
 
     .btn {
       width: 200px;

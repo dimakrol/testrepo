@@ -1,7 +1,7 @@
 
 # Created by https://www.gitignore.io/api/linux,macos,laravel,phpstorm,netbeans,appengine
 
-
+app/Providers/AppServiceProvider.php
 
 ### AppEngine ###
 # Google App Engine generated folder
