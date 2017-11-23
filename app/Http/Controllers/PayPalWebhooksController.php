@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Subscribe;
 use App\Models\Subscription;
 use App\Models\User;
 use Carbon\Carbon;
@@ -9,6 +10,7 @@ use Fahim\PaypalIPN\PaypalIPNListener;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class PayPalWebhooksController extends Controller
 {
@@ -43,6 +45,11 @@ class PayPalWebhooksController extends Controller
                             'next_payment' => Carbon::now()->addYear(),
                         ]);
                         $user->subscriptions()->save($subscription);
+
+                        Mail::to($user->email)
+                            ->send(new Subscribe([
+                                'name' => $user->first_name,
+                            ]));
                     }
 
                     Log::info("payment verified and inserted to db");

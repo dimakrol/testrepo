@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Subscribe;
 use App\Models\Plan;
 use App\Models\Subscription;
 use App\Services\Payment\StripePaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class SubscriptionController extends Controller
 {
@@ -34,6 +36,10 @@ class SubscriptionController extends Controller
             Auth::user(),
             $plan
         )) {
+            Mail::to(Auth::user()->email)
+                ->send(new Subscribe([
+                    'name' => Auth::user()->first_name,
+                ]));
             flash('Success! Welcome to Words Won\'t Do!')->success();
             return redirect('/');
         }
