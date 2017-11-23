@@ -16189,6 +16189,10 @@ background: #ccc;
   color: #88959e !important;
 }
 
+.small-text {
+  font-size: 10px;
+}
+
 .form-control {
   border-color: #f5f5f5;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -16528,6 +16532,10 @@ a:hover {
 
 .login-register-forms .btn-facebook-login {
   margin-bottom: 20px;
+}
+
+.login-register-forms .small-text {
+  margin-top: 20px;
 }
 
 body {

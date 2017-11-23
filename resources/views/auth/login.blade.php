@@ -1,16 +1,13 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-<div class="container">
+<div class="container login-register-forms">
     <div class="row">
         <div class="col-md-6 offset-md-3 form-margin-top">
             <h3 class="font-weight-bold">Login to your Acoount</h3>
-            <p class="form-margin-top">Need an account? <a href="{{ route('register') }}">Signup Free</a></p>
-            <p class="text-center">
-                <a href="{{route('login.facebook')}}" class="font-weight-bold"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
-            </p>
-            <p class="text-center"> - OR - </p>
-            <hr>
+            <p class="grey-text">Need an account? <a href="{{ route('register') }}">Signup Free</a></p>
+            <a href="{{route('login.facebook')}}" class="btn btn-facebook-login"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+            <p class="text-center grey-text"> - OR - </p>
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 
@@ -34,7 +31,7 @@
                 </div>
                 <a href="{{ route('password.request') }}">Lost your password?</a>
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Login</button>
-                <hr>
+                <p class="small-text grey-text">By clicking 'Create Account' I am agreeing to Words Won't Do's <a href="http://help.wordswontdo.com/important-documents/privacy-policy-policy" target="_blank">privacy policy</a> and <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use" target="_blank">terms of service</a>.</p>
             </form>
         </div>
     </div>

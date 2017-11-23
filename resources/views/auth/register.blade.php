@@ -40,8 +40,8 @@
                         <small class="form-text text-muted text-danger"><span class="text-danger">{{ $errors->first('password') }}</span></small>
                     @endif
                 </div>
-
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Sign Up</button>
+                <p class="small-text grey-text">By clicking 'Create Account' I am agreeing to Words Won't Do's <a href="http://help.wordswontdo.com/important-documents/privacy-policy-policy" target="_blank">privacy policy</a> and <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use" target="_blank">terms of service</a>.</p>
             </form>
         </div>
     </div>
