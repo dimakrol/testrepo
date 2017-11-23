@@ -16185,6 +16185,17 @@ background: #ccc;
   content: '\21BB';
 }
 
+.grey-text {
+  color: #88959e !important;
+}
+
+.form-control {
+  border-color: #f5f5f5;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding: 0.5rem 0.875rem;
+}
+
 .btn {
   width: 140px;
   height: 36px;
@@ -16206,6 +16217,23 @@ background: #ccc;
 .btn-success:focus {
   border: 0 !important;
   background: #7cc3b9 !important;
+}
+
+.btn-facebook-login {
+  background-color: #3e66ad;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+.btn-facebook-login span {
+  font-size: 14px;
+}
+
+.btn-facebook-login:hover,
+.btn-facebook-login:active,
+.btn-facebook-login:focus {
+  color: #fff;
+  background: #5a80c4 !important;
 }
 
 body {
@@ -16486,6 +16514,20 @@ a:hover {
 .video-view-alert {
   margin-top: 15px;
   display: none;
+}
+
+.login-register-forms {
+  padding-bottom: 25px;
+}
+
+.login-register-forms .btn {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+}
+
+.login-register-forms .btn-facebook-login {
+  margin-bottom: 20px;
 }
 
 body {

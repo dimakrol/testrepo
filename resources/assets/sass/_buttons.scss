@@ -17,3 +17,17 @@
     background: lighten($green, 10%)!important;
   }
 }
+
+.btn-facebook-login {
+    background-color: #3e66ad;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    span {
+        font-size: 14px;
+    }
+
+    &:hover, &:active, &:focus {
+       color: #fff;
+       background: lighten(#3e66ad, 10%)!important;
+    }
+}

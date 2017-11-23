@@ -5,16 +5,13 @@
     </style>
 @endsection
 @section('content')
-<div class="container">
+<div class="container login-register-forms">
     <div class="row">
         <div class="col-md-6 offset-md-3 form-margin-top">
             <h3 class="font-weight-bold">Create Your Free Account</h3>
-            <p class="form-margin-top">Already have an account? <a href="{{ route('login') }}">Log in</a></p>
-            <p class="text-center">
-                <a href="{{route('login.facebook')}}" class="font-weight-bold"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
-            </p>
-            <p class="text-center"> - OR - </p>
-            <hr>
+            <p class="grey-text">Already have an account? <a href="{{ route('login') }}">Log in</a></p>
+            <a href="{{route('login.facebook')}}" class="btn btn-facebook-login"><i class="fa fa-facebook-square" aria-hidden="true"></i> <span>Continue with Facebook</span></a>
+            <p class="text-center grey-text"> - OR - </p>
             <div class="alert alert-danger alert-dismissible fade show register-alert-message" role="alert" style="display: none">
                 <span class="message"></span>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -45,7 +42,6 @@
                 </div>
 
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Sign Up</button>
-                <hr>
             </form>
         </div>
     </div>
