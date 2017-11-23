@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Mail\ForgotPassword;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Stripe\Customer;
 use Image;
@@ -162,5 +164,15 @@ class User extends Authenticatable
     public function cancelStripeSubscription(Customer $customer)
     {
 
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to($this->email)
+            ->send(new ForgotPassword([
+                'name' => $this->first_name,
+                'frogot_link' => url(config('app.url').route('password.reset', $token, false))
+            ]));
+        //$this->notify(new ResetPasswordNotification($token));
     }
 }
