@@ -16305,7 +16305,7 @@ a:hover {
   border-radius: 0rem;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 160%;
+  background-size: 115%;
 }
 
 @media (min-width: 600px) {
@@ -16367,7 +16367,7 @@ a:hover {
 }
 
 .hero--home {
-  padding: 230px 0 20px;
+  padding: 130px 0 20px;
 }
 
 .hero--home h1 {
