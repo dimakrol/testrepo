@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(5);
+        $users = User::latest()->paginate(20);
         return view('admin.user.index',compact('users'));
     }
 
@@ -32,8 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $creators = User::whereNotIn('id', [Auth::user()->id])->whereIn('role', ['admin', 'creator'])->latest()->get();
-        return view('admin.user.create', compact('creators'));
+        return view('admin.user.create');
     }
 
     public function login($id)
@@ -120,6 +119,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
 
+        if ($user->videos()->count()) {
+            flash('You can\'t delete user with video!')->warning();
+            return back();
+        }
+
+        if ($user->delete()) {
+            flash('User deleted successfully!')->success();
+            return redirect(route('admin.user.index'));
+        }
+        flash('Error while deleting video!')->error();
+        return back();
     }
 }
