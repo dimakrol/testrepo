@@ -14,7 +14,8 @@ class Video extends Model
     protected $fillable = [
         'name',
         'premium',
-        'impossible_video_id'
+        'impossible_video_id',
+        'user_id'
     ];
 
     public function sluggable()

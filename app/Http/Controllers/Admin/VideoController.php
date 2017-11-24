@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreVideoRequest;
 use App\Http\Requests\Admin\UpdateVideoRequest;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\User;
 use App\Models\Video;
 use foo\bar;
 use Illuminate\Http\Request;
@@ -36,8 +37,9 @@ class VideoController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id');
+        $creators = User::whereIn('role', ['creator', 'admin'])->pluck('first_name', 'id');
         $tags = Tag::pluck('name', 'id');
-        return view('admin.video.create', compact('categories', 'tags'));
+        return view('admin.video.create', compact('categories', 'tags', 'creators'));
     }
 
     /**
@@ -49,13 +51,14 @@ class VideoController extends Controller
         $video = new Video([
             'name' => $request->input('name'),
             'impossible_video_id' => $request->input('impossible_video_id'),
+            'user_id' => $request->input('user_id'),
             'premium' => $request->input('premium') ? true : false,
         ]);
 
         try {
             $video->upload($request->file('video'));
             $video->uploadThumbnail($request->file('image'));
-            Auth::user()->videos()->save($video);
+            $video->save();
             $video->tags()->sync($request->tags);
             $video->categories()->sync($request->categories);
         } catch (\PDOException $e) {
@@ -82,9 +85,10 @@ class VideoController extends Controller
     {
         $video = Video::findOrFail($id);
         $categories = Category::pluck('name', 'id');
+        $creators = User::whereIn('role', ['creator', 'admin'])->pluck('first_name', 'id');
         $tags = Tag::pluck('name', 'id');
 
-        return view('admin.video.edit', compact('video', 'categories', 'tags'));
+        return view('admin.video.edit', compact('video', 'categories', 'tags', 'creators'));
     }
 
 

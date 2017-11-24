@@ -41,6 +41,10 @@
         {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*']) !!}
     </div>
     <div class="form-group col-md-6 col-xs-12">
+        {!! Form::label('user_id', 'Creator:') !!}
+        {!! Form::select('user_id', $creators, $video->user_id, ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group col-md-6 col-xs-12">
         {!! Form::label('categories[]', 'Categories:') !!}
         {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2-multi-categories', 'multiple' => "multiple"]) !!}
     </div>

@@ -26,6 +26,10 @@
                 {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*', 'required' => 'required']) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('user_id', 'Creator:') !!}
+                {!! Form::select('user_id', $creators, null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('categories[]', 'Categories:') !!}
                 {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
             </div>
