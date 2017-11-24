@@ -14,6 +14,9 @@
         {!! Form::textarea('description', $user->description, ['class' => 'form-control', 'id' => 'description' , 'placeholder' => 'Creator Description', 'required' => 'required']) !!}
     </div>
     <div class="form-group col-md-6">
+        {!! Form::select('role', ['creator' => 'Creator', 'admin' => 'Admin'], $user->role, ['placeholder' => 'Select Role', 'class' => 'form-control']) !!}
+    </div>
+    <div class="form-group col-md-6">
         <label for="inputImage">Select image thumbnail to update</label>
         {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*']) !!}
     </div>

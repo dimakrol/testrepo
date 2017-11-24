@@ -62,13 +62,13 @@ class UserController extends Controller
         if (User::create([
             'first_name' => $request->input('name'),
             'description' => $request->input('description'),
-            'role' => 'creator'
+            'role' => $request->input('role')
         ])) {
             flash('User created successfully!')->success();
-            return redirect(route('admin.user.create'));
+            return redirect(route('admin.user.index'));
         }
         flash('Error while creating user!!!')->error();
-        return redirect(route('admin.user.create'));
+        return back();
     }
 
     /**
@@ -100,6 +100,7 @@ class UserController extends Controller
         $user->fill([
             'first_name' => $request->input('name'),
             'description' => $request->input('description'),
+            'role' => $request->input('role')
             ]);
 
         if(!$user->save()) {
@@ -108,7 +109,7 @@ class UserController extends Controller
         }
 
         flash('User updated successfully!')->success();
-        return redirect(route('admin.user.create'));
+        return redirect(route('admin.user.index'));
     }
 
     /**
@@ -120,6 +121,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+
+        if (Auth::user()->id == $id) {
+            flash('You can\'t delete yourself!')->error();
+            return back();
+        }
 
         if ($user->videos()->count()) {
             flash('You can\'t delete user with video!')->warning();

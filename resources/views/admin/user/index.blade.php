@@ -22,9 +22,12 @@
                 <td>{{$user->created_at}}</td>
                 <td><a href="{{ route('admin.user.edit', $user->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Edit</a></td>
                 <td><a href="{{ route('admin.user.login', $user->id) }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></td>
-                <td>{!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin.user.destroy', $user->id ] ]) !!}
-                    {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-                {!! Form::close() !!}
+                <td>
+                @if (Auth::user()->id != $user->id)
+                    {!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin.user.destroy', $user->id ] ]) !!}
+                        {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                    {!! Form::close() !!}
+                @endif
                 </td>
             </tr>
         @endforeach
