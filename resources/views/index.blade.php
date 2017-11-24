@@ -8,7 +8,7 @@
         <!-- <p class="lead">Our amazing talent create videos that you can personalise and send to friends.<br> We like to have fun and we release new content every week.</p> -->
         @if ($videos->count())
             <p class="lead" align="center">
-                <a class="btn btn-success btn-lg" href="{{ route('video.show', $videos[0]->slug) }}" role="button">Create video</a>
+                <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/work-of-art" role="button">Create video</a>
             </p>
         @endif
     </div>

@@ -6,7 +6,10 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.user.create') }}">Users</a>
+            <a href="{{ route('admin.user.index') }}">Users</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.user.create') }}">Create User</a>
         </li>
         <li>
             <a href="{{ route('admin.video.index') }}">All Videos</a>

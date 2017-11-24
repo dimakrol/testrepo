@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]]);
         Route::get('/user/{id}/videos', 'Admin\UserController@videos')->name('user.videos');
         Route::get('/user/login/{id}',  'Admin\UserController@login')->name('user.login');
-        Route::resource('/user', 'Admin\UserController', ['expect' => ['index']]);
+        Route::resource('/user', 'Admin\UserController');
     });
 });
 

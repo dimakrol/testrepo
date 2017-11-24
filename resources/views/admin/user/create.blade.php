@@ -1,28 +1,6 @@
 @extends('layouts.admin.app')
 @section('admin-content')
-    <table class="table">
-        <thead class="thead-default">
-        <tr>
-            <th>Name</th>
-            <th>Slug</th>
-            <th>Created</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($creators as $creator)
-            <tr>
-                <th scope="row">{{$creator->first_name}}</th>
-                <td>{{$creator->slug}}</td>
-                <td>{{$creator->created_at}}</td>
-                <td><a href="{{ route('admin.user.edit', $creator->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Edit</a></td>
-                <td><a href="{{ route('admin.user.login', $creator->id) }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
+    <h2>Create user:</h2>
     {!! Form::open(['route' => 'admin.user.store']) !!}
     <div class="form-group col-md-6">
         <label for="inputName" class="col-form-label">Creator name:</label>

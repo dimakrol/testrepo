@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::paginate(5);
+        return view('admin.user.index',compact('users'));
+    }
+
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -114,6 +120,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
