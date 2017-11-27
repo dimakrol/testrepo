@@ -1,6 +1,15 @@
 @extends('layouts.admin.app')
 @section('admin-content')
     <h2>All users:</h2>
+    {!! Form::open(['route' => 'admin.user.store', 'method'  => 'get']) !!}
+        <div class="form-group col-md-6">
+            <label for="user-email">Search: </label>
+            <select class="user-email form-control col-md-6" name="user-email"></select>
+        </div>
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    {!! Form::close() !!}
     <table class="table">
         <thead class="thead-default">
         <tr>
@@ -34,4 +43,28 @@
         </tbody>
     </table>
     {{ $users->links() }}
+@endsection
+
+@section('script')
+    <script>
+        $('.user-email').select2({
+            placeholder: 'Select an user by email',
+            ajax: {
+                url: '{{route('admin.user.search')}}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (item) {
+                            return {
+                                text: item.email,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
 @endsection

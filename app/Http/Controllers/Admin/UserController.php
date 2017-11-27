@@ -6,12 +6,18 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->paginate(20);
+        if ($request->input('user-email')) {
+            $users = User::whereIn('id',[$request->input('user-email')])->paginate(1);
+        } else {
+            $users = User::latest()->paginate(20);
+        }
+
         return view('admin.user.index',compact('users'));
     }
 
@@ -23,6 +29,21 @@ class UserController extends Controller
     {
         $user = User::with('videos')->findOrFail($id);
         return view('admin.user.videos', compact('user'));
+    }
+
+    public function search(Request $request)
+    {
+        $data = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $data = User::select("id","email")
+                ->where('email','LIKE',"%$search%")
+                ->limit(10)
+                ->get();
+        }
+
+        return response()->json($data);
     }
 
     /**
