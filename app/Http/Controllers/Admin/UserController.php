@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,13 +13,14 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $plan = Plan::default();
         if ($request->input('user-email')) {
             $users = User::whereIn('id',[$request->input('user-email')])->paginate(1);
         } else {
             $users = User::latest()->paginate(20);
         }
 
-        return view('admin.user.index',compact('users'));
+        return view('admin.user.index',compact('users', 'plan'));
     }
 
     /**

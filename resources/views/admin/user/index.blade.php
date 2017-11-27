@@ -15,6 +15,8 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Email</th>
+            <th>Subscription</th>
             <th>Role</th>
             <th>Created</th>
             <th></th>
@@ -27,6 +29,8 @@
             <tr>
                 <th scope="row">{{$user->id}}</th>
                 <th>{{$user->first_name}}</th>
+                <th>{{$user->email}}</th>
+                <th>{{$user->subscribed($plan->stripe_id) ? $plan->name : ''}}</th>
                 <th>{{ $user->role}}</th>
                 <td>{{$user->created_at}}</td>
                 <td><a href="{{ route('admin.user.edit', $user->id) }}"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Edit</a></td>
