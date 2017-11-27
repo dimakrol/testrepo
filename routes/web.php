@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/user', 'Admin\UserController');
 
         Route::get('/plan/index', 'Admin\PlanController@index')->name('plan.index');
+        Route::post('/plan/update/{id}', 'Admin\PlanController@update')->name('plan.update');
     });
 });
 

@@ -13,4 +13,10 @@ class PlanController extends Controller
         $plan = Plan::default();
         return view('admin.plan.index', compact('plan'));
     }
+
+    public function update($id)
+    {
+        dd('works');
+        $plan = Plan::findOrPail($id);
+    }
 }

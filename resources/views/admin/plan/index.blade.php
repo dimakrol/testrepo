@@ -19,5 +19,14 @@
             </tr>
         </tbody>
     </table>
+    {!! Form::open(['route' => ['admin.plan.update', $plan->id], 'class' => 'form-inline']) !!}
+    <div class="form-group">
+        <label for="amount" class="col-form-label mr-sm-2">Amount:</label>
+        {!! Form::number('amount', $plan->amountInPounds(), ['class' => 'form-control mb-2 mr-sm-2 mb-sm-0', 'id' => 'inputAmount' , 'placeholder' => 'Amount', 'required' => 'required']) !!}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+    {!! Form::close() !!}
 
 @endsection
