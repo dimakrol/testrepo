@@ -50,10 +50,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/field', 'Admin\FieldController', ['only' => [
             'create', 'store', 'destroy'
         ]]);
+
         Route::get('/user/{id}/videos', 'Admin\UserController@videos')->name('user.videos');
         Route::get('/user/login/{id}',  'Admin\UserController@login')->name('user.login');
         Route::get('/user/search', 'Admin\UserController@search')->name('user.search');
         Route::resource('/user', 'Admin\UserController');
+
+        Route::get('/plan/index', 'Admin\PlanController@index')->name('plan.index');
     });
 });
 
