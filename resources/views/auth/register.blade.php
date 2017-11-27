@@ -22,23 +22,17 @@
                 {{ csrf_field() }}
                 <div class="form-group form-margin-top">
                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name" required autofocus>
-                    @if ($errors->has('name'))
-                        <small class="form-text text-muted text-danger"><span class="text-danger">{{ $errors->first('name') }}</span></small>
-                    @endif
+                    <small class="signup-name-error form-text text-muted text-danger hide-block"><span class="text-danger"></span></small>
                 </div>
 
                 <div class="form-group form-margin-top">
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email Address" required autofocus>
-                    @if ($errors->has('email'))
-                        <small class="form-text text-muted text-danger"><span class="text-danger">{{ $errors->first('email') }}</span></small>
-                    @endif
+                    <small class="signup-email-error form-text text-muted text-danger hide-block"><span class="text-danger">Email error</span></small>
                 </div>
 
                 <div class="form-group form-margin-top">
                     <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Password" required autofocus>
-                    @if ($errors->has('password'))
-                        <small class="form-text text-muted text-danger"><span class="text-danger">{{ $errors->first('password') }}</span></small>
-                    @endif
+                    <small class="signup-password-error form-text text-muted text-danger hide-block"><span class="text-danger">Password error</span></small>
                 </div>
                 <button type="submit" class="btn btn-success btn-block form-margin-top">Sign Up</button>
                 <p class="small-text grey-text">By clicking 'Create Account' I am agreeing to Words Won't Do's <a href="http://help.wordswontdo.com/important-documents/privacy-policy-policy" target="_blank">privacy policy</a> and <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use" target="_blank">terms of service</a>.</p>
@@ -51,11 +45,18 @@
 @section('script')
     <script>
         $(function () {
-            let alert = $('.register-alert-message');
+
+            let errors = {
+                name: $('.signup-name-error'),
+                email: $('.signup-email-error'),
+                password: $('.signup-password-error')
+            };
+
             $('form.register-form').on('submit', function (e) {
-                alert.hide();
                 e.preventDefault();
+                hideErrors();
                 let data = $(this).serialize();
+
                 $.ajax({
                     url: '{{route('register')}}',
                     type: 'POST',
@@ -66,14 +67,20 @@
                         window.location.replace('{{ route('subscription.index') }}');
                     },
                     error: function(data) {
-                        var result = '';
-                        for (err in JSON.parse(data.responseText).errors) {
-                            result += JSON.parse(data.responseText).errors[err].toString() + "\n";
+                        let backErrors = JSON.parse(data.responseText).errors;
+
+                        for (err in backErrors) {
+                            errors[err].show().find('span').text(backErrors[err]);
                         }
-                        alert.show().find('span.message').text(result);
                     }
                 });
             });
+
+            function hideErrors() {
+                for (const prop in errors) {
+                    errors[prop].hide();
+                }
+            }
         })
     </script>
 @endsection
