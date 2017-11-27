@@ -59,13 +59,10 @@ class UserController extends Controller
     public function login($id)
     {
         $creator = User::findOrFail($id);
-        if (in_array($creator->role, ['admin', 'creator'])) {
-            Auth::login($creator);
-            flash('You success login as '.$creator->first_name)->success();
-            return redirect(route('admin.index'));
-        }
-        flash('Error while login as: '.$creator->first_name)->error();
-        return back();
+
+        Auth::login($creator);
+        flash('You success login as '.$creator->first_name)->success();
+        return redirect(route('admin.index'));
     }
 
     /**

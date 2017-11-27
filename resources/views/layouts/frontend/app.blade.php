@@ -47,7 +47,7 @@
             stripe: {
                 stripeKey: "{{ config('services.stripe.key') }}"
             },
-            user: JSON.parse('{!! json_encode(Auth::user()) !!}')
+            user: JSON.parse('{{ Auth::user()->id }}')
         }
     </script>
     @endauth
