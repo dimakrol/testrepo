@@ -62,6 +62,19 @@ class StripePaymentService
             ]);
     }
 
+    public static function updatePlan(EloquentPlan $plan)
+    {
+        $stripePlan = StripePaymentService::getPlan($plan->stripe_id);
+        $stripePlan->delete();
+        try {
+            StripePaymentService::createPlan($plan);
+            return true;
+        } catch (\Exception $e) {
+            Log::error('Error while updating subscription: '.$e->getMessage());
+            return false;
+        }
+    }
+
     public static function createCustomerWithSubscription($stripeToken, User $user, EloquentPlan $plan)
     {
         static::setKey();
