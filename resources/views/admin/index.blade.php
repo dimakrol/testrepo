@@ -2,7 +2,7 @@
 
 @section('admin-content')
 <h2>Welcome to Admin</h2>
-<h3>Global:</h3>
+<h3><span class="text-success">Global:</span></h3>
 <table class="table">
     <thead>
     <tr>
