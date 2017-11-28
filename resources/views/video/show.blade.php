@@ -47,17 +47,20 @@
                             @endif
                         @endforeach
                         <div class="form-group">
-                            <button class="btn btn-success update-preview btn-block" disabled="true">Update Preview</button>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-danger btn-block crop-button hide-block">Crop</button>
+                            <button class="btn btn-success update-preview" disabled="true">Update Preview</button>
+                            <button class="btn btn-danger crop-button hide-block">Crop</button>
                         </div>
                         <div class="form-group">
                             <a href="#" class="btn btn-danger btn-block download-video" style="display: none" disabled="true"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
                         </div>
                         <div class="form-group">
                             <a href="#" class="btn btn-primary btn-block go-share" style="display: none" disabled="true"><i class="fa fa-share" aria-hidden="true"></i> Go Share</a>
+
                         </div>
+                            <div class="form-group">
+                                <div class="btn btn-danger rot-left" style="display: none"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                                <div class="btn btn-primary rot-right" style="display: none"><i class="fa fa-repeat" aria-hidden="true"></i></div>
+                            </div>
                         @foreach($video->fields as $field)
                             @if('image' == $field->type)
                                 <div class="text-center preview-image {{$field->variable_name}} hide-block">
@@ -86,15 +89,19 @@
             let croppedImage = null;
             let updatePreviewButton = $('button.update-preview');
             let videoId = $('video').data('id');
-            let cropButton = $('.crop-button');
-            let addPhotoButton = $('.add-photo');
-            let createButton = $('.create-video');
-            let downloadButton = $('.download-video');
-            let goShareButton = $('.go-share');
+            let buttons = {
+                crop: $('.crop-button'),
+                addPhoto: $('.add-photo'),
+                create: $('.create-video'),
+                download: $('.download-video'),
+                goShare: $('.go-share'),
+                rotLeft: $('.rot-left'),
+                rotRight: $('.rot-right'),
+            };
             let previewImage = null;
             let ratio = null;
 
-            createButton.on('click', function() {
+            buttons.create.on('click', function() {
                 fbq('track', 'Lead', {
                     content_name: "{{$video->slug}}"
                 });
@@ -104,13 +111,21 @@
                 uploadFile();
             });
 
-            cropButton.on('click', function () {
+            buttons.crop.on('click', function () {
                 cropImage();
             });
 
-            addPhotoButton.on('click', function () {
+            buttons.addPhoto.on('click', function () {
                 let varName = $(this).data('variable-name');
                 $('input[name='+varName+']').click();
+            });
+
+            buttons.rotLeft.on('click', function () {
+                croppie.rotate(-90);
+            });
+
+            buttons.rotRight.on('click', function () {
+                croppie.rotate(90);
             });
 
             @foreach($video->fields as $field)
@@ -119,8 +134,8 @@
                 ratio = $(this).data('ratio');
                 previewImage = $('.preview-image.'+'{{$field->variable_name}}');
                 previewImage.hide();
-//                downloadButton.prop('disabled', true).hide();
-//                goShareButton.prop('disabled', true).hide();
+//                buttons.download.prop('disabled', true).hide();
+//                buttons.goShare.prop('disabled', true).hide();
 
                 let files = e.target.files || e.dataTransfer.files;
 
@@ -151,7 +166,9 @@
                     croppie.destroy();
                 }
 
-                cropButton.show();
+                buttons.crop.show();
+                buttons.rotLeft.show();
+                buttons.rotRight.show();
 
                 croppie = new Croppie(el, {
                     viewport: { width: ratio * 200, height: 200 },
@@ -172,11 +189,13 @@
                 }).then((response) => {
                     previewImage.show().children().attr('src', response);
                     updatePreviewButton.prop('disabled', false);
-                    cropButton.hide();
+                    buttons.crop.hide();
+                    buttons.rotLeft.hide();
+                    buttons.rotRight.hide();
                     croppedImage = response;
                     croppie.destroy();
                     croppie = null;
-                    addPhotoButton.text('Change Photo');
+                    buttons.addPhoto.text('Change Photo');
                 })
             }
 
@@ -200,10 +219,10 @@
                         </video>`);
                         updatePreviewButton.prop('disabled', true);
                         if (data.downloadUrl) {
-                            downloadButton.attr("href", data.downloadUrl).prop('disabled', false).show();
+                            buttons.download.attr("href", data.downloadUrl).prop('disabled', false).show();
                         }
                         if (data.generatedUrl) {
-                            goShareButton.attr("href", data.generatedUrl).prop('disabled', false).show();
+                            buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
                         previewImage.hide();
                     },
