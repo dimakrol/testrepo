@@ -11,7 +11,7 @@
     </div>
     <div class="form-group col-md-6">
         <label for="description" class="col-form-label">Description:</label>
-        {!! Form::textarea('description', $user->description, ['class' => 'form-control', 'id' => 'description' , 'placeholder' => 'Creator Description', 'required' => 'required']) !!}
+        {!! Form::textarea('description', $user->description, ['class' => 'form-control', 'id' => 'description' , 'placeholder' => 'Creator Description']) !!}
     </div>
     <div class="form-group col-md-6">
         {!! Form::select('role', ['creator' => 'Creator', 'admin' => 'Admin'], $user->role, ['placeholder' => 'Select Role', 'class' => 'form-control']) !!}
