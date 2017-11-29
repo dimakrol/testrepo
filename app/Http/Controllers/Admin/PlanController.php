@@ -12,15 +12,21 @@ class PlanController extends Controller
     public function index()
     {
         $plan = Plan::default();
-        return view('admin.plan.index', compact('plan'));
+        $planUK = Plan::where('stripe_id', Plan::STRIPE_ID_UK)->first();
+
+        return view('admin.plan.index', compact('plan', 'planUK'));
     }
 
     public function update($id, Request $request)
     {
-        $plan = Plan::findOrFail($id);
+        $plan = Plan::default();
         $plan->amount = $request->input('amount') * 100;
-        if ($plan->save()) {
-            if (!StripePaymentService::updatePlan($plan)) {
+
+        $planUK = Plan::where('stripe_id', Plan::STRIPE_ID_UK)->first();
+        $planUK->amount = $request->input('amount_uk') * 100;
+
+        if ($plan->save() && $planUK->save()) {
+            if (!StripePaymentService::updatePlan($plan) || !StripePaymentService::updatePlan($planUK)) {
                 flash('Error while updating plan!!!')->error();
                 return back();
             }
