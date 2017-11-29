@@ -72,6 +72,12 @@
         @yield('content')
         <div class="footer text-center">
           <p>Copyright &copy; Words Wont Do Ltd</p>
+          <p>
+            <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use">Terms </a>&amp;
+            <a href="http://help.wordswontdo.com/important-documents/privacy-policy-policy"> Privacy</a> |
+            <a href="http://help.wordswontdo.com/add-a-title/contact-us"> Get In Touch</a> |
+            <a href="http://help.wordswontdo.com/creators/become-a-creator"> Become a Creator</a>
+          </p>
           <ul class="list-unstyled list-inline">
             <li class="list-inline-item">
               <a href="https://www.facebook.com/wordswontdo/" target="_blank" class="footer__link">
