@@ -66,8 +66,10 @@ class VideoController extends Controller
     public function generate(Request $request)
     {
         //todo check if user has subscription
-        if (!Auth::user() && !Auth::user()->subscribed(Plan::default()->stripe_id)) {
-            return redirect(route('home'));
+        if (!Auth::check()) {
+            return response()->json('error');
+        } elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
+            return response()->json('error');
         }
 
         $video = Video::with('fields')->findOrFail($request->id);
@@ -76,11 +78,9 @@ class VideoController extends Controller
 
         foreach ($video->fields as $field) {
             if ($request->input($field->variable_name)) {
-                //Log::debug('input name:'.$field->variable_name);
                 $fileUrl = '';
                 try {
                     $fileUrl = Video::uploadImage($request->input($field->variable_name));
-                    //Log::debug('File input path: '.$fileUrl);
                 } catch (\Exception $e) {
                     Log::error('Error while uploading image file: '. $e->getMessage());
                 }

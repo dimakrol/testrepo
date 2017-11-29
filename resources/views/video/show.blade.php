@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <a class="btn btn-success btn-block create-video" href="{{ route('register') }}">Create Video</a>
                         </div>
-                    @elseif(!Auth::user()->subscribed('yearly'))
+                    @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
                         <div class="form-group">
                             <a class="btn btn-success btn-block create-video" href="{{ route('subscription.index') }}">Create Video</a>
                         </div>

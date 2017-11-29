@@ -15,7 +15,6 @@ class SubscriptionController extends Controller
 {
     public function index()
     {
-        //$plan = Plan::where('name', 'yearly')->first();
         $plan = Plan::getByUser(Auth::user());
         return view('subscription', compact('plan'));
     }
@@ -26,7 +25,7 @@ class SubscriptionController extends Controller
             'stripeToken' => 'required'
         ]);
 
-        $plan = Plan::default();
+        $plan = Plan::getByUser(Auth::user());
         if (!$plan) {
             Log::error('Default plan does not exists');
             return back();

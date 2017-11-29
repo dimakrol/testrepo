@@ -127,7 +127,15 @@ class User extends Authenticatable
      */
     public function subscribed($subscription = 'default', $plan = null)
     {
-        $subscription = $this->subscription($subscription);
+        if (is_array($subscription)) {
+            foreach ($subscription as $s) {
+                if ($subscription = $this->subscription($s)) {
+                    break;
+                }
+            }
+        } else {
+            $subscription = $this->subscription($subscription);
+        }
 
         if (is_null($subscription)) {
             return false;
