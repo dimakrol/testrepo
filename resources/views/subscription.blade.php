@@ -9,13 +9,13 @@
                     @if(Auth::user()->subscribed($plan->stripe_id))
                         <div class="card-body">
                             <div class="card-title">
-                                <h3 class="text-center">You have <span class="text-danger">{{ ucfirst($plan->name) }}</span> subscription</h3>
+                                <h3 class="text-center">You have <span class="text-danger">Yearly</span> subscription</h3>
                             </div>
                         </div>
                     @else
                     <div class="card-body">
                         <div class="card-title">
-                            <h3 class="text-center">Buy early subscription for &pound;{{ $plan->amountInPounds() }}</h3>
+                            <h3 class="text-center">Buy early subscription for {{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }} {{ $plan->amountInCurrency() }}</h3>
                         </div>
                         <hr>
                         <form id="subscribe-form" action="/subscription" method="post">

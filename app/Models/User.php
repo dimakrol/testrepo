@@ -40,7 +40,7 @@ class User extends Authenticatable
         'first_name', 'email', 'password','last_name',
         'gender','facebook_id','ip_address','date_of_birth',
         'payment_date','stripe_customer_id','last_signin',
-        'description', 'role'
+        'description', 'role', 'country_code'
     ];
 
     /**

@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'first_name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'country_code' => geoip()->getLocation($_SERVER['REMOTE_ADDR'])->iso_code
         ]);
         try {
             Mail::to($user->email)

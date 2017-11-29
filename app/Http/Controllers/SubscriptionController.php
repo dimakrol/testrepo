@@ -15,7 +15,8 @@ class SubscriptionController extends Controller
 {
     public function index()
     {
-        $plan = Plan::where('name', 'yearly')->first();
+        //$plan = Plan::where('name', 'yearly')->first();
+        $plan = Plan::getByUser(Auth::user());
         return view('subscription', compact('plan'));
     }
 
