@@ -71,6 +71,8 @@ class RegisterController extends Controller
 
         if (array_key_exists('X-Forwarded-For',$_SERVER)) {
             Log::debug('Debug X-Forwarded-For Dima: '.$_SERVER['X-Forwarded-For']);
+        } else {
+            Log::debug('No Debug X-Forwarded-For xxx');
         }
 
         $user = User::create([
