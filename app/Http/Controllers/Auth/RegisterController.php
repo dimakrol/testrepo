@@ -68,6 +68,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         Log::debug('Server '.$_SERVER['REMOTE_ADDR']);
+
+        if (array_key_exists('X-Forwarded-For',$_SERVER)) {
+            Log::debug('Debug X-Forwarded-For Dima: '.$_SERVER['X-Forwarded-For']);
+        }
+
         $user = User::create([
             'first_name' => $data['name'],
             'email' => $data['email'],
