@@ -63,6 +63,11 @@ class Video extends Model
     {
         return $this->hasMany(VideoGenerated::class, 'video_id');
     }
+
+    public function playlists()
+    {
+        return $this->belongsToMany(Playlist::class);
+    }
     /**
      * return creator of video
      *
