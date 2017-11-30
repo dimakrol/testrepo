@@ -35,7 +35,8 @@ class VideoController extends Controller
     public function generatedVideoByHash($hash)
     {
         $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();
-        return view('video.view', compact('gVideo'));
+        $videos = Video::inRandomOrder()->whereNotIn('id', [$gVideo->video_id])->limit(4)->get();
+        return view('video.view', compact('gVideo', 'videos'));
     }
 
     /**
