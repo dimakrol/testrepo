@@ -81,6 +81,7 @@ class RegisterController extends Controller
         }
 
         if ( function_exists( 'apache_request_headers' ) ) {
+            Log::debug('Apache header exists: ');
             $headers = apache_request_headers();
         } else {
             $headers = $_SERVER;
