@@ -139,17 +139,17 @@ class VideoController extends Controller
             if (isset($request->tags)) {
                 $video->tags()->sync($request->tags);
             } else {
-                $video->tags()->sync(array());
+                $video->tags()->sync([]);
             }
             if (isset($request->categories)) {
                 $video->categories()->sync($request->categories);
             } else {
-                $video->categories()->sync(array());
+                $video->categories()->sync([]);
             }
             if (isset($request->playlists)) {
                 $video->playlists()->sync($request->playlists);
             } else {
-                $video->playlists()->sync(array());
+                $video->playlists()->sync([]);
             }
         } catch (\PDOException $e) {
             Log::error('Error while updating video with id: ' .$video->id.' error:'. $e->getMessage());
