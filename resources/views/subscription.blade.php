@@ -13,98 +13,124 @@
                             </div>
                         </div>
                     @else
-                    <div class="card-body">
-                        <div class="card-title">
+                    <div class="subscription__body">
+                        <h2 class="subscription__membership-name">Annual Membership</h2>
+                        <!--<div class="card-title">
                             <h3 class="text-center">Buy early subscription for {{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }} {{ $plan->amountInCurrency() }}</h3>
+                        </div>-->
+                        <div class="row no-gutters subscription__title">
+                            <div class="col-5">
+                                <p class="subscription__price">£9.99</p>
+                                <p class="subscription__term">/year*</p>
+                            </div>
+                            <div class="col-7">
+                                <ul class="subscription__features">
+                                    <li>
+                                        <i class="fa fa-check" aria-hidden="true"></i> New content every week.
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-check" aria-hidden="true"></i> Send unlimited videos.
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-check" aria-hidden="true"></i> Save the planet.
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                        <button class="subscription__paypal paypal" type="button" id="#" name="paypal"></button>
                         <hr>
-                        <form id="subscribe-form" action="/subscription" method="post">
+                        <form class="subscribe-form" id="subscribe-form" action="/subscription" method="post">
                             <div class="error-message-alert alert alert-danger" role="alert" style="display: none"></div>
                             <input type="hidden" name="stripeToken">
                             {{ csrf_field() }}
-                            <div class="form-group text-center">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-cc-mastercard fa-2x"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-cc-amex fa-2x"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-cc-discover fa-2x"></i></li>
-                                </ul>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <h3 class="subscribe-form__title">Credit Card</h3>
+                                    <h4 class="subscribe-form__subtitle">Accepted payment methods</h4>
+                                </div>
+                                <div class="col-6 d-flex align-items-end">
+                                    <img src="{{ asset('images/CC-image.png') }}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="card-number" class="control-label mb-1">Card number</label>
-                                <input id="card-number" type="tel" class="form-control cc-number">
+                            <div class="subscribe-form__input-container">
+                                <label for="card-number" class="control-label mb-1 subscribe-form__label">
+                                    <input id="card-number" type="tel" class="form-control cc-number cc-number--with-icon" placeholder="Card number">
+                                </label>
                                 <div class="invalid-feedback">
                                     Please provide a valid credit card number.
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <label for="card-expiry-month" class="control-label mb-1">Month Expiration</label>
-                                        <select class="form-control" id="card-expiry-month" required>
-                                            <option selected>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                        </select>
+                            <div class="row no-gutters">
+                                <div class="col-4">
+                                    <div class="subscribe-form__input-container subscribe-form__input-container--with-space">
+                                        <label for="card-expiry-month" class="control-label mb-1 subscribe-form__label">
+                                            <select class="form-control" id="card-expiry-month" required>
+                                                <option selected>01</option>
+                                                <option>02</option>
+                                                <option>03</option>
+                                                <option>04</option>
+                                                <option>05</option>
+                                                <option>06</option>
+                                                <option>07</option>
+                                                <option>08</option>
+                                                <option>09</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                            </select>
+                                        </label>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <label for="card-expiry-year" class="control-label mb-1">Year Expiration</label>
-                                        <select class="form-control" id="card-expiry-year" required>
-                                            <option>2017</option>
-                                            <option>2018</option>
-                                            <option>2019</option>
-                                            <option selected="">2020</option>
-                                            <option>2021</option>
-                                            <option>2022</option>
-                                            <option>2023</option>
-                                            <option>2024</option>
-                                            <option>2025</option>
-                                            <option>2026</option>
-                                            <option>2027</option>
-                                        </select>
+                                <div class="col-4">
+                                    <div class="subscribe-form__input-container subscribe-form__input-container--with-space">
+                                        <label for="card-expiry-year" class="control-label mb-1 subscribe-form__label">
+                                            <select class="form-control" id="card-expiry-year" required>
+                                                <option>2017</option>
+                                                <option>2018</option>
+                                                <option>2019</option>
+                                                <option selected="">2020</option>
+                                                <option>2021</option>
+                                                <option>2022</option>
+                                                <option>2023</option>
+                                                <option>2024</option>
+                                                <option>2025</option>
+                                                <option>2026</option>
+                                                <option>2027</option>
+                                            </select>
+                                        </label>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                    <label for="card-cvc" class="control-label mb-1">Security code</label>
-                                        <div class="input-group">
-                                            <input type="tel" id="card-cvc" class="form-control cc-cvc">
-                                            <div class="input-group-addon">
-                                            <span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" data-title="Security Code"
-                                                  data-content="<div class='text-center one-card'>The 3 digit code on back of the card..<div class='visa-mc-cvc-preview'></div></div>"
-                                                  data-trigger="hover"></span>
+                                <div class="col-4">
+                                    <div class="subscribe-form__input-container">
+                                        <label for="card-cvc" class="control-label mb-1 subscribe-form__label">
+                                            <div class="input-group">
+                                                <input type="tel" id="card-cvc" class="form-control cc-cvc" placeholder="CVC">
+                                                <div class="input-group-addon">
+                                                    <span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" data-title="Security Code"
+                                                          data-content="<div class='text-center one-card'>The 3 digit code on back of the card..<div class='visa-mc-cvc-preview'></div></div>"
+                                                          data-trigger="hover"></span>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <div id="payment-button" class="btn btn-lg btn-info btn-block">
-                                    <span id="payment-button-amount">Subscribe</span>
+                                <div id="payment-button" class="btn subscribe-form__submit">
+                                    <span id="payment-button-amount"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Make secure payment</span>
                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                 </div>
                             </div>
                         </form>
-                        <div class="card-title">
+                        <!--<div class="card-title">
                             <h3 class="text-center"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i></h3>
-                        </div>
+                        </div>-->
                         <div class="row mx-auto">
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-button">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <input type="hidden" name="hosted_button_id" value="CZQU2CJKR5VG2">
-                                <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-                                <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+                                <!--<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                                <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">-->
                             </form>
                         </div>
                     </div>
