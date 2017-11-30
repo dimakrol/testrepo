@@ -75,8 +75,10 @@ class RegisterController extends Controller
 //        }
 
         if (array_key_exists('HTTP_X_FORWARDED_FOR',$_SERVER)) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
             Log::debug('HTTP_X_FORWARDED_FOR: '.$_SERVER['HTTP_X_FORWARDED_FOR']);
         } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
             Log::debug('No HTTP_X_FORWARDED_FOR new sing up user!');
         }
 
@@ -106,7 +108,7 @@ class RegisterController extends Controller
             'first_name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'country_code' => geoip()->getLocation($_SERVER['HTTP_X_FORWARDED_FOR'])->iso_code
+            'country_code' => geoip()->getLocation($ip)->iso_code
         ]);
         try {
             Mail::to($user->email)

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12 col-sm-8 col-md-8 col-lg-6 mx-auto">
                 <div id="pay-invoice" class="subscription card">
-                    @if(Auth::user()->subscribed($plan->stripe_id))
+                    @if(Auth::user()->subscribed(['yearly', 'yearlyuk']))
                         <div class="card-body">
                             <div class="card-title">
                                 <h3 class="text-center">You have <span class="text-danger">Yearly</span> subscription</h3>
