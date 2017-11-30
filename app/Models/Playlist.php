@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Playlist extends Model
 {
+    protected $fillable = ['name'];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
