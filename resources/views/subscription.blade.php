@@ -232,29 +232,28 @@
             }
 
             function valid_credit_card(value) {
-                //validate if empty
-                if (!value) return false;
-                // accept only digits, dashes or spaces
-                if (/[^0-9-\s]+/.test(value)) return false;
+                var regex = new RegExp("^[0-9]{16}$");
+                if (!regex.test(value))
+                    return false;
 
-                // The Luhn Algorithm. It's so pretty.
-                var nCheck = 0, nDigit = 0, bEven = false;
-                value = value.replace(/\D/g, "");
-
-                for (var n = value.length - 1; n >= 0; n--) {
-                    var cDigit = value.charAt(n),
-                        nDigit = parseInt(cDigit, 10);
-
-                    if (bEven) {
-                        if ((nDigit *= 2) > 9) nDigit -= 9;
-                    }
-
-                    nCheck += nDigit;
-                    bEven = !bEven;
-                }
-
-                return (nCheck % 10) == 0;
+                return luhnCheck(value);
             }
+
+            function luhnCheck(val) {
+                var sum = 0;
+                for (var i = 0; i < val.length; i++) {
+                    var intVal = parseInt(val.substr(i, 1));
+                    if (i % 2 == 0) {
+                        intVal *= 2;
+                        if (intVal > 9) {
+                            intVal = 1 + (intVal % 10);
+                        }
+                    }
+                    sum += intVal;
+                }
+                return (sum % 10) == 0;
+            }
+
 
             function valid_securuty_code(value) {
                 if (!value || !/^[0-9]{3,4}$/.test(value)) {
