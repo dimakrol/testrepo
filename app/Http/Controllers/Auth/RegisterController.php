@@ -67,19 +67,48 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        Log::debug('Server '.$_SERVER['REMOTE_ADDR']);
+//        Log::debug('Server '.$_SERVER['REMOTE_ADDR']);
+//        if (array_key_exists('X-Forwarded-For',$_SERVER)) {
+//            Log::debug('Debug X-Forwarded-For Dima: '.$_SERVER['X-Forwarded-For']);
+//        } else {
+//            Log::debug('No Debug X-Forwarded-For xxx');
+//        }
 
-        if (array_key_exists('X-Forwarded-For',$_SERVER)) {
-            Log::debug('Debug X-Forwarded-For Dima: '.$_SERVER['X-Forwarded-For']);
+        if (array_key_exists('HTTP_X_FORWARDED_FOR',$_SERVER)) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            Log::debug('HTTP_X_FORWARDED_FOR: '.$_SERVER['HTTP_X_FORWARDED_FOR']);
         } else {
-            Log::debug('No Debug X-Forwarded-For xxx');
+            $ip = $_SERVER['REMOTE_ADDR'];
+            Log::debug('No HTTP_X_FORWARDED_FOR new sing up user!');
         }
+
+//        if ( function_exists( 'apache_request_headers' ) ) {
+//            Log::debug('Apache header exists: ');
+//            $headers = apache_request_headers();
+//        } else {
+//            $headers = $_SERVER;
+//        }
+//
+//
+//        if ( array_key_exists( 'X-Forwarded-For', $headers ) && filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
+//            $the_ip = $headers['X-Forwarded-For'];
+//            Log::debug('Apache X-Forwarded-For '.$the_ip);
+//
+//        } elseif ( array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers ) && filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 )) {
+//            $the_ip = $headers['HTTP_X_FORWARDED_FOR'];
+//            Log::debug('Apache HTTP_X_FORWARDED_FOR '.$the_ip);
+//        } else {
+//            Log::debug('No Apache header!!!');
+//            $the_ip = filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
+//            Log::debug('ip: '.$the_ip);
+//        }
+
 
         $user = User::create([
             'first_name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'country_code' => geoip()->getLocation($_SERVER['REMOTE_ADDR'])->iso_code
+            'country_code' => geoip()->getLocation($ip)->iso_code
         ]);
         try {
             Mail::to($user->email)

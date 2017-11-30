@@ -37,10 +37,10 @@ class PayPalWebhooksController extends Controller
                         ->where('billing_type', 'paypal')->first()) {
                         $user = User::find(json_decode($request->custom)->user_id);
                         $subscription = new Subscription([
-                            'name' => $request->item_name,
+                            'name' => $request->item_number,
                             'billing_type' => 'paypal',
                             'stripe_id' => $request->subscr_id,
-                            'stripe_plan' => $request->item_name,
+                            'stripe_plan' => $request->item_number,
                             'quantity' => $request->mc_gross * 100,
                             'next_payment' => Carbon::now()->addYear(),
                         ]);

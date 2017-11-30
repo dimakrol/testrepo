@@ -1,12 +1,12 @@
 @extends('layouts.frontend.app')
-@section('styles')
-    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Your Website Title" />
-    <meta property="og:description"   content="Your description" />
-    <meta property="og:image" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png"/>
-    <meta property="og:image:secure_url" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png" />
-@endsection
+{{--@section('styles')--}}
+    {{--<meta property="og:url"           content="http://www.your-domain.com/your-page.html" />--}}
+    {{--<meta property="og:type"          content="website" />--}}
+    {{--<meta property="og:title"         content="Your Website Title" />--}}
+    {{--<meta property="og:description"   content="Your description" />--}}
+    {{--<meta property="og:image" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png"/>--}}
+    {{--<meta property="og:image:secure_url" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png" />--}}
+{{--@endsection--}}
 
 @section('content')
     <div class="container">
@@ -30,10 +30,16 @@
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#share-via-email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Share via Email</button>
                     </div>
-
-                    {{--<div id="fb-root"></div>--}}
-                    {{--<div class="fb-share-button" data-href="{{ route('my-video', $gVideo->slug) }}" data-layout="button_count">button</div>--}}
-                    {{--<a href="https://www.facebook.com/sharer/sharer.php?u=YourPageLink.com&display=popup"> share this </a>--}}
+                </div>
+                <h3 class="your-own">Create your own:</h3>
+                <div class="row">
+                    @foreach($videos as $video)
+                        <div class="col-lg-6 col-sm-6 portfolio-item">
+                            <div class="card h-100">
+                                <a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -51,7 +57,6 @@
                 <div class="modal-body">
                     <form class="share-via-email">
                         <div class="alert alert-danger error-message-form" role="alert" style="display: none">
-                            fadsfsafasdfasdfasdfasa
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control" id="recipient-email" placeholder="Email Address" required>
