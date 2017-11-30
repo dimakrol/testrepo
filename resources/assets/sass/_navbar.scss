@@ -1,11 +1,12 @@
 .navbar {
   border-bottom: 5px solid $green;
   background: $white;
+  padding: .6875rem 1.125rem;
 }
 
 .navbar-brand {
   text-transform: uppercase;
-  font-size: 28px;
+  font-size: 1.125rem;
   color: $darkGrey;
   font-weight: 700;
 }
