@@ -49,8 +49,12 @@
         {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2-multi-categories', 'multiple' => "multiple"]) !!}
     </div>
     <div class="form-group col-md-6 col-xs-12">
-        {!! Form::label('categories[]', 'Tags:') !!}
-        {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
+        {!! Form::label('tags[]', 'Tags:') !!}
+        {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi-tags', 'multiple' => "multiple"]) !!}
+    </div>
+    <div class="form-group col-md-6 col-xs-12">
+        {!! Form::label('playlists[]', 'Playlists:') !!}
+        {!! Form::select('playlists[]', $playlists, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
     </div>
     <table class="table col-md-12 col-xs-12">
         <thead class="thead-default">
@@ -92,6 +96,7 @@
     <script>
         $('.select2-multi').select2();
         $('.select2-multi-categories').select2().val({!! json_encode($video->categories()->pluck('id')) !!}).trigger('change');
-        $('.select2-multi').select2().val({!! json_encode($video->tags()->pluck('id')) !!}).trigger('change');
+        $('.select2-multi-tags').select2().val({!! json_encode($video->tags()->pluck('id')) !!}).trigger('change');
+        $('.select2-multi').select2().val({!! json_encode($video->playlists()->pluck('id')) !!}).trigger('change');
     </script>
 @endsection

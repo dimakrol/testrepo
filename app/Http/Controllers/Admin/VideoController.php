@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\StoreVideoRequest;
 
 use App\Http\Requests\Admin\UpdateVideoRequest;
 use App\Models\Category;
+use App\Models\Playlist;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Video;
@@ -39,7 +40,8 @@ class VideoController extends Controller
         $categories = Category::pluck('name', 'id');
         $creators = User::whereIn('role', ['creator', 'admin'])->pluck('first_name', 'id');
         $tags = Tag::pluck('name', 'id');
-        return view('admin.video.create', compact('categories', 'tags', 'creators'));
+        $playlists = Playlist::pluck('name', 'id');
+        return view('admin.video.create', compact('categories', 'tags', 'creators', 'playlists'));
     }
 
     /**
@@ -61,6 +63,7 @@ class VideoController extends Controller
             $video->save();
             $video->tags()->sync($request->tags);
             $video->categories()->sync($request->categories);
+            $video->playlists()->sync($request->playlists);
         } catch (\PDOException $e) {
             Log::error('Error while creating video: '. $e->getMessage());
             flash('Error while creating video!')->error();
@@ -86,9 +89,11 @@ class VideoController extends Controller
         $video = Video::findOrFail($id);
         $categories = Category::pluck('name', 'id');
         $creators = User::whereIn('role', ['creator', 'admin'])->pluck('first_name', 'id');
+        $playlists = Playlist::pluck('name', 'id');
+
         $tags = Tag::pluck('name', 'id');
 
-        return view('admin.video.edit', compact('video', 'categories', 'tags', 'creators'));
+        return view('admin.video.edit', compact('video', 'categories', 'tags', 'creators', 'playlists'));
     }
 
 
@@ -140,6 +145,11 @@ class VideoController extends Controller
                 $video->categories()->sync($request->categories);
             } else {
                 $video->categories()->sync(array());
+            }
+            if (isset($request->playlists)) {
+                $video->playlists()->sync($request->playlists);
+            } else {
+                $video->playlists()->sync(array());
             }
         } catch (\PDOException $e) {
             Log::error('Error while updating video with id: ' .$video->id.' error:'. $e->getMessage());
