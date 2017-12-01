@@ -41,6 +41,7 @@ class SubscriptionController extends Controller
                     'name' => Auth::user()->first_name,
                 ]));
             flash('Success! Welcome to Words Won\'t Do!')->success();
+            session(['subscription' => ['value' => $plan->amountInCurrency(), 'currency' => $plan->currency]]);
             return redirect('/');
         }
         return back();
