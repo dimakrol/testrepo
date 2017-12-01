@@ -9,7 +9,10 @@
     @if($playlists->count() > 0)
         <ul class="list-group col-md-6 admin__playlist">
             @foreach($playlists as $playlist)
-                <li id="item-{{$playlist->id}}" class="list-group-item" style="cursor: pointer">{{$playlist->name}}</li>
+                <li id="item-{{$playlist->id}}" class="list-group-item" style="cursor: pointer">{{$playlist->name}}
+                    <span class="float-right">
+                        <a href="{{ route('admin.playlist.change-video-order', $playlist->id) }}">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></span></li>
             @endforeach
         </ul>
     @else

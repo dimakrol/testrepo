@@ -26,6 +26,13 @@ class PlaylistController extends Controller
         return response()->json('success');
     }
 
+    public function changeOrderOfVideos($id)
+    {
+        $playlist = Playlist::findOrFail($id);
+        $videos = $playlist->videos()->orderBy('playlist_video.order', 'asc')->get();
+        return view('admin.playlist.video-order', compact('playlist', 'videos'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
