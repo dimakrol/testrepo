@@ -15,14 +15,15 @@ class PlaylistController extends Controller
      */
     public function create()
     {
-        $playlists = Playlist::all();
+        $playlists = Playlist::ordered()->get();
         return view('admin.playlist.create', compact('playlists'));
     }
 
 
     public function changeOrder(Request $request)
     {
-        return $request->item;
+        Playlist::setNewOrder($request->item);
+        return response()->json('success');
     }
 
     /**

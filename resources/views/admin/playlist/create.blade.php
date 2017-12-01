@@ -1,12 +1,15 @@
 @extends('layouts.admin.app')
 @section('admin-content')
+    <div class="alert alert-success col-md-6 admin__playlist_alert" role="alert" style="display: none">
+        Order changed success!!!<span><i class="fa fa-times float-right" aria-hidden="true"></i></span>
+    </div>
     <div class="form-group col-md-6">
         <h2>Playlists:</h2>
     </div>
     @if($playlists->count() > 0)
         <ul class="list-group col-md-6 admin__playlist">
             @foreach($playlists as $playlist)
-                <li id="item-{{$playlist->id}}" class="list-group-item">{{$playlist->name}}</li>
+                <li id="item-{{$playlist->id}}" class="list-group-item" style="cursor: pointer">{{$playlist->name}}</li>
             @endforeach
         </ul>
     @else
@@ -28,18 +31,33 @@
 
 @section('script')
     <script>
-        $('.admin__playlist').sortable({
-            axis: 'y',
-            update: function (event, ui) {
-                var data = $(this).sortable('serialize');
+        $(function () {
+            let alert = $('.admin__playlist_alert');
 
-                // POST to server using $.post or $.ajax
-                $.ajax({
-                    data: data,
-                    type: 'POST',
-                    url: '{{route('admin.playlist.change-order')}}'
-                });
-            }
+            alert.on('click', 'span', function () {
+                $(this).parent().hide();
+            });
+
+            $('.admin__playlist').sortable({
+                axis: 'y',
+                update: function (event, ui) {
+                    $('.admin__playlist_alert').hide();
+                    var data = $(this).sortable('serialize');
+
+                    // POST to server using $.post or $.ajax
+                    $.ajax({
+                        data: data,
+                        type: 'POST',
+                        url: '{{route('admin.playlist.change-order')}}',
+                        success: function (data) {
+                            alert.show();
+                        }
+                    });
+                }
+            });
+
+
         });
+
     </script>
 @endsection
