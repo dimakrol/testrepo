@@ -1,8 +1,8 @@
 @extends('layouts.admin.app')
 @section('admin-content')
-    {{--<div class="alert alert-success col-md-6 admin__playlist_alert" role="alert" style="display: none">--}}
-        {{--Order changed success!!!<span><i class="fa fa-times float-right" aria-hidden="true"></i></span>--}}
-    {{--</div>--}}
+    <div class="alert alert-success col-md-6 admin__playlist_alert" role="alert" style="display: none">
+        Order changed success!!!<span><i class="fa fa-times float-right" aria-hidden="true"></i></span>
+    </div>
     <div class="form-group col-md-6">
         <h2><span class="text-danger">{{$playlist->name}}</span> edit order of videos:</h2>
     </div>
@@ -23,25 +23,24 @@
 @section('script')
     <script>
         $(function () {
-//            let alert = $('.admin__playlist_alert');
+            let alert = $('.admin__playlist_alert');
 
-//            alert.on('click', 'span', function () {
-//                $(this).parent().hide();
-//            });
+            alert.on('click', 'span', function () {
+                $(this).parent().hide();
+            });
 
             $('.admin__playlist').sortable({
                 axis: 'y',
                 update: function (event, ui) {
-//                    $('.admin__playlist_alert').hide();
+                    alert.hide();
                     var data = $(this).sortable('serialize');
 
-                    // POST to server using $.post or $.ajax
                     $.ajax({
                         data: data,
                         type: 'POST',
                         url: '{{route('admin.playlist.update-video-order', $playlist->id)}}',
                         success: function (data) {
-//                            alert.show();
+                            alert.show();
                         }
                     });
                 }
