@@ -23,28 +23,28 @@
 @section('script')
     <script>
         $(function () {
-            let alert = $('.admin__playlist_alert');
+//            let alert = $('.admin__playlist_alert');
 
-            alert.on('click', 'span', function () {
-                $(this).parent().hide();
-            });
+//            alert.on('click', 'span', function () {
+//                $(this).parent().hide();
+//            });
 
             $('.admin__playlist').sortable({
-                {{--axis: 'y',--}}
-                {{--update: function (event, ui) {--}}
-                    {{--$('.admin__playlist_alert').hide();--}}
-                    {{--var data = $(this).sortable('serialize');--}}
+                axis: 'y',
+                update: function (event, ui) {
+//                    $('.admin__playlist_alert').hide();
+                    var data = $(this).sortable('serialize');
 
-                    {{--// POST to server using $.post or $.ajax--}}
-                    {{--$.ajax({--}}
-                        {{--data: data,--}}
-                        {{--type: 'POST',--}}
-                        {{--url: '{{route('admin.playlist.change-order')}}',--}}
-                        {{--success: function (data) {--}}
-                            {{--alert.show();--}}
-                        {{--}--}}
-                    {{--});--}}
-                {{--}--}}
+                    // POST to server using $.post or $.ajax
+                    $.ajax({
+                        data: data,
+                        type: 'POST',
+                        url: '{{route('admin.playlist.update-video-order', $playlist->id)}}',
+                        success: function (data) {
+//                            alert.show();
+                        }
+                    });
+                }
             });
         });
 
