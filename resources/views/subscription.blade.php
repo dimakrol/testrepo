@@ -131,11 +131,13 @@
                         <div class="row mx-auto" style="display: none">
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-button">
                                 @if ($plan->stripe_id != 'yearlyuk')
+                                    <input type="hidden" name="custom" value="{{json_encode(array('user_id' => Auth::user()->id))}}">
                                     <input type="hidden" name="cmd" value="_s-xclick">
                                     <input type="hidden" name="hosted_button_id" value="CZQU2CJKR5VG2">
                                     <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
                                     <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
                                 @else
+                                    <input type="hidden" name="custom" value="{{json_encode(array('user_id' => Auth::user()->id))}}">
                                     <input type="hidden" name="cmd" value="_s-xclick">
                                     <input type="hidden" name="hosted_button_id" value="8SVLUPUG2FPGS">
                                     <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
