@@ -1,27 +1,27 @@
 @extends('layouts.frontend.app')
 @section('content')
     <div class="container">
-        <div class="row my-4 video-row-container">
-            <div class="col-lg-8 video-container">
+        <div class="row video">
+            <div class="col-lg-8">
                 <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="row">
-                    <div class="col-2">
-                        <a href="{{ route('video.show', $video->slug) }}"><img src="{{ $video->user->thumbnail_path }}" class="rounded-circle"></a>
-                    </div>
-                    <div class="col-10">
-                        <h2>{{ $video->name }}</h2>
-                        <p>by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
+                <div class="video__description-container">
+                    <a class="d-inline-block" href="{{ route('video.show', $video->slug) }}">
+                        <img src="{{ $video->user->thumbnail_path }}" class="rounded-circle avatar">
+                    </a>
+                    <div>
+                        <h2 class="video__title">{{ $video->name }}</h2>
+                        <p class="video__author">by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div>
                     @if(!Auth::user())
-                        <div class="form-group">
-                            <a class="btn btn-success btn-block create-video" href="{{ route('register') }}">Create Video</a>
+                        <div class="form-group text-center">
+                            <a class="custom-button custom-button--primary" href="{{ route('register') }}">Create Video</a>
                         </div>
                     @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
                         <div class="form-group">

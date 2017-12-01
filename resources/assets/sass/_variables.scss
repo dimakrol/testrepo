@@ -1,10 +1,28 @@
-$white: #ffffff;
-$lightGreen: #5DC09C;
+$white: #fff;
+$lightGreen: #5dc09c;
 $green: #59b3a6;
 $black: #282929;
 $offWhite: #f5f6f8;
 $grey: #bac3cd;
+$light-gray: #f5f5f5;
 $darkGrey: #4b5157;
+
+$bg-color: #f7fafb;
+$paypal-bg-color: #eee;
+$text-muted: #95989a;
+
+// breakpoints
+// 576px+
+$sm: 36rem;
+// 768px+
+$md: 48rem;
+// 992px+
+$lg: 62rem;
+// 1200px+
+$xl: 75rem;
+
+// others
+$transition: .15s ease-in-out;
 
 //
 //// Body
