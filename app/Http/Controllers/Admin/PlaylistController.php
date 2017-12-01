@@ -19,6 +19,12 @@ class PlaylistController extends Controller
         return view('admin.playlist.create', compact('playlists'));
     }
 
+
+    public function changeOrder(Request $request)
+    {
+        return $request->item;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

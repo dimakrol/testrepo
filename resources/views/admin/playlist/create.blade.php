@@ -4,9 +4,9 @@
         <h2>Playlists:</h2>
     </div>
     @if($playlists->count() > 0)
-        <ul class="list-group col-md-6">
+        <ul class="list-group col-md-6 admin__playlist">
             @foreach($playlists as $playlist)
-                <li class="list-group-item">{{$playlist->name}}</li>
+                <li id="item-{{$playlist->id}}" class="list-group-item">{{$playlist->name}}</li>
             @endforeach
         </ul>
     @else
@@ -24,4 +24,22 @@
         <button type="submit" class="btn btn-primary">Create</button>
     </div>
     {!! Form::close() !!}
+@endsection
+
+@section('script')
+    <script>
+        $('.admin__playlist').sortable({
+            axis: 'y',
+            update: function (event, ui) {
+                var data = $(this).sortable('serialize');
+
+                // POST to server using $.post or $.ajax
+                $.ajax({
+                    data: data,
+                    type: 'POST',
+                    url: '{{route('admin.playlist.change-order')}}'
+                });
+            }
+        });
+    </script>
 @endsection

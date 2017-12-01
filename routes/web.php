@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
             'create', 'store', 'destroy'
         ]]);
 
+        Route::post('/playlist/change-order', 'Admin\PlaylistController@changeOrder')->name('playlist.change-order');
         Route::resource('/playlist', 'Admin\PlaylistController', ['only' => [
             'create', 'store', 'destroy'
         ]]);
