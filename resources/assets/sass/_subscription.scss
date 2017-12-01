@@ -8,8 +8,11 @@ $text-muted: #95989a;
 .subscription {
 
   &.card {
-    margin-top: 8px;
     border: 0;
+    margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 25rem;
   }
 
   .input-group-addon {
