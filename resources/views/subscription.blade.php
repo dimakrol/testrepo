@@ -157,8 +157,12 @@
     <script src="https://js.stripe.com/v2/"></script>
     <script>
         $(function () {
-            Stripe.setPublishableKey(WWD.stripe.stripeKey);
+            @if(null !== session('completeRegistration'))
+                fbq('track', 'CompleteRegistration');
+                {{session()->forget('completeRegistration')}}
+            @endif
 
+            Stripe.setPublishableKey(WWD.stripe.stripeKey);
 
             $(".subscription__paypal.paypal").on('click', function () {
                 fbq('track', 'AddPaymentInfo');

@@ -52,5 +52,9 @@
             fbq('track', 'Purchase', {value: '{{session('subscription')['value']}}', currency: '{{ session('subscription')['currency'] }}'});
             {{session()->forget('subscription')}}
         @endif
+        @if(null !== session('completeRegistration'))
+            fbq('track', 'CompleteRegistration');
+            {{session()->forget('completeRegistration')}}
+        @endif
     </script>
 @endsection
