@@ -27,7 +27,7 @@
             <a href="{{ route('admin.tag.create') }}">Create Tag</a>
         </li>
         <li>
-            <a href="{{ route('admin.playlist.create') }}">Create Playlist</a>
+            <a href="{{ route('admin.playlist.create') }}">Playlists</a>
         </li>
         <li>
             <a href="{{ route('admin.field.create') }}">Create field</a>

@@ -26,9 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $playlists = Playlist::all()->load(['videos' => function($q) {
+        $playlists = Playlist::with(['videos' => function($q) {
             $q->orderBy('playlist_video.order', 'asc')->get();
-        }]);
+        }])->orderBy('playlists.order', 'asc')->get();
        // dd($playlists);
         $videos = Video::with('user')->latest()->take(9)->get();
         return view('index', compact('videos', 'playlists'));
