@@ -37,6 +37,10 @@
                 {!! Form::label('tags[]', 'Tags:') !!}
                 {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
             </div>
+            <div class="form-group">
+                {!! Form::label('playlists[]', 'Playlists:') !!}
+                {!! Form::select('playlists[]', $playlists, null, ['class' => 'form-control select2-multi', 'multiple' => "multiple"]) !!}
+            </div>
             {{--in future--}}
             {{--<div class="form-group" style="display: none">--}}
                 {{--<video width="400"--}}

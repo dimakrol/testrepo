@@ -15,3 +15,9 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script>
+        fbq('track', 'Purchase', {value: 'paypal', currency: 'paypal'});
+    </script>
+@endsection

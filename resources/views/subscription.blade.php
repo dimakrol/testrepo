@@ -16,11 +16,11 @@
                     <div class="subscription__body">
                         <h2 class="subscription__membership-name">Annual Membership</h2>
                         <!--<div class="card-title">
-                            <h3 class="text-center">Buy early subscription for {{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }} {{ $plan->amountInCurrency() }}</h3>
+                            <h3 class="text-center">Buy early subscription for  </h3>
                         </div>-->
                         <div class="row no-gutters subscription__title">
                             <div class="col-5">
-                                <p class="subscription__price">£9.99</p>
+                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}</p>
                                 <p class="subscription__term">/year*</p>
                             </div>
                             <div class="col-7">
@@ -56,7 +56,7 @@
                                 <label for="card-number" class="control-label mb-1 subscribe-form__label">
                                     <input id="card-number" type="tel" class="form-control cc-number cc-number--with-icon" placeholder="Card number">
                                 </label>
-                                <div class="invalid-feedback">
+                                <div class="subscription-form__card-number invalid-feedback">
                                     Please provide a valid credit card number.
                                 </div>
                             </div>
@@ -111,6 +111,9 @@
                                                           data-trigger="hover"></span>
                                                 </div>
                                             </div>
+                                            <div class="subscription-form__secure-code invalid-feedback">
+                                                Please provide a valid secure code number.
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
@@ -125,12 +128,22 @@
                         <!--<div class="card-title">
                             <h3 class="text-center"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i></h3>
                         </div>-->
-                        <div class="row mx-auto">
+                        <div class="row mx-auto" style="display: none">
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-button">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="CZQU2CJKR5VG2">
-                                <!--<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-                                <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">-->
+                                @if ($plan->stripe_id != 'yearlyuk')
+                                    <input type="hidden" name="custom" value="{{json_encode(array('user_id' => Auth::user()->id))}}">
+                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                    <input type="hidden" name="hosted_button_id" value="CZQU2CJKR5VG2">
+                                    <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+                                @else
+                                    <input type="hidden" name="custom" value="{{json_encode(array('user_id' => Auth::user()->id))}}">
+                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                    <input type="hidden" name="hosted_button_id" value="8SVLUPUG2FPGS">
+                                    <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+                                @endif
+
                             </form>
                         </div>
                     </div>
@@ -144,10 +157,16 @@
     <script src="https://js.stripe.com/v2/"></script>
     <script>
         $(function () {
+            @if(null !== session('completeRegistration'))
+                fbq('track', 'CompleteRegistration');
+                {{session()->forget('completeRegistration')}}
+            @endif
+
             Stripe.setPublishableKey(WWD.stripe.stripeKey);
 
-            $('form.paypal-button').on('click', function (e) {
+            $(".subscription__paypal.paypal").on('click', function () {
                 fbq('track', 'AddPaymentInfo');
+                $('form.paypal-button').submit();
             });
 
             $('[data-toggle="popover"]').popover();
@@ -155,7 +174,7 @@
             var form = $("#subscribe-form");
 
 
-            $('#payment-button-amount').on('click', function(e) {
+            $('#payment-button').on('click', function(e) {
                 fbq('track', 'AddPaymentInfo');
                 e.preventDefault();
                 deleteErrorMessages();
@@ -180,11 +199,12 @@
                 var cardSecurity = $('#card-cvc');
                 if (!valid_credit_card(cardNumber.val())) {
                     cardNumber.addClass('is-invalid');
+                    $('.subscription-form__card-number').show();
                     return false;
                 }
                 if (!valid_securuty_code(cardSecurity.val())) {
                     cardSecurity.addClass('is-invalid');
-                    $('.error-message-alert').text('Please provide a valid security code.').show();
+                    $('.subscription-form__secure-code').show();
                     return false;
                 }
                 return true;
@@ -199,9 +219,6 @@
                 } else {
                     if (response.id) {
                         $('input[name=stripeToken]').val(response.id);
-                        fbq('track', 'Purchase', {
-                            content_name: "User id: {{Auth::user()->id}}; email: {{Auth::user()->email}}"
-                        });
                         form.submit();
                     }
                 }
@@ -209,7 +226,7 @@
 
             function deleteErrorMessages() {
                 $('#card-number,#card-cvc').removeClass('is-invalid');
-                $('.error-message-alert').hide();
+                $('.error-message-alert, .subscription-form__card-number, .subscription-form__secure-code').hide();
             }
 
             function toggleSubscribeButton() {
@@ -218,29 +235,28 @@
             }
 
             function valid_credit_card(value) {
-                //validate if empty
-                if (!value) return false;
-                // accept only digits, dashes or spaces
-                if (/[^0-9-\s]+/.test(value)) return false;
+                var regex = new RegExp("^[0-9]{16}$");
+                if (!regex.test(value))
+                    return false;
 
-                // The Luhn Algorithm. It's so pretty.
-                var nCheck = 0, nDigit = 0, bEven = false;
-                value = value.replace(/\D/g, "");
-
-                for (var n = value.length - 1; n >= 0; n--) {
-                    var cDigit = value.charAt(n),
-                        nDigit = parseInt(cDigit, 10);
-
-                    if (bEven) {
-                        if ((nDigit *= 2) > 9) nDigit -= 9;
-                    }
-
-                    nCheck += nDigit;
-                    bEven = !bEven;
-                }
-
-                return (nCheck % 10) == 0;
+                return luhnCheck(value);
             }
+
+            function luhnCheck(val) {
+                var sum = 0;
+                for (var i = 0; i < val.length; i++) {
+                    var intVal = parseInt(val.substr(i, 1));
+                    if (i % 2 == 0) {
+                        intVal *= 2;
+                        if (intVal > 9) {
+                            intVal = 1 + (intVal % 10);
+                        }
+                    }
+                    sum += intVal;
+                }
+                return (sum % 10) == 0;
+            }
+
 
             function valid_securuty_code(value) {
                 if (!value || !/^[0-9]{3,4}$/.test(value)) {

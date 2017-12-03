@@ -36,6 +36,8 @@ class SocialAccountService
             'facebook_id' => $providerUser->getId(),
         ]);
 
+        session(['completeRegistration' => true]);
+
         return $user;
     }
 }

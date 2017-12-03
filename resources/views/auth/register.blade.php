@@ -63,7 +63,6 @@
                     data: data,
                     dataType: 'json',
                     success: function(data) {
-                        fbq('track', 'CompleteRegistration');
                         window.location.replace('{{ route('subscription.index') }}');
                     },
                     error: function(data) {

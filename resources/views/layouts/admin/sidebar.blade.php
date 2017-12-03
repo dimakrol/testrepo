@@ -24,7 +24,10 @@
             <a href="{{ route('admin.category.create') }}">Create Category</a>
         </li>
         <li>
-            <a href="{{ route('admin.tag.create') }}">Create tag</a>
+            <a href="{{ route('admin.tag.create') }}">Create Tag</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.playlist.create') }}">Create Playlist</a>
         </li>
         <li>
             <a href="{{ route('admin.field.create') }}">Create field</a>
