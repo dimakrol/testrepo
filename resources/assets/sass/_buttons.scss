@@ -13,6 +13,7 @@
   border-radius: .25rem;
   display: inline-block;
   font-weight: bold;
+  max-width: 21.375rem;
   text-align: center;
   text-decoration: none;
   text-transform: capitalize;
@@ -31,10 +32,6 @@
       color: white;
       text-decoration: none;
     }
-  }
-
-  @media (min-width: $sm){
-    max-width: 21.375rem;
   }
 }
 

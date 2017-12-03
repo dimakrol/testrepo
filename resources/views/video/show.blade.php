@@ -1,8 +1,8 @@
 @extends('layouts.frontend.app')
 @section('content')
-    <div class="container">
-        <div class="row video">
-            <div class="col-lg-8">
+    <div class="container container--white">
+        <div class="row justify-content-center video">
+            <div class="col-md-10 col-lg-7 col-xl-6">
                 <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
@@ -16,16 +16,14 @@
                         <p class="video__author">by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
                 <div>
                     @if(!Auth::user())
                         <div class="form-group text-center">
                             <a class="custom-button custom-button--primary" href="{{ route('register') }}">Create Video</a>
                         </div>
                     @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
-                        <div class="form-group">
-                            <a class="btn btn-success btn-block create-video" href="{{ route('subscription.index') }}">Create Video</a>
+                        <div class="form-group text-center">
+                            <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">Create Video</a>
                         </div>
                     @else
                         @foreach($video->fields as $field)
@@ -57,10 +55,10 @@
                             <a href="#" class="btn btn-primary btn-block go-share" style="display: none" disabled="true"><i class="fa fa-share" aria-hidden="true"></i> Go Share</a>
 
                         </div>
-                            <div class="form-group">
-                                <div class="btn btn-danger rot-left" style="display: none"><i class="fa fa-undo" aria-hidden="true"></i></div>
-                                <div class="btn btn-primary rot-right" style="display: none"><i class="fa fa-repeat" aria-hidden="true"></i></div>
-                            </div>
+                        <div class="form-group">
+                            <div class="btn btn-danger rot-left" style="display: none"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                            <div class="btn btn-primary rot-right" style="display: none"><i class="fa fa-repeat" aria-hidden="true"></i></div>
+                        </div>
                         @foreach($video->fields as $field)
                             @if('image' == $field->type)
                                 <div class="text-center preview-image {{$field->variable_name}} hide-block">

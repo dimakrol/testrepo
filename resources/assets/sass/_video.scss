@@ -17,4 +17,11 @@
     font-size: .75rem;
     margin-bottom: 0;
   }
+
+  @media (min-width: $md) {
+
+    &__description-container {
+      margin-bottom: 1.875rem;
+    }
+  }
 }

@@ -16,3 +16,10 @@ a {
     color: lighten($lightGreen, 10%);
   }
 }
+
+video {
+
+  @media (min-width: $sm) {
+    margin-bottom: .5rem;
+  }
+}
