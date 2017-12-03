@@ -7,6 +7,41 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Image;
 
+/**
+ * App\Models\Video
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $preview_url
+ * @property string $thumbnail_url
+ * @property string $local_url
+ * @property int $premium
+ * @property string $impossible_video_id
+ * @property int $user_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $slug
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Field[] $fields
+ * @property-read mixed $thumbnail_path
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Playlist[] $playlists
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \App\Models\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\VideoGenerated[] $videosGenerated
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video findSimilarSlugs($attribute, $config, $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereImpossibleVideoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereLocalUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video wherePremium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video wherePreviewUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereThumbnailUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Video extends Model
 {
     use Sluggable;
@@ -59,11 +94,17 @@ class Video extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function videosGenerated()
     {
         return $this->hasMany(VideoGenerated::class, 'video_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function playlists()
     {
         return $this->belongsToMany(Playlist::class);

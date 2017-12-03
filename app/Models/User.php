@@ -13,6 +13,58 @@ use Illuminate\Support\Facades\Storage;
 use Stripe\Customer;
 use Image;
 
+/**
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string|null $gender
+ * @property string|null $email
+ * @property string|null $password
+ * @property string|null $facebook_id
+ * @property string|null $ip_address
+ * @property string|null $date_of_birth
+ * @property string|null $stripe_customer_id
+ * @property string|null $last_signin
+ * @property int $is_admin
+ * @property string|null $remember_token
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $slug
+ * @property string|null $role
+ * @property string|null $description
+ * @property string|null $thumbnail_url
+ * @property string|null $country_code
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Card[] $cards
+ * @property-read mixed $thumbnail_path
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subscription[] $subscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Video[] $videos
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\VideoGenerated[] $videosGenerated
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User findSimilarSlugs($attribute, $config, $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereDateOfBirth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereFacebookId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIsAdmin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastSignin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereStripeCustomerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereThumbnailUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable, Sluggable;

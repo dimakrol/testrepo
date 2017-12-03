@@ -5,6 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
+/**
+ * App\Models\VideoGenerated
+ *
+ * @property int $id
+ * @property int|null $user_id
+ * @property int|null $video_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property string $impossible_id
+ * @property string|null $slug
+ * @property string|null $hash
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\GeneratedField[] $generatedFields
+ * @property-read string $video_url
+ * @property-read \App\Models\User|null $user
+ * @property-read \App\Models\Video|null $video
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated findSimilarSlugs($attribute, $config, $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereImpossibleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoGenerated whereVideoId($value)
+ * @mixin \Eloquent
+ */
 class VideoGenerated extends Model
 {
     use Sluggable;
