@@ -7,8 +7,16 @@
         {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName' , 'placeholder' => 'Name', 'required' => 'required']) !!}
     </div>
     <div class="form-group col-md-6">
+        {!! Form::label('email', 'Email:') !!}
+        {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email', 'required' => 'required']) !!}
+    </div>
+    <div class="form-group col-md-6">
         <label for="description" class="col-form-label">Description:</label>
         {!! Form::textarea('description', null, ['class' => 'form-control', 'id' => 'description' , 'placeholder' => 'Description', 'required' => 'required']) !!}
+    </div>
+    <div class="form-group col-md-6">
+        {!! Form::label('country_code', 'Country:') !!}
+        {!! Form::select('country_code', ['GB' => 'Great Britain', 'US' => 'USA'], null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-md-6">
         {!! Form::select('role', ['creator' => 'Creator', 'admin' => 'Admin'], null, ['placeholder' => 'Select Role', 'class' => 'form-control']) !!}

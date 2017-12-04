@@ -60,21 +60,6 @@ class UserController extends Controller
         return view('admin.user.videos', compact('user'));
     }
 
-    public function search(Request $request)
-    {
-        $data = [];
-
-        if($request->has('q')){
-            $search = $request->q;
-            $data = User::select("id","email")
-                ->where('email','LIKE',"%$search%")
-                ->limit(10)
-                ->get();
-        }
-
-        return response()->json($data);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -107,13 +92,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:5'
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
         ]);
 
         if (User::create([
             'first_name' => $request->input('name'),
+            'email' => $request->input('email'),
             'description' => $request->input('description'),
-            'role' => $request->input('role')
+            'country_code' => $request->input('country_code'),
+            'role' => $request->input('role'),
         ])) {
             flash('User created successfully!')->success();
             return redirect(route('admin.user.index'));
