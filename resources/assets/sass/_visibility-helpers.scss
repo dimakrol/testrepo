@@ -1,0 +1,7 @@
+.hidden-xs-down {
+  display: none !important;
+
+  @media (min-width: $sm){
+    display: inline-block !important;
+  }
+}

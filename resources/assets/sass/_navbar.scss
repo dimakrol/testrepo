@@ -1,41 +1,46 @@
 .navbar {
   border-bottom: 5px solid $green;
-  background: $white;
+  background: white;
   padding: .6875rem 1.125rem;
-}
 
-.navbar-brand {
-  text-transform: uppercase;
-  font-size: 1.125rem;
-  color: $darkGrey;
-  font-weight: 700;
-}
+  &-brand {
+    text-transform: uppercase;
+    font-size: 1.125rem;
+    color: $darkGrey;
+    font-weight: 700;
+  }
 
-.navbar-toggler {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  background: $offWhite;
-}
+  &-toggler {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: $offWhite;
 
-.navbar-toggler:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.5em;
-  left: .35em;
-  width: 1em;
-  height: 0.12em;
-  background: $grey;
-  box-shadow:
-    0 0.25em 0 0 $grey,
-    0 0.5em 0 0 $grey;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0.5em;
+      left: .35em;
+      width: 1em;
+      height: 0.12em;
+      background: $grey;
+      box-shadow:
+              0 0.25em 0 0 $grey,
+              0 0.5em 0 0 $grey;
+    }
+  }
 }
 
 .nav-link {
   font-weight: 400;
   color: $darkGrey;
+
   &:hover {
     color: $green;
   }
+}
+
+.menu-login-button {
+  color: $green;
+  margin-left: 10px;
 }
