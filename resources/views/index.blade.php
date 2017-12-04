@@ -50,9 +50,8 @@
     <script>
         $(function () {
             @if(null !== session('subscription'))
-
-            fbq('track', 'Purchase', {value: '{{session('subscription')['value']}}', currency: '{{ session('subscription')['currency'] }}'});
-            {{session()->forget('subscription')}}
+                fbq('track', 'Purchase', {value: '{{session('subscription')['value']}}', currency: '{{ session('subscription')['currency'] }}'});
+                {{session()->forget('subscription')}}
             @endif
             @if(null !== session('completeRegistration'))
                 fbq('track', 'CompleteRegistration');

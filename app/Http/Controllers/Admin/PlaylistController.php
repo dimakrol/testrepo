@@ -34,6 +34,13 @@ class PlaylistController extends Controller
         return view('admin.playlist.video-order', compact('playlist', 'videos'));
     }
 
+    public function changeDisplay($id, Request $request)
+    {
+        $playlist = Playlist::findOrFail($id);
+        $playlist->update(['display' => (int)$request->display]);
+        return response()->json('success');
+    }
+
     public function updateOrderOfVideos(Request $request, $id)
     {
 

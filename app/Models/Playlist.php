@@ -31,7 +31,7 @@ class Playlist extends Model
         'sort_when_creating' => true,
     ];
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'display'];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
