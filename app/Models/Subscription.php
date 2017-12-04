@@ -5,6 +5,36 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Subscription
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string|null $name
+ * @property string|null $billing_type
+ * @property string $stripe_id
+ * @property string $stripe_plan
+ * @property int $quantity
+ * @property \Carbon\Carbon|null $trial_ends_at
+ * @property \Carbon\Carbon|null $ends_at
+ * @property \Carbon\Carbon|null $next_payment
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereBillingType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereEndsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereNextPayment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereStripeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereStripePlan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereTrialEndsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Subscription whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Subscription extends Model
 {
 

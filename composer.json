@@ -22,10 +22,12 @@
     "laravel/tinker": "~1.0",
     "laravelcollective/html": "~5.0",
     "league/flysystem-aws-s3-v3": "^1.0",
+    "spatie/eloquent-sortable": "^3.4",
     "torann/geoip": "^1.0",
     "yajra/laravel-datatables-oracle": "~8.0"
   },
   "require-dev": {
+    "barryvdh/laravel-ide-helper": "^2.4",
     "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
     "laravel/homestead": "^6.2",
@@ -70,6 +72,12 @@
       "@php artisan cache:clear",
       "@php artisan config:cache",
       "@php artisan route:cache"
+    ],
+    "post-update-cmd": [
+      "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+      "php artisan ide-helper:generate",
+      "php artisan ide-helper:meta",
+      "php artisan optimize"
     ]
   },
   "config": {

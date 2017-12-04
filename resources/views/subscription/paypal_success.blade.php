@@ -18,6 +18,8 @@
 
 @section('script')
     <script>
-        fbq('track', 'Purchase', {value: 'paypal', currency: 'paypal'});
+        $(function () {
+            fbq('track', 'Purchase', {value: 'paypal', currency: 'paypal'});
+        });
     </script>
 @endsection

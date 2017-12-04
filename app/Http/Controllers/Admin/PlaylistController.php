@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class PlaylistController extends Controller
 {
@@ -15,8 +16,42 @@ class PlaylistController extends Controller
      */
     public function create()
     {
-        $playlists = Playlist::all();
+        $playlists = Playlist::ordered()->get();
         return view('admin.playlist.create', compact('playlists'));
+    }
+
+
+    public function changeOrder(Request $request)
+    {
+        Playlist::setNewOrder($request->item);
+        return response()->json('success');
+    }
+
+    public function changeOrderOfVideos($id)
+    {
+        $playlist = Playlist::findOrFail($id);
+        $videos = $playlist->videos()->orderBy('playlist_video.order', 'asc')->get();
+        return view('admin.playlist.video-order', compact('playlist', 'videos'));
+    }
+
+    public function changeDisplay($id, Request $request)
+    {
+        $playlist = Playlist::findOrFail($id);
+        $playlist->update(['display' => (int)$request->display]);
+        return response()->json('success');
+    }
+
+    public function updateOrderOfVideos(Request $request, $id)
+    {
+
+        $playlist = Playlist::findOrFail($id);
+        $countOfVideos = $playlist->videos()->count();
+        $playlist->videos()->detach();
+
+        for ($i = 1; $i < $countOfVideos+1; $i++) {
+            $playlist->videos()->attach($request->item[$i-1], ['order' => $i]);
+        }
+        return response()->json('success');
     }
 
     /**

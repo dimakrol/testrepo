@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Playlist;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -25,8 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $playlists = Playlist::with(['videos' => function($q) {
+            $q->orderBy('playlist_video.order', 'asc')->get();
+        }])->where('display', true)->orderBy('playlists.order', 'asc')->get();
+
         $videos = Video::with('user')->latest()->take(9)->get();
-        return view('index', compact('videos'));
+        return view('index', compact('videos', 'playlists'));
     }
 
     public function play()

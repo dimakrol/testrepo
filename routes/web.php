@@ -51,6 +51,10 @@ Route::group(['middleware' => 'auth'], function () {
             'create', 'store', 'destroy'
         ]]);
 
+        Route::post('/playlist/{id}/display','Admin\PlaylistController@changeDisplay')->name('playlist.display');
+        Route::post('/playlist/change-order', 'Admin\PlaylistController@changeOrder')->name('playlist.change-order');
+        Route::get('/playlist/{id}/videos', 'Admin\PlaylistController@changeOrderOfVideos')->name('playlist.change-video-order');
+        Route::post('/playlist/{id}/videos', 'Admin\PlaylistController@updateOrderOfVideos')->name('playlist.update-video-order');
         Route::resource('/playlist', 'Admin\PlaylistController', ['only' => [
             'create', 'store', 'destroy'
         ]]);
