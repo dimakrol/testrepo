@@ -2,7 +2,7 @@
 @section('content')
     <div class="container container--white">
         <div class="row justify-content-center video">
-            <div class="col-md-10 col-lg-7 col-xl-6">
+            <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
                     <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                     Your browser does not support the video tag.
@@ -18,59 +18,64 @@
                 </div>
                 <div>
                     @if(!Auth::user())
-                        <div class="form-group text-center">
+                        <div class="form-group">
                             <a class="custom-button custom-button--primary" href="{{ route('register') }}">Create Video</a>
                         </div>
                     @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
                         <div class="form-group text-center">
                             <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">Create Video</a>
                         </div>
-                    @else
-                        @foreach($video->fields as $field)
-                            @if('image' == $field->type)
-                                <div class="form-group hide-block">
-                                    {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'data-ratio' => $field->aspect_ratio, 'accept' => 'image/*', 'required' => 'required']) !!}
-                                </div>
-                            @elseif('text' == $field->type)
-                            @elseif('text_area' == $field->type)
-                            @endif
-                        @endforeach
-                        @foreach($video->fields as $field)
-                            @if('image' == $field->type)
-                                <div class="form-group">
-                                    <button class="btn btn-success btn-block add-photo"
-                                            data-variable-name="{{$field->variable_name}}"
-                                    >Add Your Photo</button>
-                                </div>
-                            @endif
-                        @endforeach
-                        <div class="form-group">
-                            <button class="btn btn-success update-preview" disabled="true">Update Preview</button>
-                            <button class="btn btn-danger crop-button hide-block">Crop</button>
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-danger btn-block download-video" style="display: none" disabled="true"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-primary btn-block go-share" style="display: none" disabled="true"><i class="fa fa-share" aria-hidden="true"></i> Go Share</a>
-
-                        </div>
-                        <div class="form-group">
-                            <div class="btn btn-danger rot-left" style="display: none"><i class="fa fa-undo" aria-hidden="true"></i></div>
-                            <div class="btn btn-primary rot-right" style="display: none"><i class="fa fa-repeat" aria-hidden="true"></i></div>
-                        </div>
-                        @foreach($video->fields as $field)
-                            @if('image' == $field->type)
-                                <div class="text-center preview-image {{$field->variable_name}} hide-block">
-                                    <img src="" class="img-fluid" alt="Responsive image">
-                                </div>
-                            @endif
-                        @endforeach
-
                     @endif
                 </div>
-                <div id="croppie"></div>
             </div>
+            @if(!Auth::user())
+            @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
+            @else
+                <div class="col-sm-10 col-lg-5 pt-lg-3">
+                    @foreach($video->fields as $field)
+                        @if('image' == $field->type)
+                            <div class="form-group hide-block">
+                                {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'data-ratio' => $field->aspect_ratio, 'accept' => 'image/*', 'required' => 'required']) !!}
+                            </div>
+                        @elseif('text' == $field->type)
+                        @elseif('text_area' == $field->type)
+                        @endif
+                    @endforeach
+                    @foreach($video->fields as $field)
+                        @if('image' == $field->type)
+                            <div class="form-group">
+                                <button class="custom-button custom-button--primary"
+                                        data-variable-name="{{$field->variable_name}}"
+                                >Add Your Photo</button>
+                            </div>
+                        @endif
+                    @endforeach
+                    <div class="form-group">
+                        <button class="custom-button custom-button--primary" disabled="true">Update Preview</button>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-danger crop-button hide-block">Crop</button>
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="btn btn-danger btn-block download-video" style="display: none" disabled="true"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="btn btn-primary btn-block go-share" style="display: none" disabled="true"><i class="fa fa-share" aria-hidden="true"></i> Go Share</a>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn btn-danger rot-left" style="display: none"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                        <div class="btn btn-primary rot-right" style="display: none"><i class="fa fa-repeat" aria-hidden="true"></i></div>
+                    </div>
+                    @foreach($video->fields as $field)
+                        @if('image' == $field->type)
+                            <div class="text-center preview-image {{$field->variable_name}} hide-block">
+                                <img src="" class="img-fluid" alt="Responsive image">
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
+            <div id="croppie"></div>
         </div>
     </div>
 @endsection

@@ -10,7 +10,9 @@
 }
 
 .custom-button {
+  border: 0;
   border-radius: .25rem;
+  cursor: pointer;
   display: inline-block;
   font-weight: bold;
   max-width: 21.375rem;
@@ -28,9 +30,13 @@
     &:active,
     &:focus,
     &:hover {
-      background: lighten($lightGreen, 10%);
+      background-color: lighten($lightGreen, 10%);
       color: white;
       text-decoration: none;
+    }
+
+    &:disabled {
+      background-color: $lightGreen--disabled;
     }
   }
 }
