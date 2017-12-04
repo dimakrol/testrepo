@@ -40,7 +40,7 @@ class PlaylistController extends Controller
         $playlist = Playlist::findOrFail($id);
         $countOfVideos = $playlist->videos()->count();
         $playlist->videos()->detach();
-//return $countOfVideos;
+
         for ($i = 1; $i < $countOfVideos+1; $i++) {
             $playlist->videos()->attach($request->item[$i-1], ['order' => $i]);
         }
