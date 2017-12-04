@@ -55,6 +55,9 @@ class Plan extends Model
         return static::where('stripe_id', static::STRIPE_ID_UK)->first();
     }
 
+    /**
+     * @return string
+     */
     public function amountInCurrency()
     {
         return number_format(($this->amount / 100), 2, '.', ' ');
