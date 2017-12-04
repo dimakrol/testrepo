@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="container-fluid py-3">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-sm-8 col-md-8 col-lg-6 mx-auto">
-                <div id="pay-invoice" class="subscription card">
+            <div class="col mx-auto subscription">
+                <div id="pay-invoice" class="subscription__card">
                     @if(Auth::user()->subscribed(['yearly', 'yearlyuk']))
                         <div class="card-body">
                             <div class="card-title">
@@ -48,8 +48,8 @@
                                     <h3 class="subscribe-form__title">Credit Card</h3>
                                     <h4 class="subscribe-form__subtitle">Accepted payment methods</h4>
                                 </div>
-                                <div class="col-6 d-flex align-items-end">
-                                    <img src="{{ asset('images/CC-image.png') }}">
+                                <div class="col-6 d-flex align-items-end justify-content-end">
+                                    <img class="img-fluid" src="{{ asset('images/CC-image.png') }}">
                                 </div>
                             </div>
                             <div class="subscribe-form__input-container">

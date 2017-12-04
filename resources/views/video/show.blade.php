@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 @section('content')
-    <div class="container container--white">
+    <div class="container bg-white">
         <div class="row justify-content-center video">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
