@@ -39,12 +39,12 @@ class UserController extends Controller
             })
             ->addColumn('delete', function ($user) {
                 return '<button class="btn btn-danger delete-user" data-user-id="'.$user->id.'">Delete</button>';
-//                return Form::open([ 'method'  => 'delete', 'route' => [ 'admin.user.destroy', $user->id ] ]) .
-//                     Form::submit('Delete', ['class' => 'btn btn-danger']) .
-//                 Form::close();
             })
             ->addColumn('sub_name', function (User $user) {
                 return $user->subscriptions->first()['name'];
+            })
+            ->addColumn('generated', function (User $user) {
+                return $user->videos->count();
             })
             ->rawColumns(['edit', 'login', 'delete'])
             ->make(true);

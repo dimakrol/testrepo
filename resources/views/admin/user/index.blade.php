@@ -14,6 +14,7 @@
             <th>Subscription</th>
             <th>Signed Up</th>
             <th>Lust Sign In</th>
+            <th>Generated</th>
             <th></th>
             <th></th>
             <th></th>
@@ -85,6 +86,7 @@
                 { data: 'sub_name', name: 'subscriptions.name'},
                 { data: 'created_at', name: 'users.created_at'},
                 { data: 'last_signin', name: 'users.last_signin'},
+                { data: 'generated', name: 'generated', orderable: false, searchable: false},
                 { data: 'login', name: 'login', orderable: false, searchable: false},
                 { data: 'edit', name: 'edit', orderable: false, searchable: false},
                 { data: 'delete', name: 'delete', orderable: false, searchable: false},
