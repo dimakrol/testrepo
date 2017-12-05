@@ -12,7 +12,7 @@
             <th>Email</th>
             <th>Role</th>
             <th>Subscription</th>
-            <th>Created</th>
+            <th>Signed Up</th>
             <th></th>
             <th></th>
             <th></th>
