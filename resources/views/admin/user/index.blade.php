@@ -47,11 +47,21 @@
             });
 
             deleteUserModal.on('click', function () {
-                console.log($(this).data('user-id'));
+                let userId = $(this).data('user-id');
+
+                $.ajax({
+                    data: {_method: 'delete'},
+                    type: 'POST',
+                    url: 'user/'+userId,
+                    success: function () {
+                        $('#share-via-email').modal('hide');
+                        datatable.api().ajax.reload();
+                    }
+                });
             })
 
         });
-        $('#users-table').dataTable({
+        let datatable = $('#users-table').dataTable({
             processing: true,
             serverSide: true,
             ajax: '{{route('admin.user.data')}}',
