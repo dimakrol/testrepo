@@ -52,3 +52,65 @@
   font-size: 48px;
   color: $grey;
 }
+
+.wwd-carousel {
+
+  &__header {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: .6875rem;
+    text-align: center;
+
+    span {
+      background-color: white;
+      color: $green;
+      padding: .1875rem .3125rem;
+    }
+  }
+
+  &__positioning {
+    left: 50%;
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 95%;
+  }
+  
+  @media (min-width: $sm) {
+
+    &__header {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__positioning {
+      bottom: 3rem;
+    }
+
+    .btn-lg {
+      height: 2.625rem;
+      line-height: 2.625rem;
+      width: 12.5rem;
+    }
+  }
+}
+
+.carousel-item {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 45.45vw;
+
+  &--first {
+    background-image: url("/images/homehero.jpg");
+  }
+
+  &--second {
+    background-image: url("/images/homehero.jpg");
+  }
+
+  @media (min-width: $sm) {
+    height: 75vw;
+    max-height: 29.5rem;
+  }
+}
