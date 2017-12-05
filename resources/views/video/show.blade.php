@@ -18,22 +18,17 @@
                         <p class="video__author">by: <a href="{{ route('channel.index', $video->user->slug) }}">{{ $video->creator()->fullName() }}</a></p>
                     </div>
                 </div>
-                <div>
-                    @if(!Auth::user())
-                        <div class="form-group">
-                            <a class="custom-button custom-button--primary" href="{{ route('register') }}">Create Video</a>
-                        </div>
-                    @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
-                        <div class="form-group text-center">
-                            <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">Create Video</a>
-                        </div>
-                    @endif
-                </div>
             </div>
-            @if(!Auth::user())
-            @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
-            @else
-                <div class="col-sm-10 col-lg-5 pt-lg-3">
+            <div class="col-sm-10 col-lg-5 pt-lg-3">
+                @if(!Auth::user())
+                    <div class="form-group">
+                        <a class="custom-button custom-button--primary" href="{{ route('register') }}">Create Video</a>
+                    </div>
+                @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
+                    <div class="form-group text-center">
+                        <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">Create Video</a>
+                    </div>
+                @else
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="form-group hide-block">
@@ -75,9 +70,9 @@
                             </div>
                         @endif
                     @endforeach
-                </div>
-            @endif
-            <div id="croppie"></div>
+                @endif
+                <div id="croppie"></div>
+            </div>
         </div>
     </div>
 @endsection

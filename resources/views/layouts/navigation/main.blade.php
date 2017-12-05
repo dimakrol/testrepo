@@ -13,9 +13,9 @@
                     </li>
                 @else
                     <div class="dropdown" role="menu">
-                        <div class="btn btn-success dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->first_name }}
-                        </div>
+                        </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{route('subscription.index')}}">Subscription</a>
                             <a class="dropdown-item" href="{{route('my-videos')}}">My Videos</a>

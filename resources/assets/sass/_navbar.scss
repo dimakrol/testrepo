@@ -29,6 +29,14 @@
               0 0.5em 0 0 $grey;
     }
   }
+
+  @media (min-width: $lg) {
+    padding: .4375rem 1.125rem;
+
+    &-brand {
+      font-size: 1.875rem;
+    }
+  }
 }
 
 .nav-link {
@@ -43,4 +51,8 @@
 .menu-login-button {
   color: $green;
   margin-left: 10px;
+}
+
+.dropdown-menu {
+  min-width: 100%;
 }
