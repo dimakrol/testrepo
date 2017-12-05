@@ -38,9 +38,10 @@ class UserController extends Controller
                 return '<a href="'.route('admin.user.edit', $user->id).'"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Edit</a>';
             })
             ->addColumn('delete', function ($user) {
-                return Form::open([ 'method'  => 'delete', 'route' => [ 'admin.user.destroy', $user->id ] ]) .
-                     Form::submit('Delete', ['class' => 'btn btn-danger']) .
-                 Form::close();
+                return '<button class="btn btn-danger delete-user" data-user-id="'.$user->id.'">Delete</button>';
+//                return Form::open([ 'method'  => 'delete', 'route' => [ 'admin.user.destroy', $user->id ] ]) .
+//                     Form::submit('Delete', ['class' => 'btn btn-danger']) .
+//                 Form::close();
             })
             ->addColumn('sub_name', function (User $user) {
                 return $user->subscriptions->first()['name'];
