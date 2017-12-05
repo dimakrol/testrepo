@@ -44,7 +44,7 @@ class UserController extends Controller
                 return $user->subscriptions->first()['name'];
             })
             ->addColumn('generated', function (User $user) {
-                return $user->videos->count();
+                return $user->videosGenerated->count();
             })
             ->rawColumns(['edit', 'login', 'delete'])
             ->make(true);
