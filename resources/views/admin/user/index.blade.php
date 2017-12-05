@@ -1,5 +1,8 @@
 @extends('layouts.admin.app')
 @section('admin-content')
+    <div class="alert alert-success col-md-6 admin__user_alert" role="alert" style="display: none">
+        <span class="message"></span><span><i class="fa fa-times float-right" aria-hidden="true"></i></span>
+    </div>
     <h2>All users:</h2>
     <table class="table" id="users-table">
         <thead>
@@ -39,10 +42,11 @@
     <script>
         $(function () {
             let deleteUserModal = $('.delete-user-modal');
+            let alert = $('.admin__user_alert');
+
 
             $('#users-table_wrapper').on('click', '.delete-user', function () {
                 deleteUserModal.data('user-id', $(this).data('user-id'));
-
                 $('#share-via-email').modal('show');
             });
 
@@ -56,9 +60,16 @@
                     success: function () {
                         $('#share-via-email').modal('hide');
                         datatable.api().ajax.reload();
+                        alert.find('span.message').text('Display status updated!!!');
+                        alert.show();
                     }
                 });
-            })
+            });
+
+            alert.on('click', 'span', function () {
+                $(this).parent().hide();
+            });
+
 
         });
         let datatable = $('#users-table').dataTable({
