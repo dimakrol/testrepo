@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Socialite;
 use App\Services\SocialAccountService;
@@ -18,6 +19,8 @@ class SocialAuthController extends Controller
     {
         try {
             $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
+            $user->last_signin = Carbon::now();
+            $user->save();
             auth()->login($user);
         } catch (\Exception $e) {
             flash('You need to accept FB request')->error();
