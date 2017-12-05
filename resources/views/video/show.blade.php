@@ -3,10 +3,12 @@
     <div class="container bg-white">
         <div class="row justify-content-center video">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
-                <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
-                    <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-container">
+                    <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
+                        <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
                 <div class="video__description-container">
                     <a class="d-inline-block" href="{{ route('video.show', $video->slug) }}">
                         <img src="{{ $video->user->thumbnail_path }}" class="rounded-circle avatar">
@@ -44,14 +46,14 @@
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="form-group">
-                                <button class="custom-button custom-button--primary"
+                                <button class="custom-button custom-button--primary add-photo"
                                         data-variable-name="{{$field->variable_name}}"
                                 >Add Your Photo</button>
                             </div>
                         @endif
                     @endforeach
                     <div class="form-group">
-                        <button class="custom-button custom-button--primary" disabled="true">Update Preview</button>
+                        <button class="custom-button custom-button--primary update-preview" disabled="true">Update Preview</button>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-danger crop-button hide-block">Crop</button>
