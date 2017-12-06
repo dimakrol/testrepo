@@ -3,6 +3,10 @@ body {
   padding-top: 4rem;
   background: $bg-color;
   font-family: 'Roboto Condensed', sans-serif;
+
+  @media (min-width: $lg) {
+    padding-top: 4.625rem;
+  }
 }
 
 a {
