@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Plan;
 use App\Services\Payment\StripePaymentService;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,6 +16,12 @@ class PlanController extends Controller
         $planUK = Plan::where('stripe_id', Plan::STRIPE_ID_UK)->first();
 
         return view('admin.plan.index', compact('plan', 'planUK'));
+    }
+
+    public function changeDot(Request $request)
+    {
+        DB::table('plans')->update(['dot' => (int)$request->dot]);
+        return response()->json('success');
     }
 
     public function update($id, Request $request)

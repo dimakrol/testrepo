@@ -1,5 +1,8 @@
 @extends('layouts.admin.app')
 @section('admin-content')
+    <div class="alert alert-success col-md-6 admin__plan_alert" role="alert" style="display: none">
+        <span class="message"></span><span><i class="fa fa-times float-right" aria-hidden="true"></i></span>
+    </div>
     <h3>Plan:</h3>
     <table class="table">
         <thead class="thead-default">
@@ -38,5 +41,41 @@
         <button type="submit" class="btn btn-primary">Update</button>
     </div>
     {!! Form::close() !!}
+    <div style="padding: 15px">
+        <div class="form-check">
+            <label class="form-check-label">
+                {!! Form::checkbox('dot', null, $plan->dot, ['class' => 'form-check-input']); !!}Dot notation
+            </label>
+        </div>
+    </div>
+@endsection
 
+@section('script')
+    <script>
+        let alert = $('.admin__plan_alert');
+        let dot = $('input[name=dot]');
+
+        dot.on('change', function () {
+            let checked = 0;
+            if ($(this).is(":checked")) {
+                checked = 1;
+            }
+
+            $.ajax({
+                data: {dot: checked},
+                type: 'POST',
+                url: '{{route('admin.plan.dot')}}',
+                success: function (data) {
+
+                    alert.find('span.message').text('Dot notation updated!!!');
+                    alert.show();
+                }
+            });
+
+        });
+
+        alert.on('click', 'span', function () {
+            $(this).parent().hide();
+        });
+    </script>
 @endsection
