@@ -1,5 +1,8 @@
 @extends('layouts.admin.app')
 @section('admin-content')
+    <div class="alert alert-success col-md-6 admin__user_alert" role="alert" style="display: none">
+        <span class="message"></span><span><i class="fa fa-times float-right" aria-hidden="true"></i></span>
+    </div>
     <h2>All users:</h2>
     <table class="table" id="users-table">
         <thead>
@@ -9,7 +12,9 @@
             <th>Email</th>
             <th>Role</th>
             <th>Subscription</th>
-            <th>Created</th>
+            <th>Signed Up</th>
+            <th>Lust Sign In</th>
+            <th>Generated</th>
             <th></th>
             <th></th>
             <th></th>
@@ -39,19 +44,37 @@
     <script>
         $(function () {
             let deleteUserModal = $('.delete-user-modal');
+            let alert = $('.admin__user_alert');
+
 
             $('#users-table_wrapper').on('click', '.delete-user', function () {
                 deleteUserModal.data('user-id', $(this).data('user-id'));
-
                 $('#share-via-email').modal('show');
             });
 
             deleteUserModal.on('click', function () {
-                console.log($(this).data('user-id'));
-            })
+                let userId = $(this).data('user-id');
+
+                $.ajax({
+                    data: {_method: 'delete'},
+                    type: 'POST',
+                    url: 'user/'+userId,
+                    success: function () {
+                        $('#share-via-email').modal('hide');
+                        datatable.api().ajax.reload();
+                        alert.find('span.message').text('Display status updated!!!');
+                        alert.show();
+                    }
+                });
+            });
+
+            alert.on('click', 'span', function () {
+                $(this).parent().hide();
+            });
+
 
         });
-        $('#users-table').dataTable({
+        let datatable = $('#users-table').dataTable({
             processing: true,
             serverSide: true,
             ajax: '{{route('admin.user.data')}}',
@@ -62,6 +85,8 @@
                 { data: 'role', name: 'users.role'},
                 { data: 'sub_name', name: 'subscriptions.name'},
                 { data: 'created_at', name: 'users.created_at'},
+                { data: 'last_signin', name: 'users.last_signin'},
+                { data: 'generated', name: 'generated', orderable: false, searchable: false},
                 { data: 'login', name: 'login', orderable: false, searchable: false},
                 { data: 'edit', name: 'edit', orderable: false, searchable: false},
                 { data: 'delete', name: 'delete', orderable: false, searchable: false},
