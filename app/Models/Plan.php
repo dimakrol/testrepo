@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Plan whereStripeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Plan whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $dot
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Plan whereDot($value)
  */
 class Plan extends Model
 {
@@ -60,6 +62,9 @@ class Plan extends Model
      */
     public function amountInCurrency()
     {
+        if (!$this->dot) {
+            return ceil($this->amount/100);
+        }
         return number_format(($this->amount / 100), 2, '.', ' ');
     }
 }

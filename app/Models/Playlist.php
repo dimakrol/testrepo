@@ -21,6 +21,8 @@ use Spatie\EloquentSortable\SortableTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Playlist whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Playlist whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $display
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Playlist whereDisplay($value)
  */
 class Playlist extends Model
 {
