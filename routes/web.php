@@ -17,8 +17,9 @@ Route::get('/video/{id}/download', 'VideoController@download')->name('video.down
 Route::get('/view/{hash}', 'VideoController@generatedVideoByHash')->name('view');
 Route::get('/my-videos/{slug}', 'VideoController@generatedVideo')->name('my-video');
 
-Route::post('/share/email', 'ShareController@email')->name('share.email');
+Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
 
+Route::post('/share/email', 'ShareController@email')->name('share.email');
 
 Route::post('/paypal/process', 'PayPalWebhooksController@processPayment');
 
