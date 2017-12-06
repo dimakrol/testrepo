@@ -42,7 +42,7 @@
               @if($playlist->videos->count())
                   <h1 class="my-4"><a href="{{$playlist->link ? route('category.show', $playlist->link): '#'}}">{{$playlist->name}}</a></h1>
                   <div class="row">
-                    @foreach($playlist->videos->chunk(3)[0] as $video)
+                    @foreach($playlist->videos as $video)
                           <div class="col-lg-4 col-sm-6 portfolio-item">
                               <div class="card h-100">
                                   <a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
