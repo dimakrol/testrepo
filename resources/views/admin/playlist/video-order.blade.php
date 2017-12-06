@@ -20,11 +20,16 @@
     <div style="padding: 15px">
         <div class="form-check">
             <label class="form-check-label">
-                {!! Form::checkbox('display', 'value', $playlist->display, ['class' => 'form-check-input']); !!}
+                {!! Form::checkbox('display', null, $playlist->display, ['class' => 'form-check-input']); !!}
                 Display
             </label>
         </div>
+        <div class="form-group col-md-6 col-xs-12">
+            {!! Form::label('link_id', 'Category link:') !!}
+            {!! Form::select('link_id', $categories, $playlist->link, ['class' => 'form-control', 'placeholder' => 'Select Category Link']) !!}
+        </div>
     </div>
+
 
 
 @endsection
@@ -35,6 +40,7 @@
             let alert = $('.admin__playlist_alert');
 
             let display = $('input[name=display]');
+            let category = $('select[name=link_id]');
 
             display.on('change', function () {
                 let checked = 0;
@@ -51,7 +57,22 @@
                         alert.show();
                     }
                 });
+            });
 
+            category.on('change', function (e) {
+                let id = $(this).val();
+
+                if (id) {
+                    $.ajax({
+                        data: {link_id: id},
+                        type: 'POST',
+                        url: '{{route('admin.playlist.link', $playlist->id)}}',
+                        success: function (data) {
+                            alert.find('span.message').text('Category link updated!!!');
+                            alert.show();
+                        }
+                    });
+                }
             });
 
             alert.on('click', 'span', function () {

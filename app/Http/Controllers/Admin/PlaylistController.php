@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,15 +30,23 @@ class PlaylistController extends Controller
 
     public function changeOrderOfVideos($id)
     {
+        $categories = Category::pluck('name', 'id');
         $playlist = Playlist::findOrFail($id);
         $videos = $playlist->videos()->orderBy('playlist_video.order', 'asc')->get();
-        return view('admin.playlist.video-order', compact('playlist', 'videos'));
+        return view('admin.playlist.video-order', compact('playlist', 'videos', 'categories'));
     }
 
     public function changeDisplay($id, Request $request)
     {
         $playlist = Playlist::findOrFail($id);
         $playlist->update(['display' => (int)$request->display]);
+        return response()->json('success');
+    }
+
+    public function changeLink($id, Request $request)
+    {
+        $playlist = Playlist::find($id);
+        $playlist->update(['link'=> $request->link_id]);
         return response()->json('success');
     }
 

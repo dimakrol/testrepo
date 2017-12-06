@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]]);
 
         Route::post('/playlist/{id}/display','Admin\PlaylistController@changeDisplay')->name('playlist.display');
+        Route::post('/playlist/{id}/link','Admin\PlaylistController@changeLink')->name('playlist.link');
         Route::post('/playlist/change-order', 'Admin\PlaylistController@changeOrder')->name('playlist.change-order');
         Route::get('/playlist/{id}/videos', 'Admin\PlaylistController@changeOrderOfVideos')->name('playlist.change-video-order');
         Route::post('/playlist/{id}/videos', 'Admin\PlaylistController@updateOrderOfVideos')->name('playlist.update-video-order');
