@@ -11,6 +11,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Type</th>
             <th>Subscription</th>
             <th>Signed Up</th>
             <th>Lust Sign In</th>
@@ -83,10 +84,11 @@
                 { data: 'first_name', name: 'users.first_name'},
                 { data: 'email', name: 'users.email'},
                 { data: 'role', name: 'users.role'},
+                { data: 'sub_type', name: 'subscriptions.billing_type'},
                 { data: 'sub_name', name: 'subscriptions.name'},
                 { data: 'created_at', name: 'users.created_at'},
                 { data: 'last_signin', name: 'users.last_signin'},
-                { data: 'generated', name: 'generated', orderable: false, searchable: false},
+                { data: 'videos_generated_count', name: 'videos_generated_count', searchable: false},
                 { data: 'login', name: 'login', orderable: false, searchable: false},
                 { data: 'edit', name: 'edit', orderable: false, searchable: false},
                 { data: 'delete', name: 'delete', orderable: false, searchable: false},

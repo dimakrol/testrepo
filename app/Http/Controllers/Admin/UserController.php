@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function data()
     {
-        $query = User::with('subscriptions')->select('users.*');
+        $query = User::withCount('videosGenerated')->with('subscriptions');
 
         return Datatables::of($query)
             ->addColumn('login', function ($user) {
@@ -43,8 +43,8 @@ class UserController extends Controller
             ->addColumn('sub_name', function (User $user) {
                 return $user->subscriptions->first()['name'];
             })
-            ->addColumn('generated', function (User $user) {
-                return $user->videosGenerated->count();
+            ->addColumn('sub_type', function (User $user) {
+                return $user->subscriptions->first()['billing_type'];
             })
             ->rawColumns(['edit', 'login', 'delete'])
             ->make(true);
