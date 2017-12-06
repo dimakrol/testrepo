@@ -30,7 +30,7 @@ class PlaylistController extends Controller
 
     public function changeOrderOfVideos($id)
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = Category::pluck('name', 'slug');
         $playlist = Playlist::findOrFail($id);
         $videos = $playlist->videos()->orderBy('playlist_video.order', 'asc')->get();
         return view('admin.playlist.video-order', compact('playlist', 'videos', 'categories'));

@@ -40,7 +40,7 @@
       <!-- Page Heading -->
           @foreach($playlists as $playlist)
               @if($playlist->videos->count())
-                  <h1 class="my-4" style="text-decoration: underline; text-decoration-color: #5DC09C">{{$playlist->name}}</h1>
+                  <h1 class="my-4"><a href="{{$playlist->link ? route('category.show', $playlist->link): '#'}}">{{$playlist->name}}</a></h1>
                   <div class="row">
                     @foreach($playlist->videos->chunk(3)[0] as $video)
                           <div class="col-lg-4 col-sm-6 portfolio-item">
