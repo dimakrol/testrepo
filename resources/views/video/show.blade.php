@@ -22,7 +22,7 @@
             <div class="col-sm-10 col-lg-5 pt-lg-3">
                 @if(!Auth::user())
                     <div class="form-group">
-                        <a class="custom-button custom-button--primary" href="{{ route('register') }}">Create Video</a>
+                        <a class="custom-button custom-button--primary create-video" href="{{ route('register') }}">Create Video</a>
                     </div>
                 @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
                     <div class="form-group text-center">
@@ -102,6 +102,7 @@
             let ratio = null;
 
             buttons.create.on('click', function() {
+                console.log('lead');
                 fbq('track', 'Lead', {
                     content_name: "{{$video->slug}}"
                 });
