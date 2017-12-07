@@ -6,6 +6,32 @@
  */
 
 require('./bootstrap');
+require('../../../node_modules/owl.carousel/dist/owl.carousel.min.js');
+
+$(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+        dots: false,
+        loop: true,
+        margin: 20,
+        nav: true,
+        navContainer: '.owl-carousel',
+        navText: [
+            '<i class="fa fa-chevron-left" aria-hidden="true"></i>',
+            '<i class="fa fa-chevron-right" aria-hidden="true"></i>'
+        ],
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3,
+            }
+        }
+    });
+});
 
 window.Vue = require('vue');
 window.Bus = new Vue();

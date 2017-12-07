@@ -1,0 +1,19 @@
+.category {
+
+  &__title-container {
+    color: white;
+    padding-top: 2rem;
+  }
+
+  &__title-underline {
+    border-top: .5rem solid white;
+    float: left;
+    margin-bottom: 1.5rem;
+    margin-top: .5rem;
+    width: 6rem;
+  }
+
+  &__title {
+    margin-bottom: 0;
+  }
+}

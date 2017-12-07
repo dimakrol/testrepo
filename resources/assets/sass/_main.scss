@@ -3,10 +3,6 @@
   background: $offWhite;
 }
 
-.portfolio-item {
-  margin-bottom: 30px;
-}
-
 .pagination {
   margin-bottom: 30px;
 }
@@ -23,4 +19,49 @@
   height: 2.8125rem;
   margin-right: .625rem;
   width: 2.8125rem;
+}
+
+// Owl Carousel for index page
+.owl {
+
+  &-carousel {
+    margin-bottom: 1.875rem;
+  }
+
+  &-prev,
+  &-next {
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(black, 0.3), 0 0 4px rgba(black, 0.2);
+    color: rgba($darkGrey, .4);
+    cursor: pointer;
+    height: 2.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    z-index: 1;
+
+    i {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+    }
+  }
+
+  &-prev {
+    left: -1.25rem;
+
+    i {
+      transform: translate(-60%, -50%);
+    }
+  }
+
+  &-next {
+    right: -1.25rem;
+
+    i {
+      transform: translate(-40%, -50%);
+    }
+  }
 }
