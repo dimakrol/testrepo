@@ -38,7 +38,7 @@
               @if($playlist->videos->count())
                   <h1 class="my-4"><a href="{{$playlist->link ? route('category.show', $playlist->link): '#'}}">{{$playlist->name}}</a></h1>
                   <div class="row mx-2 mx-sm-0">
-                      <div class="owl-carousel owl-theme">
+                      <div id="playlist-owl-carousel-{{$playlist->id}}" class="owl-carousel owl-theme">
                           @foreach($playlist->videos as $video)
                               <div class="portfolio-item">
                                   <div class="card h-100">
