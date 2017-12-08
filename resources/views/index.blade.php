@@ -80,5 +80,41 @@
                 {{session()->forget('completeRegistration')}}
             @endif
         });
+
+        // setting up carousel for playlists
+        $(document).ready(function(){
+            // parse all carousels from the page
+            var playlists = $('[id^="playlist-owl-carousel-"]');
+
+            // iterate each playlist
+            for (var key = 0; key < playlists.length; key++) {
+                // for each playlist
+                var playlist = playlists[key];
+
+                // set up the settings
+                $(playlist).owlCarousel({
+                    dots: false,
+                    loop: true,
+                    margin: 20,
+                    nav: true,
+                    navContainer: playlist,
+                    navText: [
+                        '<i class="fa fa-chevron-left" aria-hidden="true"></i>',
+                        '<i class="fa fa-chevron-right" aria-hidden="true"></i>'
+                    ],
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        768: {
+                            items: 2
+                        },
+                        992: {
+                            items: 3,
+                        }
+                    }
+                });
+            }
+        });
     </script>
 @endsection
