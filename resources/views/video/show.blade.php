@@ -51,17 +51,25 @@
                         <button class="custom-button custom-button--primary update-preview" disabled="true">Update Preview</button>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-danger crop-button hide-block">Crop</button>
+                        <button class="custom-button custom-button--danger crop-button hide-block">Crop</button>
                     </div>
                     <div class="form-group">
-                        <a href="#" class="btn btn-danger btn-block download-video" style="display: none" disabled="true"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+                        <button class="custom-button custom-button--primary download-video" disabled="true" type="button" style="display: none">
+                            <i class="fa fa-download" aria-hidden="true"></i> Download
+                        </button>
                     </div>
                     <div class="form-group">
-                        <a href="#" class="btn btn-primary btn-block go-share" style="display: none" disabled="true"><i class="fa fa-share" aria-hidden="true"></i> Go Share</a>
+                        <button class="custom-button custom-button--primary go-share" disabled="true" type="button" style="display: none">
+                            {{--<i class="fa fa-share" aria-hidden="true"></i> --}}Go Share
+                        </button>
                     </div>
                     <div class="form-group">
-                        <div class="btn btn-danger rot-left" style="display: none"><i class="fa fa-undo" aria-hidden="true"></i></div>
-                        <div class="btn btn-primary rot-right" style="display: none"><i class="fa fa-repeat" aria-hidden="true"></i></div>
+                        <button class="custom-button custom-button--rotate rot-left" type="button" style="display: none">
+                            <i class="fa fa-undo" aria-hidden="true"></i>
+                        </button>
+                        <button class="custom-button custom-button--rotate rot-right mr-0" type="button" style="display: none">
+                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                        </button>
                     </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
