@@ -82,6 +82,18 @@
                 {{--<div id="croppie"></div>--}}
             </div>
         </div>
+        <div class="row">
+            <h3 class="your-own">See also:</h3>
+            <div class="row">
+                @foreach($videos as $video)
+                    <div class="col-lg-6 col-sm-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
     <div class="modal" id="crop-modal" tabindex="-1" role="dialog" aria-hidden="true">

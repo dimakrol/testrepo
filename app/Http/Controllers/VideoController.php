@@ -48,7 +48,9 @@ class VideoController extends Controller
     public function show($slug)
     {
         $video = Video::with(['fields', 'user'])->whereSlug($slug)->firstOrFail();
-        return view('video.show', compact('video'));
+        $videos = Video::inRandomOrder()->whereNotIn('id', [$video->id])->limit(4)->get();
+
+        return view('video.show', compact('video', 'videos'));
     }
 
     public function channel($slug)
