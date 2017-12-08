@@ -12,14 +12,22 @@
                 </p>
             </div>
         </div>
-        {{--<div class="carousel-item carousel-item--second">--}}
-            {{--<div class="wwd-carousel__positioning">--}}
-                {{--<h1 class="wwd-carousel__header"><span>Personalized Video Messages</span></h1>--}}
-                {{--<p class="lead" align="center">--}}
-                    {{--<a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/work-of-art" role="button">Create video</a>--}}
-                {{--</p>--}}
-            {{--</div>--}}
-        {{--</div>--}}
+        <div class="carousel-item carousel-item--second">
+            <div class="wwd-carousel__positioning">
+                <h1 class="wwd-carousel__header"><span>Personalized Video Messages</span></h1>
+                <p class="lead" align="center">
+                    <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/work-of-art" role="button">Create video</a>
+                </p>
+            </div>
+        </div>
+        <div class="carousel-item carousel-item--third">
+            <div class="wwd-carousel__positioning">
+                <h1 class="wwd-carousel__header"><span>Personalized Video Messages</span></h1>
+                <p class="lead" align="center">
+                    <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/work-of-art" role="button">Create video</a>
+                </p>
+            </div>
+        </div>
     </div>
     <a class="carousel-control-prev" href="#wwd-carousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
