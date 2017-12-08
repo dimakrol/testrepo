@@ -51,7 +51,7 @@
                         <button class="custom-button custom-button--primary update-preview" disabled="true">Update Preview</button>
                     </div>
                     <div class="form-group">
-                        <button class="custom-button custom-button--danger crop-button hide-block">Crop</button>
+                        {{--<button class="custom-button custom-button--danger crop-button hide-block">Crop</button>--}}
                     </div>
                     <div class="form-group">
                         <a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">
@@ -64,12 +64,12 @@
                         </a>
                     </div>
                     <div class="form-group">
-                        <button class="custom-button custom-button--rotate rot-left" type="button" style="display: none">
-                            <i class="fa fa-undo" aria-hidden="true"></i>
-                        </button>
-                        <button class="custom-button custom-button--rotate rot-right mr-0" type="button" style="display: none">
-                            <i class="fa fa-repeat" aria-hidden="true"></i>
-                        </button>
+                        {{--<button class="custom-button custom-button--rotate rot-left" type="button" style="display: none">--}}
+                            {{--<i class="fa fa-undo" aria-hidden="true"></i>--}}
+                        {{--</button>--}}
+                        {{--<button class="custom-button custom-button--rotate rot-right mr-0" type="button" style="display: none">--}}
+                            {{--<i class="fa fa-repeat" aria-hidden="true"></i>--}}
+                        {{--</button>--}}
                     </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
@@ -79,10 +79,38 @@
                         @endif
                     @endforeach
                 @endif
-                <div id="croppie"></div>
+                {{--<div id="croppie"></div>--}}
             </div>
         </div>
     </div>
+
+    <div class="modal" id="crop-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div id="croppie"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="custom-button custom-button--rotate rot-left" type="button">
+                        <i class="fa fa-undo" aria-hidden="true"></i>
+                    </button>
+                    <button class="custom-button custom-button--danger crop-button">Crop</button>
+                    <button class="custom-button custom-button--rotate rot-right mr-0" type="button">
+                        <i class="fa fa-repeat" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
@@ -92,6 +120,7 @@
                 content_name: "{{$video->slug}}"
             });
 
+            let cropModal = $('#crop-modal');
             let croppie = null;
             let fileName = null;
             let croppedImage = null;
@@ -151,6 +180,7 @@
                     return;
                 }
                 createImage(files[0]);
+                cropModal.modal('show');
             });
             @endforeach
 
@@ -161,7 +191,6 @@
                 reader.onload = (e) => {
 
                     image = e.target.result;
-
                     setUpCroppie(image);
 
                 };
@@ -174,9 +203,9 @@
                     croppie.destroy();
                 }
 
-                buttons.crop.show();
-                buttons.rotLeft.show();
-                buttons.rotRight.show();
+                // buttons.crop.show();
+                // buttons.rotLeft.show();
+                // buttons.rotRight.show();
 
                 croppie = new Croppie(el, {
                     viewport: { width: ratio * 200, height: 200 },
@@ -191,16 +220,18 @@
 
 
             function cropImage() {
+
                 croppie.result({
                     type: 'canvas',
                     size: 'viewport'
                 }).then((response) => {
                     previewImage.show().children().attr('src', response);
                     updatePreviewButton.prop('disabled', false);
-                    buttons.crop.hide();
-                    buttons.rotLeft.hide();
-                    buttons.rotRight.hide();
+                    // buttons.crop.hide();
+                    // buttons.rotLeft.hide();
+                    // buttons.rotRight.hide();
                     croppedImage = response;
+                    cropModal.modal('hide');
                     croppie.destroy();
                     croppie = null;
                     buttons.addPhoto.text('Change Photo');
