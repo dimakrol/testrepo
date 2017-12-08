@@ -110,7 +110,6 @@
             let ratio = null;
 
             buttons.create.on('click', function() {
-                console.log('lead');
                 fbq('track', 'Lead', {
                     content_name: "{{$video->slug}}"
                 });

@@ -72,6 +72,7 @@
     <script>
         $(function () {
             @if(null !== session('subscription'))
+                //facebook track functionality(complete subscription)
                 fbq('track', 'Purchase', {value: '{{session('subscription')['value']}}', currency: '{{ session('subscription')['currency'] }}'});
                 {{session()->forget('subscription')}}
             @endif
@@ -79,10 +80,9 @@
                 fbq('track', 'CompleteRegistration');
                 {{session()->forget('completeRegistration')}}
             @endif
-        });
 
-        // setting up carousel for playlists
-        $(document).ready(function(){
+
+            // setting up carousel for playlists
             // parse all carousels from the page
             var playlists = $('[id^="playlist-owl-carousel-"]');
 
