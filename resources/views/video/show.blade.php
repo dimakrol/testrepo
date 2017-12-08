@@ -54,14 +54,14 @@
                         <button class="custom-button custom-button--danger crop-button hide-block">Crop</button>
                     </div>
                     <div class="form-group">
-                        <button class="custom-button custom-button--primary download-video" disabled="true" type="button" style="display: none">
+                        <a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">
                             <i class="fa fa-download" aria-hidden="true"></i> Download
-                        </button>
+                        </a>
                     </div>
                     <div class="form-group">
-                        <button class="custom-button custom-button--primary go-share" disabled="true" type="button" style="display: none">
+                        <a href="#" class="custom-button custom-button--primary go-share" disabled="true" style="display: none">
                             {{--<i class="fa fa-share" aria-hidden="true"></i> --}}Go Share
-                        </button>
+                        </a>
                     </div>
                     <div class="form-group">
                         <button class="custom-button custom-button--rotate rot-left" type="button" style="display: none">
