@@ -11,7 +11,7 @@
             @foreach($category->videos as $video)
                 <div class="col-lg-4 col-sm-6 portfolio-item mb-3 mb-sm-4">
                     <div class="card h-100">
-                        <a href="{{ route('video.show', $video->slug) }}">
+                        <a href="{{ route('video.show', $video->slug) }}" data-category="{{ $category->name }}">
                             <img class="card-img-top" src="{{ $video->getThumbnail() }}" alt="">
                         </a>
                         <div class="card-body">
