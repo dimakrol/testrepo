@@ -3,7 +3,7 @@
     <div class="container bg-white">
         <div class="row justify-content-center video">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
-                <div class="video-container">
+                <div class="video-container" data-category="{{ $video->name }}">
                     <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
                         <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                         Your browser does not support the video tag.
@@ -88,7 +88,9 @@
                 {{--@foreach($videos as $video)--}}
                     {{--<div class="col-lg-6 col-sm-6 portfolio-item">--}}
                         {{--<div class="card h-100">--}}
-                            {{--<a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>--}}
+                            {{--<a href="{{ route('video.show', $video->slug) }}" data-category="{{$video->name}}">--}}
+                                {{--<img class="card-img-top" src="{{ $video->getThumbnail() }}" alt="">--}}
+                            {{--</a>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--@endforeach--}}
