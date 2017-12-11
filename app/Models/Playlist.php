@@ -41,4 +41,15 @@ class Playlist extends Model
     {
         return $this->belongsToMany(Video::class)->withPivot('order');
     }
+
+    /**
+     * @return mixed|string
+     */
+    public function getCategoryNameAttribute()
+    {
+        if ($this->link) {
+            return str_replace('-', ' ', $this->link);
+        }
+        return $this->name;
+    }
 }
