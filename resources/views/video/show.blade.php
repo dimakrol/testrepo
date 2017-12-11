@@ -101,25 +101,27 @@
     <div class="modal" id="crop-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
                 <div class="modal-body">
                     <div class="row">
                         <div id="croppie"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="custom-button custom-button--rotate rot-left" type="button">
-                        <i class="fa fa-undo" aria-hidden="true"></i>
-                    </button>
-                    <button class="custom-button custom-button--danger crop-button">Crop</button>
-                    <button class="custom-button custom-button--rotate rot-right mr-0" type="button">
-                        <i class="fa fa-repeat" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div>
+                        <button class="custom-button custom-button--croppie rot-left" type="button">
+                            <i class="fa fa-undo" aria-hidden="true"></i>
+                        </button>
+                        <button class="custom-button custom-button--croppie rot-right" type="button">
+                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                        </button>
+                        <button class="custom-button custom-button--croppie mr-0" type="button">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="align-self-stretch">
+                        <button class="custom-button custom-button--primary crop-button mb-2">Save</button>
+                        <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -266,7 +268,7 @@
                     contentType: false, // Set content type to false as jQuery will tell the server its a query string request
                     success: function(data) {
                         $('.video-container').html(`
-                        <video data-id="${data.videoId}" poster="http://localhost:8000/images/loading_anim.gif" autoplay preload="auto" class="center" width="100%" controls="">
+                        <video data-id="${data.videoId}" poster="https://localhost:8000/images/loading_anim.gif" autoplay preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);

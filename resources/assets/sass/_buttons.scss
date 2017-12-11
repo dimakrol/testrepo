@@ -41,6 +41,15 @@
       background-color: $lightGreen--disabled;
     }
   }
+  
+  &--hollow {
+    background-color: transparent;
+    color: $gray-900;
+    font-size: 1.125rem;
+    max-width: 21.375rem;
+    padding: .75rem .25rem;
+    width: 100%;
+  }
 
   &--danger {
     background-color: $danger;
@@ -51,13 +60,24 @@
     width: 100%;
   }
 
-  &--rotate {
+  &--croppie {
     background-color: $gray-900;
     border-radius: .75rem;
     color: white;
+    font-size: 1.25rem;
     height: 3.125rem;
+    margin-bottom: 1.5625rem;
     margin-right: .75rem;
+    transition: background-color $transition;
     width: 3.125rem;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: lighten($gray-900, 10%);
+      color: white;
+      text-decoration: none;
+    }
   }
 }
 
