@@ -11,15 +11,17 @@
 @section('content')
     <div class="container">
         <div class="row my-4">
-            <div class="offset-lg-2 col-lg-8 col-sm-12 col-xs-12 video-container">
+            <div class="offset-lg-2 col-lg-8 col-sm-12 col-xs-12">
                 <div class="video-view-alert alert alert-success" role="alert">
                     Email has been send successfully!!!
                 </div>
                 <h2 class="my-video-title" align="center"><span class="text-danger">{{$gVideo->video->name}}</span></h2>
-                <video poster="{{ $gVideo->video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
-                    <source src="{{ $gVideo->video_url }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-container"  data-category="{{$gVideo->video->categoryName}}">
+                    <video data-category="{{ $gVideo->video->categoryName }}" poster="{{ $gVideo->video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
+                        <source src="{{ $gVideo->video_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
                 <div class="row my-video social-buttons">
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
                         <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
@@ -36,7 +38,7 @@
                     @foreach($videos as $video)
                         <div class="col-lg-6 col-sm-6 portfolio-item">
                             <div class="card h-100">
-                                <a href="{{ route('video.show', $video->slug) }}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
+                                <a href="{{ route('video.show', $video->slug) }}" data-category="{{$video->categoryName}}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
                             </div>
                         </div>
                     @endforeach
