@@ -39,12 +39,12 @@
     </a>
 </div>
 
-<div class="background--grey">
-  <div class="container">
+<div class="background--grey pt-4 pb-sm-2 pb-md-5">
+  <div class="container container--index">
       <!-- Page Heading -->
           @foreach($playlists as $playlist)
               @if($playlist->videos->count())
-                  <h1 class="my-4"><a href="{{$playlist->link ? route('category.show', $playlist->link): '#'}}">{{$playlist->name}}</a></h1>
+                  <h1 class="playlist-title"><a href="{{$playlist->link ? route('category.show', $playlist->link): '#'}}">{{$playlist->name}}</a></h1>
                   <div class="row mx-2 mx-sm-0">
                       <div id="playlist-owl-carousel-{{$playlist->id}}" class="owl-carousel owl-theme">
                           @foreach($playlist->videos as $video)
@@ -58,11 +58,11 @@
                                               <div class="col-3">
                                                   <a href="{{ route('video.show', $video->slug) }}"><img src="{{ $video->user->thumbnail_path }}" class="rounded-circle img-fluid"></a>
                                               </div>
-                                              <div class="col-9">
-                                                  <h4>
-                                                      <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
+                                              <div class="col-9 d-flex justify-content-center flex-column">
+                                                  <h4 class="mb-0">
+                                                      <a class="video__title" href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
                                                   </h4>
-                                                  <p class="card-text">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->fullName()}}</a></p>
+                                                  <p class="card-text video__author">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->fullName()}}</a></p>
                                               </div>
                                           </div>
                                       </div>

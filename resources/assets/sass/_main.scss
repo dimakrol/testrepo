@@ -1,5 +1,4 @@
 .background--grey {
-  padding-top: 32px;
   background: $offWhite;
 }
 
@@ -15,10 +14,51 @@
   margin-top: 20px;
 }
 
+.container {
+
+  &--index {
+    background-color: white;
+    padding-top: .25rem;
+
+    @media (min-width: $sm) {
+      background-color: transparent;
+    }
+  }
+}
+
 .avatar {
   height: 2.8125rem;
   margin-right: .625rem;
   width: 2.8125rem;
+}
+
+.playlist-title {
+  margin-bottom: .5em;
+  padding: 0 .5rem;
+
+  > a {
+    color: $black;
+    font-size: 1.25rem;
+  }
+
+  @media (min-width: $md) {
+
+    > a {
+      font-size: 1.875rem;
+      position: relative;
+
+      &:after {
+        background-color: $lightGreen;
+        bottom: -.5rem;
+        content: '';
+        display: inline-block;
+        height: .5rem;
+        left: 0;
+        position: absolute;
+        width: 5rem;
+      }
+    }
+  }
 }
 
 // category label
@@ -54,6 +94,10 @@
 
   &-carousel {
     margin-bottom: 1.875rem;
+
+    @media (min-width: $md) {
+      margin-bottom: 3.5rem;
+    }
   }
 
   &-prev,
