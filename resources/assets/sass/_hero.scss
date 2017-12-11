@@ -103,14 +103,13 @@
   height: 45.45vw;
 
   &--first {
-    background-image: url("/images/SantasNaughtyList-min.jpg");
+    background-image: url("/images/jingle-bells-home-hero.jpg");
   }
-
   &--second {
-    background-image: url("/images/100thBirthdayHero-min.jpg");
+    background-image: url("/images/queen-christmas-home-hero.jpg");
   }
   &--third {
-    background-image: url("/images/homehero.jpg");
+    background-image: url("/images/SantasNaughtyList-min.jpg");
   }
 
   @media (min-width: $sm) {
