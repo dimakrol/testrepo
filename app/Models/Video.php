@@ -119,6 +119,17 @@ class Video extends Model
         return $this->user()->first();
     }
 
+    public function getCategoryNameAttribute()
+    {
+        if ($category = $this->categories()->first()) {
+            return $category->name;
+        } elseif ($playlist = $this->playlists()->first()) {
+            return $playlist->name;
+        } else {
+            return $this->name;
+        }
+    }
+
     /**
      * Upload video to server, set url parameters to fields
      * @param $videoFile
