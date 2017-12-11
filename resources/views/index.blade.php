@@ -4,15 +4,15 @@
 @include('flash::message')
 <div id="wwd-carousel" class="carousel slide wwd-carousel" data-ride="carousel">
     <div class="carousel-inner">
+        {{--<div class="carousel-item carousel-item--first active">--}}
+            {{--<div class="wwd-carousel__positioning">--}}
+                {{--<h1 class="wwd-carousel__header"><span>New Christmas E-Cards!</span></h1>--}}
+                {{--<p class="lead" align="center">--}}
+                    {{--<a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/merry-christmas" role="button">Create video</a>--}}
+                {{--</p>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="carousel-item carousel-item--first active">
-            <div class="wwd-carousel__positioning">
-                <h1 class="wwd-carousel__header"><span>New Christmas E-Cards!</span></h1>
-                <p class="lead" align="center">
-                    <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/merry-christmas" role="button">Create video</a>
-                </p>
-            </div>
-        </div>
-        <div class="carousel-item carousel-item--second">
             <div class="wwd-carousel__positioning">
                 <h1 class="wwd-carousel__header"><span>New Christmas E-Cards!</span></h1>
                 <p class="lead" align="center">
@@ -20,7 +20,7 @@
                 </p>
             </div>
         </div>
-        <div class="carousel-item carousel-item--third">
+        <div class="carousel-item carousel-item--second">
             <div class="wwd-carousel__positioning">
                 <h1 class="wwd-carousel__header"><span>New Christmas E-Cards!</span></h1>
                 <p class="lead" align="center">
