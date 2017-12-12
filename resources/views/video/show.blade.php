@@ -262,7 +262,7 @@
                     contentType: false, // Set content type to false as jQuery will tell the server its a query string request
                     success: function(data) {
                         $('.video-container').html(`
-                        <video data-id="${data.videoId}" poster="https://localhost:8000/images/loading_anim.gif" autoplay preload="auto" class="center" width="100%" controls="">
+                        <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
