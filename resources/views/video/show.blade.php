@@ -32,7 +32,9 @@
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="form-group hide-block">
-                                {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'data-ratio' => $field->aspect_ratio, 'accept' => 'image/*', 'required' => 'required']) !!}
+                                <form class="form-file">
+                                    {!! Form::file($field->variable_name, ['class' => 'form-control-file', 'data-ratio' => $field->aspect_ratio, 'accept' => 'image/*', 'required' => 'required']) !!}
+                                </form>
                             </div>
                         @elseif('text' == $field->type)
                         @elseif('text_area' == $field->type)
@@ -51,9 +53,6 @@
                         <button class="custom-button custom-button--primary update-preview" disabled="true">Update Preview</button>
                     </div>
                     <div class="form-group">
-                        {{--<button class="custom-button custom-button--danger crop-button hide-block">Crop</button>--}}
-                    </div>
-                    <div class="form-group">
                         <a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">
                             <i class="fa fa-download" aria-hidden="true"></i> Download
                         </a>
@@ -63,14 +62,6 @@
                             {{--<i class="fa fa-share" aria-hidden="true"></i> --}}Go Share
                         </a>
                     </div>
-                    <div class="form-group">
-                        {{--<button class="custom-button custom-button--rotate rot-left" type="button" style="display: none">--}}
-                            {{--<i class="fa fa-undo" aria-hidden="true"></i>--}}
-                        {{--</button>--}}
-                        {{--<button class="custom-button custom-button--rotate rot-right mr-0" type="button" style="display: none">--}}
-                            {{--<i class="fa fa-repeat" aria-hidden="true"></i>--}}
-                        {{--</button>--}}
-                    </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="text-center preview-image {{$field->variable_name}} hide-block">
@@ -79,7 +70,6 @@
                         @endif
                     @endforeach
                 @endif
-                {{--<div id="croppie"></div>--}}
             </div>
         </div>
         {{--<div class="row">--}}
@@ -114,13 +104,13 @@
                         <button class="custom-button custom-button--croppie rot-right" type="button">
                             <i class="fa fa-repeat" aria-hidden="true"></i>
                         </button>
-                        <button class="custom-button custom-button--croppie mr-0" type="button">
+                        <button class="custom-button custom-button--croppie mr-0 trash-file" type="button" data-dismiss="modal">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </div>
                     <div class="align-self-stretch">
                         <button class="custom-button custom-button--primary crop-button mb-2">Save</button>
-                        <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="custom-button custom-button--hollow trash-file" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -136,6 +126,8 @@
                 content_name: "{{$video->slug}}"
             });
 
+            let form = $('form.form-file');
+            let trushButton = $('button.trash-file');
             let cropModal = $('#crop-modal');
             let croppie = null;
             let fileName = null;
@@ -153,6 +145,10 @@
             };
             let previewImage = null;
             let ratio = null;
+
+            trushButton.on('click', function () {
+                form[0].reset();
+            });
 
             buttons.create.on('click', function() {
                 fbq('track', 'Lead', {
@@ -187,8 +183,6 @@
                 ratio = $(this).data('ratio');
                 previewImage = $('.preview-image.'+'{{$field->variable_name}}');
                 previewImage.hide();
-//                buttons.download.prop('disabled', true).hide();
-//                buttons.goShare.prop('disabled', true).hide();
 
                 let files = e.target.files || e.dataTransfer.files;
 
