@@ -122,6 +122,9 @@
     @auth
         <script>window.intercomSettings = { app_id: "e8yc37gy", name: "{{Auth::user()->first_name}}", email: "{{Auth::user()->email ?: 'user.with@no.email'}}", created_at: "{{Auth::user()->created_at->timestamp}}"}</script>
     @endauth
-    <script>window.intercomSettings = { app_id: "e8yc37gy" }</script>
+
+    @guest
+        <script>window.intercomSettings = { app_id: "e8yc37gy" }</script>
+    @endguest
 </body>
 </html>
