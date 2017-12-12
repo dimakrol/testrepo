@@ -15,9 +15,17 @@
                             <img class="card-img-top" src="{{ $video->getThumbnail() }}" alt="">
                         </a>
                         <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
-                            </h4>
+                            <div class="row">
+                                <div class="col-3">
+                                    <a href="{{ route('video.show', $video->slug) }}"><img src="{{ $video->user->thumbnail_path }}" class="rounded-circle img-fluid"></a>
+                                </div>
+                                <div class="col-9 d-flex justify-content-center flex-column">
+                                    <h4 class="mb-0">
+                                        <a class="video__title" href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
+                                    </h4>
+                                    <p class="card-text video__author">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->fullName()}}</a></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
