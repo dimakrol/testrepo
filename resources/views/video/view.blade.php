@@ -30,7 +30,7 @@
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="btn btn-warning" style="background-color: #4267B2"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#share-via-email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Share via Email</button>
+                        <button style="cursor: pointer;" type="button" class="btn btn-success" data-toggle="modal" data-target="#share-via-email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Share via Email</button>
                     </div>
                 </div>
                 <h3 class="your-own">Create your own:</h3>
@@ -73,7 +73,7 @@
                     <button type="button"
                             class="btn btn-success share-via-email-but"
                             data-mail-route="{{route('share.email')}}"
-                            data-share-link="{{route('view', $gVideo->hash)}}">Send</button>
+                            data-share-link="{{route('view', $gVideo->hash)}}" style="cursor: pointer;">Send</button>
                 </div>
 
             </div>

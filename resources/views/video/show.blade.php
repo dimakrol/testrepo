@@ -180,7 +180,7 @@
             });
 
             @foreach($video->fields as $field)
-                $('input[name={{$field->variable_name}}]').on('change', function (e) {
+                $(document).on('change', 'input[name={{$field->variable_name}}]', function (e) {
                 fileName = $(this)[0].name;
                 ratio = $(this).data('ratio');
                 previewImage = $('.preview-image.'+'{{$field->variable_name}}');
