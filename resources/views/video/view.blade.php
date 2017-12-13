@@ -17,7 +17,7 @@
                 </div>
                 <h2 class="my-video-title" align="center"><span class="text-danger">{{$gVideo->video->name}}</span></h2>
                 <div class="video-container"  data-category="{{$gVideo->video->categoryName}}">
-                    <video data-category="{{ $gVideo->video->categoryName }}" autoplay poster="{{ $gVideo->video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
+                    <video data-category="{{ $gVideo->video->categoryName }}" autoplay loop muted playsinline poster="{{ $gVideo->video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
                         <source src="{{ $gVideo->video_url }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
