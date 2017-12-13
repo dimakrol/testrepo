@@ -52,14 +52,14 @@
                     <div class="form-group">
                         <button class="custom-button custom-button--primary update-preview" disabled="true">Update Preview</button>
                     </div>
-                    <div class="form-group">
-                        <a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">
-                            <i class="fa fa-download" aria-hidden="true"></i> Download
-                        </a>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">--}}
+                            {{--<i class="fa fa-download" aria-hidden="true"></i> Download--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <a href="#" class="custom-button custom-button--primary go-share" disabled="true" style="display: none">
-                            {{--<i class="fa fa-share" aria-hidden="true"></i> --}}Go Share
+                            {{--<i class="fa fa-share" aria-hidden="true"></i> --}}Save & Share
                         </a>
                     </div>
                     @foreach($video->fields as $field)
