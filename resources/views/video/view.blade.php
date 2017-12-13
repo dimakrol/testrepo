@@ -70,7 +70,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit"
+                    <button type="button"
                             class="btn btn-success share-via-email-but"
                             data-mail-route="{{route('share.email')}}"
                             data-share-link="{{route('view', $gVideo->hash)}}">Send</button>
