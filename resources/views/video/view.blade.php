@@ -86,15 +86,15 @@
         $(function () {
 
             let modalShare = $('#share-via-email');
-            let submitEmailBut = $('.share-via-email-but');
             let alertEmail = $('.video-view-alert');
             let formModalAlert = $('.error-message-form');
 
-            submitEmailBut.on('click', function () {
+            $(document).on('click', '.share-via-email-but', function () {
                 let email = $('#recipient-email');
                 let name = $('#recipient-name');
                 let route = $(this).data('mail-route');
                 let shareLink = $(this).data('share-link');
+
                 $.ajax({
                     url: route,
                     type: 'POST',
