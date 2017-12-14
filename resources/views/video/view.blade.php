@@ -53,11 +53,13 @@
                         <i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email
                     </button>
                 </div>
-                <div class="form-group">
-                    <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
-                        <i class="fa fa-download" aria-hidden="true"></i> Download
-                    </a>
-                </div>
+                @unless($iPhone)
+                    <div class="form-group">
+                        <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
+                            <i class="fa fa-download" aria-hidden="true"></i> Download
+                        </a>
+                    </div>
+                @endunless
             </div>
         </div>
         <h3 class="mb-3 your-own">Create your own:</h3>
