@@ -20,19 +20,19 @@
                         </div>-->
                         <div class="row no-gutters subscription__title">
                             <div class="col-5">
-                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}</p>
-                                <p class="subscription__term">/year*</p>
+                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency()/12 }}</p>
+                                <p class="subscription__term">/monts*</p>
                             </div>
                             <div class="col-7">
                                 <ul class="subscription__features">
                                     <li>
-                                        <i class="fa fa-check" aria-hidden="true"></i> New content every week.
+                                        <i class="fa fa-check" aria-hidden="true"></i> UNLIMITED video sends.
                                     </li>
                                     <li>
-                                        <i class="fa fa-check" aria-hidden="true"></i> Send unlimited videos.
+                                        <i class="fa fa-check" aria-hidden="true"></i> New content each week.
                                     </li>
                                     <li>
-                                        <i class="fa fa-check" aria-hidden="true"></i> Save the planet.
+                                        <i class="fa fa-check" aria-hidden="true"></i> Save 70% vs paper cards.
                                     </li>
                                 </ul>
                             </div>
