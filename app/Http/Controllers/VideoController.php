@@ -34,9 +34,10 @@ class VideoController extends Controller
 
     public function generatedVideoByHash($hash)
     {
+        $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
         $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();
         $videos = Video::inRandomOrder()->whereNotIn('id', [$gVideo->video_id])->limit(4)->get();
-        return view('video.view', compact('gVideo', 'videos'));
+        return view('video.view', compact('gVideo', 'videos', 'iPhone'));
     }
 
     /**
@@ -47,10 +48,12 @@ class VideoController extends Controller
      */
     public function show($slug)
     {
+        $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+
         $video = Video::with(['fields', 'user'])->whereSlug($slug)->firstOrFail();
         $videos = Video::inRandomOrder()->whereNotIn('id', [$video->id])->limit(4)->get();
 
-        return view('video.show', compact('video', 'videos'));
+        return view('video.show', compact('video', 'videos', 'iPhone'));
     }
 
     public function channel($slug)

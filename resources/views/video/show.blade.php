@@ -269,9 +269,11 @@
                             Your browser does not support the video tag.
                         </video>`);
                         updatePreviewButton.prop('disabled', true);
-                        if (data.downloadUrl) {
-                            buttons.download.attr("href", data.downloadUrl).prop('disabled', false).show();
-                        }
+                        @unless($iPhone)
+                            if (data.downloadUrl) {
+                                buttons.download.attr("href", data.downloadUrl).prop('disabled', false).show();
+                            }
+                        @endunless
                         if (data.generatedUrl) {
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
