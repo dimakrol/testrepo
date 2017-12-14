@@ -39,6 +39,14 @@
   > a {
     color: $black;
     font-size: 1.25rem;
+    transition: color $transition;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: $lightGreen;
+      text-decoration: none;
+    }
   }
 
   @media (min-width: $md) {

@@ -2,10 +2,14 @@
   padding-top: 1.125rem;
   padding-bottom: 175px;
 
+  &-container {
+    margin-bottom: 1rem;
+  }
+
   &__description-container {
     display: flex;
     align-items: center;
-    margin-bottom: .625rem;
+    margin-bottom: 1.5625rem;
   }
 
   &__title {

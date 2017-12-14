@@ -9,43 +9,66 @@
 {{--@endsection--}}
 
 @section('content')
-    <div class="container">
-        <div class="row my-4">
-            <div class="offset-lg-2 col-lg-8 col-sm-12 col-xs-12">
-                <div class="video-view-alert alert alert-success" role="alert">
-                    Email has been send successfully!!!
-                </div>
-                <h2 class="my-video-title" align="center"><span class="text-danger">{{$gVideo->video->name}}</span></h2>
-                <div class="video-container"  data-category="{{$gVideo->video->categoryName}}">
-                    <video data-category="{{ $gVideo->video->categoryName }}" autoplay poster="{{ $gVideo->video->getThumbnail() }}" preload="auto" class="center" width="100%" controls="">
+    <div class="container bg-white">
+        <div class="video-view-alert alert alert-success" role="alert">
+            Email has been send successfully!!!
+        </div>
+        <div class="row justify-content-center video pb-5">
+            <div class="col-md-10 col-lg-6 col-lg-offset-1">
+                <div class="video-container" data-category="{{$gVideo->video->categoryName}}">
+                    <video
+                            data-category="{{ $gVideo->video->categoryName }}"
+                            autoplay
+                            loop
+                            muted
+                            playsinline
+                            poster="{{ $gVideo->video->getThumbnail() }}"
+                            preload="auto"
+                            class="center"
+                            width="100%"
+                            controls=""
+                    >
                         <source src="{{ $gVideo->video_url }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <div class="row my-video social-buttons">
-                    @unless($iPhone)
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                            <a href="{{ route('video.download', $gVideo->id) }}" class="btn btn-danger"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
-                        </div>
-                    @endunless
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 social-button">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="btn btn-warning" style="background-color: #4267B2"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
+                <div class="video__description-container">
+                    <a class="d-inline-block" href="{{ route('video.show', $gVideo->slug) }}">
+                        <img src="{{ $gVideo->user->thumbnail_path }}" class="rounded-circle avatar">
+                    </a>
+                    <div>
+                        <h2 class="video__title">{{ $gVideo->video->name }}</h2>
+                        <p class="video__author">by: <a href="{{ route('channel.index', $gVideo->video->user->slug) }}">{{ $gVideo->video->user->last_name }}</a></p>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                        <button style="cursor: pointer;" type="button" class="btn btn-success" data-toggle="modal" data-target="#share-via-email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Share via Email</button>
-                    </div>
-                </div>
-                <h3 class="your-own">Create your own:</h3>
-                <div class="row">
-                    @foreach($videos as $video)
-                        <div class="col-lg-6 col-sm-6 portfolio-item">
-                            <div class="card h-100">
-                                <a href="{{ route('video.show', $video->slug) }}" data-category="{{$video->categoryName}}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
             </div>
+            <div class="col-sm-10 col-lg-5 pt-lg-3">
+                <div class="form-group">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="custom-button custom-button--facebook">
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
+                    </a>
+                </div>
+                <div class="form-group">
+                    <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">
+                        <i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email
+                    </button>
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
+                        <i class="fa fa-download" aria-hidden="true"></i> Download
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h3 class="mb-3 your-own">Create your own:</h3>
+        <div class="row justify-content-center pb-4">
+            @foreach($videos as $video)
+                <div class="col-6 mb-2 px-2 portfolio-item">
+                    <div class="card h-100">
+                        <a href="{{ route('video.show', $video->slug) }}" data-category="{{$video->categoryName}}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 

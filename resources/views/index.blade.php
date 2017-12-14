@@ -62,7 +62,7 @@
                                                   <h4 class="mb-0">
                                                       <a class="video__title" href="{{ route('video.show', $video->slug) }}">{{ $video->name }}</a>
                                                   </h4>
-                                                  <p class="card-text video__author">Created by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->fullName()}}</a></p>
+                                                  <p class="card-text video__author">by: <a href="{{ route('channel.index', $video->user->slug) }}">{{$video->user->fullName()}}</a></p>
                                               </div>
                                           </div>
                                       </div>
