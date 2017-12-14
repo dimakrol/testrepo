@@ -166,7 +166,7 @@ class VideoController extends Controller
         @copy($video->video_url, $tempImage);
 
         $headers = [
-            'Content-Type: video/mp4',
+            'Content-Type: video/mpeg',
         ];
 
         return response()->download($tempImage, $filename, $headers);
