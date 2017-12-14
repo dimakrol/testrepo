@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-    <div id="wrapper" class="toggled">
+    <div id="wrapper" class="toggled flex-grow-1">
         @include('layouts.admin.sidebar')
         <div id="page-content-wrapper">
             <div class="container-fluid">

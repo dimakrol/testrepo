@@ -145,3 +145,17 @@
     }
   }
 }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: calc( 100vh - 4rem );
+
+  @media (min-width: $lg) {
+    min-height: calc( 100vh - 4.625rem );
+  }
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}

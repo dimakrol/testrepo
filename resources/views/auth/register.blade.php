@@ -5,7 +5,7 @@
     </style>
 @endsection
 @section('content')
-<div class="container login-register-forms">
+<div class="container login-register-forms flex-grow-1">
     <div class="row">
         <div class="col-md-6 offset-md-3 form-margin-top">
             <h3 class="font-weight-bold">Create Your Free Account</h3>

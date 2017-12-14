@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid flex-grow-1">
         <div class="row">
             <div class="col mx-auto subscription">
                 <div id="pay-invoice" class="subscription__card">

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-<div class="container">
+<div class="container flex-grow-1">
     <div class="row">
         <div class="col-md-6 offset-md-3 form-margin-top">
             @if (session('status'))

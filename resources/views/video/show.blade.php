@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 @section('content')
-    <div class="container bg-white">
+    <div class="container bg-white flex-grow-1">
         <div class="row justify-content-center video">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <div class="video-container" data-category="{{ $video->categoryName }}">
