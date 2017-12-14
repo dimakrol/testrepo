@@ -124,6 +124,10 @@
                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                 </div>
                             </div>
+                            <p class="small-text grey-text">*billed in advance, auto-renewal - 30-Day Satisfaction Guarantee
+                                <br/>
+                                by clicking make secure payment, you agree to WordsWontDo’s <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use" target="_blank">terms of sale</a>.
+                            </p>
                         </form>
                         <!--<div class="card-title">
                             <h3 class="text-center"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i></h3>
