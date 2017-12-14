@@ -165,10 +165,6 @@ class VideoController extends Controller
         $tempImage = tempnam(sys_get_temp_dir(), $filename);
         @copy($video->video_url, $tempImage);
 
-        $headers = [
-            'Content-Type: video/mpeg',
-        ];
-
-        return response()->download($tempImage, $filename, $headers);
+        return response()->download($tempImage, $filename);
     }
 }
