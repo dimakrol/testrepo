@@ -253,7 +253,7 @@
                     contentType: false,
                     success: function(data) {
                         $('.video-container').html(`
-                        <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay muted preload="auto" class="center" width="100%" controls="">
+                        <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay loop muted playsinline preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
