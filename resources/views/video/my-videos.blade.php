@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 @section('content')
-    <div class="container">
+    <div class="container flex-grow-1">
         @if($gVideos->count())
         <div class="my-videos-title">
             <h1 align="center"><span class="text-danger">Your Videos</span></h1>

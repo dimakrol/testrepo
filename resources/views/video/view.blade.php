@@ -9,7 +9,7 @@
 {{--@endsection--}}
 
 @section('content')
-    <div class="container bg-white">
+    <div class="container bg-white flex-grow-1">
         <div class="video-view-alert alert alert-success" role="alert">
             Email has been send successfully!!!
         </div>

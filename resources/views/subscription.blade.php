@@ -2,25 +2,25 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid flex-grow-1">
         <div class="row">
             <div class="col mx-auto subscription">
                 <div id="pay-invoice" class="subscription__card">
-                    @if(Auth::user()->subscribed(['yearly', 'yearlyuk']))
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3 class="text-center">You have <span class="text-danger">Yearly</span> subscription</h3>
-                            </div>
-                        </div>
-                    @else
+                    {{--@if(Auth::user()->subscribed(['yearly', 'yearlyuk']))--}}
+                        {{--<div class="card-body">--}}
+                            {{--<div class="card-title">--}}
+                                {{--<h3 class="text-center">You have <span class="text-danger">Yearly</span> subscription</h3>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--@else--}}
                     <div class="subscription__body">
                         <h2 class="subscription__membership-name">Annual Membership</h2>
                         <!--<div class="card-title">
                             <h3 class="text-center">Buy early subscription for  </h3>
                         </div>-->
                         <div class="row no-gutters subscription__title">
-                            <div class="col-5">
-                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}</p>
+                            <div class="col-5 text-center">
+                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency()/12 }}</p>
                                 <p class="subscription__term">/month*</p>
                             </div>
                             <div class="col-7">
@@ -124,6 +124,10 @@
                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                 </div>
                             </div>
+                            <p class="small-text grey-text">*billed in advance, auto-renewal - 30-Day Satisfaction Guarantee
+                                <br/>
+                                by clicking make secure payment, you agree to WordsWontDo’s <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use" target="_blank">terms of sale</a>.
+                            </p>
                         </form>
                         <!--<div class="card-title">
                             <h3 class="text-center"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i></h3>
@@ -147,7 +151,7 @@
                             </form>
                         </div>
                     </div>
-                    @endif
+                    {{--@endif--}}
                 </div>
             </div>
         </div>
