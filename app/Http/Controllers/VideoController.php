@@ -106,20 +106,6 @@ class VideoController extends Controller
         $token = json_decode($result)->{'token'};
 
         $gVideo = null;
-        try {
-            $hash = str_random(40);
-            while (VideoGenerated::where('hash', $hash)->first()) {
-                $hash = str_random(40);
-            }
-
-            $gVideo = $video->videosGenerated()->create([
-                'user_id' => Auth::user()->id,
-                'impossible_id' => $token,
-                'hash' => $hash
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
-        }
 
         $videoUrl = "http://api.impossible.io/v2/render/".$token.".mp4";
 
@@ -127,11 +113,26 @@ class VideoController extends Controller
             'videoUrl' => $videoUrl,
             'videoId' => $video->id,
         ];
+
         if (!Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
-            $response['downloadUrl'] = route('subscription.index');
             $response['generatedUrl'] = route('subscription.index');
         } else {
-            $response['downloadUrl'] = route('video.download', $gVideo->id);
+
+            try {
+                $hash = str_random(40);
+                while (VideoGenerated::where('hash', $hash)->first()) {
+                    $hash = str_random(40);
+                }
+
+                $gVideo = $video->videosGenerated()->create([
+                    'user_id' => Auth::user()->id,
+                    'impossible_id' => $token,
+                    'hash' => $hash
+                ]);
+            } catch (\Exception $e) {
+                Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
+            }
+
             $response['generatedUrl'] = route('view', $gVideo->hash) ;
         }
 

@@ -45,9 +45,9 @@
                             </div>
                         @endif
                     @endforeach
-                    <div class="form-group">
-                        <button class="custom-button custom-button--primary update-preview" disabled="true" style="display: none">Change Image</button>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<button class="custom-button custom-button--primary change-image" disabled="true" style="display: none">Change Image</button>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <a href="#" class="custom-button custom-button--primary go-share" disabled="true">Save & Share</a>
                     </div>
@@ -121,7 +121,7 @@
             let croppie = null;
             let fileName = null;
             let croppedImage = null;
-            let updatePreviewButton = $('button.update-preview');
+            // let updatePreviewButton = $('button.change-image');
             let videoId = $('video').data('id');
             let buttons = {
                 crop: $('.crop-button'),
@@ -145,9 +145,9 @@
                 });
             });
 
-            updatePreviewButton.on('click', function () {
-                uploadFile();
-            });
+            // updatePreviewButton.on('click', function () {
+            //     uploadFile();
+            // });
 
             buttons.crop.on('click', function () {
                 cropImage();
@@ -168,19 +168,19 @@
 
             @foreach($video->fields as $field)
                 $(document).on('change', 'input[name={{$field->variable_name}}]', function (e) {
-                fileName = $(this)[0].name;
-                ratio = $(this).data('ratio');
-                previewImage = $('.preview-image.'+'{{$field->variable_name}}');
-                previewImage.hide();
+                    fileName = $(this)[0].name;
+                    ratio = $(this).data('ratio');
+                    previewImage = $('.preview-image.'+'{{$field->variable_name}}');
+                    previewImage.hide();
 
-                let files = e.target.files || e.dataTransfer.files;
+                    let files = e.target.files || e.dataTransfer.files;
 
-                if (!files.length) {
-                    return;
-                }
-                createImage(files[0]);
-                cropModal.modal('show');
-            });
+                    if (!files.length) {
+                        return;
+                    }
+                    createImage(files[0]);
+                    cropModal.modal('show');
+                });
             @endforeach
 
             function createImage(file) {
@@ -220,13 +220,12 @@
                     type: 'canvas',
                     size: 'viewport'
                 }).then((response) => {
-                    previewImage.show().children().attr('src', response);
-                    updatePreviewButton.prop('disabled', false);
                     croppedImage = response;
                     cropModal.modal('hide');
                     croppie.destroy();
                     croppie = null;
                     buttons.addPhoto.text('Change Photo');
+                    uploadFile();
                 })
             }
 
@@ -248,8 +247,6 @@
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
-                        updatePreviewButton.prop('disabled', true);
-
                         if (data.generatedUrl) {
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }

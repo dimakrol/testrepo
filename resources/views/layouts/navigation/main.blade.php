@@ -18,7 +18,9 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{route('subscription.index')}}">Subscription</a>
-                            <a class="dropdown-item" href="{{route('my-videos')}}">My Videos</a>
+                            @if (Auth::user()->subscribed(['yearly', 'yearlyuk']))
+                                <a class="dropdown-item" href="{{route('my-videos')}}">My Videos</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
