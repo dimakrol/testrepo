@@ -4,7 +4,7 @@
         <div class="row justify-content-center video">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <div class="video-container" data-category="{{ $video->categoryName }}">
-                    <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" autoplay loop muted playsinline preload="auto" class="center" width="100%" controls controlsList="nodownload">
+                    <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" autoplay loop playsinline preload="auto" class="center" width="100%" controls controlsList="nodownload">
                         <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -249,7 +249,7 @@
                     contentType: false,
                     success: function(data) {
                         $('.video-container').html(`
-                        <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay loop muted playsinline preload="auto" class="center" width="100%" controls="">
+                        <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay loop playsinline preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
