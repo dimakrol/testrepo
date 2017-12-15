@@ -71,13 +71,6 @@ class VideoController extends Controller
      */
     public function generate(Request $request)
     {
-        //todo check if user has subscription
-        if (!Auth::check()) {
-            return response()->json('error');
-        } elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
-            return response()->json('error');
-        }
-
         $video = Video::with('fields')->findOrFail($request->id);
 
         $params = [];
