@@ -20,7 +20,7 @@
                         </div>-->
                         <div class="row no-gutters subscription__title">
                             <div class="col-5">
-                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency()/12 }}</p>
+                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}</p>
                                 <p class="subscription__term">/month*</p>
                             </div>
                             <div class="col-7">
