@@ -71,6 +71,10 @@ class VideoController extends Controller
      */
     public function generate(Request $request)
     {
+        if (!Auth::check()) {
+            return response()->json('error');
+        }
+
         $video = Video::with('fields')->findOrFail($request->id);
 
         $params = [];
@@ -139,13 +143,12 @@ class VideoController extends Controller
             'videoUrl' => $videoUrl,
             'videoId' => $video->id,
         ];
-        if (!$gVideo) {
-            $response['downloadUrl'] = null;
-            $response['generatedUrl'] = null;
+        if (!Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
+            $response['downloadUrl'] = route('subscription.index');
+            $response['generatedUrl'] = route('subscription.index');
         } else {
             $response['downloadUrl'] = route('video.download', $gVideo->id);
             $response['generatedUrl'] = route('view', $gVideo->hash) ;
-
         }
 
         return response()->json($response);

@@ -22,11 +22,7 @@
             <div class="col-sm-10 col-lg-5 pt-lg-3">
                 @if(!Auth::user())
                     <div class="form-group">
-                        <a class="custom-button custom-button--primary create-video" href="{{ route('register') }}">Create Video</a>
-                    </div>
-                @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
-                    <div class="form-group text-center">
-                        <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">Create Video</a>
+                        <a class="custom-button custom-button--primary create-video" href="{{ route('login') }}">Create Video</a>
                     </div>
                 @else
                     @foreach($video->fields as $field)
@@ -52,15 +48,13 @@
                     <div class="form-group">
                         <button class="custom-button custom-button--primary update-preview" disabled="true">Update Preview</button>
                     </div>
-                    {{--<div class="form-group">--}}
-                        {{--<a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">--}}
-                            {{--<i class="fa fa-download" aria-hidden="true"></i> Download--}}
-                        {{--</a>--}}
-                    {{--</div>--}}
                     <div class="form-group">
-                        <a href="#" class="custom-button custom-button--primary go-share" disabled="true" style="display: none">
-                            {{--<i class="fa fa-share" aria-hidden="true"></i> --}}Save & Share
+                        <a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">
+                            <i class="fa fa-download" aria-hidden="true"></i> Download
                         </a>
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="custom-button custom-button--primary go-share" disabled="true" style="display: none">Save & Share</a>
                     </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
@@ -125,9 +119,7 @@
             fbq('track', 'ViewContent', {
                 content_name: "{{$video->slug}}"
             });
-            //play video onload
-//            $('video')[0].play();
-            // document.addEventListener('contextmenu', event => event.preventDefault());
+
             let form = $('form.form-file');
             let trushButton = $('button.trash-file');
             let cropModal = $('#crop-modal');
@@ -239,9 +231,6 @@
                 }).then((response) => {
                     previewImage.show().children().attr('src', response);
                     updatePreviewButton.prop('disabled', false);
-                    // buttons.crop.hide();
-                    // buttons.rotLeft.hide();
-                    // buttons.rotRight.hide();
                     croppedImage = response;
                     cropModal.modal('hide');
                     croppie.destroy();
@@ -260,8 +249,8 @@
                     data: data,
                     cache: false,
                     dataType: 'json',
-                    processData: false, // Don't process the files
-                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                    processData: false,
+                    contentType: false,
                     success: function(data) {
                         $('.video-container').html(`
                         <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay muted preload="auto" class="center" width="100%" controls="">
@@ -269,16 +258,18 @@
                             Your browser does not support the video tag.
                         </video>`);
                         updatePreviewButton.prop('disabled', true);
-                        @unless($iPhone)
+
+                        @if(!$iPhone)
                             if (data.downloadUrl) {
                                 buttons.download.attr("href", data.downloadUrl).prop('disabled', false).show();
                             }
-                        @endunless
+                        @endif
+
                         if (data.generatedUrl) {
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
+
                         previewImage.hide();
-//                        $('video')[0].play();
                     },
                     error: function(jqXHR, textStatus) {
                         console.log(textStatus);
