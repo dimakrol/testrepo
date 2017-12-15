@@ -22,7 +22,7 @@
             <div class="col-sm-10 col-lg-5 pt-lg-3">
                 @if(!Auth::user())
                     <div class="form-group">
-                        <a class="custom-button custom-button--primary create-video" href="{{ route('login') }}">Create Video</a>
+                        <a class="custom-button custom-button--primary create-video" href="{{ route('register') }}">Create Video</a>
                     </div>
                 @else
                     @foreach($video->fields as $field)
@@ -46,15 +46,10 @@
                         @endif
                     @endforeach
                     <div class="form-group">
-                        <button class="custom-button custom-button--primary update-preview" disabled="true">Update Preview</button>
+                        <button class="custom-button custom-button--primary update-preview" disabled="true" style="display: none">Change Image</button>
                     </div>
                     <div class="form-group">
-                        <a href="#" class="custom-button custom-button--primary download-video" disabled="true" style="display: none">
-                            <i class="fa fa-download" aria-hidden="true"></i> Download
-                        </a>
-                    </div>
-                    <div class="form-group">
-                        <a href="#" class="custom-button custom-button--primary go-share" disabled="true" style="display: none">Save & Share</a>
+                        <a href="#" class="custom-button custom-button--primary go-share" disabled="true">Save & Share</a>
                     </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
@@ -132,7 +127,7 @@
                 crop: $('.crop-button'),
                 addPhoto: $('.add-photo'),
                 create: $('.create-video'),
-                download: $('.download-video'),
+                // download: $('.download-video'),
                 goShare: $('.go-share'),
                 rotLeft: $('.rot-left'),
                 rotRight: $('.rot-right'),
@@ -254,12 +249,6 @@
                             Your browser does not support the video tag.
                         </video>`);
                         updatePreviewButton.prop('disabled', true);
-
-                        @if(!$iPhone)
-                            if (data.downloadUrl) {
-                                buttons.download.attr("href", data.downloadUrl).prop('disabled', false).show();
-                            }
-                        @endif
 
                         if (data.generatedUrl) {
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();

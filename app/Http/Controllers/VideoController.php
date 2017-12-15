@@ -26,17 +26,10 @@ class VideoController extends Controller
 
     public function generatedVideoByHash($hash)
     {
-        $subscribed = false;
-        if (Auth::user()) {
-            if (Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
-                $subscribed = true;
-            }
-        }
-
         $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
         $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();
         $videos = Video::inRandomOrder()->whereNotIn('id', [$gVideo->video_id])->limit(4)->get();
-        return view('video.view', compact('gVideo', 'videos', 'iPhone', 'subscribed'));
+        return view('video.view', compact('gVideo', 'videos', 'iPhone'));
     }
 
     /**

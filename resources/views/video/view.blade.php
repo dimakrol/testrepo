@@ -43,29 +43,23 @@
                 </div>
             </div>
             <div class="col-sm-10 col-lg-5 pt-lg-3">
-                @if (!$subscribed)
+                <div class="form-group">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="custom-button custom-button--facebook">
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
+                    </a>
+                </div>
+                <div class="form-group">
+                    <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">
+                        <i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email
+                    </button>
+                </div>
+                @unless($iPhone)
                     <div class="form-group">
-                        <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">Subscribe</a>
-                    </div>
-                @else
-                    <div class="form-group">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="custom-button custom-button--facebook">
-                            <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
+                        <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
+                            <i class="fa fa-download" aria-hidden="true"></i> Download
                         </a>
                     </div>
-                    <div class="form-group">
-                        <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">
-                            <i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email
-                        </button>
-                    </div>
-                    @unless($iPhone)
-                        <div class="form-group">
-                            <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
-                                <i class="fa fa-download" aria-hidden="true"></i> Download
-                            </a>
-                        </div>
-                    @endunless
-                @endif
+                @endunless
             </div>
         </div>
         <h3 class="mb-3 your-own">Create your own:</h3>
