@@ -52,7 +52,7 @@
                         <i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email
                     </button>
                 </div>
-                @unless($iPhone)
+                @unless($iPhone || $iPod)
                     <div class="form-group">
                         <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
                             <i class="fa fa-download" aria-hidden="true"></i> Download
