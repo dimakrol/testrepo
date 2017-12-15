@@ -6,13 +6,13 @@
         <div class="row">
             <div class="col mx-auto subscription">
                 <div id="pay-invoice" class="subscription__card">
-                    {{--@if(Auth::user()->subscribed(['yearly', 'yearlyuk']))--}}
-                        {{--<div class="card-body">--}}
-                            {{--<div class="card-title">--}}
-                                {{--<h3 class="text-center">You have <span class="text-danger">Yearly</span> subscription</h3>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@else--}}
+                    @if(Auth::user()->subscribed(['yearly', 'yearlyuk']))
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3 class="text-center">You have <span class="text-danger">Yearly</span> subscription</h3>
+                            </div>
+                        </div>
+                    @else
                     <div class="subscription__body">
                         <h2 class="subscription__membership-name">Annual Membership</h2>
                         <!--<div class="card-title">
@@ -20,7 +20,7 @@
                         </div>-->
                         <div class="row no-gutters subscription__title">
                             <div class="col-5 text-center">
-                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency()/12 }}</p>
+                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}</p>
                                 <p class="subscription__term">/month*</p>
                             </div>
                             <div class="col-7">
@@ -151,7 +151,7 @@
                             </form>
                         </div>
                     </div>
-                    {{--@endif--}}
+                    @endif
                 </div>
             </div>
         </div>
