@@ -19,8 +19,11 @@ class VideoController extends Controller
      */
     public function generatedVideos()
     {
-        $gVideos = Auth::user()->videosGenerated()->latest()->with('video')->paginate(20);
-        return view('video.my-videos', compact('gVideos'));
+        if (Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
+            $gVideos = Auth::user()->videosGenerated()->latest()->with('video')->paginate(20);
+            return view('video.my-videos', compact('gVideos'));
+        }
+        return redirect(route('home'));
     }
 
 
