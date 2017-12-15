@@ -45,6 +45,19 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        if (request('current_url')) {
+            session(['current_url' => request('current_url')]);
+        }
+        return view('auth.register');
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -97,6 +110,13 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        return response()->json('success');
+        $path = route('home');
+
+        if ($current_url = session('current_url')) {
+            $path = $current_url;
+            session()->forget('current_url');
+        }
+
+        return response()->json(['path' => $path]);
     }
 }

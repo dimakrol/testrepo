@@ -2,6 +2,7 @@
 
 Auth::routes();
 
+
 Route::resource('/video', 'VideoController', ['only' => ['show']]);
 
 

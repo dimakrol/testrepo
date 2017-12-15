@@ -22,7 +22,7 @@
             <div class="col-sm-10 col-lg-5 pt-lg-3">
                 @if(!Auth::user())
                     <div class="form-group">
-                        <a class="custom-button custom-button--primary create-video" href="{{ route('register') }}">Create Video</a>
+                        <a class="custom-button custom-button--primary create-video" href="{{ route('register').'?current_url='.url()->current() }}">Create Video</a>
                     </div>
                 @else
                     @foreach($video->fields as $field)

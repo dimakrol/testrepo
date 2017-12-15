@@ -63,7 +63,7 @@
                     data: data,
                     dataType: 'json',
                     success: function(data) {
-                        window.location.replace('{{ route('subscription.index') }}');
+                        window.location.replace(data.path);
                     },
                     error: function(data) {
                         let backErrors = JSON.parse(data.responseText).errors;
