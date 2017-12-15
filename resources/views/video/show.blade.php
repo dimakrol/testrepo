@@ -207,10 +207,6 @@
                     croppie.destroy();
                 }
 
-                // buttons.crop.show();
-                // buttons.rotLeft.show();
-                // buttons.rotRight.show();
-
                 croppie = new Croppie(el, {
                     viewport: { width: ratio * 200, height: 200 },
                     boundary: { width: 300, height: 300 },

@@ -23,21 +23,20 @@ class VideoController extends Controller
         return view('video.my-videos', compact('gVideos'));
     }
 
-    public function generatedVideo($slug)
-    {
-        $gVideo = VideoGenerated::with(['video'])->whereSlug($slug)->firstOrFail();
-        if ($gVideo->user_id == Auth::user()->id) {
-            return view('video.my-video', compact('gVideo'));
-        }
-        return redirect(route('view', $gVideo->hash));
-    }
 
     public function generatedVideoByHash($hash)
     {
+        $subscribed = false;
+        if (Auth::user()) {
+            if (Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
+                $subscribed = true;
+            }
+        }
+
         $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
         $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();
         $videos = Video::inRandomOrder()->whereNotIn('id', [$gVideo->video_id])->limit(4)->get();
-        return view('video.view', compact('gVideo', 'videos', 'iPhone'));
+        return view('video.view', compact('gVideo', 'videos', 'iPhone', 'subscribed'));
     }
 
     /**
@@ -94,8 +93,6 @@ class VideoController extends Controller
         $PROJECT_ID = getenv('IMPOSSIBLE_PROJECT_ID');
         $movieName = $video->impossible_video_id;
 
-        //Log::debug('Impossible video id: '. $movieName);
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -112,8 +109,6 @@ class VideoController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
         $result = curl_exec($ch);
-
-        //Log::debug('Result: '. $result);
 
         $token = json_decode($result)->{'token'};
 
@@ -133,11 +128,7 @@ class VideoController extends Controller
             Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
         }
 
-        //Log::debug('Token: '. $token);
-
         $videoUrl = "http://api.impossible.io/v2/render/".$token.".mp4";
-
-        //Log::debug('Video Url: '. $videoUrl);
 
         $response = [
             'videoUrl' => $videoUrl,
