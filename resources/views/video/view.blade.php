@@ -20,7 +20,6 @@
                             data-category="{{ $gVideo->video->categoryName }}"
                             autoplay
                             loop
-                            muted
                             playsinline
                             poster="{{ $gVideo->video->getThumbnail() }}"
                             preload="auto"
