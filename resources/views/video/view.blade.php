@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="col-sm-10 col-lg-5 pt-lg-3">
-                <div class="form-group">
+                <div class="form-group social-button">
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="custom-button custom-button--facebook">
                         <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
                     </a>
