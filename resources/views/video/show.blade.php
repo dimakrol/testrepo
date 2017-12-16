@@ -49,7 +49,7 @@
                         {{--<button class="custom-button custom-button--primary change-image" disabled="true" style="display: none">Change Image</button>--}}
                     {{--</div>--}}
                     <div class="form-group">
-                        <a href="#" class="custom-button custom-button--primary go-share" disabled="true">Save & Share</a>
+                        <button class="custom-button custom-button--primary go-share" disabled>Save & Share</button>
                     </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
@@ -224,7 +224,7 @@
                     cropModal.modal('hide');
                     croppie.destroy();
                     croppie = null;
-                    buttons.addPhoto.text('Change Photo');
+                    buttons.addPhoto.text('Change Photo').addClass('custom-button--used');
                     uploadFile();
                 })
             }

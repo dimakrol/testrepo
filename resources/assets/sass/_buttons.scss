@@ -131,6 +131,16 @@
       text-decoration: none;
     }
   }
+
+  &--used {
+    background-color: $bg-color;
+    color: $lightGreen;
+    font-size: 1.125rem;
+    max-width: 21.375rem;
+    padding: .75rem .25rem;
+    transition: color $transition, background-color $transition;
+    width: 100%;
+  }
 }
 
 .btn-success {
