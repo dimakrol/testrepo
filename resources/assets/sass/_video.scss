@@ -46,6 +46,12 @@
   &-dialog {
     margin: 0 auto;
     max-width: 23rem;
+    padding-bottom: 1.5625rem;
+  }
+
+  &-header {
+    border-bottom: 0;
+    color: white;
   }
 
   &-content {
@@ -55,7 +61,7 @@
   }
 
   &-body {
-    padding: 0;
+    padding: 0 .9375rem;
   }
 
   &-backdrop {
@@ -78,5 +84,11 @@
     > :not(:first-child) {
       margin-left: 0;
     }
+  }
+
+  .close {
+    color: inherit;
+    cursor: pointer;
+    margin: -.625rem -.625rem -.9375rem auto;
   }
 }

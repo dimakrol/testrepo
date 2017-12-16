@@ -85,7 +85,7 @@
     <div class="modal fade" id="share-via-email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header mb-3">
                     <h5 class="modal-title" id="exampleModalLabel">New message</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -98,17 +98,19 @@
                         <div class="form-group">
                             <input type="email" class="form-control" id="recipient-email" placeholder="Email Address" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-5">
                             <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name" required>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button"
-                            class="btn btn-success share-via-email-but"
+                            class="custom-button custom-button--primary share-via-email-but"
                             data-mail-route="{{route('share.email')}}"
-                            data-share-link="{{route('view', $gVideo->hash)}}" style="cursor: pointer;">Send</button>
+                            data-share-link="{{route('view', $gVideo->hash)}}" style="cursor: pointer;">
+                        Send
+                    </button>
+                    <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Close</button>
                 </div>
 
             </div>
@@ -186,7 +188,7 @@
                 .append(
                     '<div class="success-message">' +
                         '<small class="text-success">' +
-                            'Link has been copied successful' +
+                            'Link has been copied successfully' +
                         '</small>' +
                     '</div>'
                 );
