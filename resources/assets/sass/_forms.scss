@@ -8,3 +8,51 @@
 .form-group {
   text-align: center;
 }
+
+.share-label {
+  margin-bottom: 0;
+  max-width: 21.375rem;
+  position: relative;
+  width: 100%;
+
+  > i {
+    color: white;
+    font-size: 1.5625rem;
+    left: 1rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &:after {
+    background-color: darken($lightGreen, 8%);
+    content: '';
+    display: inline-block;
+    height: 100%;
+    left: 3.1875rem;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+}
+
+.share-input {
+  background: linear-gradient(to right, $lightGreen 0%, $lightGreen 3.125rem, white 3.125rem, white 100%);
+  border: 2px solid $lightGreen;
+  border-radius: .25rem;
+  color: #89959f;
+  cursor: pointer;
+  font-size: 1.125rem;
+  font-weight: normal;
+  height: 3.1875rem;
+  padding: .1rem .625rem .1rem 3.8125rem;
+  width: 100%;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background: linear-gradient(to right, lighten($lightGreen, 10%) 0%, lighten($lightGreen, 10%) 3.125rem, white 3.125rem, white 100%);
+    border: 2px solid lighten($lightGreen, 10%);
+    outline: 0;
+  }
+}

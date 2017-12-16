@@ -42,6 +42,15 @@
                 </div>
             </div>
             <div class="col-sm-10 col-lg-5 pt-lg-3">
+                <div class="form-group">
+                    {{--<button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">--}}
+                        {{--<i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email--}}
+                    {{--</button>--}}
+                    <label class="share-label" id="share-label">
+                        <input type="text" placeholder="Share Link" value="{{route('view', $gVideo->hash)}}" class="share-input" id="share-input" spellcheck="false">
+                        <i class="fa fa-link" aria-hidden="true"></i>
+                    </label>
+                </div>
                 <div class="form-group social-button">
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="custom-button custom-button--facebook" target="_blank">
                         <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
@@ -166,5 +175,24 @@
 
         })
 
+        $('#share-input').on('click', function () {
+            // select the input
+            this.select();
+            // copy the path
+            document.execCommand('copy');
+            // show the message, hide it and remove from the DOM
+            $('#share-label')
+                .parent()
+                .append(
+                    '<div class="success-message">' +
+                        '<small class="text-success">' +
+                            'Link has been copied successful' +
+                        '</small>' +
+                    '</div>'
+                );
+            $('.success-message').fadeOut(2000, function () {
+                $(this).remove();
+            });
+        });
     </script>
 @endsection
