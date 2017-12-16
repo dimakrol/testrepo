@@ -26,13 +26,13 @@
                             <div class="col-7">
                                 <ul class="subscription__features">
                                     <li>
-                                        <i class="fa fa-check" aria-hidden="true"></i> UNLIMITED video sends.
+                                        <i class="fa fa-check" aria-hidden="true"></i> Unlimited Videos.
                                     </li>
                                     <li>
-                                        <i class="fa fa-check" aria-hidden="true"></i> New content each week.
+                                        <i class="fa fa-check" aria-hidden="true"></i> New Content Weekly.
                                     </li>
                                     <li>
-                                        <i class="fa fa-check" aria-hidden="true"></i> Save 70% vs paper cards.
+                                        <i class="fa fa-check" aria-hidden="true"></i> Smile Guaranteed.
                                     </li>
                                 </ul>
                             </div>
