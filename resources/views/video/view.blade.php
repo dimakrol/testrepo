@@ -43,11 +43,8 @@
             </div>
             <div class="col-sm-10 col-lg-5 pt-lg-3">
                 <div class="form-group">
-                    {{--<button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">--}}
-                        {{--<i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email--}}
-                    {{--</button>--}}
                     <label class="share-label" id="share-label">
-                        <input type="text" placeholder="Share Link" value="{{route('view', $gVideo->hash)}}" class="share-input" id="share-input" spellcheck="false">
+                        <input type="text" placeholder="Share Link" value="{{url()->current()}}" class="share-input" id="share-input" spellcheck="false">
                         <i class="fa fa-link" aria-hidden="true"></i>
                     </label>
                 </div>
