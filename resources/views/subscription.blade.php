@@ -129,9 +129,6 @@
                                 by clicking make secure payment, you agree to WordsWontDo’s <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use" target="_blank">terms of sale</a>.
                             </p>
                         </form>
-                        <!--<div class="card-title">
-                            <h3 class="text-center"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i></h3>
-                        </div>-->
                         <div class="row mx-auto" style="display: none">
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-button">
                                 @if ($plan->stripe_id != 'yearlyuk')
@@ -147,7 +144,6 @@
                                     <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
                                     <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
                                 @endif
-
                             </form>
                         </div>
                     </div>
