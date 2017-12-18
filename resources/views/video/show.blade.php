@@ -49,7 +49,7 @@
                         {{--<button class="custom-button custom-button--primary change-image" disabled="true" style="display: none">Change Image</button>--}}
                     {{--</div>--}}
                     <div class="form-group">
-                        <button class="custom-button custom-button--primary go-share" disabled>Save & Share</button>
+                        <a href="#" class="custom-button custom-button--primary go-share" disabled>Save & Share</a>
                     </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
