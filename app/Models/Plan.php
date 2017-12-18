@@ -63,8 +63,8 @@ class Plan extends Model
     public function amountInCurrency()
     {
         if (!$this->dot) {
-            return ceil($this->amount/100/12);
+            return ceil($this->amount/100);
         }
-        return number_format(($this->amount / 100 / 12), 1, '.', ' ');
+        return number_format(($this->amount / 100), 2, '.', ' ');
     }
 }
