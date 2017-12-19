@@ -154,9 +154,11 @@
     </div>
 @endsection
 @section('script')
+
     <script src="https://js.stripe.com/v2/"></script>
     <script>
         $(function () {
+            fbq('track', 'InitiateCheckout');
             @if(null !== session('completeRegistration'))
                 fbq('track', 'CompleteRegistration');
                 {{session()->forget('completeRegistration')}}

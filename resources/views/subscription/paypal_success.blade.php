@@ -19,7 +19,7 @@
 @section('script')
     <script>
         $(function () {
-            fbq('track', 'Purchase', {value: 'paypal', currency: 'paypal'});
+            fbq('track', 'Purchase', {value: '{{$plan->amountInCurrency()}}', currency: '{{$plan->currency}}'});
         });
     </script>
 @endsection
