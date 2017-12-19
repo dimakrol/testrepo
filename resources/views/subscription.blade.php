@@ -160,7 +160,7 @@
                                         "Great fun, and very easy to use.. giggles all around"
                                     </p>
                                     <p class="review__author">
-                                        - Liz, Dev 2017
+                                        - Liz, Dec 2017
                                     </p>
                                 </div>
                             </div>
