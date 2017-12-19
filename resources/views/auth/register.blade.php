@@ -8,7 +8,7 @@
 <div class="container login-register-forms flex-grow-1">
     <div class="row">
         <div class="col-md-6 offset-md-3 form-margin-top">
-            <h3 class="font-weight-bold">Create Your Free Account</h3>
+            <h3 class="font-weight-bold">Create Your Account</h3>
             <p class="grey-text">Already have an account? <a href="{{ route('login') }}">Log in</a></p>
             <a href="{{route('login.facebook')}}" class="btn btn-facebook-login"><i class="fa fa-facebook-square" aria-hidden="true"></i> <span>Continue with Facebook</span></a>
             <p class="text-center grey-text"> - OR - </p>
