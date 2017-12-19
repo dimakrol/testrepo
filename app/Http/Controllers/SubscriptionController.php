@@ -67,8 +67,10 @@ class SubscriptionController extends Controller
         if (!$request->auth) {
             return redirect(route('home'));
         }
+
+        $plan = Plan::default();
         flash('Success! Welcome to Words Won\'t Do!')->success();
-        return view('subscription.paypal_success');
+        return view('subscription.paypal_success', compact('plan'));
     }
 
     public function paypalError(Request $request)
