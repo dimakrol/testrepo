@@ -75,14 +75,14 @@ class StripePaymentService
         }
     }
 
-    public static function createCustomerWithSubscription($stripeToken, User $user, EloquentPlan $plan)
+    public static function createCustomerWithSubscription($stripeToken, $stripeEmail, User $user, EloquentPlan $plan)
     {
         static::setKey();
 
         try {
             $stripeCustomer = Customer::create([
                 'source' => $stripeToken,
-                'email' => $user->email,
+                'email' => $stripeEmail,
                 'plan' => $plan->stripe_id
             ]);
 

@@ -21,7 +21,6 @@ class SubscriptionController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $this->validate($request, [
             'stripeToken' => 'required',
             'stripeEmail' => 'required'
@@ -35,6 +34,7 @@ class SubscriptionController extends Controller
 
         if (StripePaymentService::createCustomerWithSubscription(
             $request->input('stripeToken'),
+            $request->input('stripeEmail'),
             Auth::user(),
             $plan
         )) {
