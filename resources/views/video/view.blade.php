@@ -176,7 +176,9 @@
 
         $('#share-input').on('click', function () {
             // select the input
-            this.select();
+            // hack used for iOS
+            this.focus();
+            this.setSelectionRange(0, 999);
             // copy the path
             document.execCommand('copy');
             // show the message, hide it and remove from the DOM
