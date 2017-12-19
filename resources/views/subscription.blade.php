@@ -143,7 +143,7 @@
                         </div>
                         <div class="subscription__reviews">
                             <div class="review">
-                                <img class="review__avatar" src="{{ asset('images/avatar-placeholder.png') }}" alt="Review user">
+                                <img class="review__avatar" src="{{ asset('images/mike.png') }}" alt="Review user">
                                 <div class="review__description">
                                     <p class="review__text">
                                         "I also subscribe to JibJab but have to say, Words Won't Do is much more fun!"
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                             <div class="review">
-                                <img class="review__avatar" src="{{ asset('images/avatar-placeholder.png') }}" alt="Review user">
+                                <img class="review__avatar" src="{{ asset('images/liz.png') }}" alt="Review user">
                                 <div class="review__description">
                                     <p class="review__text">
                                         "Great fun, and very easy to use.. giggles all around"
@@ -268,77 +268,6 @@
                 }, stripeResponseHandler);
                 return false; // submit from callback
             });
-
-            function validate() {
-                var cardNumber = $('#card-number');
-                var cardSecurity = $('#card-cvc');
-                if (!valid_credit_card(cardNumber.val())) {
-                    cardNumber.addClass('is-invalid');
-                    $('.subscription-form__card-number').show();
-                    return false;
-                }
-                if (!valid_securuty_code(cardSecurity.val())) {
-                    cardSecurity.addClass('is-invalid');
-                    $('.subscription-form__secure-code').show();
-                    return false;
-                }
-                return true;
-            }
-
-            function stripeResponseHandler(status, response) {
-
-                if (response.error) {
-                    toggleSubscribeButton();
-                    $('.error-message-alert').text('Error while processing your card...').show();
-                    return false;
-                } else {
-                    if (response.id) {
-                        $('input[name=stripeToken]').val(response.id);
-                        form.submit();
-                    }
-                }
-            }
-
-            function deleteErrorMessages() {
-                $('#card-number,#card-cvc').removeClass('is-invalid');
-                $('.error-message-alert, .subscription-form__card-number, .subscription-form__secure-code').hide();
-            }
-
-            function toggleSubscribeButton() {
-                $('#payment-button').prop('disabled', function(i, v) { return !v; });
-                $('#payment-button-amount,#payment-button-sending').toggle();
-            }
-
-            function valid_credit_card(value) {
-                var regex = new RegExp("^[0-9]{16}$");
-                if (!regex.test(value))
-                    return false;
-
-                return luhnCheck(value);
-            }
-
-            function luhnCheck(val) {
-                var sum = 0;
-                for (var i = 0; i < val.length; i++) {
-                    var intVal = parseInt(val.substr(i, 1));
-                    if (i % 2 == 0) {
-                        intVal *= 2;
-                        if (intVal > 9) {
-                            intVal = 1 + (intVal % 10);
-                        }
-                    }
-                    sum += intVal;
-                }
-                return (sum % 10) == 0;
-            }
-
-
-            function valid_securuty_code(value) {
-                if (!value || !/^[0-9]{3,4}$/.test(value)) {
-                    return false;
-                }
-                return true;
-            }
         });
     </script>
 @endsection
