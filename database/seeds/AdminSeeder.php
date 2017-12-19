@@ -14,9 +14,8 @@ class AdminSeeder extends Seeder
     {
         $users = User::all();
 
-
         foreach ($users as $user) {
-            Storage::disk('local')->append('public/index.csv', $user->id.','.$user->first_name.','.$user->email.','.$user->created_at);
+            Storage::disk('local')->append('public/index.csv', $user->id.','.$user->first_name.','.$user->email.','.($user->subscriptions()->count() ? $user->subscriptions()->first()->created_at:'Not Subscribed') . ','.$user->created_at);
         }
 
 //        $user = new User;
