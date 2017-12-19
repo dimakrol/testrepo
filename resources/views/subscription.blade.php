@@ -168,10 +168,11 @@
                         <div class="row">
                             <div class="col-10 mx-auto">
                                 <button class="subscription__paypal paypal" type="button" id="#" name="paypal"></button>
-                                <div id="payment-button" class="btn subscribe-form__submit">
-                                    <span id="payment-button-amount"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Credit/Debit Card</span>
-                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                </div>
+                                <button id="payment-button" class="btn subscribe-form__submit"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Credit/Debit Card</button>
+                                {!! Form::open(['route' => 'subscription.store', 'id' => 'stripe-subscription-form']) !!}
+                                    <input type="hidden" name="stripeToken" id="stripeToken">
+                                    <input type="hidden" name="stripeEmail" id="stripeEmail">
+                                {!! Form::close() !!}
                             </div>
                         </div>
                         <div class="row mx-auto" style="display: none">
@@ -199,24 +200,51 @@
     </div>
 @endsection
 @section('script')
-
-    <script src="https://js.stripe.com/v2/"></script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
     <script>
         $(function () {
             fbq('track', 'InitiateCheckout');
+
             @if(null !== session('completeRegistration'))
                 fbq('track', 'CompleteRegistration');
                 {{session()->forget('completeRegistration')}}
             @endif
 
-            Stripe.setPublishableKey(WWD.stripe.stripeKey);
+            var stripePaymentButton = $('#payment-button');
+            var subscriptionForm = $('#stripe-subscription-form');
+            var stripe = StripeCheckout.configure({
+                    key: WWD.stripe.stripeKey,
+                    image: "https://stripe.com/img/documentation/checkout/marketplace.png",
+                    locale: "auto",
+                    panelLabel: "Subscribe For",
+                    token: function (token) {
+                        $('#stripeToken').val(token.id);
+                        $('#stripeEmail').val(token.email);
+                        subscriptionForm.submit();
+                    }
+            });
+
+            stripePaymentButton.on('click', function (e) {
+                fbq('track', 'AddPaymentInfo');
+
+                stripe.open({
+                    name: 'Yearly Subscription',
+                    description: 'Subscription for 1 year',
+                    amount: {{$plan->amount}},
+                    currency: '{{$plan->currency}}',
+                    email: '{{Auth::user()->email}}'
+                });
+                e.preventDefault();
+            });
 
             $(".subscription__paypal.paypal").on('click', function () {
                 fbq('track', 'AddPaymentInfo');
                 $('form.paypal-button').submit();
             });
 
-            $('[data-toggle="popover"]').popover();
+
+
+
 
             var form = $("#subscribe-form");
 

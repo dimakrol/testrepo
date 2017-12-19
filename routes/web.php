@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
-    Route::post('/subscription', 'SubscriptionController@store');
+    Route::post('/subscription', 'SubscriptionController@store')->name('subscription.store');
     Route::delete('/subscription', 'SubscriptionController@cancel');
 
     Route::get('/subscription/success', 'SubscriptionController@paypalSuccess');
