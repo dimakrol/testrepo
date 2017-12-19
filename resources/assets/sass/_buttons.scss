@@ -147,8 +147,9 @@
   border: 0 !important;
   background: $green;
   &:hover, &:active, &:focus {
-    border: 0 !important;
     background: lighten($green, 10%) !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
 }
 
