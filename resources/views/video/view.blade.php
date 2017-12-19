@@ -119,15 +119,15 @@
     <script>
         $(function () {
 
-            let modalShare = $('#share-via-email');
-            let alertEmail = $('.video-view-alert');
-            let formModalAlert = $('.error-message-form');
+            var modalShare = $('#share-via-email');
+            var alertEmail = $('.video-view-alert');
+            var formModalAlert = $('.error-message-form');
 
             $(document).on('click', '.share-via-email-but', function () {
-                let email = $('#recipient-email');
-                let name = $('#recipient-name');
-                let route = $(this).data('mail-route');
-                let shareLink = $(this).data('share-link');
+                var email = $('#recipient-email');
+                var name = $('#recipient-name');
+                var route = $(this).data('mail-route');
+                var shareLink = $(this).data('share-link');
 
                 $.ajax({
                     url: route,
@@ -141,7 +141,7 @@
                         alertEmail.show().not('.alert-important').delay(4000).fadeOut(350);
                     },
                     error: function(data) {
-                        let emailError = JSON.parse(data.responseText).errors.email[0];
+                        var emailError = JSON.parse(data.responseText).errors.email[0];
                         formModalAlert.text(emailError).show().not('.alert-important').delay(4000).fadeOut(350);
                     }
                 });

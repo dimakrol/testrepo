@@ -45,9 +45,6 @@
                             </div>
                         @endif
                     @endforeach
-                    {{--<div class="form-group">--}}
-                        {{--<button class="custom-button custom-button--primary change-image" disabled="true" style="display: none">Change Image</button>--}}
-                    {{--</div>--}}
                     <div class="form-group">
                         <a href="#" class="custom-button custom-button--primary go-share" disabled>Save & Share</a>
                     </div>
@@ -115,15 +112,14 @@
                 content_name: "{{$video->slug}}"
             });
 
-            let form = $('form.form-file');
-            let trushButton = $('button.trash-file');
-            let cropModal = $('#crop-modal');
-            let croppie = null;
-            let fileName = null;
-            let croppedImage = null;
-            // let updatePreviewButton = $('button.change-image');
-            let videoId = $('video').data('id');
-            let buttons = {
+            var form = $('form.form-file');
+            var trushButton = $('button.trash-file');
+            var cropModal = $('#crop-modal');
+            var croppie = null;
+            var fileName = null;
+            var croppedImage = null;
+            var videoId = $('video').data('id');
+            var buttons = {
                 crop: $('.crop-button'),
                 addPhoto: $('.add-photo'),
                 create: $('.create-video'),
@@ -132,8 +128,8 @@
                 rotLeft: $('.rot-left'),
                 rotRight: $('.rot-right'),
             };
-            let previewImage = null;
-            let ratio = null;
+            var previewImage = null;
+            var ratio = null;
 
             trushButton.on('click', function () {
                 form[0].reset();
@@ -145,16 +141,12 @@
                 });
             });
 
-            // updatePreviewButton.on('click', function () {
-            //     uploadFile();
-            // });
-
             buttons.crop.on('click', function () {
                 cropImage();
             });
 
             buttons.addPhoto.on('click', function () {
-                let varName = $(this).data('variable-name');
+                var varName = $(this).data('variable-name');
                 $('input[name='+varName+']').click();
             });
 
@@ -173,7 +165,7 @@
                     previewImage = $('.preview-image.'+'{{$field->variable_name}}');
                     previewImage.hide();
 
-                    let files = e.target.files || e.dataTransfer.files;
+                    var files = e.target.files || e.dataTransfer.files;
 
                     if (!files.length) {
                         return;
@@ -197,7 +189,7 @@
             }
 
             function setUpCroppie(imageData) {
-                let el = document.getElementById('croppie');
+                var el = document.getElementById('croppie');
                 if (croppie) {
                     croppie.destroy();
                 }
@@ -230,7 +222,7 @@
             }
 
             function uploadFile () {
-                let data = new FormData();
+                var data = new FormData();
                 data.append(fileName, croppedImage);
                 data.append('id', videoId);
                 $.ajax({
