@@ -1,17 +1,18 @@
 .login-register-forms {
-    padding-bottom: 25px;
+  padding-bottom: 25px;
 
-    .btn {
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-    }
+  .btn {
+    width: 100%;
+    height: 3.125rem !important;
+    line-height: 3.125rem;
+  }
 
-    .btn-facebook-login {
-        margin-bottom: 20px;
-    }
+  .btn-facebook-login {
+    font-size: .875rem;
+    margin-bottom: 1.25rem;
+  }
 
-    .small-text {
-        margin-top: 20px;
-    }
+  .small-text {
+    margin-top: 1.25rem;
+  }
 }

@@ -93,7 +93,7 @@
       background-color: $lightGreen--disabled;
     }
   }
-  
+
   &--hollow {
     background-color: transparent;
     color: $gray-900;
@@ -144,24 +144,25 @@
 }
 
 .btn-success {
-  border: 0!important;
+  border: 0 !important;
   background: $green;
   &:hover, &:active, &:focus {
-    border: 0!important;
-    background: lighten($green, 10%)!important;
+    background: lighten($green, 10%) !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
 }
 
 .btn-facebook-login {
-    background-color: #3e66ad;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    span {
-        font-size: 14px;
-    }
+  background-color: #3e66ad;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  span {
+    font-size: 14px;
+  }
 
-    &:hover, &:active, &:focus {
-       color: #fff;
-       background: lighten(#3e66ad, 10%)!important;
-    }
+  &:hover, &:active, &:focus {
+    color: #fff;
+    background: lighten(#3e66ad, 10%) !important;
+  }
 }

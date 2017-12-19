@@ -6,10 +6,10 @@
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">
-                        <a href="{{ route('register') }}" class="btn btn-success d-none d-sm-inline-block">Sign Up</a>
+                        <a href="{{ route('login') }}" class="btn btn-light menu-login-button">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="btn btn-light menu-login-button mr-0">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-success d-none d-sm-inline-block">Sign Up</a>
                     </li>
                 @else
                     <div class="dropdown" role="menu">
@@ -17,17 +17,24 @@
                             {{ Auth::user()->first_name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{route('subscription.index')}}">Subscription</a>
+                            <a class="dropdown-item" href="{{route('subscription.index')}}">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                My Account
+                            </a>
                             @if (Auth::user()->subscribed(['yearly', 'yearlyuk']))
-                                <a class="dropdown-item" href="{{route('my-videos')}}">My Videos</a>
+                                <a class="dropdown-item" href="{{route('my-videos')}}">
+                                    <i class="fa fa-film" aria-hidden="true"></i>
+                                    My Videos
+                                </a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-power-off" aria-hidden="true"></i>
                                 Logout
                             </a>
                             @if(Auth::user()->is_admin)
                                 <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                    <i class="fa fa-user-secret" aria-hidden="true"></i>
                                     Admin
                                 </a>
                             @endif

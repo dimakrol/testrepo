@@ -50,9 +50,32 @@
 
 .menu-login-button {
   color: $green;
-  margin-left: 10px;
+  margin-right: .625rem;
 }
 
 .dropdown-menu {
+  background-color: $green;
   min-width: 100%;
+  padding: 0;
+}
+
+.dropdown-item {
+  color: white;
+  font-size: .9375rem;
+  padding: .5625rem .5625rem .5625rem 1rem;
+  position: relative;
+  transition: background-color $transition, color $transition;
+
+  > i {
+    margin-right: .75rem;
+    text-align: center;
+    width: 1.0625rem;
+  }
+
+  &:active,
+  &focus,
+  &:hover {
+    background-color: rgba(0,0,0,.1);
+    color: white;
+  }
 }
