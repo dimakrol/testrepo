@@ -6,10 +6,10 @@
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">
-                        <a href="{{ route('register') }}" class="btn btn-success d-none d-sm-inline-block">Sign Up</a>
+                        <a href="{{ route('login') }}" class="btn btn-light menu-login-button">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="btn btn-light menu-login-button mr-0">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-success d-none d-sm-inline-block">Sign Up</a>
                     </li>
                 @else
                     <div class="dropdown" role="menu">
