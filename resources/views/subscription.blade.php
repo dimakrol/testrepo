@@ -18,12 +18,14 @@
                         <!--<div class="card-title">
                             <h3 class="text-center">Buy early subscription for  </h3>
                         </div>-->
-                        <div class="row no-gutters subscription__title">
-                            <div class="col-5 text-center subscription__with-vr">
-                                <p class="subscription__price">{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}</p>
+                        <div class="row no-gutters subscription__title special-offer" data-slogan="Currently - 25% Off!!!">
+                            <div class="col-6 col-sm-5 text-center subscription__with-vr">
+                                <p class="subscription__price special-offer__price" data-special-price="$7">
+                                    {{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}
+                                </p>
                                 <p class="subscription__term">/year*</p>
                             </div>
-                            <div class="col-6 offset-sm-1">
+                            <div class="col-6 col-sm-6 offset-sm-1">
                                 <ul class="subscription__features">
                                     <li>
                                         <i class="fa fa-check" aria-hidden="true"></i> Unlimited Videos.
@@ -37,7 +39,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <p class="small-text grey-text text-center mb-5">*billed in advance, auto-renewal, 30 day money back garantee</p>
+                        <p class="small-text grey-text text-center mb-4">*billed in advance, auto-renewal, 30 day money back garantee</p>
                         {{--<form class="subscribe-form" id="subscribe-form" action="/subscription" method="post">--}}
                             {{--<div class="error-message-alert alert alert-danger" role="alert" style="display: none"></div>--}}
                             {{--<input type="hidden" name="stripeToken">--}}
@@ -153,7 +155,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="review">
+                            <div class="review d-none d-sm-flex">
                                 <img class="review__avatar" src="{{ asset('images/liz.png') }}" alt="Review user">
                                 <div class="review__description">
                                     <p class="review__text">

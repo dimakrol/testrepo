@@ -76,16 +76,19 @@
     color: $black;
     font-size: 1.25rem;
     font-weight: bold;
-    margin-bottom: 1.125rem;
+    margin-bottom: 2.25rem;
   }
 
   &__title {
+    align-items: center;
     background-color: $lightGreen;
     border: 1px solid $lightGreen;
     border-radius: 4px;
     color: white;
+    display: flex;
     margin: 0 0 .5rem;
     padding: 1.5rem .5rem;
+    position: relative;
 
     @media (min-width: $sm) {
       padding: 1.5rem 1rem;
@@ -233,6 +236,61 @@
     &:focus,
     &:hover {
       background-color: darken($lightGreen, 10%);
+    }
+  }
+}
+
+// special offer
+.special-offer {
+
+  &:before {
+    background-color: $special-offer-bg;
+    color: black;
+    content: attr(data-slogan);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 6px 1.5rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  &__price {
+    position: relative;
+
+    &:before {
+      background: $special-offer-bg;
+      border-radius: 50%;
+      color: black;
+      content: attr(data-special-price);
+      font-size: 1.5rem;
+      font-weight: bold;
+      left: 25%;
+      position: absolute;
+      top: -20%;
+      z-index: 2;
+
+      // adjust those parameters if price changed
+      padding: 7% 0;
+      width: 30%;
+    }
+
+    &:after {
+      background-color: $pink;
+      display: inline-block;
+      content: '';
+      height: .4rem;
+      left: 1.5rem;
+      opacity: .9;
+      position: absolute;
+      top: 1rem;
+      transform: rotate(25deg);
+      width: 75%;
+      z-index: 1;
     }
   }
 }
