@@ -1,15 +1,27 @@
-@extends('layouts.frontend.app')
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+@yield('styles')
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-@section('content')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <title>{{ config('app.name', 'Laravel') }}</title>
+</head>
+<body>
+<div id="app">
+    @include('layouts.navigation.main')
+    <div class="container frontend-flash-container">
+        @include('flash::message')
+    </div>
     <div id="wrapper" class="toggled flex-grow-1">
         @include('layouts.admin.sidebar')
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                {{--todo add alert system--}}
-                {{--<div class="alert alert-primary" role="alert">--}}
-                    {{--This is a primary alert—check it out!--}}
-                {{--</div>--}}
-                {{-- todo add normal flash messages --}}
                 @include('flash::message')
                 @foreach($errors->all() as $message)
                     {{$message}}
@@ -18,4 +30,49 @@
             </div>
         </div>
     </div>
-@endsection
+    <div class="footer text-center">
+        <p>Copyright &copy; Words Wont Do Ltd</p>
+        <p>
+            <a href="http://help.wordswontdo.com/important-documents/terms-and-conditions-terms-of-use">Terms </a>&amp;
+            <a href="http://help.wordswontdo.com/important-documents/privacy-policy-policy"> Privacy</a> |
+            <a href="http://help.wordswontdo.com/add-a-title/contact-us"> Get In Touch</a> |
+            <a href="http://help.wordswontdo.com/creators/become-a-creator"> Become a Creator</a>
+        </p>
+        <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+                <a href="https://www.facebook.com/wordswontdo/" target="_blank" class="footer__link">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://twitter.com/WordsWontDo" target="_blank" class="footer__link">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.pinterest.co.uk/wordswontdo/" target="_blank" class="footer__link">
+                    <i class="fa fa-pinterest"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="{{ mix('js/admin-app.js') }}"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+@yield('script')
+
+<script>
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+</script>
+
+<!-- Intercom -->
+</body>
+</html>

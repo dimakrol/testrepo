@@ -4,7 +4,7 @@
         <div class="row justify-content-center video">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <div class="video-container" data-category="{{ $video->categoryName }}">
-                    <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" autoplay loop playsinline preload="auto" class="center" width="100%" controls controlsList="nodownload">
+                    <video data-id="{{ $video->id }}" poster="{{ $video->getThumbnail() }}" autoplay playsinline preload="auto" class="center" width="100%" controls controlsList="nodownload">
                         <source src="{{ $video->getVideoUrl() }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -39,7 +39,7 @@
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="form-group">
-                                <button type="button" class="custom-button custom-button--primary add-photo"
+                                <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary add-photo"
                                         data-variable-name="{{$field->variable_name}}"
                                 >Add Your Photo</button>
                             </div>
@@ -235,13 +235,17 @@
                     contentType: false,
                     success: function(data) {
                         $('.video-container').html(`
-                        <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay loop playsinline preload="auto" class="center" width="100%" controls="">
+                        <video id="genVideo" data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" playsinline preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
                         if (data.generatedUrl) {
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
+
+                        var vid = document.getElementById("genVideo");
+                        vid.muted = true;
+                        vid.play();
 
                         previewImage.hide();
                     },
