@@ -4,8 +4,8 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />
-    <meta property="og:image" content="{{ $gVideo->video_url }}"/>
-    <meta property="og:image:secure_url" content="{{ $gVideo->video_url }}" />
+    <meta property="og:image" content="{{ $gVideo->video->getThumbnail() }}"/>
+    <meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}" />
 @endsection
 
 @section('content')
