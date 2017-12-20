@@ -22,7 +22,14 @@
             s.parentNode.insertBefore(t,s)}(window,document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '112667282703000');
-        fbq('track', 'PageView');
+        fbq('track', 'PageView'
+        @auth
+        ,{
+            em: '{{Auth::user()->email}}',
+            fn: '{{Auth::user()->first_name}}'
+        }
+        @endauth
+        );
     </script>
     <noscript>
         <img height="1" width="1" src="https://www.facebook.com/tr?id=112667282703000&ev=PageView&noscript=1"/>
