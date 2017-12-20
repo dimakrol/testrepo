@@ -39,7 +39,7 @@
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="form-group">
-                                <button type="button" class="custom-button custom-button--primary add-photo"
+                                <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary add-photo"
                                         data-variable-name="{{$field->variable_name}}"
                                 >Add Your Photo</button>
                             </div>

@@ -6,7 +6,6 @@
 <meta property="og:title" content="{{$gVideo->video->name}}"/>
 <meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}"/>
 <meta property="og:image:type" content="image/jpeg"/>
-
 @endsection
 
 @section('content')
