@@ -20,7 +20,10 @@
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
     "croppie": "^2.5.1",
+    "datatables.net": "^1.10.16",
+    "datatables.net-bs4": "^1.10.16",
     "font-awesome": "^4.7.0",
+    "jquery-ui": "^1.12.1",
     "moment": "^2.19.1",
     "owl.carousel": "^2.2.0",
     "popper.js": "^1.12.6",
