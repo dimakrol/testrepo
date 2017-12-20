@@ -19,7 +19,6 @@
                     <video
                             data-category="{{ $gVideo->video->categoryName }}"
                             autoplay
-                            loop
                             playsinline
                             poster="{{ $gVideo->video->getThumbnail() }}"
                             preload="auto"
