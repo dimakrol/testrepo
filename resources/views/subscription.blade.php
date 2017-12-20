@@ -216,7 +216,7 @@
             var subscriptionForm = $('#stripe-subscription-form');
             var stripe = StripeCheckout.configure({
                     key: WWD.stripe.stripeKey,
-                    image: "https://stripe.com/img/documentation/checkout/marketplace.png",
+                    image: "{{ asset('images/logo.png') }}",
                     locale: "auto",
                     panelLabel: "Subscribe For",
                     token: function (token) {
@@ -242,33 +242,6 @@
             $(".subscription__paypal.paypal").on('click', function () {
                 fbq('track', 'AddPaymentInfo');
                 $('form.paypal-button').submit();
-            });
-
-
-
-
-
-            var form = $("#subscribe-form");
-
-
-            $('#payment-button').on('click', function(e) {
-                fbq('track', 'AddPaymentInfo');
-                e.preventDefault();
-                deleteErrorMessages();
-                toggleSubscribeButton();
-
-                if (!validate()) {
-                    toggleSubscribeButton();
-                    return false;
-                }
-
-                Stripe.createToken({
-                    number: $('#card-number').val(),
-                    cvc: $('#card-cvc').val(),
-                    exp_month: $('#card-expiry-month').val(),
-                    exp_year: $('#card-expiry-year').val()
-                }, stripeResponseHandler);
-                return false; // submit from callback
             });
         });
     </script>

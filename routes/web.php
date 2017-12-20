@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/subscription/success', 'SubscriptionController@paypalSuccess');
     Route::get('/subscription/error', 'SubscriptionController@paypalError');
 
+    Route::get('/account', 'UserController@index');
 
     Route::group(['prefix' => 'admin','middleware' => 'admin','as' => 'admin.'], function () {
         Route::get('/', 'Admin\AdminController@index')->name('index');
