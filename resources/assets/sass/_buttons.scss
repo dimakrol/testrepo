@@ -14,11 +14,21 @@
   border-radius: .25rem;
   cursor: pointer;
   display: inline-block;
+  font-size: 1.125rem;
   font-weight: bold;
+  padding: .75rem .25rem;
   position: relative;
   text-align: center;
   text-decoration: none;
   text-transform: capitalize;
+  transition: color $transition, background-color $transition;
+  width: 100%;
+
+  &:active,
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
 
   > i {
     font-size: 1.5625rem;
@@ -41,10 +51,6 @@
   &--primary {
     background-color: $lightGreen;
     color: white;
-    font-size: 1.125rem;
-    max-width: 21.375rem;
-    padding: .75rem .25rem;
-    width: 100%;
 
     > i {
 
@@ -58,7 +64,6 @@
     &:hover {
       background-color: lighten($lightGreen, 10%);
       color: white;
-      text-decoration: none;
     }
 
     &:disabled {
@@ -69,10 +74,6 @@
   &--facebook {
     background-color: $facebook-color;
     color: white;
-    font-size: 1.125rem;
-    max-width: 21.375rem;
-    padding: .75rem .25rem;
-    width: 100%;
 
     > i {
 
@@ -86,7 +87,6 @@
     &:hover {
       background-color: lighten($facebook-color, 10%);
       color: white;
-      text-decoration: none;
     }
 
     &:disabled {
@@ -97,19 +97,11 @@
   &--hollow {
     background-color: transparent;
     color: $gray-900;
-    font-size: 1.125rem;
-    max-width: 21.375rem;
-    padding: .75rem .25rem;
-    width: 100%;
   }
 
   &--danger {
     background-color: $danger;
     color: white;
-    font-size: 1.125rem;
-    max-width: 21.375rem;
-    padding: .75rem .25rem;
-    width: 100%;
   }
 
   &--croppie {
@@ -120,7 +112,6 @@
     height: 3.125rem;
     margin-bottom: 1.5625rem;
     margin-right: .75rem;
-    transition: background-color $transition;
     width: 3.125rem;
 
     &:active,
@@ -128,18 +119,24 @@
     &:hover {
       background-color: lighten($gray-900, 10%);
       color: white;
-      text-decoration: none;
     }
   }
 
   &--used {
     background-color: $bg-color;
     color: $lightGreen;
-    font-size: 1.125rem;
-    max-width: 21.375rem;
-    padding: .75rem .25rem;
-    transition: color $transition, background-color $transition;
-    width: 100%;
+  }
+
+  &--alert {
+    background-color: lighten($danger, 15%);
+    color: white;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: lighten($danger, 25%);
+      color: white;
+    }
   }
 }
 
@@ -155,8 +152,15 @@
 
 .btn-facebook-login {
   background-color: #3e66ad;
+  cursor: pointer;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: .875rem;
   font-weight: normal;
+  height: 3.125rem !important;
+  line-height: 3.125rem;
+  margin-bottom: 1.25rem;
+  width: 100%;
+
   span {
     font-size: 14px;
   }
