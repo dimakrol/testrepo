@@ -22,7 +22,7 @@
             s.parentNode.insertBefore(t,s)}(window,document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '112667282703000'
-                @auth
+        @auth
             ,{
                 em: '{{Auth::user()->email}}',
                 fn: '{{Auth::user()->first_name}}'
