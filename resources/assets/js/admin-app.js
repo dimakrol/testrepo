@@ -1,4 +1,3 @@
-import Popper from 'popper.js/dist/umd/popper.js';
 import moment from 'moment';
 import Croppie from 'croppie'
 import 'select2/dist/js/select2.full';
@@ -11,13 +10,6 @@ window._ = require('lodash');
 /**
  * js lib for bootstrap
  */
-window.Popper = Popper;
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
 try {
     window.$ = window.jQuery = require('jquery');
 
@@ -25,3 +17,9 @@ try {
     require( 'datatables.net' )( window, $ );
     require( 'datatables.net-bs4' )( $ );
 } catch (e) {}
+/**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
