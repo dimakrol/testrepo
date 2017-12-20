@@ -21,15 +21,15 @@
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window,document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '112667282703000');
-        fbq('track', 'PageView'
-        @auth
-        ,{
-            em: '{{Auth::user()->email}}',
-            fn: '{{Auth::user()->first_name}}'
-        }
+        fbq('init', '112667282703000'
+                @auth
+            ,{
+                em: '{{Auth::user()->email}}',
+                fn: '{{Auth::user()->first_name}}'
+            }
         @endauth
         );
+        fbq('track', 'PageView');
     </script>
     <noscript>
         <img height="1" width="1" src="https://www.facebook.com/tr?id=112667282703000&ev=PageView&noscript=1"/>
