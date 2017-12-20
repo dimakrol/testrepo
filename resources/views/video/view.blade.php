@@ -1,11 +1,12 @@
 @extends('layouts.frontend.app')
 @section('styles')
-<meta property="og:url"           content="{{ url()->current() }}" />
-<meta property="og:type"          content="website" />
-<meta property="og:title"         content="Your Website Title" />
-<meta property="og:description"   content="Your description" />
-<meta property="og:image" content="{{ $gVideo->video->getThumbnail() }}"/>
-<meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}" />
+<meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}"/>
+<meta property="og:url" content="{{ url()->current() }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="{{$gVideo->video->name}}"/>
+<meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}"/>
+<meta property="og:image:type" content="image/jpeg"/>
+
 @endsection
 
 @section('content')
