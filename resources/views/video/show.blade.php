@@ -235,13 +235,17 @@
                     contentType: false,
                     success: function(data) {
                         $('.video-container').html(`
-                        <video data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" autoplay loop playsinline preload="auto" class="center" width="100%" controls="">
+                        <video id="genVideo" data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" loop playsinline preload="auto" class="center" width="100%" controls="">
                             <source src="${data.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`);
                         if (data.generatedUrl) {
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
+
+                        var vid = document.getElementById("genVideo");
+                        vid.muted = true;
+                        vid.play();
 
                         previewImage.hide();
                     },
