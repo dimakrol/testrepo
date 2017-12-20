@@ -1,12 +1,12 @@
 @extends('layouts.frontend.app')
-{{--@section('styles')--}}
-    {{--<meta property="og:url"           content="http://www.your-domain.com/your-page.html" />--}}
-    {{--<meta property="og:type"          content="website" />--}}
-    {{--<meta property="og:title"         content="Your Website Title" />--}}
-    {{--<meta property="og:description"   content="Your description" />--}}
-    {{--<meta property="og:image" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png"/>--}}
-    {{--<meta property="og:image:secure_url" content="https://testwwdv2.s3-eu-west-1.amazonaws.com/thumbnails/1510154342JBCA9g7A4q.png" />--}}
-{{--@endsection--}}
+@section('styles')
+    <meta property="og:url"           content="{{ url()->current() }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image" content="{{ $gVideo->video_url }}"/>
+    <meta property="og:image:secure_url" content="{{ $gVideo->video_url }}" />
+@endsection
 
 @section('content')
     <div class="container bg-white flex-grow-1">
