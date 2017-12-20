@@ -140,6 +140,16 @@
   }
 }
 
+.view-all-button {
+  font-size: .875rem;
+  padding: .5rem;
+  width: auto;
+
+  @media (min-width: $md) {
+    font-size: 1.3125rem;
+  }
+}
+
 .btn-success {
   border: 0 !important;
   background: $green;
