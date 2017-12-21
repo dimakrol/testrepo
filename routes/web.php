@@ -63,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]]);
 
         Route::get('/subscription/data', 'Admin\SubscriptionController@data')->name('subscription.data');
-        Route::resource('/subscription', 'Admin\SubscriptionController', ['only' => ['index']]);
+        Route::resource('/subscription', 'Admin\SubscriptionController', ['only' => ['index', 'destroy']]);
 
         Route::get('/user/{id}/videos', 'Admin\UserController@videos')->name('user.videos');
         Route::get('/user/login/{id}',  'Admin\UserController@login')->name('user.login');
