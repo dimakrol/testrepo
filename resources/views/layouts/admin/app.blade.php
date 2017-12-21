@@ -74,7 +74,7 @@
 
 <script>
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
-    
+
     // show/hide sidebar
     $('#admin-menu').on('click', function () {
         $('.sidebar-wrapper').toggleClass('sidebar-wrapper--open');
