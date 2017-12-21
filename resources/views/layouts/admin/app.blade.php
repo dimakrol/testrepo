@@ -15,13 +15,13 @@
 <body>
 <div id="app">
     @include('layouts.navigation.main')
-    <div class="container frontend-flash-container">
-        @include('flash::message')
-    </div>
     <div id="wrapper" class="toggled flex-grow-1">
-        @include('layouts.admin.sidebar')
         <div id="page-content-wrapper">
-            <div class="container-fluid">
+            @include('layouts.admin.sidebar')
+            <div class="flex-grow-1 p-3">
+                <div class="container frontend-flash-container">
+                    @include('flash::message')
+                </div>
                 @include('flash::message')
                 @foreach($errors->all() as $message)
                     {{$message}}
@@ -57,6 +57,9 @@
         </ul>
     </div>
 </div>
+<button class="admin-menu" id="admin-menu">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+</button>
 
 <!-- Scripts -->
 <script src="{{ mix('js/admin-app.js') }}"></script>
@@ -71,6 +74,11 @@
 
 <script>
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+
+    // show/hide sidebar
+    $('#admin-menu').on('click', function () {
+        $('.sidebar-wrapper').toggleClass('sidebar-wrapper--open');
+    })
 </script>
 
 <!-- Intercom -->

@@ -20,8 +20,8 @@
                         </div>-->
                         <div class="row no-gutters subscription__title special-offer" data-slogan="Currently - 25% Off!!!">
                             <div class="col-6 col-sm-5 text-center subscription__with-vr">
-                                <p class="subscription__price special-offer__price" data-special-price="$7">
-                                    {{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}
+                                <p class="subscription__price special-offer__price" data-special-price="{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}">
+                                    {{$plan->stripe_id != 'yearlyuk' ? '$18' : '&pound;12' }}
                                 </p>
                                 <p class="subscription__term">/year*</p>
                             </div>
@@ -34,7 +34,7 @@
                                         <i class="fa fa-check" aria-hidden="true"></i> New Content Weekly.
                                     </li>
                                     <li>
-                                        <i class="fa fa-check" aria-hidden="true"></i> Smile Guaranteed.
+                                        <i class="fa fa-check" aria-hidden="true"></i> 10% to Charity.
                                     </li>
                                 </ul>
                             </div>

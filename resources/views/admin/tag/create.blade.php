@@ -10,7 +10,7 @@
             @endforeach
         </ul>
     @else
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <h4>No tags added.</h4>
         </div>
     @endif

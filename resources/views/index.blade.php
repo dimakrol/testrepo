@@ -46,7 +46,7 @@
               @if($playlist->videos->count())
                   <h1 class="playlist-title">
                       <a class="playlist-title__link" href="{{$playlist->link ? route('category.show', $playlist->link): '#'}}">
-                          {{$playlist->name}} >
+                          {{$playlist->name}} Videos <i class="fa fa-chevron-right" aria-hidden="true"></i>
                       </a>
                       <a href="{{$playlist->link ? route('category.show', $playlist->link): '#'}}" class="custom-button custom-button--used view-all-button">
                           View All
