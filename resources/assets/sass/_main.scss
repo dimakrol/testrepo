@@ -48,6 +48,10 @@
     font-size: 1.25rem;
     transition: color $transition;
 
+    > i {
+      font-size: .75em;
+    }
+
     &:active,
     &:focus,
     &:hover {
