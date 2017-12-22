@@ -35,7 +35,8 @@
                         Yearly Unlimited
                     </button>
                     <p class="text-center mb-5 small grey-text">
-                        Your subscription will auto renew on {{ $subscription->next_payment->format('d/m/y') }} <a href="#" class="text-danger">&nbsp;cancel&nbsp;</a>
+                        Your subscription will auto renew on {{ $subscription->next_payment->format('d/m/y') }}
+                        {{--<a href="#" class="text-danger">&nbsp;cancel&nbsp;</a>--}}
                     </p>
                 @endif
                 <hr>
@@ -55,9 +56,30 @@
                     <button class="custom-button custom-button--primary mb-4">Edit</button>
                     {!! Form::close() !!}
                 <hr>
-                <button class="custom-button custom-button--alert" type="button">
+                <button class="custom-button custom-button--alert" type="button" data-toggle="modal" data-target="#share-via-email">
                     Delete Account
                 </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="share-via-email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header mb-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Your Account?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['route' => ['user.delete', Auth::user()->id]]) !!}
+                    <button class="custom-button custom-button--alert mb-4">Delete</button>
+                    {!! Form::close() !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Cancel</button>
+                </div>
+
             </div>
         </div>
     </div>

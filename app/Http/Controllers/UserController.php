@@ -56,4 +56,15 @@ class UserController extends Controller
         flash('Account information updated successfully!')->success();
         return redirect(route('account'));
     }
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->subscriptions()->delete();
+        \Log::info('User with id: '.$user->id. 'deleted subscription!!!');
+        if ($user->delete()) {
+            flash('Your account deleted successfully!!!')->success();
+            return redirect(route('home'));
+        }
+    }
 }

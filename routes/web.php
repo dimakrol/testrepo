@@ -42,7 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/connect-facebook', 'UserController@connectFacebook')->name('connect-facebook');
     Route::get('/disconnect-facebook/{id}', 'UserController@disconnectFacebook')->name('disconnectFacebook');
     Route::post('/user/{id}/update', 'UserController@update')->name('user.update');
-    
+    Route::post('/user/delete/{id}', 'UserController@delete')->name('user.delete');
+
     Route::group(['prefix' => 'admin','middleware' => 'admin','as' => 'admin.'], function () {
         Route::get('/', 'Admin\AdminController@index')->name('index');
 
