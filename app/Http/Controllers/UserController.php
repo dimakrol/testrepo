@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Socialite;
-use Laravel\Socialite\Contracts\User as ProviderUser;
 
 class UserController extends Controller
 {
@@ -42,6 +41,19 @@ class UserController extends Controller
         $user->update(['facebook_id' => null]);
         flash('Facebook disconnected successfully!!!')->success();
 
+        return redirect(route('account'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'first_name' => 'required',
+            'email' => 'required|unique:users,email,' . $id,
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        flash('Account information updated successfully!')->success();
         return redirect(route('account'));
     }
 }

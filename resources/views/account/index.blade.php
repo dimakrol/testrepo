@@ -42,15 +42,18 @@
                 <h4 class="account__title">
                     Account Details
                 </h4>
-                <form action="#" method="post">
+                {!! Form::open(['route' => ['user.update', Auth::user()->id]]) !!}
                     <label class="input-group">
-                        <input class="form-control" type="text" name="name" placeholder="Full Name" value="{{ Auth::user()->first_name}}">
+                        <input class="form-control" type="text" name="first_name" placeholder="Full Name" value="{{ Auth::user()->first_name}}" required>
                     </label>
                     <label class="input-group">
-                        <input class="form-control" type="email" name="email" placeholder="Enter your email please" value="{{ Auth::user()->email }}">
+                        <input class="form-control" type="email" name="email" placeholder="Enter your email please" value="{{ Auth::user()->email }}" required>
                     </label>
+                    @if ($errors->has('email'))
+                        <small class="form-text text-muted text-danger"><span class="text-danger">{{ $errors->first('email') }}</span></small>
+                    @endif
                     <button class="custom-button custom-button--primary mb-4">Edit</button>
-                </form>
+                    {!! Form::close() !!}
                 <hr>
                 <button class="custom-button custom-button--alert" type="button">
                     Delete Account

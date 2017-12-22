@@ -58,20 +58,6 @@
                 @endif
             </div>
         </div>
-        {{--<div class="row">--}}
-            {{--<h3 class="your-own">See also:</h3>--}}
-            {{--<div class="row">--}}
-                {{--@foreach($videos as $video)--}}
-                    {{--<div class="col-lg-6 col-sm-6 portfolio-item">--}}
-                        {{--<div class="card h-100">--}}
-                            {{--<a href="{{ route('video.show', $video->slug) }}" data-category="{{$video->name}}">--}}
-                                {{--<img class="card-img-top" src="{{ $video->getThumbnail() }}" alt="">--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
-            {{--</div>--}}
-        {{--</div>--}}
     </div>
 
     <div class="modal" id="crop-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -243,8 +229,7 @@
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
 
-                        var vid = document.getElementById("genVideo");
-                        vid.muted = true;
+                        var vid = document.getElementById("genVideo");e;
                         vid.play();
 
                         previewImage.hide();
