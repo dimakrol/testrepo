@@ -15,6 +15,9 @@ class SubscriptionController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
+            return redirect()->route('account');
+        }
         $plan = Plan::getByUser(Auth::user());
         return view('subscription', compact('plan'));
     }
