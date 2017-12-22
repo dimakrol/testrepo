@@ -41,7 +41,7 @@
                     <label class="input-group">
                         <input class="form-control" type="email" name="email" placeholder="Enter your email please" value="{{ Auth::user()->email }}">
                     </label>
-                    <button class="custom-button custom-button--primary mb-4">Edit</button>
+                    <button class="custom-button custom-button--primary mb-4">Update</button>
                 </form>
                 <hr>
                 <button class="custom-button custom-button--alert" type="button">
