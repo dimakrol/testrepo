@@ -4,9 +4,9 @@
 <div class="container login-register-forms flex-grow-1">
     <div class="row">
         <div class="col-md-6 offset-md-3 form-margin-top">
-            <h3 class="font-weight-bold">Login to your Acoount</h3>
+            <h3 class="font-weight-bold">Login to your Account</h3>
             <p class="grey-text">Need an account? <a href="{{ route('register') }}">Signup Free</a></p>
-            <a href="{{route('login.facebook')}}" class="btn btn-facebook-login"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+            <a href="{{route('login.facebook')}}" class="btn btn-facebook-login"><i class="fa fa-facebook-square" aria-hidden="true"></i> Continue with Facebook</a>
             <p class="text-center grey-text"> - OR - </p>
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
