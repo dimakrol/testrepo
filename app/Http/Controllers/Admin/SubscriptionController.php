@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Subscription;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
@@ -34,6 +36,24 @@ class SubscriptionController extends Controller
         return redirect(url('/admin'));
     }
 
+    public function addFreeSubscription($id)
+    {
+        $user = User::findOrFail($id);
+        if (!$user->subscriptions()->count()) {
+            $user->subscriptions()->create([
+                'name' => 'yearly',
+                'billing_type' => 'stripe',
+                'stripe_id' => 'free',
+                'stripe_plan' => 'yearly',
+                'quantity' => 0,
+                'next_payment' => Carbon::now()->addYear()
+            ]);
+            flash('Subscription added successfully!')->success();
+            return redirect()->route('admin.user.edit', $user->id);
+        }
+        return back();
+    }
+    
     /**
      * Remove the specified resource from storage.
      *

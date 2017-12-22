@@ -20,6 +20,11 @@
         <label for="inputImage">Select image thumbnail to update</label>
         {!! Form::file('image', ['class' => 'form-control-file', 'id' => 'inputImage' , 'accept' => 'image/*']) !!}
     </div>
+    @if(!$user->subscribed(['yearly', 'yearlyuk']))
+        <div class="form-group col-md-6">
+            <a href="{{route('admin.subscription.add-free', $user->id)}}" class="btn btn-danger">Add Subscription</a>
+        </div>
+    @endif
     <div class="form-group col-md-6">
         <button type="submit" class="btn btn-primary">Update</button>
     </div>
