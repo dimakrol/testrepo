@@ -12,6 +12,9 @@
             <a href="{{ route('admin.user.create') }}">Create User</a>
         </li>
         <li>
+            <a href="{{ route('admin.subscription.index') }}">Subscriptions</a>
+        </li>
+        <li>
             <a href="{{ route('admin.video.index') }}">All Videos</a>
         </li>
         <li>
