@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/subscription/error', 'SubscriptionController@paypalError');
 
     Route::get('/account', 'UserController@index')->name('account');
+    Route::get('/add-facebook/{id}', 'UserController@addFacebook')->name('add-facebook');
+    Route::get('/connect-facebook', 'UserController@connectFacebook')->name('connect-facebook');
 
     Route::group(['prefix' => 'admin','middleware' => 'admin','as' => 'admin.'], function () {
         Route::get('/', 'Admin\AdminController@index')->name('index');

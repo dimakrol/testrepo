@@ -5,31 +5,39 @@
         <div class="row">
             <div class="col mx-auto account">
                 <h3 class="account__main-title">
-                    Hi John,
+                    Hi {{ Auth::user()->first_name }},
                 </h3>
                 <h4 class="account__title">
                     Facebook
                 </h4>
-                <button class="btn btn-facebook-login" type="button">
-                    <i aria-hidden="true" class="fa fa-facebook-square"></i>
-                    Connect Facebook
-                </button>
+                @if(Auth::user()->facebook_id)
+                    <a href="#" class="btn btn-facebook-login">
+                        <i aria-hidden="true" class="fa fa-facebook-square"></i>
+                        Disconnect Facebook
+                    </a>
+                @else
+                    <a href="{{ route('add-facebook', Auth::user()->id) }}" class="btn btn-facebook-login">
+                        <i aria-hidden="true" class="fa fa-facebook-square"></i>
+                        Connect Facebook
+                    </a>
+                @endif
                 <hr>
                 <h4 class="account__title">
                     Subscription
                 </h4>
-                <button class="custom-button custom-button--primary mb-5" type="button">
-                    Get Yearly Unlimited
-                </button>
-                {{--<button class="custom-button custom-button--used mb-2" type="button">--}}
-                    {{--<span>--}}
-                        {{--<i class="fa fa-check mr-2" aria-hidden="true"></i>--}}
-                    {{--</span>--}}
-                    {{--Yearly Unlimited--}}
-                {{--</button>--}}
-                {{--<p class="text-center mb-5 small grey-text">--}}
-                    {{--Your subscription will auto renew on 5/12/18 <a href="#" class="text-danger">&nbsp;cancel&nbsp;</a>--}}
-                {{--</p>--}}
+                @if (!Auth::user()->subscribed(['yearly', 'yearlyuk']))
+                    <a href="{{ route('subscription.index') }}" class="custom-button custom-button--primary mb-5">
+                        Get Yearly Unlimited
+                    </a>
+                @else
+                    <button class="custom-button custom-button--used mb-2" type="button">
+                        <span><i class="fa fa-check mr-2" aria-hidden="true"></i></span>
+                        Yearly Unlimited
+                    </button>
+                    <p class="text-center mb-5 small grey-text">
+                        Your subscription will auto renew on {{ $subscription->next_payment->format('d/m/y') }} <a href="#" class="text-danger">&nbsp;cancel&nbsp;</a>
+                    </p>
+                @endif
                 <hr>
                 <h4 class="account__title">
                     Account Details
