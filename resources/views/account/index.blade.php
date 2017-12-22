@@ -11,7 +11,7 @@
                     Facebook
                 </h4>
                 @if(Auth::user()->facebook_id)
-                    <a href="#" class="btn btn-facebook-login">
+                    <a href="{{ route('disconnectFacebook', Auth::user()->id) }}" class="btn btn-facebook-login">
                         <i aria-hidden="true" class="fa fa-facebook-square"></i>
                         Disconnect Facebook
                     </a>
