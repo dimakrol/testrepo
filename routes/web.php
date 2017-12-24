@@ -37,7 +37,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/subscription/success', 'SubscriptionController@paypalSuccess');
     Route::get('/subscription/error', 'SubscriptionController@paypalError');
 
-    Route::get('/account', 'UserController@index');
+    Route::get('/account', 'UserController@index')->name('account');
+    Route::get('/add-facebook/{id}', 'UserController@addFacebook')->name('add-facebook');
+    Route::get('/connect-facebook', 'UserController@connectFacebook')->name('connect-facebook');
+    Route::get('/disconnect-facebook/{id}', 'UserController@disconnectFacebook')->name('disconnectFacebook');
+    Route::post('/user/{id}/update', 'UserController@update')->name('user.update');
+    Route::post('/user/delete/{id}', 'UserController@delete')->name('user.delete');
 
     Route::group(['prefix' => 'admin','middleware' => 'admin','as' => 'admin.'], function () {
         Route::get('/', 'Admin\AdminController@index')->name('index');
@@ -63,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]]);
 
         Route::get('/subscription/data', 'Admin\SubscriptionController@data')->name('subscription.data');
+        Route::get('/subscription/add-free/{id}','Admin\SubscriptionController@addFreeSubscription')->name('subscription.add-free');
         Route::resource('/subscription', 'Admin\SubscriptionController', ['only' => ['index', 'destroy']]);
 
         Route::get('/user/{id}/videos', 'Admin\UserController@videos')->name('user.videos');

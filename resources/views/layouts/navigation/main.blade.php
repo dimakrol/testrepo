@@ -17,7 +17,7 @@
                             {{ Auth::user()->first_name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{route('subscription.index')}}">
+                            <a class="dropdown-item" href="{{route('account')}}">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 My Account
                             </a>
