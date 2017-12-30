@@ -39,7 +39,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <p class="small-text grey-text text-center mb-4">*billed in advance, auto-renewal, 30 day money back garantee</p>
+                        <p class="small-text grey-text text-center mb-4">*billed in advance, auto-renewal, 30 day money back guarantee</p>
                         {{--<form class="subscribe-form" id="subscribe-form" action="/subscription" method="post">--}}
                             {{--<div class="error-message-alert alert alert-danger" role="alert" style="display: none"></div>--}}
                             {{--<input type="hidden" name="stripeToken">--}}
