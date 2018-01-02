@@ -14,9 +14,9 @@
         {{--</div>--}}
         <div class="carousel-item carousel-item--first active">
             <div class="wwd-carousel__positioning">
-                <h1 class="wwd-carousel__header"><span>New Christmas E-Cards!</span></h1>
+                <h1 class="wwd-carousel__header"><span>Happy New Year!</span></h1>
                 <p class="lead" align="center">
-                    <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/queens-christmas-speech" role="button">Create video</a>
+                    <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/happy-new-year" role="button">Create video</a>
                 </p>
             </div>
         </div>
