@@ -19,10 +19,15 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-
+                @if (!Auth::user()->subscribed(['yearly', 'yearlyuk']))
+                    <div class="form-group">
+                        <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">JOIN WORDS WON'T DO</a>
+                    </div>
+                @else
                 <div class="form-group">
-                    <a class="custom-button custom-button--primary create-video" href="{{ route('subscription.index') }}">JOIN WORDS WON'T DO</a>
+                    <a class="custom-button custom-button--danger" href="{{ route('home') }}">WORDS WON'T DO</a>
                 </div>
+                @endif
             </div>
         </div>
     </div>
