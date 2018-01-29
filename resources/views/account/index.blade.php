@@ -53,7 +53,7 @@
                     @if ($errors->has('email'))
                         <small class="form-text text-muted text-danger"><span class="text-danger">{{ $errors->first('email') }}</span></small>
                     @endif
-                    <button class="custom-button custom-button--primary mb-4">Edit</button>
+                    <button class="custom-button custom-button--primary mb-4">Update</button>
                     {!! Form::close() !!}
                 <hr>
                 <button class="custom-button custom-button--alert" type="button" data-toggle="modal" data-target="#share-via-email">
