@@ -15,6 +15,8 @@ Route::get('/callback-facebook', 'SocialAuthController@callback');
 
 
 Route::get('/video/{id}/download', 'VideoController@download')->name('video.download');
+
+Route::get('view/make-preview', 'VideoController@makePreview')->name('view.make-preview');
 Route::get('/view/{hash}', 'VideoController@generatedVideoByHash')->name('view');
 
 Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');

@@ -50,6 +50,19 @@ class VideoController extends Controller
         return view('video.show', compact('video', 'videos'));
     }
 
+    public function makePreview()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        if ($generatedUrl = session()->get('lust-generated-url')) {
+            $originalVideo = Video::findOrFail(session()->get('original-video-id'));
+            return view('video.preview', compact('generatedUrl', 'originalVideo'));
+        }
+        return redirect()->route('home');
+    }
+
     public function channel($slug)
     {
         $user = User::with(['videos' => function($q) {
@@ -116,8 +129,11 @@ class VideoController extends Controller
             'videoId' => $video->id,
         ];
 
+        session()->put('lust-generated-url', $videoUrl);
+        session()->put('original-video-id', $video->id);
+
         if (!Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
-            $response['generatedUrl'] = route('subscription.index');
+            $response['redirectUrl'] = route('view.make-preview');
         } else {
 
             try {
@@ -134,8 +150,7 @@ class VideoController extends Controller
             } catch (\Exception $e) {
                 Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
             }
-
-            $response['generatedUrl'] = route('view', $gVideo->hash) ;
+            $response['redirectUrl'] = route('view', $gVideo->hash);
         }
 
         return response()->json($response);

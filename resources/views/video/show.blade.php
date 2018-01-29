@@ -220,19 +220,20 @@
                     processData: false,
                     contentType: false,
                     success: function(data) {
-                        $('.video-container').html(`
-                        <video id="genVideo" data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" playsinline preload="auto" class="center" width="100%" controls="">
-                            <source src="${data.videoUrl}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>`);
-                        if (data.generatedUrl) {
-                            buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
-                        }
+                        window.location.replace(data.redirectUrl);
+                        {{--$('.video-container').html(`--}}
+                        {{--<video id="genVideo" data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" playsinline preload="auto" class="center" width="100%" controls="">--}}
+                            {{--<source src="${data.videoUrl}" type="video/mp4">--}}
+                            {{--Your browser does not support the video tag.--}}
+                        {{--</video>`);--}}
+                        {{--if (data.generatedUrl) {--}}
+                            {{--buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();--}}
+                        {{--}--}}
 
-                        var vid = document.getElementById("genVideo");
-                        vid.play();
+                        {{--var vid = document.getElementById("genVideo");--}}
+                        {{--vid.play();--}}
 
-                        previewImage.hide();
+                        {{--previewImage.hide();--}}
                     },
                     error: function(jqXHR, textStatus) {
                         console.log(textStatus);
