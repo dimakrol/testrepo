@@ -87,9 +87,9 @@
         </div>
     {!! Form::close() !!}
 
-    {!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin.video.destroy', $video->id ] ]) !!}
-            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-    {!! Form::close() !!}
+    {{--{!! Form::open([ 'method'  => 'delete', 'route' => [ 'admin.video.destroy', $video->id ] ]) !!}--}}
+            {{--{{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}--}}
+    {{--{!! Form::close() !!}--}}
     </div>
 @endsection
 @section('script')

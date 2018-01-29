@@ -160,26 +160,26 @@ class VideoController extends Controller
         return redirect()->route('admin.video.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
-    public function destroy($id)
-    {
-        $video = Video::findOrFail($id);
-
-        try {
-            $video->destroyFile();
-            $video->destroyThumbnail();
-            $video->delete();
-        } catch (\PDOException $e) {
-            Log::error('Error while deletion video with id: '. $video->id.' '. $e->getMessage());
-            flash('Error while deletion video!')->error();
-            return back();
-        }
-
-        flash('File deleted successful!')->success();
-        return redirect()->route('admin.video.index');
-    }
+//    /**
+//     * @param $id
+//     * @return \Illuminate\Http\RedirectResponse
+//     * @throws \Exception
+//     */
+//    public function destroy($id)
+//    {
+//        $video = Video::findOrFail($id);
+//
+//        try {
+//            $video->destroyFile();
+//            $video->destroyThumbnail();
+//            $video->delete();
+//        } catch (\PDOException $e) {
+//            Log::error('Error while deletion video with id: '. $video->id.' '. $e->getMessage());
+//            flash('Error while deletion video!')->error();
+//            return back();
+//        }
+//
+//        flash('File deleted successful!')->success();
+//        return redirect()->route('admin.video.index');
+//    }
 }
