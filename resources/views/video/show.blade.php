@@ -229,7 +229,7 @@
                             buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();
                         }
 
-                        var vid = document.getElementById("genVideo");e;
+                        var vid = document.getElementById("genVideo");
                         vid.play();
 
                         previewImage.hide();
