@@ -96,31 +96,31 @@
     z-index: 1;
   }
 
-  &[data-category="birthday"]::before {
+  &.birthday::before {
     background-color: #6bcbef;
   }
 
-  &[data-category="christmas"]::before {
+  &.christmas::before {
     background-color: #fe7c7f;
   }
 
-  &[data-category="fathers"]::before {
+  &.fathers::before {
     background-color: #69d777;
   }
 
-  &[data-category="halloween"]::before {
+  &.halloween::before {
     background-color: #ffa97b;
   }
 
-  &[data-category="misc"]::before {
+  &.misc::before {
     background-color: #8b7add;
   }
 
-  &[data-category="mothers"]::before {
+  &.mothers::before {
     background-color: #e542a3;
   }
 
-  &[data-category="valentines"]::before {
+  &.valentines::before {
     background-color: #e83737;
   }
 }
