@@ -22,7 +22,7 @@ class PlanSubscriptionSeeder extends Seeder
                 "stripe_id" => Plan::STRIPE_ID
             ]);
 
-            StripePaymentService::createPlan($plan);
+//            StripePaymentService::createPlan($plan);
         }
     }
 }
