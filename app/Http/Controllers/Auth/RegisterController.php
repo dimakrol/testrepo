@@ -110,7 +110,7 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        $path = route('home');
+        $path = route('subscription.index');
 
         if ($current_url = session('current_url')) {
             $path = $current_url;
