@@ -131,6 +131,7 @@ class VideoController extends Controller
 
         session()->put('lust-generated-url', $videoUrl);
         session()->put('original-video-id', $video->id);
+        flash('Video created successfully!')->success();
 
         if (!Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
             $response['redirectUrl'] = route('view.make-preview');
