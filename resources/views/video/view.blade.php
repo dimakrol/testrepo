@@ -17,14 +17,13 @@
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <div class="video-container" data-category="{{$gVideo->video->categoryName}}">
                     <video
-                            data-category="{{ $gVideo->video->categoryName }}"
-                            autoplay
-                            playsinline
-                            poster="{{ $gVideo->video->getThumbnail() }}"
-                            preload="auto"
-                            class="center"
-                            width="100%"
-                            controls=""
+                        data-category="{{ $gVideo->video->categoryName }}"
+                        playsinline
+                        poster="{{ $gVideo->video->getThumbnail() }}"
+                        preload="auto"
+                        class="center"
+                        width="100%"
+                        controls=""
                     >
                         <source src="{{ $gVideo->video_url }}" type="video/mp4">
                         Your browser does not support the video tag.

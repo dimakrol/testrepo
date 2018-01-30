@@ -6,14 +6,13 @@
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <div class="video-container" data-category="{{$originalVideo->categoryName}}">
                     <video
-                            data-category="{{ $originalVideo->categoryName }}"
-                            autoplay
-                            playsinline
-                            poster="{{ $originalVideo->getThumbnail() }}"
-                            preload="auto"
-                            class="center"
-                            width="100%"
-                            controls=""
+                        data-category="{{ $originalVideo->categoryName }}"
+                        playsinline
+                        poster="{{ $originalVideo->getThumbnail() }}"
+                        preload="auto"
+                        class="center"
+                        width="100%"
+                        controls=""
                     >
                         <source src="{{ $generatedUrl }}" type="video/mp4">
                         Your browser does not support the video tag.
