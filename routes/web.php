@@ -5,6 +5,7 @@ Auth::routes();
 
 Route::resource('/video', 'VideoController', ['only' => ['show']]);
 
+Route::get('/sitemap.xml', 'SitemapController@index');
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
