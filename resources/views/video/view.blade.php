@@ -1,11 +1,23 @@
 @extends('layouts.frontend.app')
 @section('styles')
-<meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}"/>
-<meta property="og:url" content="{{ url()->current() }}"/>
-<meta property="og:type" content="article"/>
-<meta property="og:title" content="{{$gVideo->video->name}}"/>
-<meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}"/>
-<meta property="og:image:type" content="image/jpeg"/>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '1734798486815400',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v2.12'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 @endsection
 
 @section('content')
@@ -65,6 +77,7 @@
                 @endunless
             </div>
         </div>
+        <button id="shareBtn" class="btn btn-primary">share</button>
         <h3 class="mb-3 your-own">Create your own:</h3>
         <div class="row justify-content-center pb-4">
             @foreach($videos as $video)
@@ -115,6 +128,14 @@
 
 @section('script')
     <script>
+        document.getElementById('shareBtn').onclick = function() {
+            FB.ui({
+                method: 'share',
+                display: 'popup',
+                href: 'https://developers.facebook.com/docs/',
+            }, function(response){});
+        }
+
         $(function () {
 
             var modalShare = $('#share-via-email');
