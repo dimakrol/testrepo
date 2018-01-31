@@ -9,7 +9,7 @@
     <script>
         window.fbAsyncInit = function() {
             FB.init({
-                appId            : '{{env('')}}',
+                appId            : '{{config('services.facebook.client_id')}}',
                 autoLogAppEvents : true,
                 xfbml            : true,
                 version          : 'v2.12'
