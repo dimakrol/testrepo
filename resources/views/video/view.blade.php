@@ -1,9 +1,15 @@
 @extends('layouts.frontend.app')
 @section('styles')
+    <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}"/>
+    <meta property="og:url" content="{{ url()->current() }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{$gVideo->video->name}}"/>
+    <meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}"/>
+    <meta property="og:image:type" content="image/jpeg"/>
     <script>
         window.fbAsyncInit = function() {
             FB.init({
-                appId            : '1734798486815400',
+                appId            : '{{env('')}}',
                 autoLogAppEvents : true,
                 xfbml            : true,
                 version          : 'v2.12'
@@ -59,9 +65,9 @@
                     </label>
                 </div>
                 <div class="form-group social-button">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="custom-button custom-button--facebook" target="_blank">
+                    <button style="cursor: pointer;" type="button"  class="custom-button custom-button--facebook">
                         <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
-                    </a>
+                    </button>
                 </div>
                 <div class="form-group">
                     <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">
@@ -77,7 +83,6 @@
                 @endunless
             </div>
         </div>
-        <button id="shareBtn" class="btn btn-primary">share</button>
         <h3 class="mb-3 your-own">Create your own:</h3>
         <div class="row justify-content-center pb-4">
             @foreach($videos as $video)
@@ -128,14 +133,6 @@
 
 @section('script')
     <script>
-        document.getElementById('shareBtn').onclick = function() {
-            FB.ui({
-                method: 'share',
-                display: 'popup',
-                href: 'https://developers.facebook.com/docs/',
-            }, function(response){});
-        }
-
         $(function () {
 
             var modalShare = $('#share-via-email');
@@ -172,22 +169,12 @@
                 height: 550
             };
 
-            $(document).on('click', '.social-button > a', function(e){
-
-                var
-                    verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
-                    horisontalPos = Math.floor(($(window).height() - popupSize.height) / 2);
-
-                var popup = window.open($(this).prop('href'), 'social',
-                    'width='+popupSize.width+',height='+popupSize.height+
-                    ',left='+verticalPos+',top='+horisontalPos+
-                    ',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
-
-                if (popup) {
-                    popup.focus();
-                    e.preventDefault();
-                }
-
+            $(document).on('click', '.social-button > .custom-button--facebook', function(e){
+                FB.ui({
+                    method: 'share',
+                    display: 'popup',
+                    href: '{{urlencode(route('view', $gVideo->hash))}}',
+                }, function(response){});
             });
 
 
