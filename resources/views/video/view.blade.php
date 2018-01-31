@@ -173,7 +173,7 @@
                 FB.ui({
                     method: 'share',
                     display: 'popup',
-                    href: '{{urlencode(route('view', $gVideo->hash))}}',
+                    href: '{{route('view', $gVideo->hash)}}',
                 }, function(response){});
             });
 
