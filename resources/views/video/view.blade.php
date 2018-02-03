@@ -37,8 +37,7 @@
                     <video
                         data-category="{{ $gVideo->video->categoryName }}"
                         playsinline
-                        poster="{{ asset('images/loading_anim.gif') }}"
-                        autoplay
+                        poster="{{ $gVideo->video->getThumbnail() }}"
                         preload="auto"
                         class="center"
                         width="100%"
