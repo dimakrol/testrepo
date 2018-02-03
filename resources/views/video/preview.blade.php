@@ -8,7 +8,8 @@
                     <video
                         data-category="{{ $originalVideo->categoryName }}"
                         playsinline
-                        poster="{{ $originalVideo->getThumbnail() }}"
+                        poster="{{ asset('images/loading_anim.gif') }}"
+                        autoplay
                         preload="auto"
                         class="center"
                         width="100%"

@@ -122,7 +122,7 @@ class VideoController extends Controller
 
         $gVideo = null;
 
-        $videoUrl = "http://api.impossible.io/v2/render/".$token.".mp4";
+        $videoUrl = "https://render-eu-west-1.impossible.io/v2/render/".$token.".mp4";
 
         $response = [
             'videoUrl' => $videoUrl,
