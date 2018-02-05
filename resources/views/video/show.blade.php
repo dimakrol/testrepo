@@ -20,11 +20,11 @@
                 </div>
             </div>
             <div class="col-sm-10 col-lg-5 pt-lg-3">
-                @if(!Auth::user())
-                    <div class="form-group">
-                        <a class="custom-button custom-button--primary create-video" href="{{ route('register').'?current_url='.route('subscription.index') }}">Create Video</a>
-                    </div>
-                @else
+                {{--@if(!Auth::user())--}}
+                    {{--<div class="form-group">--}}
+                        {{--<a class="custom-button custom-button--primary create-video" href="{{ route('register').'?current_url='.route('subscription.index') }}">Create Video</a>--}}
+                    {{--</div>--}}
+                {{--@else--}}
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="form-group hide-block">
@@ -55,7 +55,7 @@
                             </div>
                         @endif
                     @endforeach
-                @endif
+                {{--@endif--}}
             </div>
         </div>
     </div>
