@@ -13,6 +13,7 @@
                         class="center"
                         width="100%"
                         controls=""
+                        controlsList="nodownload"
                     >
                         <source src="{{ $generatedUrl }}" type="video/mp4">
                         Your browser does not support the video tag.
