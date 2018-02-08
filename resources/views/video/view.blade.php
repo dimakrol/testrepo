@@ -31,6 +31,7 @@
         <div class="video-view-alert alert alert-success" role="alert">
             Email has been send successfully!!!
         </div>
+        <img src="{{ $gVideo->video->getThumbnail() }}" width="1px" height="1px" alt="">
         <div class="row justify-content-center video pb-5">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <div class="video-container" data-category="{{$gVideo->video->categoryName}}">
