@@ -28,7 +28,7 @@ class SocialAuthController extends Controller
         }
 
         if (!$user->subscribed(Plan::default()->stripe_id)) {
-            return redirect(route('subscription.index'));
+            return redirect('/home');
         }
         return redirect('/home');
     }

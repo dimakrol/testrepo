@@ -5,6 +5,7 @@ Auth::routes();
 
 Route::resource('/video', 'VideoController', ['only' => ['show']]);
 
+Route::get('/sitemap.xml', 'SitemapController@index');
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -15,6 +16,7 @@ Route::get('/callback-facebook', 'SocialAuthController@callback');
 
 
 Route::get('/video/{id}/download', 'VideoController@download')->name('video.download');
+Route::post('/video/generate', 'VideoController@generate');
 
 Route::get('view/make-preview', 'VideoController@makePreview')->name('view.make-preview');
 Route::get('/view/{hash}', 'VideoController@generatedVideoByHash')->name('view');
@@ -28,7 +30,6 @@ Route::post('/paypal/process', 'PayPalWebhooksController@processPayment');
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/video/generate', 'VideoController@generate');
     Route::get('/my-videos', 'VideoController@generatedVideos')->name('my-videos');
 
 

@@ -13,12 +13,17 @@
                         class="center"
                         width="100%"
                         controls=""
+                        controlsList="nodownload"
                     >
                         <source src="{{ $generatedUrl }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                @if (!Auth::user()->subscribed(['yearly', 'yearlyuk']))
+                @if (!Auth::check())
+                    <div class="form-group">
+                        <a class="custom-button custom-button--primary" href="{{ route('register') }}">JOIN WORDS WON'T DO</a>
+                    </div>
+                @elseif(!Auth::user()->subscribed(['yearly', 'yearlyuk']))
                     <div class="form-group">
                         <a class="custom-button custom-button--primary" href="{{ route('subscription.index') }}">JOIN WORDS WON'T DO</a>
                     </div>

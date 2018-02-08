@@ -91,6 +91,6 @@ class VideoGenerated extends Model
      */
     public function getVideoUrlAttribute()
     {
-        return "http://api.impossible.io/v2/render/".$this->impossible_id.".mp4";
+        return "https://render-eu-west-1.impossible.io/v2/render/".$this->impossible_id.".mp4";
     }
 }

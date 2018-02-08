@@ -1,11 +1,29 @@
 @extends('layouts.frontend.app')
 @section('styles')
-<meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}"/>
-<meta property="og:url" content="{{ url()->current() }}"/>
-<meta property="og:type" content="article"/>
-<meta property="og:title" content="{{$gVideo->video->name}}"/>
-<meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}"/>
-<meta property="og:image:type" content="image/jpeg"/>
+    <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}"/>
+    <meta property="og:url" content="{{ url()->current() }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{$gVideo->video->name}}"/>
+    <meta property="og:image:secure_url" content="{{ $gVideo->video->getThumbnail() }}"/>
+    <meta property="og:image:type" content="image/jpeg"/>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '{{config('services.facebook.client_id')}}',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v2.12'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 @endsection
 
 @section('content')
@@ -13,6 +31,8 @@
         <div class="video-view-alert alert alert-success" role="alert">
             Email has been send successfully!!!
         </div>
+        <!-- This image for fb share don't delete it -->
+        <img src="{{ $gVideo->video->getThumbnail() }}" width="1px" height="1px" alt="">
         <div class="row justify-content-center video pb-5">
             <div class="col-md-10 col-lg-6 col-lg-offset-1">
                 <div class="video-container" data-category="{{$gVideo->video->categoryName}}">
@@ -47,9 +67,9 @@
                     </label>
                 </div>
                 <div class="form-group social-button">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(route('view', $gVideo->hash))}}" class="custom-button custom-button--facebook" target="_blank">
+                    <button style="cursor: pointer;" type="button"  class="custom-button custom-button--facebook">
                         <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
-                    </a>
+                    </button>
                 </div>
                 <div class="form-group">
                     <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">
@@ -151,22 +171,12 @@
                 height: 550
             };
 
-            $(document).on('click', '.social-button > a', function(e){
-
-                var
-                    verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
-                    horisontalPos = Math.floor(($(window).height() - popupSize.height) / 2);
-
-                var popup = window.open($(this).prop('href'), 'social',
-                    'width='+popupSize.width+',height='+popupSize.height+
-                    ',left='+verticalPos+',top='+horisontalPos+
-                    ',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
-
-                if (popup) {
-                    popup.focus();
-                    e.preventDefault();
-                }
-
+            $(document).on('click', '.social-button > .custom-button--facebook', function(e){
+                FB.ui({
+                    method: 'share',
+                    display: 'popup',
+                    href: '{{route('view', $gVideo->hash)}}',
+                }, function(response){});
             });
 
 

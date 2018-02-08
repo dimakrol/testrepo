@@ -52,10 +52,6 @@ class VideoController extends Controller
 
     public function makePreview()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
         if ($generatedUrl = session()->get('lust-generated-url')) {
             $originalVideo = Video::findOrFail(session()->get('original-video-id'));
             return view('video.preview', compact('generatedUrl', 'originalVideo'));
@@ -78,9 +74,9 @@ class VideoController extends Controller
      */
     public function generate(Request $request)
     {
-        if (!Auth::check()) {
-            return response()->json('error');
-        }
+//        if (!Auth::check()) {
+//            return response()->json('error');
+//        }
 
         $video = Video::with('fields')->findOrFail($request->id);
 
@@ -122,7 +118,7 @@ class VideoController extends Controller
 
         $gVideo = null;
 
-        $videoUrl = "http://api.impossible.io/v2/render/".$token.".mp4";
+        $videoUrl = "https://render-eu-west-1.impossible.io/v2/render/".$token.".mp4";
 
         $response = [
             'videoUrl' => $videoUrl,
@@ -133,7 +129,7 @@ class VideoController extends Controller
         session()->put('original-video-id', $video->id);
         flash('Video created successfully!')->success();
 
-        if (!Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
+        if (!Auth::check() || !Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
             $response['redirectUrl'] = route('view.make-preview');
         } else {
 
