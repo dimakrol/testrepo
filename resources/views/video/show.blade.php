@@ -182,7 +182,7 @@
 
                 croppie = new Croppie(el, {
                     viewport: { width: ratio * 200, height: 200 },
-                    boundary: { width: 300, height: 300 },
+                    boundary: { width: 360, height: 300 },
                     enableOrientation: true
                 });
 
