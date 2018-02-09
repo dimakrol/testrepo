@@ -8,7 +8,10 @@ Route::resource('/video', 'VideoController', ['only' => ['show']]);
 Route::get('/sitemap.xml', 'SitemapController@index');
 
 Route::get('/', 'HomeController@index');
+
+Route::get('/amp', 'HomeController@ampIndex')->name('amp.home');
 Route::get('/amp/index', 'HomeController@ampIndex')->name('amp.home');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('channel/{slug}', 'VideoController@channel')->name('channel.index');
 
