@@ -43,6 +43,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Linking with AMP version of the site -->
+    <link rel="amphtml" href="{{ url('/') }}/amp">
+
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @auth

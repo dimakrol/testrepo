@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ⚡ lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -6,20 +6,23 @@
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="canonical" href="https://wordswontdo.com/">
+    <link rel="canonical" href="{{ url('/') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "NewsArticle",
-        "headline": "WordsWontDo",
-        "datePublished": "2015-10-07T12:02:41Z",
-        "image": [
-          "images/HomeHero_HNY.jpg"
-        ]
-      }
+        {
+          "@context": "http://schema.org/",
+          "@type": "WebSite",
+          "name": "WordsWontDo",
+          "url": "{{ url('/') }}/amp",
+          "image": {
+            "@type": "ImageObject",
+            "url": "{{ url('/') }}/images/HomeHero_HNY.jpg",
+            "height": 810,
+            "width": 1440
+          }
+        }
     </script>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <style amp-custom>
