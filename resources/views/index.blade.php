@@ -57,7 +57,7 @@
                           @foreach($playlist->videos as $video)
                               <div class="portfolio-item">
                                   <div class="card h-100">
-                                      <a href="{{ route('video.show', $video->slug) }}" data-category="{{$playlist->categoryName}}" class="{{ $video->categories()->count() ? $video->categories[0]->name : ''}}">
+                                      <a href="{{ route('video.show', $video->slug) }}" data-category="{{ $video->categories()->count() ? $video->categories[0]->name : 'New'}}" class="{{ $video->categories()->count() ? $video->categories[0]->name : 'New'}}">
                                           <img class="card-img-top" src="{{ $video->getThumbnail() }}" alt="">
                                       </a>
                                       <div class="card-body">

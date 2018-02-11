@@ -96,31 +96,35 @@
     z-index: 1;
   }
 
-  &.birthday::before {
+  &.New::before {
+    background-color: orange;
+  }
+
+  &.Birthday::before {
     background-color: #6bcbef;
   }
 
-  &.christmas::before {
+  &.Christmas::before {
     background-color: #fe7c7f;
   }
 
-  &.fathers::before {
+  &.Fathers::before {
     background-color: #69d777;
   }
 
-  &.halloween::before {
+  &.Halloween::before {
     background-color: #ffa97b;
   }
 
-  &.misc::before {
+  &.Misc::before {
     background-color: #8b7add;
   }
 
-  &.mothers::before {
+  &.Mothers::before {
     background-color: #e542a3;
   }
 
-  &.valentines::before {
+  &.Valentines::before {
     background-color: #e83737;
   }
 }
