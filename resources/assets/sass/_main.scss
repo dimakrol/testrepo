@@ -212,3 +212,20 @@
 .flex-grow-1 {
   flex-grow: 1;
 }
+
+.hr__with-text {
+  position: relative;
+
+  &:after {
+    background-color: white;
+    color: $gray-900;
+    content: attr(data-text);
+    display: inline-block;
+    font-size: .75rem;
+    left: 50%;
+    padding: 0 .5rem;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

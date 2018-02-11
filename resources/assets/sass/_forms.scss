@@ -7,10 +7,24 @@
 
 .form-group {
   text-align: center;
+
+  &--round-share {
+    display: inline-block;
+    height: 3.125rem;
+    width: 3.125rem;
+
+    &:not(:last-of-type) {
+      margin-right: .7rem;
+    }
+
+    > .custom-button {
+      border-radius: 50%;
+    }
+  }
 }
 
 .share-label {
-  background: linear-gradient(to right, $lightGreen 0%, $lightGreen 3.125rem, white 3.125rem, white 100%);
+  background: linear-gradient(to right, $lightGreen 0%, $lightGreen 3.18725rem, white 3.1875rem, white 100%);
   border: 2px solid $lightGreen;
   border-radius: .25rem;
   margin-bottom: 0;

@@ -33,8 +33,8 @@
         </div>
         <!-- This image for fb share don't delete it -->
         <img src="{{ $gVideo->video->getThumbnail() }}" width="1px" height="1px" alt="">
-        <div class="row justify-content-center video pb-5">
-            <div class="col-md-10 col-lg-6 col-lg-offset-1">
+        <div class="row justify-content-center video pb-2 pt-0 flex-lg-column align-items-lg-center">
+            <div class="col-md-10 col-lg-6">
                 <div class="video-container" data-category="{{$gVideo->video->categoryName}}">
                     <video
                         data-category="{{ $gVideo->video->categoryName }}"
@@ -49,40 +49,37 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <div class="video__description-container">
-                    <a class="d-inline-block" href="{{ route('video.show', $gVideo->slug) }}">
-                        <img src="{{ $gVideo->video->user->thumbnail_path }}" class="rounded-circle avatar">
-                    </a>
-                    <div>
-                        <h2 class="video__title">{{ $gVideo->video->name }}</h2>
-                        <p class="video__author">by: <a href="{{ route('channel.index', $gVideo->video->user->slug) }}">{{ $gVideo->video->user->first_name }}</a></p>
-                    </div>
-                </div>
             </div>
-            <div class="col-sm-10 col-lg-5 pt-lg-3">
-                <div class="form-group">
-                    <label class="share-label" id="share-label">
-                        <input type="text" placeholder="Share Link" value="{{url()->current()}}" class="share-input" id="share-input" spellcheck="false">
-                        <i class="fa fa-link" aria-hidden="true"></i>
-                    </label>
-                </div>
+            <div class="col-sm-10 col-md-8 col-lg-5">
                 <div class="form-group social-button">
-                    <button style="cursor: pointer;" type="button"  class="custom-button custom-button--facebook">
+                    <button style="cursor: pointer;" type="button" class="custom-button custom-button--facebook">
                         <i class="fa fa-facebook-square" aria-hidden="true"></i> Share on Facebook
                     </button>
                 </div>
-                <div class="form-group">
-                    <button style="cursor: pointer;" type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">
-                        <i class="fa fa-envelope-square" aria-hidden="true"></i> Share via Email
-                    </button>
-                </div>
-                @unless($iPhone || $iPod)
-                    <div class="form-group">
-                        <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
-                            <i class="fa fa-download" aria-hidden="true"></i> Download
-                        </a>
+                <hr class="hr__with-text" data-text="or">
+                <div class="text-center">
+                    @unless($iPhone || $iPod)
+                        <div class="form-group form-group--round-share">
+                            <a href="{{ route('video.download', $gVideo->id) }}" class="custom-button custom-button--primary">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    @endunless
+                    <div class="form-group form-group--round-share">
+                        <button type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#share-via-email">
+                            <i class="fa fa-envelope-square" aria-hidden="true"></i>
+                        </button>
                     </div>
-                @endunless
+                    <div class="form-group form-group--round-share">
+                        {{--<label class="share-label" id="share-label">--}}
+                        {{--<input type="text" placeholder="Share Link" value="{{url()->current()}}" class="share-input" id="share-input" spellcheck="false">--}}
+                        {{--<i class="fa fa-link" aria-hidden="true"></i>--}}
+                        {{--</label>--}}
+                        <button type="button" class="custom-button custom-button--primary">
+                            <i class="fa fa-link" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <h3 class="mb-3 your-own">Create your own:</h3>
@@ -182,26 +179,26 @@
 
         })
 
-        $('#share-input').on('click', function () {
-            // select the input
-            // hack used for iOS
-            this.focus();
-            this.setSelectionRange(0, 999);
-            // copy the path
-            document.execCommand('copy');
-            // show the message, hide it and remove from the DOM
-            $('#share-label')
-                .parent()
-                .append(
-                    '<div class="success-message">' +
-                        '<small class="text-success">' +
-                            'Link has been copied successfully' +
-                        '</small>' +
-                    '</div>'
-                );
-            $('.success-message').fadeOut(2000, function () {
-                $(this).remove();
-            });
-        });
+        // $('#share-input').on('click', function () {
+        //     // select the input
+        //     // hack used for iOS
+        //     this.focus();
+        //     this.setSelectionRange(0, 999);
+        //     // copy the path
+        //     document.execCommand('copy');
+        //     // show the message, hide it and remove from the DOM
+        //     $('#share-label')
+        //         .parent()
+        //         .append(
+        //             '<div class="success-message">' +
+        //                 '<small class="text-success">' +
+        //                     'Link has been copied successfully' +
+        //                 '</small>' +
+        //             '</div>'
+        //         );
+        //     $('.success-message').fadeOut(2000, function () {
+        //         $(this).remove();
+        //     });
+        // });
     </script>
 @endsection
