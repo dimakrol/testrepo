@@ -85,9 +85,9 @@
         <h3 class="mb-3 your-own">Create your own:</h3>
         <div class="row justify-content-center pb-4">
             @foreach($videos as $video)
-                <div class="col-6 mb-2 px-2 portfolio-item">
+                <div class="col-12 col-md-6 col-lg-4 px-3 mb-3 mb-lg-0 portfolio-item">
                     <div class="card h-100">
-                        <a href="{{ route('video.show', $video->slug) }}" data-category="{{$video->categoryName}}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
+                        <a href="{{ route('video.show', $video->slug) }}" data-category="{{ $video->categories()->count() ? $video->categories[0]->name : 'New'}}" class="{{ $video->categories()->count() ? $video->categories[0]->name : 'New'}}"><img class="card-img-top" src="{{ $video->getThumbnail() }}" alt=""></a>
                     </div>
                 </div>
             @endforeach
