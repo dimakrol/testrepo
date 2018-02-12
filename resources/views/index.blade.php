@@ -16,7 +16,7 @@
             <div class="wwd-carousel__positioning">
                 <h1 class="wwd-carousel__header"><span>Personalized Video eCards</span></h1>
                 <p class="lead" align="center">
-                    <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/100th-birthday" role="button">CREATE VIDEO</a>
+                    <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/valentines" role="button">CREATE VIDEO</a>
                 </p>
             </div>
         </div>
