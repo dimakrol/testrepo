@@ -71,11 +71,7 @@
                         </button>
                     </div>
                     <div class="form-group form-group--round-share">
-                        {{--<label class="share-label" id="share-label">--}}
-                        {{--<input type="text" placeholder="Share Link" value="{{url()->current()}}" class="share-input" id="share-input" spellcheck="false">--}}
-                        {{--<i class="fa fa-link" aria-hidden="true"></i>--}}
-                        {{--</label>--}}
-                        <button type="button" class="custom-button custom-button--primary">
+                        <button type="button" class="custom-button custom-button--primary" data-toggle="modal" data-target="#copy-link">
                             <i class="fa fa-link" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -122,6 +118,28 @@
                             data-share-link="{{route('view', $gVideo->hash)}}" style="cursor: pointer;">
                         Send
                     </button>
+                    <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="copy-link" tabindex="-1" role="dialog" aria-labelledby="copy-link" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header mb-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Share link</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body form-group mb-5">
+                    <label id="share-label" class="w-100">
+                        <input type="text" placeholder="Share Link" value="{{url()->current()}}" class="share-input" id="share-input" spellcheck="false">
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="custom-button custom-button--primary" id="share-button">Copy the link</button>
                     <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Close</button>
                 </div>
 
@@ -177,28 +195,31 @@
             });
 
 
-        })
+        });
 
-        // $('#share-input').on('click', function () {
-        //     // select the input
-        //     // hack used for iOS
-        //     this.focus();
-        //     this.setSelectionRange(0, 999);
-        //     // copy the path
-        //     document.execCommand('copy');
-        //     // show the message, hide it and remove from the DOM
-        //     $('#share-label')
-        //         .parent()
-        //         .append(
-        //             '<div class="success-message">' +
-        //                 '<small class="text-success">' +
-        //                     'Link has been copied successfully' +
-        //                 '</small>' +
-        //             '</div>'
-        //         );
-        //     $('.success-message').fadeOut(2000, function () {
-        //         $(this).remove();
-        //     });
-        // });
+        function copyLink() {
+            // select the input
+            // hack used for iOS
+            $('#share-input').focus();
+            $('#share-input')[0].setSelectionRange(0, 999);
+            // copy the path
+            document.execCommand('copy');
+            // show the message, hide it and remove from the DOM
+            $('#share-label')
+                .parent()
+                .append(
+                    '<div class="success-message">' +
+                    '<small class="text-success">' +
+                    'Link has been copied successfully' +
+                    '</small>' +
+                    '</div>'
+                );
+            $('.success-message').fadeOut(2000, function () {
+                $(this).remove();
+            });
+        }
+
+        $('#share-input').on('click', copyLink);
+        $('#share-button').on('click', copyLink);
     </script>
 @endsection
