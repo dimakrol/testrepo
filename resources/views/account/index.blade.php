@@ -34,10 +34,12 @@
                         <span><i class="fa fa-check mr-2" aria-hidden="true"></i></span>
                         Yearly Unlimited
                     </button>
-                    <p class="text-center mb-5 small grey-text">
-                        Your subscription will auto renew on {{ $subscription->next_payment->format('d/m/y') }}
-                        {{--<a href="#" class="text-danger">&nbsp;cancel&nbsp;</a>--}}
-                    </p>
+                    @if($subscription->next_payment)
+                        <p class="text-center mb-5 small grey-text">
+                            Your subscription will auto renew on {{ $subscription->next_payment->format('d/m/y') }}
+                            {{--<a href="#" class="text-danger">&nbsp;cancel&nbsp;</a>--}}
+                        </p>
+                    @endif
                 @endif
                 <hr>
                 <h4 class="account__title">
