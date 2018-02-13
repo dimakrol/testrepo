@@ -452,7 +452,7 @@
                       width="100vw"
                       layout="responsive"
                       type="slides">
-            <amp-img src="{{ url("/images/HomeHero_HNY.jpg") }}"
+            <amp-img src="{{ url("/images/Valentines.jpg") }}"
                      class="wwd-main-image"
                      width="1440"
                      height="810"
