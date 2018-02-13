@@ -18,7 +18,7 @@
           "url": "{{ url('/') }}/amp",
           "image": {
             "@type": "ImageObject",
-            "url": "{{ url('/') }}/images/HomeHero_HNY.jpg",
+            "url": "{{ url('/images/Valentines-min.jpg') }}",
             "height": 810,
             "width": 1440
           }
@@ -194,7 +194,6 @@
             font-weight: bold;
             text-decoration: none;
             transition: color .15s ease-in-out;
-
         }
         .playlist__container {
             margin-bottom: .625rem;
@@ -242,6 +241,7 @@
             background-color: #fff;
             border: 1px solid rgba(0,0,0,.125);
             border-radius: .25rem;
+            position: relative;
         }
         .card-link {
             display: block;
@@ -249,6 +249,44 @@
         .card-body {
             padding: 1.25rem;
         }
+        .card > a::before {
+            background-color: black;
+            content: attr(data-category);
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 600;
+            left: 0;
+            padding: .25rem .5rem;
+            position: absolute;
+            text-transform: uppercase;
+            top: 7%;
+            line-height: 1;
+            z-index: 1;
+        }
+        .card > a.New::before {
+            background-color: orange;
+        }
+        .card > a.Birthday::before {
+             background-color: #6bcbef;
+         }
+        .card > a.Christmas::before {
+             background-color: #fe7c7f;
+         }
+        .card > a.Fathers::before {
+             background-color: #69d777;
+         }
+        .card > a.Halloween::before {
+             background-color: #ffa97b;
+         }
+        .card > a.Misc::before {
+             background-color: #8b7add;
+         }
+        .card > a.Mothers::before {
+             background-color: #e542a3;
+         }
+        .card > a.Valentine\'s::before {
+             background-color: #E83737;
+         }
         .video__image {
             border-top-left-radius: .25rem;
             border-top-right-radius: .25rem;
