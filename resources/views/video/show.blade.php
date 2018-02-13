@@ -20,11 +20,6 @@
                 </div>
             </div>
             <div class="col-sm-10 col-lg-5 pt-lg-3">
-                {{--@if(!Auth::user())--}}
-                    {{--<div class="form-group">--}}
-                        {{--<a class="custom-button custom-button--primary create-video" href="{{ route('register').'?current_url='.route('subscription.index') }}">Create Video</a>--}}
-                    {{--</div>--}}
-                {{--@else--}}
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="form-group hide-block">
@@ -45,9 +40,6 @@
                             </div>
                         @endif
                     @endforeach
-                    <div class="form-group">
-                        <a href="#" class="custom-button custom-button--primary go-share" disabled>Save & Share</a>
-                    </div>
                     @foreach($video->fields as $field)
                         @if('image' == $field->type)
                             <div class="text-center preview-image {{$field->variable_name}} hide-block">
@@ -55,7 +47,6 @@
                             </div>
                         @endif
                     @endforeach
-                {{--@endif--}}
             </div>
         </div>
     </div>
@@ -109,8 +100,6 @@
                 crop: $('.crop-button'),
                 addPhoto: $('.add-photo'),
                 create: $('.create-video'),
-                // download: $('.download-video'),
-                goShare: $('.go-share'),
                 rotLeft: $('.rot-left'),
                 rotRight: $('.rot-right'),
             };
@@ -193,7 +182,6 @@
 
 
             function cropImage() {
-
                 croppie.result({
                     type: 'canvas',
                     size: 'viewport'
@@ -221,19 +209,6 @@
                     contentType: false,
                     success: function(data) {
                         window.location.replace(data.redirectUrl);
-                        {{--$('.video-container').html(`--}}
-                        {{--<video id="genVideo" data-id="${data.videoId}" poster="{{asset('images/loading_anim.gif')}}" playsinline preload="auto" class="center" width="100%" controls="">--}}
-                            {{--<source src="${data.videoUrl}" type="video/mp4">--}}
-                            {{--Your browser does not support the video tag.--}}
-                        {{--</video>`);--}}
-                        {{--if (data.generatedUrl) {--}}
-                            {{--buttons.goShare.attr("href", data.generatedUrl).prop('disabled', false).show();--}}
-                        {{--}--}}
-
-                        {{--var vid = document.getElementById("genVideo");--}}
-                        {{--vid.play();--}}
-
-                        {{--previewImage.hide();--}}
                     },
                     error: function(jqXHR, textStatus) {
                         console.log(textStatus);
