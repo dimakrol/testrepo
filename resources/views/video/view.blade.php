@@ -104,7 +104,7 @@
                         <div class="alert alert-danger error-message-form" role="alert" style="display: none">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="recipient-email" placeholder="Email Address" required>
+                            <input type="email" class="form-control" id="recipient-email" placeholder="Recipient Email" required>
                         </div>
                         <div class="form-group mb-5">
                             <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name" required>
