@@ -128,5 +128,18 @@
     @guest
         <script>window.intercomSettings = { app_id: "e8yc37gy" }</script>
     @endguest
+
+    <script type="application/ld+json">
+        { "@context" : "http://schema.org",
+          "@type" : "Organization",
+          "name" : "Words Won't Do",
+          "url" : "https://wordswontdo.com",
+          "sameAs" : [ "https://www.facebook.com/wordswontdo/",
+            "https://twitter.com/WordsWontDo",
+            "https://www.youtube.com/channel/UCYqbWBCJ7XGoMvkW9GGiuWw/",
+            "https://plus.google.com/112423643265326272373",
+            "https://pinterest.com/wordswontdo"]
+        }
+    </script>
 </body>
 </html>
