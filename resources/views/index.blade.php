@@ -15,6 +15,7 @@
         <div class="carousel-item carousel-item--first active">
             <div class="wwd-carousel__positioning">
                 <h1 class="wwd-carousel__header"><span>Personalized Video eCards</span></h1>
+                <h2 class="wwd-carousel__subheader"><span>Short and fun personalised eCards. Smile Guaranteed!</span></h2>
                 <p class="lead" align="center">
                     <a class="btn btn-success btn-lg" href="https://wordswontdo.com/video/valentines" role="button">CREATE VIDEO</a>
                 </p>
