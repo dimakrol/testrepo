@@ -12,18 +12,27 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-//        $users = User::all();
+        $users = User::all();
+
+        foreach ($users as $user) {
+            Storage::disk('local')->append('public/index.csv', $user->id.','.$user->first_name.','.$user->email.','.($user->subscriptions()->count() ? $user->subscriptions()->first()->created_at:'Not Subscribed') . ','.$user->created_at);
+        }
+
+//        $subscriptions = \App\Models\Subscription::all();
 //
-//        foreach ($users as $user) {
-//            Storage::disk('local')->append('public/index.csv', $user->id.','.$user->first_name.','.$user->email.','.($user->subscriptions()->count() ? $user->subscriptions()->first()->created_at:'Not Subscribed') . ','.$user->created_at);
+//        foreach ($subscriptions as $subscription) {
+//            if ($subscription->user()->count()) {
+//                $aUser = $subscription->user;
+//                Storage::disk('local')->append('public/index.csv', $aUser->id . ',' . $aUser->first_name . ',' . $aUser->email . ',' . $aUser->created_at);
+//            }
 //        }
 
-        $user = new User;
-        $user->first_name = 'John';
-        $user->last_name = 'Doe';
-        $user->email = 'admin@admin.com';
-        $user->password = bcrypt('123123');
-        $user->is_admin = true;
-        $user->save();
+//        $user = new User;
+//        $user->first_name = 'John';
+//        $user->last_name = 'Doe';
+//        $user->email = 'admin@admin.com';
+//        $user->password = bcrypt('123123');
+//        $user->is_admin = true;
+//        $user->save();
     }
 }

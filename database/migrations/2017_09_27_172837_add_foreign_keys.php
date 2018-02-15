@@ -14,7 +14,7 @@ class AddForeignKeys extends Migration
     public function up()
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
         });
         Schema::table('tag_video', function (Blueprint $table) {
             $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
