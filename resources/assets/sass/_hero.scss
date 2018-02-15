@@ -54,10 +54,9 @@
 // Carousel for hero image at index page
 .wwd-carousel {
 
-  &__header {
-    font-size: 1.75rem;
+  &__header,
+  &__subheader {
     font-weight: bold;
-    margin-bottom: .6875rem;
     text-align: center;
 
     span {
@@ -65,6 +64,15 @@
       color: $green;
       padding: .1875rem .3125rem;
     }
+  }
+
+  &__header {
+    font-size: 1.75rem;
+    margin-bottom: .6875rem;
+  }
+
+  &__subheader {
+    display: none;
   }
 
   &__positioning {
@@ -79,6 +87,12 @@
 
     &__header {
       font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__subheader {
+      display: block;
+      font-size: 1.5rem;
       margin-bottom: 1.5rem;
     }
 

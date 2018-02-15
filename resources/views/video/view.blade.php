@@ -92,7 +92,7 @@
 
     <div class="modal fade" id="share-via-email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <form class="modal-content">
                 <div class="modal-header mb-3">
                     <h5 class="modal-title" id="exampleModalLabel">New message</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -100,16 +100,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="share-via-email">
-                        <div class="alert alert-danger error-message-form" role="alert" style="display: none">
-                        </div>
-                        <div class="form-group">
+                    <div class="share-via-email">
+                        <div class="alert alert-danger error-message-form" role="alert" style="display: none;"></div>
+                        <label class="form-group" for="recipient-email">
                             <input type="email" class="form-control" id="recipient-email" placeholder="Recipient Email" required>
-                        </div>
-                        <div class="form-group mb-5">
+                        </label>
+                        <label class="form-group mb-5" for="recipient-name">
                             <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name" required>
-                        </div>
-                    </form>
+                        </label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button"
@@ -120,13 +119,12 @@
                     </button>
                     <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Close</button>
                 </div>
-
-            </div>
+            </form>
         </div>
     </div>
     <div class="modal fade" id="copy-link" tabindex="-1" role="dialog" aria-labelledby="copy-link" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <form class="modal-content">
                 <div class="modal-header mb-3">
                     <h5 class="modal-title" id="exampleModalLabel">Share link</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -143,7 +141,7 @@
                     <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Close</button>
                 </div>
 
-            </div>
+            </form>
         </div>
     </div>
 @endsection
