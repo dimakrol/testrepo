@@ -36,6 +36,11 @@ Route::post('/paypal/process', 'PayPalWebhooksController@processPayment');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/my-videos', 'VideoController@generatedVideos')->name('my-videos');
 
+    //braintree section
+    Route::get('/braintree/token', 'BraintreeTokenController@token');
+    Route::get('/braintree', 'BraintreeTokenController@index');
+    Route::post('/braintree/subscribe', 'BraintreeTokenController@subscribe')->name('braintree.subscribe');
+
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
     Route::post('/subscription', 'SubscriptionController@store')->name('subscription.store');
