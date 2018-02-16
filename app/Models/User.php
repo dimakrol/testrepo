@@ -3,15 +3,14 @@
 namespace App\Models;
 
 use App\Mail\ForgotPassword;
-use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Auth;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Stripe\Customer;
 use Image;
+use Laravel\Cashier\Billable;
 
 /**
  * App\Models\User
@@ -67,7 +66,7 @@ use Image;
  */
 class User extends Authenticatable
 {
-    use Notifiable, Sluggable;
+    use Notifiable, Sluggable, Billable;
 
     /**
      * Return the sluggable configuration array for this model.
