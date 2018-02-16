@@ -102,10 +102,12 @@
                 <div class="modal-body">
                     <div class="share-via-email">
                         <div class="alert alert-danger error-message-form" role="alert" style="display: none;"></div>
-                        <label class="form-group" for="recipient-email">
+                        {{--<label class="form-group" for="recipient-email">--}}
+                        <label class="w-100">
                             <input type="email" class="form-control" id="recipient-email" placeholder="Recipient Email" required>
                         </label>
-                        <label class="form-group mb-5" for="recipient-name">
+                        {{--<label class="form-group mb-5" for="recipient-name">--}}
+                        <label class="w-100">
                             <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name" required>
                         </label>
                     </div>
