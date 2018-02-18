@@ -125,6 +125,11 @@
       color: white;
     }
   }
+
+  &--gray {
+    background-color: $gray-100;
+    color: white;
+  }
 }
 
 .view-all-button {
