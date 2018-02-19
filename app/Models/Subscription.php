@@ -43,6 +43,8 @@ class Subscription extends Model
         'billing_type',
         'stripe_id',
         'stripe_plan',
+        'braintree_id',
+        'braintree_plan',
         'quantity',
         'trial_ends_at',
         'ends_at',

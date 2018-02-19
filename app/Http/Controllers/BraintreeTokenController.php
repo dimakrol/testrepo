@@ -27,6 +27,8 @@ class BraintreeTokenController extends Controller
     public function subscribe(Request $request)
     {
 //        dd($request->all());
-        $request->user()->newSubscription('primary', 'yearly')->create($request->get('payment_nonce'));
+        $request->user()
+            ->newSubscription('yearly', 'yearly')
+            ->create($request->get('payment_nonce'));
     }
 }

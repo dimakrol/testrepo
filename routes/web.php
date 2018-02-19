@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
+    Route::get('/subscription/new', 'SubscriptionController@indexBraintree')->name('subscription.index-braintree');
+
     Route::post('/subscription', 'SubscriptionController@store')->name('subscription.store');
     Route::delete('/subscription', 'SubscriptionController@cancel');
 

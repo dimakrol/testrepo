@@ -8,7 +8,8 @@
         {{ csrf_field() }}
         <hr>
         <input type="hidden" name="payment_nonce">
-        <button id="payment-button" class="btn btn-primary btn-flat" type="submit">Pay now</button>
+        {{--<button id="payment-button" class="btn btn-primary btn-flat" type="submit">Pay now</button>--}}
+        {{--<button id="payment-button-confirm" class="btn btn-success btn-flat" type="submit">Success</button>--}}
     </form>
 
 
@@ -24,13 +25,15 @@
             var button = document.querySelector('#payment-button');
             var form = $('#my-form');
             console.log(response.data);
+            console.log('--- initialized');
             braintree.dropin.create({
                 authorization: response.data.token,
                 container: '#dropin-container',
-                // paypal: {
-                //     flow: 'vault'
-                // }
+                paypal: {
+                    flow: 'vault'
+                }
             }, function (createErr, instance) {
+                console.log('--- created ');
                 if (createErr) {
                     // An error in the create call is likely due to
                     // incorrect configuration values or network issues.
@@ -42,6 +45,8 @@
 
                 button.addEventListener('click', function (e) {
                     e.preventDefault();
+                    console.log('--- clicked button');
+
                     instance.requestPaymentMethod(function (err, payload) {
                         if (err) {
                             // Handle error
@@ -50,8 +55,10 @@
                         }
                         console.log(payload.nonce);
                         form.find('input[name=payment_nonce]').val(payload.nonce);
-                        e.preventDefault();
-                        form.submit();
+                        console.log('--- payment nonce '+ payload.nonce);
+
+                        // e.preventDefault();
+                        // form.submit();
 
                         // if (payload.liabilityShifted || payload.type !== 'CreditCard') {
                         //     // hiddenNonceInput.value = payload.nonce;
@@ -67,12 +74,43 @@
                 });
             });
 
-
+            $('#payment-button-confirm').on('click', function (ev) {
+                form.submit();
+            })
             // braintree.setup(response.data.token, 'dropin', {
             //     container: 'dropin-container',
             //     onReady: function () {
             //         $('#payment-button').removeClass('hidden');
             //     }
+            // });
+
+
+            // braintree.dropin.create({ // eslint-disable-line no-undef
+            //     authorization: authorization,
+            //     container: '#dropin-container',
+            //     paypal: {
+            //         flow: 'vault'
+            //     }
+            // }, function (err, dropinInstance) {
+            //     if (err) {
+            //         return;
+            //     }
+            //
+            //     dropinInstance.on('paymentMethodRequestable', function () {
+            //         submitButton.removeAttribute('disabled');
+            //     });
+            //
+            //     dropinInstance.on('noPaymentMethodRequestable', function () {
+            //         submitButton.setAttribute('disabled', true);
+            //     });
+            //
+            //     submitButton.addEventListener('click', function () {
+            //         dropinInstance.requestPaymentMethod(function (reqErr) {
+            //             if (reqErr) {
+            //                 return;
+            //             }
+            //         });
+            //     }, false);
             // });
         });
     </script>
