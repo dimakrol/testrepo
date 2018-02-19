@@ -15,9 +15,6 @@
                     @else
                         <div class="subscription__body">
                             <h2 class="subscription__membership-name">Annual Membership</h2>
-                            <!--<div class="card-title">
-                                <h3 class="text-center">Buy early subscription for  </h3>
-                            </div>-->
                             <div class="row no-gutters subscription__title special-offer" data-slogan="Currently - 25% Off!!!">
                                 <div class="col-6 col-sm-5 text-center subscription__with-vr">
                                     <p class="subscription__price special-offer__price" data-special-price="{{$plan->stripe_id != 'yearlyuk' ? '$' : '&pound;' }}{{ $plan->amountInCurrency() }}">
@@ -86,20 +83,16 @@
                                 <div class="col-10 mx-auto">
                                     <form id="my-form" method="post" action="{{route('braintree.subscribe')}}">
                                         <div id="dropin-container"></div>
-                                        <input type="hidden" name="plan" value="1">
+                                        @if ($plan->stripe_id != 'yearlyuk')
+                                            <input type="hidden" name="plan" value="yearly">
+                                        @else
+                                            <input type="hidden" name="plan" value="yearlyuk">
+                                        @endif
                                         {{ csrf_field() }}
                                         <hr>
                                         <input type="hidden" name="payment_nonce">
                                         <button id="payment-button" class="btn subscribe-form__submit" style="display: none" disabled><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Subscribe</button>
-                                        {{--<button id="payment-button" class="btn btn-primary btn-flat" type="submit">Pay now</button>--}}
-                                        {{--<button id="payment-button-confirm" class="btn btn-success btn-flat" type="submit">Success</button>--}}
                                     </form>
-                                    {{--<button class="subscription__paypal paypal" type="button" id="#" name="paypal"></button>--}}
-                                    {{--<button id="payment-button" class="btn subscribe-form__submit"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Credit/Debit Card</button>--}}
-                                    {{--{!! Form::open(['route' => 'subscription.store', 'id' => 'stripe-subscription-form']) !!}--}}
-                                    {{--<input type="hidden" name="stripeToken" id="stripeToken">--}}
-                                    {{--<input type="hidden" name="stripeEmail" id="stripeEmail">--}}
-                                    {{--{!! Form::close() !!}--}}
                                 </div>
                             </div>
                         </div>

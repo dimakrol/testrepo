@@ -19,17 +19,18 @@ class SubscriptionController extends Controller
             return redirect()->route('account');
         }
         $plan = Plan::getByUser(Auth::user());
-        return view('subscription', compact('plan'));
-    }
-
-    public function indexBraintree()
-    {
-        if (Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
-            return redirect()->route('account');
-        }
-        $plan = Plan::getByUser(Auth::user());
+//        return view('subscription', compact('plan'));
         return view('braintree_subscription', compact('plan'));
     }
+
+//    public function indexBraintree()
+//    {
+//        if (Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
+//            return redirect()->route('account');
+//        }
+//        $plan = Plan::getByUser(Auth::user());
+//        return view('braintree_subscription', compact('plan'));
+//    }
 
     public function store(Request $request)
     {
