@@ -105,6 +105,57 @@
 @section('script')
     <script src="https://js.braintreegateway.com/web/dropin/1.9.4/js/dropin.min.js"></script>
     <script>
+        $.ajax({
+            url: '{{ url('braintree/token') }}'
+        }).done(function (response) {
+            var button = document.querySelector('#payment-button');
+            var form = document.querySelector('#my-form');
+            // console.log('--- initialized');
+            braintree.dropin.create({
+                authorization: response.data.token,
+                container: '#dropin-container',
+                paypal: {
+                    flow: 'vault'
+                }
+            }, function (createErr, instance) {
+                button.style.display = '';
+                console.log('--- created ');
+                if (createErr) {
+                    // An error in the create call is likely due to
+                    // incorrect configuration values or network issues.
+                    // An appropriate error will be shown in the UI.
+                    // console.error('--- here');
+                    // console.error(createErr);
+                    return;
+                }
+
+
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    instance.requestPaymentMethod(function (err, payload) {
+                        if (err) {
+                            // Handle error
+                            return;
+                        }
+                        // console.log('--- payment nonce ' + payload.nonce);
+                        button.disabled = true;
+                        form.elements.namedItem("payment_nonce").value = payload.nonce;
+                        if (payload.nonce) {
+                            form.submit();
+                        }
+                    });
+                });
+
+                instance.on('paymentMethodRequestable', function () {
+                    button.disabled = false;
+                });
+
+                instance.on('noPaymentMethodRequestable', function () {
+                    button.disabled = true;
+                });
+            });
+        });
+
         $(function () {
             fbq('track', 'InitiateCheckout');
 
@@ -112,56 +163,7 @@
                 fbq('track', 'CompleteRegistration');
                 {{session()->forget('completeRegistration')}}
             @endif
-            $.ajax({
-                url: '{{ url('braintree/token') }}'
-            }).done(function (response) {
-                var button = document.querySelector('#payment-button');
-                var form = document.querySelector('#my-form');
-                // console.log('--- initialized');
-                braintree.dropin.create({
-                    authorization: response.data.token,
-                    container: '#dropin-container',
-                    paypal: {
-                        flow: 'vault'
-                    }
-                }, function (createErr, instance) {
-                    button.style.display = '';
-                    console.log('--- created ');
-                    if (createErr) {
-                        // An error in the create call is likely due to
-                        // incorrect configuration values or network issues.
-                        // An appropriate error will be shown in the UI.
-                        // console.error('--- here');
-                        // console.error(createErr);
-                        return;
-                    }
 
-
-                    button.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        instance.requestPaymentMethod(function (err, payload) {
-                            if (err) {
-                                // Handle error
-                                return;
-                            }
-                            // console.log('--- payment nonce ' + payload.nonce);
-                            button.disabled = true;
-                            form.elements.namedItem("payment_nonce").value = payload.nonce;
-                            if (payload.nonce) {
-                                form.submit();
-                            }
-                        });
-                    });
-
-                    instance.on('paymentMethodRequestable', function () {
-                        button.disabled = false;
-                    });
-
-                    instance.on('noPaymentMethodRequestable', function () {
-                        button.disabled = true;
-                    });
-                });
-            });
         });
     </script>
 @endsection
