@@ -8,7 +8,7 @@
                     <video
                         data-category="{{ $originalVideo->categoryName }}"
                         playsinline
-                        poster="{{ $originalVideo->getThumbnail() }}"
+                        poster="{{asset('images/loading_anim.gif')}}"
                         preload="auto"
                         class="center"
                         width="100%"
@@ -43,6 +43,12 @@
         video.on('contextmenu', function(e) {
             e.preventDefault();
         });
+
+        var video = document.querySelector('video');
+        //update poster after video will be loaded
+        video.onloadeddata = function () {
+            this.poster = '{{ $originalVideo->getThumbnail() }}';
+        };
     </script>
 
 @endsection

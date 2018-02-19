@@ -39,7 +39,7 @@
                     <video
                         data-category="{{ $gVideo->video->categoryName }}"
                         playsinline
-                        poster="{{ $gVideo->video->getThumbnail() }}"
+                        poster="{{asset('images/loading_anim.gif')}}"
                         preload="auto"
                         class="center"
                         width="100%"
@@ -151,6 +151,12 @@
 @section('script')
     <script>
         $(function () {
+            var video = document.querySelector('video');
+            //update poster after video will be loaded
+            video.onloadeddata = function () {
+                this.poster = '{{ $gVideo->video->getThumbnail() }}';
+            };
+
 
             var modalShare = $('#share-via-email');
             var alertEmail = $('.video-view-alert');
