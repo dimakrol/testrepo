@@ -82,7 +82,14 @@
 }
 
 .success-message {
+  bottom: -1rem;
   left: 0;
   position: absolute;
   right: 0;
+}
+
+// hack for right input's focus for iOS 11
+.modal-open {
+  position: fixed;
+  width: 100%;
 }

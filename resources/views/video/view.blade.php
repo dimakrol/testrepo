@@ -94,7 +94,7 @@
         <div class="modal-dialog" role="document">
             <form class="modal-content">
                 <div class="modal-header mb-3">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Share via email</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -102,24 +102,25 @@
                 <div class="modal-body">
                     <div class="share-via-email">
                         <div class="alert alert-danger error-message-form" role="alert" style="display: none;"></div>
-                        {{--<label class="form-group" for="recipient-email">--}}
-                        <label class="w-100">
-                            <input type="email" class="form-control" id="recipient-email" placeholder="Recipient Email" required>
+                        <label class="form-group" for="recipient-name">
+                            <input type="text" class="form-control" id="recipient-name" placeholder="Name" required>
                         </label>
-                        {{--<label class="form-group mb-5" for="recipient-name">--}}
-                        <label class="w-100">
-                            <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name" required>
+                        <label class="form-group" for="recipient-email">
+                            <input type="email" class="form-control" id="recipient-email" placeholder="Email" required>
+                        </label>
+                        <label for="recipient-message" class="form-group">
+                            <textarea class="form-control" id="recipient-message" cols="30" rows="4" placeholder="Message"></textarea>
                         </label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button"
-                            class="custom-button custom-button--primary share-via-email-but"
+                            class="custom-button custom-button--primary share-via-email-but mb-3"
                             data-mail-route="{{route('share.email')}}"
                             data-share-link="{{route('view', $gVideo->hash)}}" style="cursor: pointer;">
                         Send
                     </button>
-                    <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Close</button>
+                    <button type="button" class="custom-button custom-button--gray">Preview</button>
                 </div>
             </form>
         </div>
@@ -128,18 +129,18 @@
         <div class="modal-dialog" role="document">
             <form class="modal-content">
                 <div class="modal-header mb-3">
-                    <h5 class="modal-title" id="exampleModalLabel">Share link</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Share via link</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body form-group mb-5">
+                <div class="modal-body form-group mb-4">
                     <label id="share-label" class="w-100">
                         <input type="text" placeholder="Share Link" value="{{url()->current()}}" class="share-input" id="share-input" spellcheck="false">
                     </label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="custom-button custom-button--primary" id="share-button">Copy the link</button>
+                    <button type="button" class="custom-button custom-button--primary" id="share-button">Copy link</button>
                     <button type="button" class="custom-button custom-button--hollow" data-dismiss="modal">Close</button>
                 </div>
 
@@ -165,6 +166,7 @@
             $(document).on('click', '.share-via-email-but', function () {
                 var email = $('#recipient-email');
                 var name = $('#recipient-name');
+                var message = $('#recipient-message');
                 var route = $(this).data('mail-route');
                 var shareLink = $(this).data('share-link');
 
@@ -176,6 +178,7 @@
                     success: function(data) {
                         email.val('');
                         name.val('');
+                        message.val('');
                         modalShare.modal('hide');
                         alertEmail.show().not('.alert-important').delay(4000).fadeOut(350);
                     },
