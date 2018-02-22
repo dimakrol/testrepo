@@ -78,8 +78,13 @@
                 </div>
             </div>
         </div>
-        <h3 class="mb-3 your-own">Create your own:</h3>
-        <div class="row justify-content-center pb-4">
+    </div>
+
+    <div class="container bg-white flex-grow-1 related-videos" style="margin-top: 30px;">
+        <a class="playlist-title__link">
+            Related Videos
+        </a>
+        <div class="row justify-content-center pb-4" style="margin-top: 20px">
             @foreach($videos as $video)
                 <div class="col-12 col-md-6 col-lg-4 px-3 mb-3 mb-lg-0 portfolio-item">
                     <div class="card h-100">

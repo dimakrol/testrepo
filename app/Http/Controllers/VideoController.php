@@ -32,7 +32,7 @@ class VideoController extends Controller
         $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
         $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
         $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();
-        $videos = Video::inRandomOrder()->whereNotIn('id', [$gVideo->video_id])->limit(4)->get();
+        $videos = Video::inRandomOrder()->whereNotIn('id', [$gVideo->video_id])->limit(3)->get();
         return view('video.view', compact('gVideo', 'videos', 'iPhone', 'iPod'));
     }
 
@@ -45,9 +45,9 @@ class VideoController extends Controller
     public function show($slug)
     {
         $video = Video::with(['fields', 'user'])->whereSlug($slug)->firstOrFail();
-        $videos = Video::inRandomOrder()->whereNotIn('id', [$video->id])->limit(4)->get();
+        //$videos = Video::inRandomOrder()->whereNotIn('id', [$video->id])->limit(3)->get();
 
-        return view('video.show', compact('video', 'videos'));
+        return view('video.show', compact('video'));
     }
 
     public function makePreview()
