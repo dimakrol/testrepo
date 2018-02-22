@@ -38,6 +38,16 @@
     }
   }
 }
+//related videos
+.related-videos {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+
+  &__list {
+    margin-top: 20px
+  }
+}
 
 // croppie modal
 .modal {
