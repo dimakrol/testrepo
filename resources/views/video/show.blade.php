@@ -50,6 +50,7 @@
             </div>
         </div>
     </div>
+    @include('video.snippets.related_videos', ['videos' => $videos])
 
     <div class="modal" id="crop-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
