@@ -18,11 +18,12 @@ class ShareController extends Controller
             'name' => 'required'
         ]);
 
-        Mail::to($request->input('email'))
+        Mail::to($request->get('email'))
             ->send(new ShareVideoEmail([
-                'recipient_name' => $request->input('name'),
+                'recipient_name' => $request->get('name'),
                 'sender_name' => Auth::user()->first_name,
-                'video_url' => $request->input('shareLink')
+                'message' => $request->get('message'),
+                'video_url' => $request->get('shareLink')
             ]));
         return response()->json('success');
     }

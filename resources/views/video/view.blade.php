@@ -173,7 +173,7 @@
                 $.ajax({
                     url: route,
                     type: 'POST',
-                    data: {email: email.val(), name: name.val(), shareLink: shareLink},
+                    data: {email: email.val(), name: name.val(), message: message.val(), shareLink: shareLink},
                     dataType: 'json',
                     success: function(data) {
                         email.val('');

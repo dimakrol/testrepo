@@ -38,8 +38,8 @@ class ShareVideoEmail extends Mailable
         'sub' => [
             '%recipient_name%' => [$this->data['recipient_name']],
             '%sender_name%' => [$this->data['sender_name']],
-            '%video_url%' => [$this->data['video_url']]
-    //                '%message%' => [$this->data['message']],
+            '%video_url%' => [$this->data['video_url']],
+            '%message%' => [$this->data['message']],
     //                '%href_created_video%' => ['https://wordswontdo.com/my-videos/john-leonardo-da-vinci-3']
         ],
         'filters' => [
