@@ -29,19 +29,13 @@ class VideoController extends Controller
 
     public function generatedVideoByHash($hash)
     {
-        $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-        $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+        list($iPhone, $iPod)  = $this->checkIos();
+
         $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();
         $videos = Video::inRandomOrder()->whereNotIn('id', [$gVideo->video_id])->limit(3)->get();
         return view('video.view', compact('gVideo', 'videos', 'iPhone', 'iPod'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $slug
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
         $video = Video::with(['fields', 'user'])->whereSlug($slug)->firstOrFail();
@@ -53,8 +47,11 @@ class VideoController extends Controller
     public function makePreview()
     {
         if ($generatedUrl = session()->get('lust-generated-url')) {
+            list($iPhone, $iPod)  = $this->checkIos();
+
             $originalVideo = Video::findOrFail(session()->get('original-video-id'));
-            return view('video.preview', compact('generatedUrl', 'originalVideo'));
+            return view('video.preview', compact(
+                'generatedUrl', 'originalVideo', 'iPhone', 'iPod'));
         }
         return redirect()->route('home');
     }
@@ -66,12 +63,7 @@ class VideoController extends Controller
         }])->whereSlug($slug)->firstOrFail();
         return view('video.channel', compact('user'));
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function generate(Request $request)
     {
 //        if (!Auth::check()) {
@@ -168,5 +160,13 @@ class VideoController extends Controller
         ];
 
         return response()->download($tempImage, $filename, $headers);
+    }
+
+    private function checkIos()
+    {
+        return [
+            stripos($_SERVER['HTTP_USER_AGENT'],"iPhone"),
+            stripos($_SERVER['HTTP_USER_AGENT'],"iPod")
+        ];
     }
 }

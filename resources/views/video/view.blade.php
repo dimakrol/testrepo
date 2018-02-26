@@ -144,12 +144,34 @@
 @section('script')
     <script>
         $(function () {
-            var video = document.querySelector('video');
-            //update poster after video will be loaded
-            video.onloadeddata = function () {
-                this.poster = '{{ $gVideo->video->getThumbnail() }}';
-            };
-
+            @if($iPhone || $iPod)
+                //if iphone or ipad change video in 7 secs
+                setTimeout(function () {
+                    $('.video-container').html(
+                        '<video '+
+                        'data-category="{{ $gVideo->video->categoryName }}" '+
+                        'playsinline '+
+                        'poster="{{ $gVideo->video->getThumbnail() }}" '+
+                        'preload="auto" '+
+                        'class="center" '+
+                        'width="100%" '+
+                        'controls="" '+
+                        'autoplay '+
+                        '> '+
+                        '<source src="{{ $gVideo->video_url }}" type="video/mp4"> '+
+                        'Your browser does not support the video tag. '+
+                        '</video>'
+                    );
+                }, 7000);
+            @else
+                var video = document.querySelector('video');
+                //update poster after video will be loaded
+                //trigger load event and listen when video will be loaded
+                video.load();
+                video.onloadeddata = function () {
+                    this.poster = '{{ $gVideo->video->getThumbnail() }}';
+                };
+            @endif
 
             var modalShare = $('#share-via-email');
             var alertEmail = $('.video-view-alert');
