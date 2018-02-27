@@ -29,6 +29,7 @@ class VideoController extends Controller
 
     public function generatedVideoByHash($hash)
     {
+        //todo add protection if owner subscribed.
         list($iPhone, $iPod)  = $this->checkIos();
 
         $gVideo = VideoGenerated::with(['video'])->whereHash($hash)->firstOrFail();

@@ -107,6 +107,7 @@ class RegisterController extends Controller
             }
         }
 
+        //todo refactoring
         try {
             Mail::to($user->email)
                 ->send(new WelcomeEmail([
