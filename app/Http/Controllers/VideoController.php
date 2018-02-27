@@ -66,10 +66,6 @@ class VideoController extends Controller
 
     public function generate(Request $request)
     {
-//        if (!Auth::check()) {
-//            return response()->json('error');
-//        }
-
         $video = Video::with('fields')->findOrFail($request->id);
 
         $params = [];
@@ -90,6 +86,7 @@ class VideoController extends Controller
         $movieName = $video->impossible_video_id;
 
         $ch = curl_init();
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -103,11 +100,8 @@ class VideoController extends Controller
         ];
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
         $result = curl_exec($ch);
-
         $token = json_decode($result)->{'token'};
-
         $gVideo = null;
 
         $videoUrl = "https://render-eu-west-1.impossible.io/v2/render/".$token.".mp4";
@@ -117,30 +111,45 @@ class VideoController extends Controller
             'videoId' => $video->id,
         ];
 
+        //
         session()->put('lust-generated-url', $videoUrl);
         session()->put('original-video-id', $video->id);
         flash('Video created successfully!')->success();
 
+        try {
+            $hash = str_random(40);
+            while (VideoGenerated::where('hash', $hash)->first()) {
+                $hash = str_random(40);
+            }
+
+            $gVideoData = [
+                'impossible_id' => $token,
+                'hash' => $hash
+            ];
+
+            if (Auth::check()) {
+                $gVideoData['user_id'] = Auth::user()->id;
+            }
+
+            $gVideo = $video->videosGenerated()->create($gVideoData);
+        } catch (\Exception $e) {
+            Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
+        }
+
+//todo push to session generated videos for not logged in user
+        if (!Auth::check()) {
+            session()->push('new-user.generated-videos', $gVideo->id);
+        }
+
+        //if user not logged in or not subscribed redirect to make-preview page
+        //save to session redirect-after-subscribe route
         if (!Auth::check() || !Auth::user()->subscribed(['yearly', 'yearlyuk'])) {
             $response['redirectUrl'] = route('view.make-preview');
+            session()->put('redirect-after-subscribe', route('view', $gVideo->hash));
         } else {
-
-            try {
-                $hash = str_random(40);
-                while (VideoGenerated::where('hash', $hash)->first()) {
-                    $hash = str_random(40);
-                }
-
-                $gVideo = $video->videosGenerated()->create([
-                    'user_id' => Auth::user()->id,
-                    'impossible_id' => $token,
-                    'hash' => $hash
-                ]);
-            } catch (\Exception $e) {
-                Log::error('Error while creation generated video: '.$video->id.' for user: '.Auth::user()->id);
-            }
             $response['redirectUrl'] = route('view', $gVideo->hash);
         }
+
 
         return response()->json($response);
     }

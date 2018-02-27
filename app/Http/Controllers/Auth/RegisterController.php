@@ -94,6 +94,9 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'country_code' => geoip()->getLocation($ip)->iso_code
         ]);
+
+
+
         try {
             Mail::to($user->email)
                 ->send(new WelcomeEmail([

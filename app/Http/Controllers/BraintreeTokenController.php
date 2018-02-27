@@ -46,8 +46,12 @@ class BraintreeTokenController extends Controller
                 ]));
             flash('Success! Welcome to Words Won\'t Do!')->success();
             session(['subscription' => ['value' => $plan->amountInCurrency(), 'currency' => $plan->currency]]);
-            return redirect('/');
 
+            if ($generatedUrl = session()->get('redirect-after-subscribe')) {
+                return redirect($generatedUrl);
+            }
+
+            return redirect('/');
         }
     }
 }
