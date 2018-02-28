@@ -21,6 +21,7 @@ class SocialAuthController extends Controller
             $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
             $user->last_signin = Carbon::now();
             $user->save();
+            //todo need to implement functionality as when password registration
             auth()->login($user);
         } catch (\Exception $e) {
             flash('You need to accept FB request')->error();
