@@ -8,7 +8,7 @@
     <tr>
         <th scope="col">Users total:</th>
         <th scope="col">Paying Users:</th>
-        <th scope="col">Number of shares:</th>
+        <th scope="col">Total Number of shares:</th>
         <th scope="col">Videos Created:</th>
     </tr>
     </thead>
@@ -16,7 +16,7 @@
     <tr>
         <th scope="row">{{$allUsers}}</th>
         <td>{{$payingUsers}}</td>
-        <td>#</td>
+        <td>{{$totalShares}}</td>
         <td>{{$videosCreated}}</td>
     </tr>
     </tbody>

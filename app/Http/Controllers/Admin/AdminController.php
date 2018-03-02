@@ -13,9 +13,9 @@ class AdminController extends Controller
     public function index()
     {
         $allUsers = User::count();
-        //todo should update it with checks
+        $totalShares = User::sum('number_of_shares');
         $payingUsers = Subscription::count();
         $videosCreated = VideoGenerated::count();
-        return view('admin.index', compact('allUsers', 'payingUsers', 'videosCreated'));
+        return view('admin.index', compact('allUsers', 'payingUsers', 'videosCreated', 'totalShares'));
     }
 }
