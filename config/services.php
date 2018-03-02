@@ -37,9 +37,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '2085784908374790',
-        'client_secret' => '6040bc5264688e7ae00086f463568150',
-        'redirect' => 'https://wordswontdo.com/callback-facebook',
+        'client_id' => env('FB_CLIENT_ID'),
+        'client_secret' => env('FB_CLIENT_SECRET'),
+        'redirect' => env('FB_REDIRECT'),
     ],
 
     'braintree' => [
