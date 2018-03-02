@@ -17,7 +17,7 @@ class ShareController extends Controller
             'email' => 'required|email',
             'name' => 'required'
         ]);
-
+        
         Mail::to($request->get('email'))
             ->send(new ShareVideoEmail([
                 'recipient_name' => $request->get('name'),
@@ -25,6 +25,13 @@ class ShareController extends Controller
                 'message' => $request->get('message'),
                 'video_url' => $request->get('shareLink')
             ]));
+
+        Auth::user()->increment('number_of_shares');
         return response()->json('success');
+    }
+
+    public function iterateShare()
+    {
+        Auth::user()->increment('number_of_shares');
     }
 }

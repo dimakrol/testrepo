@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ShareVideoEmail;
 use App\Models\Plan;
 use App\Models\User;
 use App\Models\Video;
@@ -169,6 +170,7 @@ class VideoController extends Controller
             'Content-Type' => "video/mp4"
         ];
 
+        Auth::user()->increment('number_of_shares');
         return response()->download($tempImage, $filename, $headers);
     }
 

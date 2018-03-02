@@ -210,6 +210,9 @@
             };
 
             $(document).on('click', '.social-button > .custom-button--facebook', function(e){
+                @auth
+                    sendIterationShare();
+                @endauth
                 FB.ui({
                     method: 'share',
                     display: 'popup',
@@ -220,13 +223,18 @@
 
         });
 
+
+        function sendIterationShare() {
+            //send to server new share action for incrementation
+            $.post('{{route("share.iterate")}}', function( data ) {});
+        }
+
         function copyLink() {
             // select the input
             // hack used for iOS
             $('#share-input').focus();
             $('#share-input')[0].setSelectionRange(0, 999);
             // copy the path
-            document.execCommand('copy');
             // show the message, hide it and remove from the DOM
             $('#share-label')
                 .parent()
@@ -240,6 +248,9 @@
             $('.success-message').fadeOut(2000, function () {
                 $(this).remove();
             });
+            @auth
+                sendIterationShare();
+            @endauth
         }
 
         $('#share-input').on('click', copyLink);

@@ -27,7 +27,6 @@ Route::get('/view/{hash}', 'VideoController@generatedVideoByHash')->name('view')
 
 Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
 
-Route::post('/share/email', 'ShareController@email')->name('share.email');
 
 Route::post('/paypal/process', 'PayPalWebhooksController@processPayment');
 
@@ -35,6 +34,9 @@ Route::post('/paypal/process', 'PayPalWebhooksController@processPayment');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/my-videos', 'VideoController@generatedVideos')->name('my-videos');
+
+    Route::post('/share/email', 'ShareController@email')->name('share.email');
+    Route::post('/share/iterate', 'ShareController@iterateShare')->name('share.iterate');
 
     //braintree section
     Route::get('/braintree/token', 'BraintreeTokenController@token');
