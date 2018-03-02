@@ -6,6 +6,7 @@ use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\VideoGenerated;
+use App\Services\RegistrationService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -95,16 +96,8 @@ class RegisterController extends Controller
             'country_code' => geoip()->getLocation($ip)->iso_code
         ]);
 
-        //todo refactoring
         if (session()->has('new-user.generated-videos')) {
-            try {
-                $generatedIds = session()->pull('new-user.generated-videos');
-                VideoGenerated::whereIn('id', $generatedIds)
-                    ->update(['user_id' => $user->id]);
-            } catch (\Exception $e) {
-                Log::error('Error while attaching generated videos to user: '.$user->id);
-                Log::error(print_r($generatedIds, true));
-            }
+            RegistrationService::attachVideoIds($user, session()->pull('new-user.generated-videos')) ;
         }
 
         //todo refactoring
