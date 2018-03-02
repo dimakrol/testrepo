@@ -17,6 +17,7 @@
             <th>Lust Sign In</th>
             <th>Generated</th>
             <th>Number Of Shares</th>
+            <th>FB linked</th>
             <th></th>
             <th></th>
             <th></th>
@@ -91,6 +92,7 @@
                 { data: 'last_signin', name: 'users.last_signin'},
                 { data: 'videos_generated_count', name: 'videos_generated_count', searchable: false},
                 { data: 'number_of_shares', name: 'user.number_of_shares', searchable: false},
+                { data: 'linked_facebook', name: 'linked_facebook', searchable: false},
                 { data: 'login', name: 'login', orderable: false, searchable: false},
                 { data: 'edit', name: 'edit', orderable: false, searchable: false},
                 { data: 'delete', name: 'delete', orderable: false, searchable: false},

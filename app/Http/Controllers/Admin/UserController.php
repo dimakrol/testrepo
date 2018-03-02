@@ -31,6 +31,9 @@ class UserController extends Controller
         $query = User::withCount('videosGenerated')->with('subscriptions');
 
         return Datatables::of($query)
+            ->addColumn('linked_facebook', function ($user) {
+                return $user->facebook_id ? 'Yes' : 'No';
+            })
             ->addColumn('login', function ($user) {
                 return '<a href="'.route('admin.user.login', $user->id).'"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>';
             })
