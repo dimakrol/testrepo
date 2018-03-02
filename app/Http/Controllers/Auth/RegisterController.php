@@ -81,13 +81,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (array_key_exists('HTTP_X_FORWARDED_FOR',$_SERVER)) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            Log::debug('HTTP_X_FORWARDED_FOR: '.$_SERVER['HTTP_X_FORWARDED_FOR']);
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
-            Log::debug('No HTTP_X_FORWARDED_FOR new sing up user!');
-        }
+        $ip = RegistrationService::getIp();
 
         $user = User::create([
             'first_name' => $data['name'],

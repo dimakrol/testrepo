@@ -30,4 +30,17 @@ class RegistrationService
             Log::error(print_r($generatedIds, true));
         }
     }
+
+    public static function getIp()
+    {
+        $ip = null;
+        if (array_key_exists('HTTP_X_FORWARDED_FOR',$_SERVER)) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            Log::debug('HTTP_X_FORWARDED_FOR: '.$_SERVER['HTTP_X_FORWARDED_FOR']);
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+            Log::debug('No HTTP_X_FORWARDED_FOR new sing up user!');
+        }
+        return  $ip;
+    }
 }
