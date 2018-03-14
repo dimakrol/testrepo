@@ -204,17 +204,11 @@
                 });
             });
 
-
-            var popupSize = {
-                width: 780,
-                height: 550
-            };
-
             $(document).on('click', '.social-button > .custom-button--facebook', function(e){
                 @auth
                     sendIterationShare();
                 @endauth
-                trackGoogleTag()
+                trackGoogleTag();
                 FB.ui({
                     method: 'share',
                     display: 'popup',
@@ -235,7 +229,8 @@
         }
 
         function copyLink() {
-            sendIterationShare()
+            sendIterationShare();
+            trackGoogleTag();
             // select the input
             // hack used for iOS
             $('#share-input').focus();
