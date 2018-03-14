@@ -183,6 +183,7 @@
                 var message = $('#recipient-message');
                 var route = $(this).data('mail-route');
                 var shareLink = $(this).data('share-link');
+                trackGoogleTag();
 
                 $.ajax({
                     url: route,
@@ -213,6 +214,7 @@
                 @auth
                     sendIterationShare();
                 @endauth
+                trackGoogleTag()
                 FB.ui({
                     method: 'share',
                     display: 'popup',
@@ -223,6 +225,9 @@
 
         });
 
+        function trackGoogleTag() {
+            dataLayer.push({'event': 'share-video'});
+        }
 
         function sendIterationShare() {
             //send to server new share action for incrementation
@@ -230,6 +235,7 @@
         }
 
         function copyLink() {
+            sendIterationShare()
             // select the input
             // hack used for iOS
             $('#share-input').focus();
